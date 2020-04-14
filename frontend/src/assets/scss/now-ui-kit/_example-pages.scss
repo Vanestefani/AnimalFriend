@@ -269,4 +269,13 @@ top:-80px;
         color: $white-color;
         text-decoration: none;
     }
+    .link:hover{
+        cursor:pointer;
+        color:rgba($primary-color,.95);
+    }
+}
+
+.link-a:not([href]):not([tabindex]):hover {
+    cursor:pointer;
+    color:rgba($primary-color,.95);
 }

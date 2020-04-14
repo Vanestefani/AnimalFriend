@@ -7,7 +7,9 @@ function ModalPoliticas() {
   const [modalPoliticas, setModal1] = React.useState(false);
   return (
     <>
-      <a onClick={() => setModal1(true)}>Políticas</a>
+      <a className="link-a"  onClick={() => setModal1(true)}>
+        Políticas
+      </a>
 
       <Modal isOpen={modalPoliticas} toggle={() => setModal1(false)}>
         <div className="modal-header justify-content-center">
@@ -422,7 +424,6 @@ function ModalPoliticas() {
           </p>
         </ModalBody>
         <div className="modal-footer">
-
           <Button color="danger" type="button" onClick={() => setModal1(false)}>
             Close
           </Button>

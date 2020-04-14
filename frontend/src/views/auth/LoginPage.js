@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -43,6 +43,7 @@ function LoginPage() {
           style={{
             backgroundImage:
               "url(" + require("../../assets//img/pet-fondo.jfif") + ")",
+
           }}
         ></div>
         <div className="content">
@@ -56,7 +57,8 @@ function LoginPage() {
                       <img
                         alt="isotipo de animalfriend"
                         src={require("../../assets//img/Logo.svg")}
-                      ></img>
+
+                     ></img>
                     </div>
                     <div class="social-line"><a href="#pablo" class="btn-neutral btn-icon btn-circle btn btn-facebook">
                       <i class="fab fa-facebook-square"></i>
@@ -112,17 +114,18 @@ function LoginPage() {
                       onClick={(e) => e.preventDefault()}
                       size="lg"
                     >
-                      Iniciar Sesión
+                    <b>  Iniciar Sesión </b>
                     </Button>
                     <div className="pull-left">
                       <h6>
-                        <a
+                        <Link
                           className="link"
-                          href="#"
-                          onClick={(e) => e.preventDefault()}
+                          to="/crear-cuenta"
+
+                          tag={Link}
                         >
                           Crear cuenta
-                        </a>
+                        </Link>
                       </h6>
                     </div>
                     <div className="pull-right">

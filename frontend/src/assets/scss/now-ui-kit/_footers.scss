@@ -27,6 +27,8 @@
 
                 &:hover{
                     text-decoration: none;
+                    cursor:pointer;
+                    color:rgba($primary-color,.95);
                 }
             }
         }
