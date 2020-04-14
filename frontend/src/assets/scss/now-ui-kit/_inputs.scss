@@ -7,7 +7,7 @@
     color: $black-color;
     height: auto;
     line-height: normal;
-    font-size: $font-size-small;
+    font-size: 14px;
     @include transition-input-focus-color();
     @include box-shadow(none);
 
@@ -39,7 +39,6 @@
     .has-success &:focus{
         border-color: lighten($success-color, 5%);
     }
-
 
     .has-danger &,
     .has-success &{
@@ -94,8 +93,8 @@
 
     &.input-lg{
         &:after{
-            font-size: 13px;
-            top: 13px;
+            font-size: 14px;
+            top: 10px;
         }
     }
 }

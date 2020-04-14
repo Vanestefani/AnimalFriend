@@ -13,7 +13,7 @@ import {
   InputGroupText,
   InputGroup,
   Container,
-  Col
+  Col,Row
 } from "reactstrap";
 
 // core components
@@ -37,25 +37,35 @@ function LoginPage() {
   return (
     <>
       <ExamplesNavbar />
-      <div className="page-header clear-filter" filter-color="blue">
+      <div className="page-header clear-filter" filter-color="green">
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("../../assets//img/login.jpg") + ")"
+            backgroundImage:
+              "url(" + require("../../assets//img/pet-fondo.jfif") + ")",
           }}
         ></div>
         <div className="content">
           <Container>
-            <Col className="ml-auto mr-auto" md="4">
+
+            <Col className="ml-auto mr-auto col-md-12" md="12">
               <Card className="card-login card-plain">
                 <Form action="" className="form" method="">
                   <CardHeader className="text-center">
                     <div className="logo-container">
                       <img
-                        alt="..."
-                        src={require("../../assets//img/now-logo.png")}
+                        alt="isotipo de animalfriend"
+                        src={require("../../assets//img/Logo.svg")}
                       ></img>
                     </div>
+                    <div class="social-line"><a href="#pablo" class="btn-neutral btn-icon btn-circle btn btn-facebook">
+                      <i class="fab fa-facebook-square"></i>
+                      </a>
+                      <a href="#pablo" class="btn-neutral btn-icon btn-circle btn btn-twitter btn-lg ">
+                        <i class="fab fa-twitter"></i></a>
+                        <a href="#pablo" class="btn-neutral btn-icon btn-circle btn btn-google">
+                          <i class="fab fa-google-plus"></i></a>
+                          </div>
                   </CardHeader>
                   <CardBody>
                     <InputGroup
@@ -66,11 +76,11 @@ function LoginPage() {
                     >
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="now-ui-icons users_circle-08"></i>
+                          <i class="fas fa-envelope"></i>
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="First Name..."
+                        placeholder="Email"
                         type="text"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
@@ -84,36 +94,34 @@ function LoginPage() {
                     >
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="now-ui-icons text_caps-small"></i>
+                          <i class="fas fa-key"></i>
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="Last Name..."
+                        placeholder="Contraseña"
                         type="text"
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
                       ></Input>
                     </InputGroup>
-                  </CardBody>
-                  <CardFooter className="text-center">
                     <Button
                       block
-                      className="btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
+                      className="btn-round  "
+                      color="primary"
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
                       size="lg"
                     >
-                      Get Started
+                      Iniciar Sesión
                     </Button>
                     <div className="pull-left">
                       <h6>
                         <a
                           className="link"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
                         >
-                          Create Account
+                          Crear cuenta
                         </a>
                       </h6>
                     </div>
@@ -121,17 +129,19 @@ function LoginPage() {
                       <h6>
                         <a
                           className="link"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
                         >
-                          Need Help?
+                          ¿Olvidaste tu contraseña?
                         </a>
                       </h6>
                     </div>
-                  </CardFooter>
+                  </CardBody>
+
                 </Form>
               </Card>
             </Col>
+
           </Container>
         </div>
         <TransparentFooter />

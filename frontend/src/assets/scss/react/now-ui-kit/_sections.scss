@@ -1,7 +1,7 @@
-.clear-filter[filter-color="blue"] {
-  @include linear-gradient(rgba($black-color,.20), rgba(3, 161, 224, 0.6));
+.clear-filter[filter-color="green"] {
+  @include linear-gradient(rgba($black-color,.20), rgba(59, 178, 184, 0.966));
 }
-[data-background-color="blue"]{
+[data-background-color="green"]{
     background-color: $info-color;
 }
 .section-nucleo-icons .icons-container i:nth-child(6) {

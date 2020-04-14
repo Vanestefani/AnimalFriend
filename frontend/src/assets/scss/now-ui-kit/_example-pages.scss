@@ -229,21 +229,20 @@
 
 .login-page{
 
-
-
     .card-login{
         border-radius: $border-radius-large;
-        padding-bottom: $padding-base-horizontal;
+        box-shadow: 5px 5px 20px #000;
+        padding: 20px;
         max-width: 320px;
-
+top:-80px;
         .btn-wd{
             min-width: 180px;
         }
 
         .logo-container{
-            width: 65px;
+            width: 100px;
+            padding: 5px;
             margin: 0 auto;
-            margin-bottom: 55px;
 
             img{
                 width: 100%;
@@ -251,7 +250,7 @@
         }
 
         .input-group:last-child{
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         &.card-plain{
@@ -266,7 +265,7 @@
     }
 
     .link{
-        font-size: 10px;
+        font-size: 12px;
         color: $white-color;
         text-decoration: none;
     }

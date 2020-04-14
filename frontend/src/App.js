@@ -10,7 +10,7 @@ import "./assets/demo/nucleo-icons-page-styles.css";
 // pages for this kit
 import Index from "./views/Index.js";
 import NucleoIcons from "./views/NucleoIcons.js";
-import LoginPage from "./views/examples/LoginPage.js";
+import LoginPage from "./views/auth/LoginPage.js";
 import LandingPage from "./views/examples/LandingPage.js";
 import ProfilePage from "./views/examples/ProfilePage.js";
 function App() {
@@ -19,7 +19,7 @@ function App() {
     <div className="App">
  <Router>
  <Switch>
- <Route path="/" render={props => <Index {...props} />} />
+ <Route path="/index" render={props => <Index {...props} />} />
         <Route
           path="/nucleo-icons"
           render={props => <NucleoIcons {...props} />}
@@ -32,7 +32,7 @@ function App() {
           path="/profile-page"
           render={props => <ProfilePage {...props} />}
         />
-        <Route path="/login-page" render={props => <LoginPage {...props} />} />
+        <Route path="/login" render={props => <LoginPage {...props} />} />
 
 </Switch>
 </Router>

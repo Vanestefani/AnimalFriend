@@ -1,10 +1,12 @@
 /*eslint-disable*/
 import React from "react";
-
+import { Button, Modal } from "reactstrap";
+import ModalPoliticas from '../Modals/Politicas';
 // reactstrap components
 import { Container } from "reactstrap";
 
 function TransparentFooter() {
+
   return (
     <footer className="footer">
       <Container>
@@ -12,50 +14,32 @@ function TransparentFooter() {
           <ul>
             <li>
               <a
-                href="https://www.creative-tim.com?ref=nukr-transparent-footer"
+                href="http://animalfriendblog.gearhostpreview.com/"
                 target="_blank"
               >
-                Creative Tim
+                Sobre nosotros
               </a>
             </li>
+
             <li>
-              <a
-                href="http://presentation.creative-tim.com?ref=nukr-transparent-footer"
-                target="_blank"
-              >
-                About Us
-              </a>
+
+          <ModalPoliticas></ModalPoliticas>
             </li>
-            <li>
+                        <li>
               <a
-                href="http://blog.creative-tim.com?ref=nukr-transparent-footer"
-                target="_blank"
-              >
-                Blog
-              </a>
+              target="_blank"
+              href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u">Danos tu opinión</a>
             </li>
           </ul>
         </nav>
         <div className="copyright" id="copyright">
-          © {new Date().getFullYear()}, Designed by{" "}
-          <a
-            href="https://www.invisionapp.com?ref=nukr-transparent-footer"
-            target="_blank"
-          >
-            Invision
-          </a>
-          . Coded by{" "}
-          <a
-            href="https://www.creative-tim.com?ref=nukr-transparent-footer"
-            target="_blank"
-          >
-            Creative Tim
-          </a>
-          .
+          © {new Date().getFullYear()}, Animalfriend
         </div>
       </Container>
     </footer>
+
   );
+
 }
 
 export default TransparentFooter;

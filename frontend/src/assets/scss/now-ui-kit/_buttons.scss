@@ -4,7 +4,7 @@
     font-weight: $font-weight-normal;
     font-size: $font-size-small;
     line-height: $line-height;
-    margin: 10px 1px;
+    margin: 20px 1px;
     border: none;
     border-radius: $border-radius-small;
     padding: $padding-btn-vertical $padding-btn-horizontal;
@@ -29,11 +29,12 @@
         height: $btn-icon-size-regular;
         min-width: $btn-icon-size-regular;
         width: $btn-icon-size-regular;
-        padding: 0;
+        padding: 20px;
         font-size: $btn-icon-font-size-regular;
         overflow: hidden;
         position: relative;
         line-height: normal;
+        margin:5px;
 
         &[class*="btn-outline-"]{
             padding: 0;
@@ -95,10 +96,20 @@
 .btn-outline-danger  { @include outline-buttons($danger-color, $danger-states-color); }
 .btn-outline-default { @include outline-buttons($default-color, $default-states-color); }
 
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 20px ;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 50%;
+    margin: 10px;;
+  }
 .btn-round{
     border-width: $border-thin;
     border-radius: $btn-round-radius !important;
-    padding: $padding-btn-vertical  $padding-round-horizontal;
+    padding: 30px  $padding-round-horizontal;
 
     &[class*="btn-outline-"]{
         padding: $padding-btn-vertical - 1  $padding-round-horizontal - 1;
