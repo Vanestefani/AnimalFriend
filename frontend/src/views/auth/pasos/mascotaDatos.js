@@ -12,6 +12,9 @@ import {
   Row,
   Button,
 } from "reactstrap";
+//Modal
+import ModalMsnRegistroExitoso from '../../../components/Modals/MsnRegistroExitoso';
+
 class mascotaDatos extends Component {
   continue = (e) => {
     e.preventDefault();
@@ -21,6 +24,11 @@ class mascotaDatos extends Component {
     e.preventDefault();
     this.props.prevStep();
   };
+ onSubmitRegistro = (e) => {
+    e.preventDefault();
+
+  };
+
   render() {
     let imgPreview;
     if (this.props.archivoImagen.fotoMascota) {
@@ -285,7 +293,7 @@ class mascotaDatos extends Component {
                 className="btn-round  "
                 color="default"
                 href="#"
-                onClick={this.onSubmit}
+                onClick={this.onSubmitRegistro}
                 size="lg"
               >
                 <b> Registrarse </b>

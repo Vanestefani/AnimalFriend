@@ -425,7 +425,7 @@ function ModalPoliticas() {
         </ModalBody>
         <div className="modal-footer">
           <Button color="danger" type="button" onClick={() => setModal1(false)}>
-            Close
+            Cerrar
           </Button>
         </div>
       </Modal>

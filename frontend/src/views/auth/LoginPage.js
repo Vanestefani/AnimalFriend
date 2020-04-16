@@ -155,7 +155,7 @@ function LoginPage() {
                     className="btn-round  "
                     color="default"
                     type="submit"
-                    // onClick={(e) => e.preventDefault()}
+                    onClick={(e) => e.preventDefault()}
                     size="lg"
                   >
                     <b> Iniciar Sesión </b>
