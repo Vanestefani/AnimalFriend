@@ -94,8 +94,7 @@ function CrearCuentaPage() {
 
   React.useEffect(() => {
     document.body.classList.add("login-page");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
+
     return function cleanup() {
       document.body.classList.remove("login-page");
       document.body.classList.remove("sidebar-collapse");
@@ -150,6 +149,7 @@ function CrearCuentaPage() {
           setnombreFocus={setnombreFocus}
           setemailFocus={setemailFocus}
           setpasswordFocus={setpasswordFocus}
+          setconfirmarFocus={setconfirmarFocus}
         ></DatosUsuario>
       );
     if (usuario.step === 2)
