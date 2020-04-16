@@ -21,7 +21,9 @@ class DatosUsuario extends Component {
 
     return (
       <>
+ <h4>Credenciales de usuario</h4>
         <div>
+
           <InputGroup
             className={
               "no-border input-lg" + (this.props.nombreFocus ? " input-group-focus" : "")

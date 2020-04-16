@@ -20,6 +20,7 @@ import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../components/Footers/TransparentFooter.js";
 import DatosUsuario from "../../views/auth/pasos/DatosUsuario";
 import DetallesUsuario from "../../views/auth/pasos/detallesUsuario";
+import MascotaDatos from "../../views/auth/pasos/mascotaDatos";
 
 function CrearCuentaPage() {
   //state inputs
@@ -52,7 +53,7 @@ function CrearCuentaPage() {
     fotoMascota: null,
   });
   //extraer archivos
-const{fotoUsuario,fotoMascota}=archivoImagen;
+  const { fotoUsuario, fotoMascota } = archivoImagen;
 
   // extraer de usuario
   const {
@@ -63,7 +64,7 @@ const{fotoUsuario,fotoMascota}=archivoImagen;
     pais,
     ciudad,
     sexo,
-      nombreMascota,
+    nombreMascota,
     especie,
     raza,
     sexoMascota,
@@ -82,14 +83,12 @@ const{fotoUsuario,fotoMascota}=archivoImagen;
     guardarUsuario({
       ...usuario,
       [e.target.name]: e.target.value,
-
     });
   };
   const onChangeImages = (e) => {
     guardararchivoImagen({
       ...archivoImagen,
       [e.target.name]: URL.createObjectURL(e.target.files[0]),
-
     });
   };
 
@@ -125,6 +124,15 @@ const{fotoUsuario,fotoMascota}=archivoImagen;
   const [ciudadFocus, setciudadFocus] = React.useState(false);
   const [sexoFocus, setsexoFocus] = React.useState(false);
   const [fotoUsuarioFocus, setfotoUsuariorFocus] = React.useState(false);
+  //    paso 3
+  const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
+  const [especieFocus, setespecieFocus] = React.useState(false);
+  const [razaFocus, setrazaFocus] = React.useState(false);
+  const [sexoMascotaFocus, setsexoMascotaFocus] = React.useState(false);
+  const [fechanacimientoFocus, setfechanacimientoFocus] = React.useState(false);
+  const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
+  const [leePoliticasFocus, setleePoliticas] = React.useState(false);
+  const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
 
   const showStep = () => {
     if (usuario.step === 1)
@@ -165,7 +173,36 @@ const{fotoUsuario,fotoMascota}=archivoImagen;
           prevStep={prevStep}
         ></DetallesUsuario>
       );
-    if (usuario.step === 3) return <h4>Pruebba</h4>;
+    if (usuario.step === 3)
+      return (
+        <MascotaDatos
+        nextStep={nextStep}
+        onChange={onChange}
+        onSubmit={onSubmit}
+        usuario={usuario}
+        archivoImagen={archivoImagen}
+        guardarUsuario={guardarUsuario}
+        onChangeImages={onChangeImages}
+        prevStep={prevStep}
+        nombreMascotaFocus={nombreMascotaFocus}
+        setnombreMascotaFocus={setnombreMascotaFocus}
+        especieFocus={especieFocus}
+        setespecieFocus={setespecieFocus}
+        razaFocus={razaFocus}
+        setrazaFocus={setrazaFocus}
+        sexoMascotaFocus={sexoMascotaFocus}
+        setsexoMascotaFocus={setsexoMascotaFocus}
+        fechanacimientoFocus={fechanacimientoFocus}
+        setfechanacimientoFocus={setfechanacimientoFocus}
+        colorPrincipalFocus={colorPrincipalFocus}
+        setcolorPrincipal={setcolorPrincipal}
+        leePoliticasFocus={leePoliticasFocus}
+        setleePoliticas={setleePoliticas}
+        fotoMascotaFocus={fotoMascotaFocus}
+        setfotoMascota={setfotoMascota}
+        onSubmit={onSubmit}
+        ></MascotaDatos>
+      );
   };
 
   return (

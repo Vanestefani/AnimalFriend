@@ -49,6 +49,7 @@ class detallesUsuario extends Component {
     return (
       <>
         <div>
+        <h4>Información de usuario</h4>
           <Row>
             <Col md="6">
               <InputGroup
@@ -159,7 +160,7 @@ class detallesUsuario extends Component {
           </Row>
           <Row>
             <Col md="6">
-              {" "}
+
               <Button
                 block
                 className="btn-round  "
