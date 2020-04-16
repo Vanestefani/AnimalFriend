@@ -53,11 +53,13 @@ function ExamplesNavbar() {
         <Container>
           <div className="navbar-translate">
             <NavbarBrand href="#" id="navbar-brand">
+             <Link  to="/">
               <img
                 width="200px"
                 alt="..."
                 src={require("../../assets//img/Logotipo.png")}
               ></img>
+              </Link>
             </NavbarBrand>
             <UncontrolledTooltip target="#navbar-brand">
               <span className="badge badge-success">AnimalFriend</span> es todo

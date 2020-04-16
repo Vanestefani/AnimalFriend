@@ -12,6 +12,8 @@ import Index from "./views/Index.js";
 import NucleoIcons from "./views/NucleoIcons.js";
 import LoginPage from "./views/auth/LoginPage.js";
 import CrearCuentaPage from "./views/auth/CrearCuentaPage";
+import CambiarContraseñaPage from "./views/auth/CambiarContraseñaPage";
+import OlvidadoContraseñaPage from "./views/auth/OlvidadoContraseñaPage";
 
 import LandingPage from "./views/examples/LandingPage.js";
 import ProfilePage from "./views/examples/ProfilePage.js";
@@ -35,8 +37,12 @@ function App() {
               path="/profile-page"
               render={(props) => <ProfilePage {...props} />}
             />
-            <Route path="/login" render={(props) => <LoginPage {...props} />} />
+
             <Route path="/crear-cuenta" render={(props) => <CrearCuentaPage {...props} />} />
+            <Route exact path="/" render={(props) => <LoginPage {...props} />} />
+            <Route path="/cambiar-contrasena" render={(props) => <CambiarContraseñaPage {...props} />} />
+            <Route path="/olvido-contrasena" render={(props) => <OlvidadoContraseñaPage {...props} />} />
+
           </Switch>
         </Router>
       </div>
