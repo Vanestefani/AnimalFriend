@@ -12,7 +12,9 @@
             color: $white-color;
         }
     }
-
+.FotoUser{
+    width: 40px;
+}
     p{
         display: inline-block;
         margin: 0;
@@ -58,13 +60,13 @@
             i.now-ui-icons{
                 font-size: 18px;
                 position: relative;
-                top: 3px;
+
                 text-align: center;
                 width: 21px;
             }
 
             i.now-ui-icons{
-                top: 4px;
+
                 font-size: 16px;
             }
 

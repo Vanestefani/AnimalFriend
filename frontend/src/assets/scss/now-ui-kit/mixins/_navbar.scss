@@ -5,15 +5,15 @@
 
     .navbar{
         .navbar-nav{
-            margin-top: 53px;
+            margin: 0 auto;
             position: relative;
-        	  max-height: calc(100vh - 75px);
+        	  max-height: calc(100vh - 25px);
         	  min-height: 100%;
         	  overflow: auto;
 
             &.navbar-logo{
                 top: 0;
-                height: 53px;
+                height: 80px;
             }
         }
 
@@ -136,8 +136,6 @@
     transition: all 0.2s;
   }
 
-
-
   .toggled {
     .top-bar {
     transform: rotate(45deg);
@@ -151,8 +149,6 @@
       opacity: 0;
     }
   }
-
-
 
     //
     // @include topbar-x-rotation();
@@ -229,7 +225,6 @@
     }
 
     @include navbar-responsive();
-
 
     [class*="navbar-expand-"] .navbar-collapse{
         width: 300px;

@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import React from "react";
-
+import ModalPoliticas from "../Modals/Politicas";
 // reactstrap components
 import { Container } from "reactstrap";
 
@@ -12,46 +12,28 @@ function DarkFooter() {
           <ul>
             <li>
               <a
-                href="https://www.creative-tim.com?ref=nukr-dark-footer"
+                href="http://animalfriendblog.gearhostpreview.com/"
                 target="_blank"
               >
-                Creative Tim
+                Sobre nosotros
               </a>
+            </li>
+
+            <li>
+              <ModalPoliticas></ModalPoliticas>
             </li>
             <li>
               <a
-                href="http://presentation.creative-tim.com?ref=nukr-dark-footer"
                 target="_blank"
+                href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u"
               >
-                About Us
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://blog.creative-tim.com?ref=nukr-dark-footer"
-                target="_blank"
-              >
-                Blog
+                Danos tu opinión
               </a>
             </li>
           </ul>
         </nav>
         <div className="copyright" id="copyright">
-          © {new Date().getFullYear()}, Designed by{" "}
-          <a
-            href="https://www.invisionapp.com?ref=nukr-dark-footer"
-            target="_blank"
-          >
-            Invision
-          </a>
-          . Coded by{" "}
-          <a
-            href="https://www.creative-tim.com?ref=nukr-dark-footer"
-            target="_blank"
-          >
-            Creative Tim
-          </a>
-          .
+          © {new Date().getFullYear()}, Animalfriend
         </div>
       </Container>
     </footer>

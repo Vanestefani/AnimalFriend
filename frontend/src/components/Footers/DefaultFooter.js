@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import React from "react";
-
+import ModalPoliticas from '../Modals/Politicas';
 // reactstrap components
 import { Container } from "reactstrap";
 
@@ -10,53 +10,33 @@ function DefaultFooter() {
   return (
     <>
       <footer className="footer footer-default">
-        <Container>
-          <nav>
-            <ul>
-              <li>
-                <a
-                  href="https://www.creative-tim.com?ref=nukr-default-footer"
-                  target="_blank"
-                >
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a
-                  href="http://presentation.creative-tim.com?ref=nukr-default-footer"
-                  target="_blank"
-                >
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="http://blog.creative-tim.com?ref=nukr-default-footer"
-                  target="_blank"
-                >
-                  Blog
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div className="copyright" id="copyright">
-            © {new Date().getFullYear()}, Designed by{" "}
-            <a
-              href="https://www.invisionapp.com?ref=nukr-default-footer"
+      <Container>
+        <nav>
+          <ul>
+            <li>
+              <a
+                href="http://animalfriendblog.gearhostpreview.com/"
+                target="_blank"
+              >
+                Sobre nosotros
+              </a>
+            </li>
+
+            <li>
+
+          <ModalPoliticas></ModalPoliticas>
+            </li>
+                        <li>
+              <a
               target="_blank"
-            >
-              Invision
-            </a>
-            . Coded by{" "}
-            <a
-              href="https://www.creative-tim.com?ref=nukr-default-footer"
-              target="_blank"
-            >
-              Creative Tim
-            </a>
-            .
-          </div>
-        </Container>
+              href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u">Danos tu opinión</a>
+            </li>
+          </ul>
+        </nav>
+        <div className="copyright" id="copyright">
+          © {new Date().getFullYear()}, Animalfriend
+        </div>
+      </Container>
       </footer>
     </>
   );
