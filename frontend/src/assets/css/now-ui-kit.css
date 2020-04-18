@@ -1353,12 +1353,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     height: 14px;
     min-width: 14px;
     width: 14px;
-    padding: 20px;
+    padding: 0 auto;
     font-size: 14px;
     overflow: hidden;
     position: relative;
     line-height: normal;
-    margin: 5px; }
+    margin: 0 auto; }
     .btn.btn-icon[class*="btn-outline-"],
     .navbar .navbar-nav > a.btn.btn-icon[class*="btn-outline-"] {
       padding: 0; }
@@ -1774,7 +1774,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .btn-round {
   border-width: 1px;
-  border-radius: 30px !important;
+  border-radius: 50% !important;
   padding: 30px 23px; }
   .btn-round[class*="btn-outline-"] {
     padding: 14px 22px; }
@@ -1895,7 +1895,7 @@ fieldset[disabled]
 .form-control {
   background-color: transparent;
   border: 1px solid #E3E3E3;
-  border-radius: 30px;
+  border-radius: 50%;
   color: #2c2c2c;
   height: auto;
   line-height: normal;
@@ -2064,7 +2064,7 @@ fieldset[disabled]
 .input-group-text {
   background-color: #FFFFFF;
   border: 1px solid #E3E3E3;
-  border-radius: 30px;
+  border-radius: 50%;
   color: #555555;
   -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   -moz-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -3963,7 +3963,8 @@ img {
       box-shadow: 0px 5px 50px 0px rgba(0, 0, 0, 0.2); }
 
 .card-general {
-  margin: 5px; }
+  margin: 5px;
+  margin-bottom: 10px; }
   .card-general .card-header {
     margin: 0 20px;
     padding: 30px 0; }
@@ -3971,7 +3972,7 @@ img {
     margin-top: 15px;
     margin-bottom: 15px; }
   .card-general .card-footer {
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     margin-top: 24px;
     padding: 24px 0; }
   .card-general .card-body {
@@ -3999,6 +4000,23 @@ img {
       margin-top: 0;
       margin-bottom: 0;
       box-shadow: 0px 5px 50px 0px rgba(0, 0, 0, 0.2); }
+
+.card-post .avatar-small {
+  width: 50px;
+  height: 50px; }
+
+.card-post .card-header {
+  margin: 20px; }
+
+.card-post .card-body {
+  top: -122px; }
+
+.card-post .card-title {
+  margin-top: 15px;
+  margin-bottom: 15px; }
+
+.card-post .card-footer {
+  margin: 30px; }
 
 .index-page .page-header {
   height: 125vh; }

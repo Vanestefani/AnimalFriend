@@ -1,16 +1,7 @@
 import React from "react";
 
 // reactstrap components
-import {
-  Button,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 // core components
 
@@ -19,10 +10,12 @@ import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
 import SubMenu from "../../components/Navbars/SubMenu";
+import CrearPublicacion from "../../components/Post/CrearPublicacion";
+import PostList from "../../components/Post/PostList";
+
+import { Link } from "react-router-dom";
 
 function Home() {
-  const [firstFocus, setFirstFocus] = React.useState(false);
-  const [lastFocus, setLastFocus] = React.useState(false);
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -43,8 +36,9 @@ function Home() {
               <ListMascotas></ListMascotas>
             </Col>
             <Col md="6">
-<SubMenu></SubMenu>
-
+              <SubMenu></SubMenu>
+              <CrearPublicacion></CrearPublicacion>
+              <PostList></PostList>
             </Col>
             <Col md="3">r</Col>
           </Row>
