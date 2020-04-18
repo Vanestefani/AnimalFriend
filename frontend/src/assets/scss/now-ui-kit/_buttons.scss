@@ -29,12 +29,13 @@
         height: $btn-icon-size-regular;
         min-width: $btn-icon-size-regular;
         width: $btn-icon-size-regular;
-        padding: 0 auto;
+        padding: 20px;
+
         font-size: $btn-icon-font-size-regular;
         overflow: hidden;
         position: relative;
         line-height: normal;
-        margin: 0 auto;
+         margin:5px;
 
         &[class*="btn-outline-"]{
             padding: 0;

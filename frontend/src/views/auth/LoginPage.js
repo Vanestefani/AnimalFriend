@@ -89,6 +89,7 @@ function LoginPage() {
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                       size="lg"
+                      small
                     >
                       <i className="fab fa-twitter"></i>
                     </Button>
