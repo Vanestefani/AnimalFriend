@@ -9,13 +9,15 @@ import {
   InputGroup,
   Container,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 // core components
 
 import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
+import VerticalMenu from "../../components/Navbars/VerticalMenu";
+import ListMascotas from "../../components/Listas/ListMascotas";
 
 function Home() {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -31,7 +33,20 @@ function Home() {
   });
   return (
     <>
-<HomeNarbar></HomeNarbar>
+      <HomeNarbar></HomeNarbar>
+      <div className="wrapper">
+        <Container>
+          <Row>
+            <Col md="3">
+              <VerticalMenu></VerticalMenu>
+              <ListMascotas></ListMascotas>
+            </Col>
+            <Col md="6">o</Col>
+            <Col md="3">r</Col>
+          </Row>
+        </Container>
+        <DefaultFooter></DefaultFooter>
+      </div>
     </>
   );
 }
