@@ -18,6 +18,7 @@ import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
+import SubMenu from "../../components/Navbars/SubMenu";
 
 function Home() {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -41,7 +42,10 @@ function Home() {
               <VerticalMenu></VerticalMenu>
               <ListMascotas></ListMascotas>
             </Col>
-            <Col md="6">o</Col>
+            <Col md="6">
+<SubMenu></SubMenu>
+
+            </Col>
             <Col md="3">r</Col>
           </Row>
         </Container>
