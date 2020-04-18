@@ -12,7 +12,7 @@ import ListMascotas from "../../components/Listas/ListMascotas";
 import SubMenu from "../../components/Navbars/SubMenu";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
-
+import Calendario from "../../components/Calendario/Calendario";
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -40,7 +40,9 @@ function Home() {
               <CrearPublicacion></CrearPublicacion>
               <PostList></PostList>
             </Col>
-            <Col md="3">r</Col>
+            <Col md="3">
+            <Calendario></Calendario>
+            </Col>
           </Row>
         </Container>
         <DefaultFooter></DefaultFooter>
