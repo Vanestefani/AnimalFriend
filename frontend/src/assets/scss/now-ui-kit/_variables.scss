@@ -85,7 +85,8 @@ $light-azure:                rgba($info-color, .2);
 $light-green:                rgba($success-color, .2);
 $light-orange:               rgba($warning-color, .2);
 $light-red:                  rgba($danger-color, .2);
-
+//Degradado
+$degradado: linear-gradient(270deg, #3BB2B8 0%, #42E695 100%);
 //== Components
 //
 

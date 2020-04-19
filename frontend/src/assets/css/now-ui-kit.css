@@ -1353,12 +1353,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     height: 14px;
     min-width: 14px;
     width: 14px;
-    padding: 0 auto;
+    padding: 20px;
     font-size: 14px;
     overflow: hidden;
     position: relative;
     line-height: normal;
-    margin: 0 auto; }
+    margin: 5px; }
     .btn.btn-icon[class*="btn-outline-"],
     .navbar .navbar-nav > a.btn.btn-icon[class*="btn-outline-"] {
       padding: 0; }
@@ -1774,7 +1774,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .btn-round {
   border-width: 1px;
-  border-radius: 50% !important;
+  border-radius: 30px !important;
   padding: 30px 23px; }
   .btn-round[class*="btn-outline-"] {
     padding: 14px 22px; }
@@ -1895,7 +1895,7 @@ fieldset[disabled]
 .form-control {
   background-color: transparent;
   border: 1px solid #E3E3E3;
-  border-radius: 50%;
+  border-radius: 30px;
   color: #2c2c2c;
   height: auto;
   line-height: normal;
@@ -2064,7 +2064,7 @@ fieldset[disabled]
 .input-group-text {
   background-color: #FFFFFF;
   border: 1px solid #E3E3E3;
-  border-radius: 50%;
+  border-radius: 30px;
   color: #555555;
   -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   -moz-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -3360,7 +3360,7 @@ Created using IcoMoon - icomoon.io
     border: 1px solid #018383; }
 
 .bg-default {
-  background-color: #018383 !important; }
+  background-color: linear-gradient(270deg, #3BB2B8 0%, #42E695 100%) !important; }
 
 .bg-primary {
   background-color: #3bb2b8 !important; }
@@ -4016,7 +4016,12 @@ img {
   margin-bottom: 15px; }
 
 .card-post .card-footer {
-  margin: 30px; }
+  margin: 30px;
+  padding-bottom: 30px; }
+
+.card-post .container {
+  margin: 0 auto;
+  padding-bottom: 30px; }
 
 .index-page .page-header {
   height: 125vh; }
@@ -4069,7 +4074,8 @@ img {
   margin-top: 35px; }
 
 .profile-page .page-header {
-  min-height: 550px; }
+  min-height: 550px;
+  background: linear-gradient(270deg, #3BB2B8 0%, #42E695 100%); }
 
 .profile-page .profile-container {
   color: #FFFFFF; }
@@ -6046,3 +6052,5 @@ td.rdtYear:hover {
   .nav-tabs {
     padding-left: 10px;
     padding-right: 10px; } }
+
+/*# sourceMappingURL=now-ui-kit.css.map */
