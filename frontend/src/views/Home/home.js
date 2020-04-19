@@ -13,6 +13,8 @@ import SubMenu from "../../components/Navbars/SubMenu";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import Calendario from "../../components/Calendario/Calendario";
+import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
+
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -41,7 +43,8 @@ function Home() {
               <PostList></PostList>
             </Col>
             <Col md="3">
-            <Calendario></Calendario>
+              <Calendario></Calendario>
+              <ListRecordatorios></ListRecordatorios>
             </Col>
           </Row>
         </Container>
