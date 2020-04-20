@@ -13,10 +13,9 @@ import CrearCuentaPage from "./views/auth/CrearCuentaPage";
 import CambiarContraseñaPage from "./views/auth/CambiarContraseñaPage";
 import OlvidadoContraseñaPage from "./views/auth/OlvidadoContraseñaPage";
 //pages
-import Home from './views/Home/home';
-import Perfil from './views/Perfil/perfil';
+import Home from "./views/Home/home";
+import Perfil from "./views/Perfil/perfil";
 import LandingPage from "./views/examples/LandingPage.js";
-import ProfilePage from "./views/examples/ProfilePage.js";
 
 function App() {
   return (
@@ -28,18 +27,8 @@ function App() {
               path="/landing-page"
               render={(props) => <LandingPage {...props} />}
             />
-             <Route
-              path="/home"
-              render={(props) => <Home {...props} />}
-            />
-            <Route
-              path="/profile-page"
-              render={(props) => <ProfilePage {...props} />}
-            />
-                <Route
-              path="/perfil"
-              render={(props) => <Perfil {...props} />}
-            />
+            <Route path="/home" render={(props) => <Home {...props} />} />
+            <Route path="/perfil" render={(props) => <Perfil {...props} />} />
 
             <Route
               path="/crear-cuenta"
