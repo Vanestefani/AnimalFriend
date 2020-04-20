@@ -2,10 +2,14 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const connectDB = require('./config/db')
+
 // Config dotev
 require("dotenv").config({
   path: "./config/config.env",
 });
+//Coneccion a base de datos
+connectDB();
 
 const app = express();
 
