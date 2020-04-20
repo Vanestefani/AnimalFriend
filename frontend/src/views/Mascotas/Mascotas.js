@@ -11,7 +11,7 @@ import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
 import SubMenu from "../../components/Navbars/SubMenu";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
-import PostList from "../../components/Post/PostList";
+import Mascota from "./Mascota";
 import Calendario from "../../components/Calendario/Calendario";
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 
@@ -39,8 +39,9 @@ function Mascotas() {
             </Col>
             <Col md="6">
               <SubMenu></SubMenu>
-              <Button>Agregar mascota</Button>
-
+              <h2 className="pull-left p-2"><b>Mascotas</b></h2>
+              <Button className="pull-right">Agregar mascota</Button>
+<Mascota></Mascota>
             </Col>
             <Col md="3">
               <Calendario></Calendario>
