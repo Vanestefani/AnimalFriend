@@ -163,11 +163,11 @@ function FormMascota(props) {
                   <Label check>
                     <Input
                       value="Hembra"
-                      id="sexoMascota"
-                      name="sexoMascota"
+                      id="generoMascota"
+                      name="generoMascota"
                       type="radio"
                       onChange={props.onChange}
-                      defaultValue={props.mascota.sexoMascota}
+                      defaultValue={props.mascota.generoMascota}
                     ></Input>
                     <span className="form-check-sign"></span>
                     Hembra
@@ -178,11 +178,11 @@ function FormMascota(props) {
                     <Input
                       defaultChecked
                       value="Macho"
-                      id="sexoMascota"
-                      name="sexoMascota"
+                      id="generoMascota"
+                      name="generoMascota"
                       type="radio"
                       onChange={props.onChange}
-                      defaultValue={props.mascota.sexoMascota}
+                      defaultValue={props.mascota.generoMascota}
                     ></Input>
                     <span className="form-check-sign"></span>
                     Macho

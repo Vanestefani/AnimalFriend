@@ -34,13 +34,13 @@ function CrearCuentaPage() {
     //paso2
     pais: "",
     ciudad: "",
-    sexo: "",
+    genero: "",
 
     //paso 3
     nombreMascota: "",
     especie: "",
     raza: "",
-    sexoMascota: "",
+    generoMascota: "",
     fechanacimiento: "",
     colorPrincipal: "",
 
@@ -63,11 +63,11 @@ function CrearCuentaPage() {
     confirmar,
     pais,
     ciudad,
-    sexo,
+    genero,
     nombreMascota,
     especie,
     raza,
-    sexoMascota,
+    generoMascota,
     fechanacimiento,
     colorPrincipal,
 
@@ -121,13 +121,13 @@ function CrearCuentaPage() {
   //    paso 2
   const [paisFocus, setpaisFocus] = React.useState(false);
   const [ciudadFocus, setciudadFocus] = React.useState(false);
-  const [sexoFocus, setsexoFocus] = React.useState(false);
+  const [generoFocus, setgeneroFocus] = React.useState(false);
   const [fotoUsuarioFocus, setfotoUsuariorFocus] = React.useState(false);
   //    paso 3
   const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
   const [especieFocus, setespecieFocus] = React.useState(false);
   const [razaFocus, setrazaFocus] = React.useState(false);
-  const [sexoMascotaFocus, setsexoMascotaFocus] = React.useState(false);
+  const [generoMascotaFocus, setgeneroMascotaFocus] = React.useState(false);
   const [fechanacimientoFocus, setfechanacimientoFocus] = React.useState(false);
   const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
   const [leePoliticasFocus, setleePoliticas] = React.useState(false);
@@ -163,8 +163,8 @@ function CrearCuentaPage() {
           guardarUsuario={guardarUsuario}
           paisFocus={paisFocus}
           ciudadFocus={ciudadFocus}
-          setsexoFocus={setsexoFocus}
-          sexoFocus={sexoFocus}
+          setgeneroFocus={setgeneroFocus}
+          generoFocus={generoFocus}
           fotoUsuarioFocus={fotoUsuarioFocus}
           setfotoUsuarioFocus={setfotoUsuariorFocus}
           setpaisFocus={setpaisFocus}
@@ -190,8 +190,8 @@ function CrearCuentaPage() {
         setespecieFocus={setespecieFocus}
         razaFocus={razaFocus}
         setrazaFocus={setrazaFocus}
-        sexoMascotaFocus={sexoMascotaFocus}
-        setsexoMascotaFocus={setsexoMascotaFocus}
+        generoMascotaFocus={generoMascotaFocus}
+        setgeneroMascotaFocus={setgeneroMascotaFocus}
         fechanacimientoFocus={fechanacimientoFocus}
         setfechanacimientoFocus={setfechanacimientoFocus}
         colorPrincipalFocus={colorPrincipalFocus}

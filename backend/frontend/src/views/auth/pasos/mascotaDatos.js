@@ -157,11 +157,11 @@ class mascotaDatos extends Component {
                 <Label check>
                   <Input
                     value="Hembra"
-                    id="sexoMascota"
-                    name="sexoMascota"
+                    id="generoMascota"
+                    name="generoMascota"
                     type="radio"
                     onChange={this.props.onChange}
-                    defaultValue={this.props.usuario.sexoMascota}
+                    defaultValue={this.props.usuario.generoMascota}
                   ></Input>
                   <span className="form-check-sign"></span>
                   Hembra
@@ -172,11 +172,11 @@ class mascotaDatos extends Component {
                   <Input
                     defaultChecked
                     value="Macho"
-                    id="sexoMascota"
-                    name="sexoMascota"
+                    id="generoMascota"
+                    name="generoMascota"
                     type="radio"
                     onChange={this.props.onChange}
-                    defaultValue={this.props.usuario.sexoMascota}
+                    defaultValue={this.props.usuario.generoMascota}
                   ></Input>
                   <span className="form-check-sign"></span>
                   Macho

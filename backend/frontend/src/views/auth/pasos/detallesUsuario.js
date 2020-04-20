@@ -28,7 +28,7 @@ class detallesUsuario extends Component {
         <img width="100px" src={this.props.archivoImagen.fotoUsuario} alt="" />
       );
     } else {
-      if (this.props.usuario.sexo === "Femenino") {
+      if (this.props.usuario.genero === "Femenino") {
         imgPreview = (
           <img
             width="100px"
@@ -118,11 +118,11 @@ class detallesUsuario extends Component {
                 <Label check>
                   <Input
                     value="Femenino"
-                    id="sexo"
-                    name="sexo"
+                    id="genero"
+                    name="genero"
                     type="radio"
                     onChange={this.props.onChange}
-                    defaultValue={this.props.usuario.sexo}
+                    defaultValue={this.props.usuario.genero}
                   ></Input>
                   <span className="form-check-sign"></span>
                   Femenino
@@ -133,11 +133,11 @@ class detallesUsuario extends Component {
                   <Input
                     defaultChecked
                     value="Masculino"
-                    id="sexo"
-                    name="sexo"
+                    id="genero"
+                    name="genero"
                     type="radio"
                     onChange={this.props.onChange}
-                    defaultValue={this.props.usuario.sexo}
+                    defaultValue={this.props.usuario.genero}
                   ></Input>
                   <span className="form-check-sign"></span>
                   Masculino

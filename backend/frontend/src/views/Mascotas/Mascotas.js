@@ -32,7 +32,7 @@ function Mascotas() {
     nombreMascota: "",
     especie: "",
     raza: "",
-    sexoMascota: "",
+    generoMascota: "",
     fechanacimiento: "",
     colorPrincipal: "",
   });
@@ -45,7 +45,7 @@ function Mascotas() {
     nombreMascota,
     especie,
     raza,
-    sexoMascota,
+    generoMascota,
     fechanacimiento,
     colorPrincipal,
   } = mascota;
@@ -70,7 +70,7 @@ function Mascotas() {
 const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
   const [especieFocus, setespecieFocus] = React.useState(false);
   const [razaFocus, setrazaFocus] = React.useState(false);
-  const [sexoMascotaFocus, setsexoMascotaFocus] = React.useState(false);
+  const [generoMascotaFocus, setgeneroMascotaFocus] = React.useState(false);
   const [fechanacimientoFocus, setfechanacimientoFocus] = React.useState(false);
   const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
   const [leePoliticasFocus, setleePoliticas] = React.useState(false);
@@ -100,8 +100,8 @@ const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
                 setespecieFocus={setespecieFocus}
                 razaFocus={razaFocus}
                 setrazaFocus={setrazaFocus}
-                sexoMascotaFocus={sexoMascotaFocus}
-                setsexoMascotaFocus={setsexoMascotaFocus}
+                generoMascotaFocus={generoMascotaFocus}
+                setgeneroMascotaFocus={setgeneroMascotaFocus}
                 fechanacimientoFocus={fechanacimientoFocus}
                 setfechanacimientoFocus={setfechanacimientoFocus}
                 colorPrincipalFocus={colorPrincipalFocus}
