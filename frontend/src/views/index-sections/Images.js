@@ -8,7 +8,7 @@ import { Container, Row, Col } from "reactstrap";
 function Images() {
   return (
     <>
-      <div className="section section-images">
+      <div className="section section-images gallery">
         <Container>
           <Row>
             <Col md="12">
