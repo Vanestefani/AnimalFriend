@@ -10,7 +10,7 @@ function Mascota() {
     <>
       <div className="section section-team text-center">
         <Container>
-          <h2 className="title">Mascotas</h2>
+
           <div className="team">
             <Row>
               <Col md="6 ">
