@@ -14,7 +14,7 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
+import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import ListMascotas from "../../components/Listas/ListMascotas";
@@ -39,7 +39,7 @@ function Perfil() {
 
   return (
     <>
-      <ExamplesNavbar />
+      <ScrollNavbar />
       <div className="wrapper">
         <ProfilePageHeader></ProfilePageHeader>
         <div className="section">

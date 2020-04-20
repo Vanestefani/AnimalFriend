@@ -3360,10 +3360,10 @@ Created using IcoMoon - icomoon.io
     border: 1px solid #018383; }
 
 .bg-default {
-  background-color: linear-gradient(270deg, #3BB2B8 0%, #42E695 100%) !important; }
+  background-color: #018383 !important; }
 
 .bg-primary {
-  background-color: #3bb2b8 !important; }
+  background-color: linear-gradient(270deg, #3BB2B8 0%, #42E695 100%) !important; }
 
 .bg-info {
   background-color: #02a8a8 !important; }

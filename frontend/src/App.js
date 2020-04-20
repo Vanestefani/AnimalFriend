@@ -15,6 +15,7 @@ import OlvidadoContraseñaPage from "./views/auth/OlvidadoContraseñaPage";
 //pages
 import Home from "./views/Home/home";
 import Perfil from "./views/Perfil/perfil";
+import Mascotas from "./views/Mascotas/Mascotas";
 import LandingPage from "./views/examples/LandingPage.js";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             />
             <Route path="/home" render={(props) => <Home {...props} />} />
             <Route path="/perfil" render={(props) => <Perfil {...props} />} />
+            <Route path="/mascotas" render={(props) => <Mascotas {...props} />} />
 
             <Route
               path="/crear-cuenta"

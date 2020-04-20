@@ -172,13 +172,15 @@
         }
     }
 }
-
+.bg-degrado{
+    background: linear-gradient(270deg, #3BB2B8 0%, #42E695 100%);
+}
 .bg-default{
     background-color: $default-color !important;
 }
 
 .bg-primary{
-    background:  $degradado !important;
+    background-color: $primary-color !important;
 }
 
 .bg-info{

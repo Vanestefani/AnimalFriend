@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+// reactstrap components
 import {
   Collapse,
   UncontrolledTooltip,
@@ -20,7 +21,7 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 
-function HomeNarbar() {
+function ScrollNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   React.useEffect(() => {
@@ -29,7 +30,7 @@ function HomeNarbar() {
         document.documentElement.scrollTop > 399 ||
         document.body.scrollTop > 399
       ) {
-        setNavbarColor("");
+        setNavbarColor("bg-degrado");
       } else if (
         document.documentElement.scrollTop < 400 ||
         document.body.scrollTop < 400
@@ -42,7 +43,6 @@ function HomeNarbar() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
-
   return (
     <>
       {collapseOpen ? (
@@ -54,7 +54,7 @@ function HomeNarbar() {
           }}
         />
       ) : null}
-      <Navbar className="bg-degrado" expand="lg">
+      <Navbar className={"fixed-top " + navbarColor} color="info" expand="lg">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand href="#" id="navbar-brand">
@@ -220,4 +220,4 @@ function HomeNarbar() {
   );
 }
 
-export default HomeNarbar;
+export default ScrollNavbar;
