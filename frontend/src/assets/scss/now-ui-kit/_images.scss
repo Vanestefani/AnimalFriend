@@ -1,7 +1,12 @@
 img{
     max-width: 100%;
     border-radius: 1px;
+    margin: 2px;
 }
 .img-raised{
     box-shadow: $box-shadow-raised;
 }
+.thumb{
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
