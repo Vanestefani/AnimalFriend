@@ -18,7 +18,7 @@ import Perfil from "./views/Perfil/perfil";
 import PerfilMascota from "./views/Mascotas/PerfilMascota";
 import Mascotas from "./views/Mascotas/Mascotas";
 import LandingPage from "./views/examples/LandingPage.js";
-
+import Recordatorios from './views/Recordatorios/Recordatorio';
 function App() {
   return (
     <>
@@ -31,6 +31,7 @@ function App() {
             />
             <Route path="/home" render={(props) => <Home {...props} />} />
             <Route path="/perfil" render={(props) => <Perfil {...props} />} />
+            <Route path="/recordatorios" render={(props) => <Recordatorios {...props} />} />
             <Route
               path="/mascotas"
               render={(props) => <Mascotas {...props} />}
