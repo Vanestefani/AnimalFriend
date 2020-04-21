@@ -6,19 +6,7 @@ import {
   UncontrolledTooltip,
   NavbarBrand,
   Navbar,
-  NavItem,
-  NavLink,
-  Nav,
   Container,
-  Form,
-  InputGroup,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
 } from "reactstrap";
 
 function ExamplesNavbar() {
@@ -85,7 +73,6 @@ function ExamplesNavbar() {
               <span className="navbar-toggler-bar bar3"></span>
             </button>
           </div>
-
         </Container>
       </Navbar>
     </>

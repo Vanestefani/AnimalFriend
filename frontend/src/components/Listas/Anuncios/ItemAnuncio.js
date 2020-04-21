@@ -9,6 +9,7 @@ function ItemAnuncio() {
             src={require("../../../assets/img/undraw_female_avatar_w3jk.png")}
             className="rounded-circle FotoUser"
             width="60px"
+            atl=""
           ></img>
 
         </center>

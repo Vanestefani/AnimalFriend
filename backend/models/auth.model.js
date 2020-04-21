@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 // esquema de usuario
+
 const userScheama = new mongoose.Schema(
   {
     email: {
@@ -14,26 +15,6 @@ const userScheama = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-    },
-    pais: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    ciudad: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    genero: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    descripcio: {
-      type: String,
-      trim: true,
-      required: false,
     },
 
     hashed_password: {
@@ -87,3 +68,4 @@ userScheama.methods = {
     return Math.round(new Date().valueOf() * Math.random()) + "";
   },
 };
+module.exports = mongoose.model('User', userScheama);
