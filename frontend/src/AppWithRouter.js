@@ -1,5 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch ,withRouter} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  withRouter,
+} from "react-router-dom";
 
 import withAnalytics, { initAnalytics } from "react-with-analytics";
 import "./App.css";
@@ -23,40 +28,43 @@ import Mascotas from "./views/Mascotas/Mascotas";
 import LandingPage from "./views/examples/LandingPage.js";
 import Recordatorios from "./views/Recordatorios/Recordatorio";
 import Anuncios from "./views/Anuncios/Anuncios";
+import NotFound from "./views/NotFound";
+
 initAnalytics("UA-126201794-1");
 export const history = createHistory();
 const Root = () => (
   <Switch>
-      <Route
-          path="/landing-page"
-          render={(props) => <LandingPage {...props} />}
-        />
-        <Route path="/anuncios" render={(props) => <Anuncios {...props} />} />
+    <Route
+      path="/landing-page"
+      render={(props) => <LandingPage {...props} />}
+    />
+    <Route path="/anuncios" render={(props) => <Anuncios {...props} />} />
 
-        <Route path="/home" render={(props) => <Home {...props} />} />
-        <Route path="/perfil" render={(props) => <Perfil {...props} />} />
-        <Route
-          path="/recordatorios"
-          render={(props) => <Recordatorios {...props} />}
-        />
-        <Route path="/mascotas" render={(props) => <Mascotas {...props} />} />
-        <Route
-          path="/perfil-mascota"
-          render={(props) => <PerfilMascota {...props} />}
-        />
-        <Route
-          path="/crear-cuenta"
-          render={(props) => <CrearCuentaPage {...props} />}
-        />
-        <Route exact path="/" render={(props) => <LoginPage {...props} />} />
-        <Route
-          path="/cambiar-contrasena"
-          render={(props) => <CambiarContraseñaPage {...props} />}
-        />
-        <Route
-          path="/olvido-contrasena"
-          render={(props) => <OlvidadoContraseñaPage {...props} />}
-        />
+    <Route path="/home" render={(props) => <Home {...props} />} />
+    <Route path="/perfil" render={(props) => <Perfil {...props} />} />
+    <Route
+      path="/recordatorios"
+      render={(props) => <Recordatorios {...props} />}
+    />
+    <Route path="/mascotas" render={(props) => <Mascotas {...props} />} />
+    <Route
+      path="/perfil-mascota"
+      render={(props) => <PerfilMascota {...props} />}
+    />
+    <Route
+      path="/crear-cuenta"
+      render={(props) => <CrearCuentaPage {...props} />}
+    />
+    <Route exact path="/" render={(props) => <LoginPage {...props} />} />
+    <Route
+      path="/cambiar-contrasena"
+      render={(props) => <CambiarContraseñaPage {...props} />}
+    />
+    <Route
+      path="/olvido-contrasena"
+      render={(props) => <OlvidadoContraseñaPage {...props} />}
+    />
+    <Route component={NotFound} />
   </Switch>
 );
 
