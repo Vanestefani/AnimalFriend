@@ -53,9 +53,9 @@ export const createPost = (text, user) => (dispatch) =>
   axios
     .post("/posts", {
       text,
-      author: user.name,
+      author: user.nombre,
       authorId: user.userId,
-      avatarColor: user.avatarColor,
+
     })
     .then((res) =>
       dispatch({

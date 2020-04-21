@@ -188,7 +188,8 @@ class detallesUsuario extends Component {
 
           <div className="pull-left">
             <h6>
-              <Link className="link" to="/crear-cuenta">
+            <Link className="link" to="/">
+
                 Iniciar sesión
               </Link>
             </h6>

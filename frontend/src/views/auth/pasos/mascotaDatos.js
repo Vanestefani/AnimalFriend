@@ -303,7 +303,7 @@ class mascotaDatos extends Component {
 
           <div className="pull-left">
             <h6>
-              <Link className="link" to="/crear-cuenta">
+              <Link className="link" to="/a">
                 Iniciar sesión
               </Link>
             </h6>

@@ -52,16 +52,11 @@ export const setCurrentUser = (decoded) => ({
   payload: decoded,
 });
 
-export const updateCurrentUser = (
-  avatarColor,
-  bio,
-  email,
-  name,
-  userId,
-  showEmail
-) => (dispatch) =>
+export const updateCurrentUser = (nombre, bio, email, pais, userId, ciudad,genero) => (
+  dispatch
+) =>
   axios
-    .patch(`/users/${userId}`, { avatarColor, bio, email, name, showEmail })
+    .patch(`/users/${userId}`, { nombre, bio, email, pais, ciudad ,genero})
     .then((res) => {
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);

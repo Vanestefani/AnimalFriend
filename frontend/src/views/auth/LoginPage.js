@@ -1,5 +1,10 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import Avatar from "@material-ui/core/Avatar";
+import { loginUser } from "../../actions/authActions";
+import compose from "recompose/compose";
 // reactstrap components
 import {
   Button,
@@ -19,7 +24,7 @@ import {
 import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../components/Footers/TransparentFooter.js";
 
-function LoginPage() {
+function LoginPage(props) {
   //focus inputs
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
@@ -27,14 +32,10 @@ function LoginPage() {
   const [usuario, guardarUsuario] = useState({
     email: "",
     password: "",
+    errors: {},
   });
   // extraer de usuario
-  const { email, password } = usuario;
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    e.target.className += " was-validated";
-  };
+  const { email, password, errors } = usuario;
 
   const onChange = (e) => {
     guardarUsuario({
@@ -54,7 +55,34 @@ function LoginPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+  const componentDidMount = () => {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  };
 
+  const componentWillReceiveProps = (nextProps) => {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { signInUser } = props;
+    signInUser(usuario);
+
+    e.target.className += " was-validated";
+    if (email.trim() === "" || password.trim() === "") {
+      alert("Todos los campos son obligatorios", "alerta-error");
+    }
+  };
   return (
     <>
       <ExamplesNavbar />
@@ -69,7 +97,7 @@ function LoginPage() {
         <div className="content">
           <Container>
             <Card className="card-login" data-background-color="blue">
-              <Form className="form" onSubmit={onSubmit}>
+              <Form className="form" onSubmit={handleSubmit} noValidate>
                 <CardHeader className="text-center">
                   <CardTitle className="title-up" tag="h3">
                     Iniciar sesión
@@ -125,8 +153,11 @@ function LoginPage() {
                       onChange={onChange}
                       defaultValue={email}
                       required
+                      autoComp
+                      lete="email"
                     ></Input>
                   </InputGroup>
+
                   <InputGroup
                     className={
                       "no-border input-lg" +
@@ -148,6 +179,7 @@ function LoginPage() {
                       required
                       onChange={onChange}
                       defaultValue={password}
+                      autoComplete="current-password"
                     ></Input>
                   </InputGroup>
 
@@ -156,7 +188,6 @@ function LoginPage() {
                     className="btn-round  "
                     color="default"
                     type="submit"
-                    onClick={(e) => e.preventDefault()}
                     size="lg"
                   >
                     <b> Iniciar Sesión </b>
@@ -185,5 +216,24 @@ function LoginPage() {
     </>
   );
 }
+LoginPage.defaultProps = {
+  errors: {},
+};
 
-export default LoginPage;
+LoginPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+  errors: PropTypes.object,
+  history: PropTypes.object.isRequired,
+  signInUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.authReducer,
+  errors: state.errorReducer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  signInUser: (user) => dispatch(loginUser(user)),
+});
+
+export default compose(connect(mapStateToProps, mapDispatchToProps))(LoginPage);

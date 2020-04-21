@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -11,22 +11,20 @@ import {
   Row,
 } from "reactstrap";
 class DatosUsuario extends Component {
-
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
   };
 
   render() {
-
     return (
       <>
- <h4>Credenciales de usuario</h4>
+        <h4>Credenciales de usuario</h4>
         <div>
-
           <InputGroup
             className={
-              "no-border input-lg" + (this.props.nombreFocus ? " input-group-focus" : "")
+              "no-border input-lg" +
+              (this.props.nombreFocus ? " input-group-focus" : "")
             }
           >
             <InputGroupAddon addonType="prepend">
@@ -37,7 +35,7 @@ class DatosUsuario extends Component {
             <Input
               placeholder="Nombre completo"
               type="text"
-              onFocus={() =>this.props. setnombreFocus(true)}
+              onFocus={() => this.props.setnombreFocus(true)}
               onBlur={() => this.props.setnombreFocus(false)}
               id="nombre"
               name="nombre"
@@ -50,7 +48,8 @@ class DatosUsuario extends Component {
 
           <InputGroup
             className={
-              "no-border input-lg" + (this.props.emailFocus ? " input-group-focus" : "")
+              "no-border input-lg" +
+              (this.props.emailFocus ? " input-group-focus" : "")
             }
           >
             <InputGroupAddon addonType="prepend">
@@ -61,7 +60,7 @@ class DatosUsuario extends Component {
             <Input
               placeholder="Email"
               type="email"
-              onFocus={() =>this.props. setemailFocus(true)}
+              onFocus={() => this.props.setemailFocus(true)}
               onBlur={() => this.props.setemailFocus(false)}
               id="email"
               name="email"
@@ -86,7 +85,7 @@ class DatosUsuario extends Component {
                 <Input
                   placeholder="Contraseña"
                   type="password"
-                  onFocus={() =>this.props.setpasswordFocus(true)}
+                  onFocus={() => this.props.setpasswordFocus(true)}
                   onBlur={() => this.props.setpasswordFocus(false)}
                   id="password"
                   name="password"
@@ -134,7 +133,7 @@ class DatosUsuario extends Component {
           </Button>
           <div className="pull-left">
             <h6>
-              <Link className="link" to="/crear-cuenta">
+              <Link className="link" to="/">
                 Iniciar sesión
               </Link>
             </h6>

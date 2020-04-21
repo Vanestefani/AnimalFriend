@@ -1,5 +1,6 @@
 import React from "react";
-
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
 
@@ -27,6 +28,12 @@ function Home() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+  const componentDidMount = () => {
+    const { history } = this.props;
+    if (!localStorage.jwtToken) {
+      history.push("/login");
+    }
+  };
   return (
     <>
       <HomeNarbar></HomeNarbar>
@@ -54,4 +61,12 @@ function Home() {
   );
 }
 
-export default Home;
+Home.propTypes = {
+  history: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.authReducer,
+});
+
+export default connect(mapStateToProps)(Home);

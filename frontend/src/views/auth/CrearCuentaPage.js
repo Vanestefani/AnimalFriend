@@ -1,5 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import compose from "recompose/compose";
 // reactstrap components
 import {
   Button,
@@ -8,12 +12,6 @@ import {
   CardBody,
   Container,
   Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Col,
-  Row,
 } from "reactstrap";
 // core components
 import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
@@ -21,8 +19,8 @@ import TransparentFooter from "../../components/Footers/TransparentFooter.js";
 import DatosUsuario from "../../views/auth/pasos/DatosUsuario";
 import DetallesUsuario from "../../views/auth/pasos/detallesUsuario";
 import MascotaDatos from "../../views/auth/pasos/mascotaDatos";
-
-function CrearCuentaPage() {
+import { registerUser } from '../../actions/authActions';
+function CrearCuentaPage(props) {
   //state inputs
   const [usuario, guardarUsuario] = useState({
     step: 1,
@@ -45,7 +43,37 @@ function CrearCuentaPage() {
     colorPrincipal: "",
 
     leePoliticas: "",
+    errors: {},
+    successfulSignup: false,
   });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    this.setState(() => ({ [name]: value }));
+  };
+
+  /* eslint-disable react/destructuring-assignment, react/prop-types */
+  const componentDidMount = () => {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  };
+  const componentWillReceiveProps = (nextProps) => {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
+  };
+  /* eslint-enable react/destructuring-assignment, react/prop-types */
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { createUser } = props;
+    createUser(usuario);
+  };
 
   //state archivos
   const [archivoImagen, guardararchivoImagen] = useState({
@@ -134,6 +162,7 @@ function CrearCuentaPage() {
   const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
 
   const showStep = () => {
+
     if (usuario.step === 1)
       return (
         <DatosUsuario
@@ -176,31 +205,31 @@ function CrearCuentaPage() {
     if (usuario.step === 3)
       return (
         <MascotaDatos
-        nextStep={nextStep}
-        onChange={onChange}
-        onSubmit={onSubmit}
-        usuario={usuario}
-        archivoImagen={archivoImagen}
-        guardarUsuario={guardarUsuario}
-        onChangeImages={onChangeImages}
-        prevStep={prevStep}
-        nombreMascotaFocus={nombreMascotaFocus}
-        setnombreMascotaFocus={setnombreMascotaFocus}
-        especieFocus={especieFocus}
-        setespecieFocus={setespecieFocus}
-        razaFocus={razaFocus}
-        setrazaFocus={setrazaFocus}
-        generoMascotaFocus={generoMascotaFocus}
-        setgeneroMascotaFocus={setgeneroMascotaFocus}
-        fechanacimientoFocus={fechanacimientoFocus}
-        setfechanacimientoFocus={setfechanacimientoFocus}
-        colorPrincipalFocus={colorPrincipalFocus}
-        setcolorPrincipal={setcolorPrincipal}
-        leePoliticasFocus={leePoliticasFocus}
-        setleePoliticas={setleePoliticas}
-        fotoMascotaFocus={fotoMascotaFocus}
-        setfotoMascota={setfotoMascota}
-        onSubmit={onSubmit}
+          nextStep={nextStep}
+          onChange={onChange}
+          onSubmit={onSubmit}
+          usuario={usuario}
+          archivoImagen={archivoImagen}
+          guardarUsuario={guardarUsuario}
+          onChangeImages={onChangeImages}
+          prevStep={prevStep}
+          nombreMascotaFocus={nombreMascotaFocus}
+          setnombreMascotaFocus={setnombreMascotaFocus}
+          especieFocus={especieFocus}
+          setespecieFocus={setespecieFocus}
+          razaFocus={razaFocus}
+          setrazaFocus={setrazaFocus}
+          generoMascotaFocus={generoMascotaFocus}
+          setgeneroMascotaFocus={setgeneroMascotaFocus}
+          fechanacimientoFocus={fechanacimientoFocus}
+          setfechanacimientoFocus={setfechanacimientoFocus}
+          colorPrincipalFocus={colorPrincipalFocus}
+          setcolorPrincipal={setcolorPrincipal}
+          leePoliticasFocus={leePoliticasFocus}
+          setleePoliticas={setleePoliticas}
+          fotoMascotaFocus={fotoMascotaFocus}
+          setfotoMascota={setfotoMascota}
+          onSubmit={onSubmit}
         ></MascotaDatos>
       );
   };
@@ -238,4 +267,29 @@ function CrearCuentaPage() {
   );
 }
 
-export default CrearCuentaPage;
+CrearCuentaPage.defaultProps = {
+  errors: {}
+};
+
+CrearCuentaPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+  createUser: PropTypes.func.isRequired,
+  errors: PropTypes.object
+};
+
+const mapStateToProps = state => ({
+  auth: state.authReducer,
+  errors: state.errorReducer
+});
+
+const mapDispatchToProps = dispatch => ({
+  createUser: user => dispatch(registerUser(user))
+});
+
+export default compose(
+
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(CrearCuentaPage);
