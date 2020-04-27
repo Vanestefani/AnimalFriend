@@ -19,7 +19,7 @@ import TransparentFooter from "../../components/Footers/TransparentFooter.js";
 import DatosUsuario from "../../views/auth/pasos/DatosUsuario";
 import DetallesUsuario from "../../views/auth/pasos/detallesUsuario";
 import MascotaDatos from "../../views/auth/pasos/mascotaDatos";
-import { registerUser } from '../../actions/authActions';
+
 function CrearCuentaPage(props) {
   //state inputs
   const [usuario, guardarUsuario] = useState({
@@ -267,29 +267,4 @@ function CrearCuentaPage(props) {
   );
 }
 
-CrearCuentaPage.defaultProps = {
-  errors: {}
-};
-
-CrearCuentaPage.propTypes = {
-  classes: PropTypes.object.isRequired,
-  createUser: PropTypes.func.isRequired,
-  errors: PropTypes.object
-};
-
-const mapStateToProps = state => ({
-  auth: state.authReducer,
-  errors: state.errorReducer
-});
-
-const mapDispatchToProps = dispatch => ({
-  createUser: user => dispatch(registerUser(user))
-});
-
-export default compose(
-
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(CrearCuentaPage);
+export default CrearCuentaPage;

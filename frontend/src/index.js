@@ -1,34 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import jwtDecode from "jwt-decode";
-import { Provider } from "react-redux";
-import registerServiceWorker from "./registerServiceWorker";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
-import App from "./App";
-import createStore from "./store";
-import setAuthToken from "./setAuthToken";
-import * as serviceWorker from "./serviceWorker";
-import { logoutUser, setCurrentUser } from "./actions/authActions";
-import "./index.css";
-const store = createStore();
-// Code snippet from Krunal
-// https://appdividend.com/2018/07/18/react-redux-node-mongodb-jwt-authentication/#React_Redux_Node_MongoDB_JWT_Authentication
-if (localStorage.jwtToken) {
-  setAuthToken(localStorage.jwtToken);
-  const decoded = jwtDecode(localStorage.jwtToken);
-  store.dispatch(setCurrentUser(decoded));
-
-  const currentTime = Date.now() / 1000;
-  if (decoded.exp < currentTime) {
-    store.dispatch(logoutUser());
-    window.location.href = "/login";
-  }
-}
 ReactDOM.render(
-  <Provider store={store}>
+  <React.StrictMode>
     <App />
-  </Provider>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
-registerServiceWorker();
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

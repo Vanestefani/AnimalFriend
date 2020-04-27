@@ -1,7 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-// reactstrap components
+
 import { Container, Row, Col } from "reactstrap";
 
 // core components
@@ -16,8 +14,6 @@ import PostList from "../../components/Post/PostList";
 import Calendario from "../../components/Calendario/Calendario";
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 
-import { Link } from "react-router-dom";
-
 function Home() {
   React.useEffect(() => {
     document.body.classList.add("landing-page");
@@ -28,12 +24,7 @@ function Home() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
-  const componentDidMount = () => {
-    const { history } = this.props;
-    if (!localStorage.jwtToken) {
-      history.push("/login");
-    }
-  };
+
   return (
     <>
       <HomeNarbar></HomeNarbar>
@@ -61,12 +52,4 @@ function Home() {
   );
 }
 
-Home.propTypes = {
-  history: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: state.authReducer,
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

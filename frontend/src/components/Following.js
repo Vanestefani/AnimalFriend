@@ -7,13 +7,6 @@ import compose from 'recompose/compose';
 import classNames from 'classnames';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import {
-  followUser,
-  getFollowing,
-  getUser,
-  getAllUsers,
-  unfollowUser
-} from '../actions/userActions';
 
 import Loading from '../components/Loading';
 import UserCard from './UserCard';
@@ -122,36 +115,4 @@ export class Following extends Component {
   }
 }
 
-Following.propTypes = {
-  authReducer: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  followThisUser: PropTypes.func.isRequired,
-  getCurrUser: PropTypes.func.isRequired,
-  getFollowingUsers: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
-  unfollowThisUser: PropTypes.func.isRequired,
-  userReducer: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  authReducer: state.authReducer,
-  userReducer: state.userReducer
-});
-
-const mapDispatchToProps = dispatch => ({
-  getCurrUser: id => dispatch(getUser(id)),
-  getFollowingUsers: id => dispatch(getFollowing(id)),
-  followThisUser: (signedInUserId, idToFollow) =>
-    dispatch(followUser(signedInUserId, idToFollow)),
-  retrieveAllUsers: () => dispatch(getAllUsers()),
-  unfollowThisUser: (signedInUserId, idToUnfollow) =>
-    dispatch(unfollowUser(signedInUserId, idToUnfollow))
-});
-
-export default compose(
-  withStyles(styles),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(Following);
+export default Following;

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
-import { loginUser } from "../../actions/authActions";
+
 import compose from "recompose/compose";
 // reactstrap components
 import {
@@ -216,24 +216,5 @@ function LoginPage(props) {
     </>
   );
 }
-LoginPage.defaultProps = {
-  errors: {},
-};
 
-LoginPage.propTypes = {
-  classes: PropTypes.object.isRequired,
-  errors: PropTypes.object,
-  history: PropTypes.object.isRequired,
-  signInUser: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: state.authReducer,
-  errors: state.errorReducer,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  signInUser: (user) => dispatch(loginUser(user)),
-});
-
-export default compose(connect(mapStateToProps, mapDispatchToProps))(LoginPage);
+export default LoginPage;

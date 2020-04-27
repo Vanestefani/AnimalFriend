@@ -1,44 +1,41 @@
 const express = require("express");
-const morgan = require("morgan");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const cors = require("cors");
-const connectDB = require('./config/db')
+const passport = require("passport");
 
-// Config dotev
-require("dotenv").config({
-  path: "./config/config.env",
-});
-//Coneccion a base de datos
-connectDB();
+const users = require("./routes/api/users");
 
 const app = express();
 
-// body parser
-app.use(bodyParser.json())
-//Puerto
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
-// configuracio solo para envirioment  develoment
-//morgan da informacion de cada request
-//cors evita problemas con react
-if (process.env.NODE_ENV === "development") {
-  app.use(
-    cors({
-      origin: process.env.CLIENT_URL,
-    })
-  );
-  app.use(morgan("dev"));
-  //Cargar RUTAS
-  const authRouter = require("./routes/auth.route");
-  //USAR RUTAS
-  app.use("/api", authRouter);
-  //Error 404
-  app.use((req, res) => {
-    res.status(404).json({
-      success: false,
-      msg: "Pagina no encontrada",
-    });
-  });
-}
+// Bodyparser middleware
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
+
+// DB Config
+const db = require("./config/keys").mongoURI;
+
+// Connect to MongoDB
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("MongoDB successfully connected"))
+  .catch(err => console.log(err));
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+require("./config/passport")(passport);
+
+// Routes
+app.use("/api/users", users);
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => console.log(`Server up and running on port ${port} !`));

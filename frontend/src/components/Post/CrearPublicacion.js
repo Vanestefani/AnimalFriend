@@ -3,7 +3,7 @@ import { Button, Input, CardHeader, Card, CardBody, Form } from "reactstrap";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createPost } from "../../actions/postsActions";
+
 import compose from "recompose/compose";
 export class CrearPublicacion extends Component {
   state = {
@@ -18,9 +18,7 @@ export class CrearPublicacion extends Component {
     e.preventDefault();
     const { postText } = this.state;
     const { dispatch, user } = this.props;
-    if (!postText.trim()) return;
-    dispatch(createPost(postText, user));
-    this.setState({ postText: "" });
+
   };
 
   render() {
@@ -80,14 +78,4 @@ export class CrearPublicacion extends Component {
   }
 }
 
-CrearPublicacion.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  user: state.authReducer.user,
-});
-
-export default compose(connect(mapStateToProps))(CrearPublicacion);
+export default CrearPublicacion;
