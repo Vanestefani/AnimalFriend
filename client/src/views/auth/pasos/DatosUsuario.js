@@ -14,6 +14,7 @@ class DatosUsuario extends Component {
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
+    
   };
 
   render() {
@@ -99,7 +100,7 @@ class DatosUsuario extends Component {
               <InputGroup
                 className={
                   "no-border input-lg" +
-                  (this.props.confirmarFocus ? " input-group-focus" : "")
+                  (this.props.password2Focus ? " input-group-focus" : "")
                 }
               >
                 <InputGroupAddon addonType="prepend">
@@ -110,12 +111,12 @@ class DatosUsuario extends Component {
                 <Input
                   placeholder="Confirmar Contraseña"
                   type="password"
-                  onFocus={() => this.props.setconfirmarFocus(true)}
-                  onBlur={() => this.props.setconfirmarFocus(false)}
-                  id="confirmar"
-                  name="confirmar"
+                  onFocus={() => this.props.setpassword2Focus(true)}
+                  onBlur={() => this.props.setpassword2Focus(false)}
+                  id="password2"
+                  name="password2"
                   onChange={this.props.onChange}
-                  defaultValue={this.props.usuario.confirmar}
+                  defaultValue={this.props.usuario.password2}
                   required
                 ></Input>
               </InputGroup>

@@ -56,7 +56,7 @@ const Root = () => (
       path="/perfil-mascota"
       render={(props) => <PerfilMascota {...props} />}
     />
-    <Route exact
+    <Route
       path="/crear-cuenta"
       render={(props) => <CrearCuentaPage {...props} />}
     />

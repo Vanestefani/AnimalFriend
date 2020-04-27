@@ -293,7 +293,7 @@ class mascotaDatos extends Component {
                 className="btn-round  "
                 color="default"
                 href="#"
-                onClick={this.onSubmitRegistro}
+                onClick={this.handleSubmit}
                 size="lg"
               >
                 <b> Registrarse </b>
