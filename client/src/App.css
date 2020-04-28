@@ -10,7 +10,9 @@
     transform: rotate(360deg);
   }
 }
-
+.form-text{
+  font-size: 8px !important;
+}
 .btn-circle {
   width: 30px;
   height: 30px;

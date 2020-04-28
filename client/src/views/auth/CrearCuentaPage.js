@@ -1,7 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, setState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
 
 import compose from "recompose/compose";
 // reactstrap components
@@ -28,7 +29,7 @@ function CrearCuentaPage(props) {
     nombre: "",
     email: "",
     password: "",
-    confirmar: "",
+    password2: "",
     //paso2
     pais: "",
     ciudad: "",
@@ -42,10 +43,76 @@ function CrearCuentaPage(props) {
     fechanacimiento: "",
     colorPrincipal: "",
 
-    leePoliticas: "",
-    errors: {},
-    successfulSignup: false,
+    leePoliticas: false,
+    errors: {
+      Errornombre: { valido: true, mensaje: "" },
+      Erroremail: { valido: true, mensaje: "" },
+      Errorpassword: { valido: true, mensaje: "" },
+      Errorpassword2: { valido: true, mensaje: "" },
+    },
   });
+  const validate = () => {
+    let isError = false;
+ // El pattern solo letras
+ const pattern = new RegExp('^[A-Z]+$', 'i');
+ const pattern2=new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+
+    if (usuario.step == 1) {
+      if (usuario.email.indexOf("@") === -1) {
+        usuario.errors.Erroremail.valido = false;
+        usuario.errors.Erroremail.mensaje =
+          "Por favor ingrese un correo valido";
+      } else {
+        usuario.errors.Erroremail.valido = true;
+      }
+      if (usuario.password.length < 6) {
+        usuario.errors.Errorpassword.valido = false;
+        usuario.errors.Errorpassword.mensaje =
+          "La contraseña debe tener al menos 6 caracteres";
+      } else {
+        usuario.errors.Errorpassword.valido = true;
+      }
+
+      if (usuario.password !== usuario.password2) {
+        usuario.errors.Errorpassword2.valido = false;
+        usuario.errors.Errorpassword2.mensaje = "Las contraseñas no coinciden";
+      } else {
+        usuario.errors.Errorpassword2.valido = true;
+      }
+      if (usuario.nombre.length < 1) {
+        usuario.errors.Errornombre.valido = false;
+        usuario.errors.Errornombre.mensaje =
+          "El campo nombre no puede estar vacio";
+      } else {
+        usuario.errors.Errornombre.valido = true;
+      }
+
+      if (!pattern.test(usuario.nombre)) {
+        usuario.errors.Errornombre.valido = false;
+        usuario.errors.Errornombre.mensaje =
+          "El campo nombre solo debe tener letras";
+      } else {
+        usuario.errors.Errornombre.valido = true;
+      }
+      if (!pattern2.test(usuario.password)) {
+        usuario.errors.Errorpassword.valido = false;
+        usuario.errors.Errorpassword.mensaje =
+          "Debe tener al menos una letra mayuscula ,una letra minuscula,un numero y un caracter especial";
+      } else {
+        usuario.errors.Errorpassword.valido = true;
+      }
+
+      if (!usuario.errors.Erroremail.valido ||!usuario.errors.Errornombre.valido
+        ||!usuario.errors.Errorpassword.valido   ||!usuario.errors.Errorpassword2.valido
+        ) {
+        isError = true;
+      } else {
+        isError = false;
+      }
+    }
+
+    return isError;
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     this.setState(() => ({ [name]: value }));
@@ -54,25 +121,15 @@ function CrearCuentaPage(props) {
   /* eslint-disable react/destructuring-assignment, react/prop-types */
   const componentDidMount = () => {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push("/home");
     }
   };
-  const componentWillReceiveProps = (nextProps) => {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/");
-    }
 
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors,
-      });
-    }
-  };
   /* eslint-enable react/destructuring-assignment, react/prop-types */
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { createUser } = props;
-    createUser(usuario);
+
+    this.props.registerUser(usuario, this.props.history);
   };
 
   //state archivos
@@ -88,7 +145,7 @@ function CrearCuentaPage(props) {
     nombre,
     email,
     password,
-    confirmar,
+    password2,
     pais,
     ciudad,
     genero,
@@ -98,7 +155,7 @@ function CrearCuentaPage(props) {
     generoMascota,
     fechanacimiento,
     colorPrincipal,
-
+    errors,
     leePoliticas,
   } = usuario;
 
@@ -128,15 +185,25 @@ function CrearCuentaPage(props) {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+
   //pasos
   const nextStep = () => {
-    guardarUsuario({
-      ...usuario,
-      step: usuario.step + 1,
-    });
+    const err = validate();
+    if (!err) {
+      guardarUsuario({
+        ...usuario,
+        step: usuario.step + 1,
+      });
+    } else {
+      guardarUsuario({
+        ...usuario,
+      });
+    }
   };
+
   const prevStep = () => {
     guardarUsuario({
+      ...usuario,
       step: usuario.step - 1,
     });
   };
@@ -145,7 +212,7 @@ function CrearCuentaPage(props) {
   const [nombreFocus, setnombreFocus] = React.useState(false);
   const [emailFocus, setemailFocus] = React.useState(false);
   const [passwordFocus, setpasswordFocus] = React.useState(false);
-  const [confirmarFocus, setconfirmarFocus] = React.useState(false);
+  const [password2Focus, setpassword2Focus] = React.useState(false);
   //    paso 2
   const [paisFocus, setpaisFocus] = React.useState(false);
   const [ciudadFocus, setciudadFocus] = React.useState(false);
@@ -162,7 +229,6 @@ function CrearCuentaPage(props) {
   const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
 
   const showStep = () => {
-
     if (usuario.step === 1)
       return (
         <DatosUsuario
@@ -174,11 +240,11 @@ function CrearCuentaPage(props) {
           nombreFocus={nombreFocus}
           emailFocus={emailFocus}
           passwordFocus={passwordFocus}
-          confirmarFocus={confirmarFocus}
+          password2Focus={password2Focus}
           setnombreFocus={setnombreFocus}
           setemailFocus={setemailFocus}
           setpasswordFocus={setpasswordFocus}
-          setconfirmarFocus={setconfirmarFocus}
+          setpassword2Focus={setpassword2Focus}
         ></DatosUsuario>
       );
     if (usuario.step === 2)
@@ -251,7 +317,7 @@ function CrearCuentaPage(props) {
               className="card-login card-plain"
               data-background-color="blue"
             >
-              <Form action="" className="form" method="">
+              <Form className="form" autocomplete="off">
                 <CardHeader className="text-center">
                   <h1>Crear cuenta</h1>
                   <h3>Paso {usuario.step} de 3.</h3>
@@ -266,5 +332,13 @@ function CrearCuentaPage(props) {
     </>
   );
 }
-
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+CrearCuentaPage.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
 export default CrearCuentaPage;
