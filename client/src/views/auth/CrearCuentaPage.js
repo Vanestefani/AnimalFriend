@@ -6,20 +6,12 @@ import { registerUser } from "../../actions/authActions";
 
 import compose from "recompose/compose";
 // reactstrap components
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  Container,
-  Form,
-} from "reactstrap";
+import { Card, CardHeader, CardBody, Container, Form } from "reactstrap";
 // core components
 import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../components/Footers/TransparentFooter.js";
 import DatosUsuario from "../../views/auth/pasos/DatosUsuario";
 import DetallesUsuario from "../../views/auth/pasos/detallesUsuario";
-import MascotaDatos from "../../views/auth/pasos/mascotaDatos";
 
 function CrearCuentaPage(props) {
   //state inputs
@@ -35,14 +27,6 @@ function CrearCuentaPage(props) {
     ciudad: "",
     genero: "",
 
-    //paso 3
-    nombreMascota: "",
-    especie: "",
-    raza: "",
-    generoMascota: "",
-    fechanacimiento: "",
-    colorPrincipal: "",
-
     leePoliticas: false,
     errors: {
       Errornombre: { valido: true, mensaje: "" },
@@ -52,7 +36,6 @@ function CrearCuentaPage(props) {
       Errorpais: { valido: true, mensaje: "" },
       Errorciudad: { valido: true, mensaje: "" },
       Errorgenero: { valido: true, mensaje: "" },
-      Errorfoto: { valido: true, mensaje: "" },
     },
   });
   const validate = () => {
@@ -173,14 +156,6 @@ function CrearCuentaPage(props) {
     this.props.registerUser(usuario, this.props.history);
   };
 
-  //state archivos
-  const [archivoImagen, guardararchivoImagen] = useState({
-    fotoUsuario: null,
-    fotoMascota: null,
-  });
-  //extraer archivos
-  const { fotoUsuario, fotoMascota } = archivoImagen;
-
   // extraer de usuario
   const {
     nombre,
@@ -211,12 +186,6 @@ function CrearCuentaPage(props) {
       [e.target.name]: e.target.value,
     });
   };
-  const onChangeImages = (e) => {
-    guardararchivoImagen({
-      ...archivoImagen,
-      [e.target.name]: URL.createObjectURL(e.target.files[0]),
-    });
-  };
 
   React.useEffect(() => {
     document.body.classList.add("login-page");
@@ -230,9 +199,7 @@ function CrearCuentaPage(props) {
   //pasos
   const nextStep = () => {
     const err = validate();
-    guardararchivoImagen({
-      ...archivoImagen,
-    });
+
     if (!err) {
       guardarUsuario({
         ...usuario,
@@ -246,9 +213,6 @@ function CrearCuentaPage(props) {
   };
 
   const prevStep = () => {
-    guardararchivoImagen({
-      ...archivoImagen,
-    });
     guardarUsuario({
       ...usuario,
       step: usuario.step - 1,
@@ -264,16 +228,6 @@ function CrearCuentaPage(props) {
   const [paisFocus, setpaisFocus] = React.useState(false);
   const [ciudadFocus, setciudadFocus] = React.useState(false);
   const [generoFocus, setgeneroFocus] = React.useState(false);
-  const [fotoUsuarioFocus, setfotoUsuariorFocus] = React.useState(false);
-  //    paso 3
-  const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
-  const [especieFocus, setespecieFocus] = React.useState(false);
-  const [razaFocus, setrazaFocus] = React.useState(false);
-  const [generoMascotaFocus, setgeneroMascotaFocus] = React.useState(false);
-  const [fechanacimientoFocus, setfechanacimientoFocus] = React.useState(false);
-  const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
-  const [leePoliticasFocus, setleePoliticas] = React.useState(false);
-  const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
 
   const showStep = () => {
     if (usuario.step === 1)
@@ -301,49 +255,14 @@ function CrearCuentaPage(props) {
           onChange={onChange}
           onSubmit={onSubmit}
           usuario={usuario}
-          archivoImagen={archivoImagen}
-          guardarUsuario={guardarUsuario}
           paisFocus={paisFocus}
           ciudadFocus={ciudadFocus}
           setgeneroFocus={setgeneroFocus}
           generoFocus={generoFocus}
-          fotoUsuarioFocus={fotoUsuarioFocus}
-          setfotoUsuarioFocus={setfotoUsuariorFocus}
           setpaisFocus={setpaisFocus}
           setciudadFocus={setciudadFocus}
-          onChangeImages={onChangeImages}
           prevStep={prevStep}
         ></DetallesUsuario>
-      );
-    if (usuario.step === 3)
-      return (
-        <MascotaDatos
-          nextStep={nextStep}
-          onChange={onChange}
-          onSubmit={onSubmit}
-          usuario={usuario}
-          archivoImagen={archivoImagen}
-          guardarUsuario={guardarUsuario}
-          onChangeImages={onChangeImages}
-          prevStep={prevStep}
-          nombreMascotaFocus={nombreMascotaFocus}
-          setnombreMascotaFocus={setnombreMascotaFocus}
-          especieFocus={especieFocus}
-          setespecieFocus={setespecieFocus}
-          razaFocus={razaFocus}
-          setrazaFocus={setrazaFocus}
-          generoMascotaFocus={generoMascotaFocus}
-          setgeneroMascotaFocus={setgeneroMascotaFocus}
-          fechanacimientoFocus={fechanacimientoFocus}
-          setfechanacimientoFocus={setfechanacimientoFocus}
-          colorPrincipalFocus={colorPrincipalFocus}
-          setcolorPrincipal={setcolorPrincipal}
-          leePoliticasFocus={leePoliticasFocus}
-          setleePoliticas={setleePoliticas}
-          fotoMascotaFocus={fotoMascotaFocus}
-          setfotoMascota={setfotoMascota}
-          onSubmit={onSubmit}
-        ></MascotaDatos>
       );
   };
 

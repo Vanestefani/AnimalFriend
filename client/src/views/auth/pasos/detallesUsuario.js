@@ -22,30 +22,7 @@ class detallesUsuario extends Component {
     this.props.prevStep();
   };
   render() {
-    let imgPreview;
-    if (this.props.archivoImagen.fotoUsuario) {
-      imgPreview = (
-        <img width="100px" src={this.props.archivoImagen.fotoUsuario} alt="" />
-      );
-    } else {
-      if (this.props.usuario.genero === "Femenino") {
-        imgPreview = (
-          <img
-            width="100px"
-            src={require("../../../assets/img/undraw_female_avatar_w3jk.png")}
-            alt=""
-          />
-        );
-      } else {
-        imgPreview = (
-          <img
-            width="100px"
-            src={require("../../../assets/img/undraw_male_avatar_323b.png")}
-            alt=""
-          />
-        );
-      }
-    }
+
     return (
       <>
         <div>
@@ -179,18 +156,7 @@ class detallesUsuario extends Component {
               </FormGroup>
             </Col>
             <Col md="6">
-              <p>
-                <b>Foto de perfil</b>
-              </p>
-              {imgPreview}
-              <Input
-                id="fotoUsuario"
-                name="fotoUsuario"
-                type="file"
-                onChange={this.props.onChangeImages}
-                defaultValue={this.props.archivoImagen.fotoUsuario}
-                accept=".jpg,.png"
-              ></Input>
+           <input></input>
             </Col>
           </Row>
           <Row>

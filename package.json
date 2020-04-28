@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   "client-install": "npm install --prefix client",
+    "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
@@ -25,7 +25,8 @@
     "mailgen": "^2.0.10",
     "mongoose": "^5.9.7",
     "morgan": "^1.10.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "nodemailer": "^6.4.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
