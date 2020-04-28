@@ -21,10 +21,7 @@ function VerticalMenu() {
 
               <p className="text-center">Nombre del usuario</p>
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <i class="far fa-lightbulb"></i>
-              Tips
-            </NavLink>
+
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
               <i class="far fa-calendar-alt"></i>
               Eventos
