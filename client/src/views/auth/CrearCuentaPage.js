@@ -136,8 +136,7 @@ function CrearCuentaPage(props) {
       }
       if (usuario.genero.length < 1) {
         usuario.errors.Errorgenero.valido = false;
-        usuario.errors.Errorgenero.mensaje =
-          "Debe elegir un campo";
+        usuario.errors.Errorgenero.mensaje = "Debe elegir un campo";
       } else {
         usuario.errors.Errorgenero.valido = true;
       }
@@ -231,6 +230,9 @@ function CrearCuentaPage(props) {
   //pasos
   const nextStep = () => {
     const err = validate();
+    guardararchivoImagen({
+      ...archivoImagen,
+    });
     if (!err) {
       guardarUsuario({
         ...usuario,
@@ -244,6 +246,9 @@ function CrearCuentaPage(props) {
   };
 
   const prevStep = () => {
+    guardararchivoImagen({
+      ...archivoImagen,
+    });
     guardarUsuario({
       ...usuario,
       step: usuario.step - 1,
