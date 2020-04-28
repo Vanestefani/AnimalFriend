@@ -49,13 +49,20 @@ function CrearCuentaPage(props) {
       Erroremail: { valido: true, mensaje: "" },
       Errorpassword: { valido: true, mensaje: "" },
       Errorpassword2: { valido: true, mensaje: "" },
+      Errorpais: { valido: true, mensaje: "" },
+      Errorciudad: { valido: true, mensaje: "" },
+      Errorgenero: { valido: true, mensaje: "" },
+      Errorfoto: { valido: true, mensaje: "" },
     },
   });
   const validate = () => {
     let isError = false;
- // El pattern solo letras
- const pattern = new RegExp('^[A-Z]+$', 'i');
- const pattern2=new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+    // El pattern solo letras
+    const pattern = new RegExp("^[A-Z]+$", "i");
+    //El pattern contraseña 1As20092
+    const pattern2 = new RegExp(
+      "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
+    );
 
     if (usuario.step == 1) {
       if (usuario.email.indexOf("@") === -1) {
@@ -102,9 +109,44 @@ function CrearCuentaPage(props) {
         usuario.errors.Errorpassword.valido = true;
       }
 
-      if (!usuario.errors.Erroremail.valido ||!usuario.errors.Errornombre.valido
-        ||!usuario.errors.Errorpassword.valido   ||!usuario.errors.Errorpassword2.valido
-        ) {
+      if (
+        !usuario.errors.Erroremail.valido ||
+        !usuario.errors.Errornombre.valido ||
+        !usuario.errors.Errorpassword.valido ||
+        !usuario.errors.Errorpassword2.valido
+      ) {
+        isError = true;
+      } else {
+        isError = false;
+      }
+    }
+
+    if (usuario.step == 2) {
+      if (usuario.pais.length < 1) {
+        usuario.errors.Errorpais.valido = false;
+        usuario.errors.Errorpais.mensaje = "Debe elegir un campo";
+      } else {
+        usuario.errors.Errorpais.valido = true;
+      }
+      if (usuario.ciudad.length < 1) {
+        usuario.errors.Errorciudad.valido = false;
+        usuario.errors.Errorciudad.mensaje = "Debe elegir un campo";
+      } else {
+        usuario.errors.Errorciudad.valido = true;
+      }
+      if (usuario.genero.length < 1) {
+        usuario.errors.Errorgenero.valido = false;
+        usuario.errors.Errorgenero.mensaje =
+          "Debe elegir un campo";
+      } else {
+        usuario.errors.Errorgenero.valido = true;
+      }
+      if (
+        !usuario.errors.Errorpais.valido ||
+        !usuario.errors.Errorciudad.valido ||
+        !usuario.errors.Errorgenero.valido ||
+        !usuario.errors.Errorfoto.valido
+      ) {
         isError = true;
       } else {
         isError = false;

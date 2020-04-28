@@ -49,67 +49,95 @@ class detallesUsuario extends Component {
     return (
       <>
         <div>
-        <h4>Información de usuario</h4>
+          <h4>Información de usuario</h4>
           <Row>
             <Col md="6">
-              <InputGroup
-                className={
-                  "no-border input-lg" +
-                  (this.props.paisFocus ? " input-group-focus" : "")
-                }
-              >
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i class="fab fa-font-awesome-flag"></i>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  placeholder="pais"
-                  type="select"
-                  onFocus={() => this.props.setpaisFocus(true)}
-                  onBlur={() => this.props.setpaisFocus(false)}
-                  id="pais"
-                  name="pais"
-                  onChange={this.props.onChange}
-                  defaultValue={this.props.usuario.pais}
-                  required
+              <FormGroup>
+                <InputGroup
+                  className={
+                    "no-border input-lg" +
+                    (this.props.paisFocus ? " input-group-focus" : "")
+                  }
                 >
-                  <option selected="">Elija un país</option>
-                  <option>Colombia</option>
-                  <option>Mexico</option>
-                  <option>Ecuador</option>
-                </Input>
-              </InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i class="fab fa-font-awesome-flag"></i>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    className={
+                      this.props.usuario.errors.Errorpais.valido
+                        ? ""
+                        : "is-invalid form-control-danger form-control"
+                    }
+                    type="select"
+                    onFocus={() => this.props.setpaisFocus(true)}
+                    onBlur={() => this.props.setpaisFocus(false)}
+                    id="pais"
+                    name="pais"
+                    onChange={this.props.onChange}
+                    defaultValue={this.props.usuario.pais}
+                    required
+                  >
+                    <option selected value="">
+                      Elija un país
+                    </option>
+                    <option value="Colombia">Colombia</option>
+                  </Input>
+                </InputGroup>
+              </FormGroup>
+              {!this.props.usuario.errors.Errorpais.valido ? (
+                <span className="text-muted">
+                  {this.props.usuario.errors.Errorpais.mensaje}
+                </span>
+              ) : (
+                ""
+              )}
             </Col>
             <Col md="6">
-              <InputGroup
-                className={
-                  "no-border input-lg" +
-                  (this.props.ciudadFocus ? " input-group-focus" : "")
-                }
-              >
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i class="fas fa-city"></i>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  placeholder="Ciudad"
-                  type="select"
-                  onFocus={() => this.props.setciudadFocus(true)}
-                  onBlur={() => this.props.setciudadFocus(false)}
-                  id="ciudad"
-                  name="ciudad"
-                  onChange={this.props.onChange}
-                  defaultValue={this.props.usuario.ciudad}
-                  required
+              <FormGroup>
+                <InputGroup
+                  className={
+                    "no-border input-lg" +
+                    (this.props.ciudadFocus ? " input-group-focus" : "")
+                  }
                 >
-                  <option selected="">Elija un país</option>
-                  <option>Bogota</option>
-                  <option>Bucaramanga</option>
-                  <option>Ecuador</option>
-                </Input>
-              </InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i class="fas fa-city"></i>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    className={
+                      this.props.usuario.errors.Errorciudad.valido
+                        ? ""
+                        : "is-invalid form-control-danger form-control"
+                    }
+                    type="select"
+                    onFocus={() => this.props.setciudadFocus(true)}
+                    onBlur={() => this.props.setciudadFocus(false)}
+                    id="ciudad"
+                    name="ciudad"
+                    onChange={this.props.onChange}
+                    defaultValue={this.props.usuario.ciudad}
+                    required
+                  >
+                    <option selected value="">
+                      Elija una ciudad
+                    </option>
+                    <option value="Bogota">Bogota</option>
+                    <option value="Medellin">Medellin</option>
+                    <option value="Cali">Cali</option>
+                  </Input>
+                </InputGroup>
+                {!this.props.usuario.errors.Errorpais.valido ? (
+                  <span className="text-muted">
+                    {this.props.usuario.errors.Errorpais.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </FormGroup>
             </Col>
           </Row>
           <Row>
@@ -122,7 +150,7 @@ class detallesUsuario extends Component {
                     name="genero"
                     type="radio"
                     onChange={this.props.onChange}
-                    defaultValue={this.props.usuario.genero}
+                    value="femenino"
                   ></Input>
                   <span className="form-check-sign"></span>
                   Femenino
@@ -131,17 +159,23 @@ class detallesUsuario extends Component {
               <FormGroup check className="form-check-radio">
                 <Label check>
                   <Input
-                    defaultChecked
                     value="Masculino"
                     id="genero"
                     name="genero"
                     type="radio"
                     onChange={this.props.onChange}
-                    defaultValue={this.props.usuario.genero}
+                    value="Masculino"
                   ></Input>
                   <span className="form-check-sign"></span>
                   Masculino
                 </Label>
+                {!this.props.usuario.errors.Errorgenero.valido ? (
+                  <span className="text-muted">
+                    {this.props.usuario.errors.Errorgenero.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </FormGroup>
             </Col>
             <Col md="6">
@@ -155,12 +189,12 @@ class detallesUsuario extends Component {
                 type="file"
                 onChange={this.props.onChangeImages}
                 defaultValue={this.props.archivoImagen.fotoUsuario}
+                accept=".jpg,.png"
               ></Input>
             </Col>
           </Row>
           <Row>
             <Col md="6">
-
               <Button
                 block
                 className="btn-round  "
@@ -188,8 +222,7 @@ class detallesUsuario extends Component {
 
           <div className="pull-left">
             <h6>
-            <Link className="link" to="/">
-
+              <Link className="link" to="/">
                 Iniciar sesión
               </Link>
             </h6>

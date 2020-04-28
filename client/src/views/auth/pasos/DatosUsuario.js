@@ -54,7 +54,9 @@ class DatosUsuario extends Component {
               ></Input>
             </InputGroup>
             {!this.props.usuario.errors.Errornombre.valido ? (
-              <span className="text-muted">{this.props.usuario.errors.Errornombre.mensaje}</span>
+              <span className="text-muted">
+                {this.props.usuario.errors.Errornombre.mensaje}
+              </span>
             ) : (
               ""
             )}
@@ -89,7 +91,9 @@ class DatosUsuario extends Component {
               ></Input>
             </InputGroup>
             {!this.props.usuario.errors.Erroremail.valido ? (
-              <span className="text-muted">{this.props.usuario.errors.Erroremail.mensaje}</span>
+              <span className="text-muted">
+                {this.props.usuario.errors.Erroremail.mensaje}
+              </span>
             ) : (
               ""
             )}
@@ -125,11 +129,15 @@ class DatosUsuario extends Component {
                     required
                   ></Input>
                 </InputGroup>
-                {!this.props.usuario.errors.Errorpassword.valido ? (
-                  <span className="text-muted">{this.props.usuario.errors.Errorpassword.mensaje}</span>
-                ) : (
-                  ""
-                )}
+                <InputGroup>
+                  {!this.props.usuario.errors.Errorpais.valido ? (
+                    <span className="text-muted">
+                      {this.props.usuario.errors.Errorpais.mensaje}
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </InputGroup>
               </FormGroup>
             </Col>
             <Col md="6">
