@@ -35,6 +35,7 @@ router.post("/register", (req, res) => {
         pais: req.body.pais,
         ciudad: req.body.ciudad,
         genero: req.body.genero,
+        bio: req.body.bio,
         password: req.body.password
       });
 
@@ -103,7 +104,7 @@ router.post("/login", (req, res) => {
       } else {
         return res
           .status(400)
-          .json({ passwordincorrect: "Contraseña incorrectat" });
+          .json({ passwordincorrect: "Contraseña incorrecta" });
       }
     });
   });
