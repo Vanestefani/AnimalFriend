@@ -1,41 +1,48 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+
+require('dotenv').config();
+
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 const passport = require("passport");
+const path = require("path");
 
-const users = require("./routes/api/users");
+// Setting up port
+const connUri = process.env.MOGOURI;
+let PORT = process.env.PORT || 5000;
 
+//=== 1 - CREATE APP
+// Creating express app and configuring middleware needed for authentication
 const app = express();
 
-// Bodyparser middleware
-app.use(
-  bodyParser.urlencoded({
-    extended: false
-  })
-);
-app.use(bodyParser.json());
+app.use(cors());
 
-// DB Config
-const db = require("./config/keys").mongoURI;
+// for parsing application/json
+app.use(express.json());
 
-// Connect to MongoDB
-mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
-  .then(() => console.log("MongoDB successfully connected"))
-  .catch(err => console.log(err));
+// for parsing application/xwww-
+app.use(express.urlencoded({ extended: false }));
+//form-urlencoded
 
-// Passport middleware
+//=== 2 - SET UP DATABASE
+//Configure mongoose's promise to global promise
+mongoose.promise = global.Promise;
+mongoose.connect(connUri, { useNewUrlParser: true , useCreateIndex: true});
+
+const connection = mongoose.connection;
+connection.once('open', () => console.log('MongoDB --  database connection established successfully!'));
+connection.on('error', (err) => {
+    console.log("MongoDB connection error. Please make sure MongoDB is running. " + err);
+    process.exit();
+});
+
+//=== 3 - INITIALIZE PASSPORT MIDDLEWARE
 app.use(passport.initialize());
+require("./middlewares/jwt")(passport);
 
-// Passport config
-require("./config/passport")(passport);
+//=== 4 - CONFIGURE ROUTES
+//Configure Route
+require('./routes/api/index')(app);
 
-// Routes
-app.use("/api/users", users);
-
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log(`Server up and running on port ${port} !`));
+//=== 5 - START SERVER
+app.listen(PORT, () => console.log('Server running on http://localhost:'+PORT+'/'));
