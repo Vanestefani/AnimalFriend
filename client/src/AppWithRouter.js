@@ -1,10 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React , { Suspense, lazy } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   withRouter,
 } from "react-router-dom";
+import { connect } from "react-redux";
 
 import withAnalytics, { initAnalytics } from "react-with-analytics";
 import "./App.css";

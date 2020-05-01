@@ -36,6 +36,8 @@ function CrearCuentaPage(props) {
       Errorpais: { valido: true, mensaje: "" },
       Errorciudad: { valido: true, mensaje: "" },
       Errorgenero: { valido: true, mensaje: "" },
+      Errorpoliticas: { valido: true, mensaje: "" },
+
     },
   });
   const validate = () => {
@@ -51,28 +53,28 @@ function CrearCuentaPage(props) {
       if (usuario.email.indexOf("@") === -1) {
         usuario.errors.Erroremail.valido = false;
         usuario.errors.Erroremail.mensaje =
-          "Por favor ingrese un correo valido";
+          "(Por favor ingrese un correo valido)";
       } else {
         usuario.errors.Erroremail.valido = true;
       }
       if (usuario.password.length < 6) {
         usuario.errors.Errorpassword.valido = false;
         usuario.errors.Errorpassword.mensaje =
-          "La contraseña debe tener al menos 6 caracteres";
+          "(La contraseña debe tener al menos 6 caracteres)";
       } else {
         usuario.errors.Errorpassword.valido = true;
       }
 
       if (usuario.password !== usuario.password2) {
         usuario.errors.Errorpassword2.valido = false;
-        usuario.errors.Errorpassword2.mensaje = "Las contraseñas no coinciden";
+        usuario.errors.Errorpassword2.mensaje = "(Las contraseñas no coinciden)";
       } else {
         usuario.errors.Errorpassword2.valido = true;
       }
       if (usuario.nombre.length < 1) {
         usuario.errors.Errornombre.valido = false;
         usuario.errors.Errornombre.mensaje =
-          "El campo nombre no puede estar vacio";
+          "(El campo nombre no puede estar vacio)";
       } else {
         usuario.errors.Errornombre.valido = true;
       }
@@ -80,14 +82,14 @@ function CrearCuentaPage(props) {
       if (!pattern.test(usuario.nombre)) {
         usuario.errors.Errornombre.valido = false;
         usuario.errors.Errornombre.mensaje =
-          "El campo nombre solo debe tener letras";
+          "(El campo nombre solo debe tener letras)";
       } else {
         usuario.errors.Errornombre.valido = true;
       }
       if (!pattern2.test(usuario.password)) {
         usuario.errors.Errorpassword.valido = false;
         usuario.errors.Errorpassword.mensaje =
-          "Debe tener al menos una letra mayuscula ,una letra minuscula,un numero y un caracter especial";
+          "(Debe tener al menos una letra mayuscula ,una letra minuscula,un numero y un caracter especial)";
       } else {
         usuario.errors.Errorpassword.valido = true;
       }
@@ -107,27 +109,32 @@ function CrearCuentaPage(props) {
     if (usuario.step == 2) {
       if (usuario.pais.length < 1) {
         usuario.errors.Errorpais.valido = false;
-        usuario.errors.Errorpais.mensaje = "Debe elegir un campo";
+        usuario.errors.Errorpais.mensaje = "(Debe elegir un campo)";
       } else {
         usuario.errors.Errorpais.valido = true;
       }
       if (usuario.ciudad.length < 1) {
         usuario.errors.Errorciudad.valido = false;
-        usuario.errors.Errorciudad.mensaje = "Debe elegir un campo";
+        usuario.errors.Errorciudad.mensaje = "(Debe elegir un campo)";
       } else {
         usuario.errors.Errorciudad.valido = true;
       }
       if (usuario.genero.length < 1) {
         usuario.errors.Errorgenero.valido = false;
-        usuario.errors.Errorgenero.mensaje = "Debe elegir un campo";
+        usuario.errors.Errorgenero.mensaje = "(Debe elegir un campo)";
       } else {
         usuario.errors.Errorgenero.valido = true;
+      }
+      if (usuario.leePoliticas===false) {
+        usuario.errors.Errorpoliticas.valido = false;
+        usuario.errors.Errorpoliticas.mensaje = "(Debe de estar de acuerdo con las politicas)";
+      } else {
+        usuario.errors.Errorpoliticas.valido = true;
       }
       if (
         !usuario.errors.Errorpais.valido ||
         !usuario.errors.Errorciudad.valido ||
-        !usuario.errors.Errorgenero.valido ||
-        !usuario.errors.Errorfoto.valido
+        !usuario.errors.Errorgenero.valido|| !usuario.errors.Errorpoliticas.valido
       ) {
         isError = true;
       } else {
@@ -175,15 +182,12 @@ function CrearCuentaPage(props) {
     leePoliticas,
   } = usuario;
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    e.target.className += " was-validated";
-  };
 
   const onChange = (e) => {
     guardarUsuario({
       ...usuario,
       [e.target.name]: e.target.value,
+      leePoliticas:!leePoliticas
     });
   };
 
@@ -235,7 +239,7 @@ function CrearCuentaPage(props) {
         <DatosUsuario
           nextStep={nextStep}
           onChange={onChange}
-          onSubmit={onSubmit}
+
           usuario={usuario}
           guardarUsuario={guardarUsuario}
           nombreFocus={nombreFocus}
@@ -253,7 +257,7 @@ function CrearCuentaPage(props) {
         <DetallesUsuario
           nextStep={nextStep}
           onChange={onChange}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit}
           usuario={usuario}
           paisFocus={paisFocus}
           ciudadFocus={ciudadFocus}

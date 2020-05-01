@@ -220,7 +220,7 @@ function ModalPoliticas() {
             son obligatorios.
           </p>
           <p className="text-justify">
-            Los comentarios, fotos, valoraciones y otros contenidos que el
+            Los comments, fotos, valoraciones y otros contenidos que el
             usuario publique en AnimalFriend se entienden de consumo público.
           </p>
           <p>

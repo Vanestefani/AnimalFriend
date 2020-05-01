@@ -90,10 +90,10 @@ function PostList() {
         </CardFooter>
         <Container>
           <div className="pull-right">
-            <Link>Ver comentarios</Link>
+            <Link>Ver comments</Link>
           </div>
           <br></br>
-          <h3>Comentarios</h3>
+          <h3>comments</h3>
           <div>
             <Input
               placeholder="¿Que quieres compartir hoy?"

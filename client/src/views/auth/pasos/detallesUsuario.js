@@ -22,6 +22,24 @@ class detallesUsuario extends Component {
     this.props.prevStep();
   };
   render() {
+    let imgPreview;
+    if (this.props.usuario.genero === "Femenino") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/undraw_female_avatar_w3jk.png")}
+          alt=""
+        />
+      );
+    } else {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/undraw_male_avatar_323b.png")}
+          alt=""
+        />
+      );
+    }
 
     return (
       <>
@@ -107,9 +125,9 @@ class detallesUsuario extends Component {
                     <option value="Cali">Cali</option>
                   </Input>
                 </InputGroup>
-                {!this.props.usuario.errors.Errorpais.valido ? (
+                {!this.props.usuario.errors.Errorciudad.valido ? (
                   <span className="text-muted">
-                    {this.props.usuario.errors.Errorpais.mensaje}
+                    {this.props.usuario.errors.Errorciudad.mensaje}
                   </span>
                 ) : (
                   ""
@@ -127,7 +145,6 @@ class detallesUsuario extends Component {
                     name="genero"
                     type="radio"
                     onChange={this.props.onChange}
-                    value="femenino"
                   ></Input>
                   <span className="form-check-sign"></span>
                   Femenino
@@ -141,7 +158,6 @@ class detallesUsuario extends Component {
                     name="genero"
                     type="radio"
                     onChange={this.props.onChange}
-                    value="Masculino"
                   ></Input>
                   <span className="form-check-sign"></span>
                   Masculino
@@ -155,8 +171,32 @@ class detallesUsuario extends Component {
                 )}
               </FormGroup>
             </Col>
-            <Col md="6">
-           <input></input>
+            <Col md="6">{imgPreview}</Col>
+          </Row>
+          <Row>
+            <Col md="12">
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="checkbox"
+                    onFocus={() => this.props.setleePoliticas(true)}
+                    onBlur={() => this.props.setleePoliticas(false)}
+                    id="leePoliticas"
+                    name="leePoliticas"
+                    onChange={this.props.onChange}
+                    required
+                  ></Input>
+                  <span className="form-check-sign"></span>
+                  Si he leído los terminos y condiciones de AnimalFriend
+                </Label>
+                {!this.props.usuario.errors.Errorpoliticas.valido ? (
+                  <span className="text-muted">
+                    {this.props.usuario.errors.Errorpoliticas.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </FormGroup>
             </Col>
           </Row>
           <Row>

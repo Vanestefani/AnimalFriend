@@ -130,9 +130,9 @@ class DatosUsuario extends Component {
                   ></Input>
                 </InputGroup>
                 <InputGroup>
-                  {!this.props.usuario.errors.Errorpais.valido ? (
+                  {!this.props.usuario.errors.Errorpassword.valido ? (
                     <span className="text-muted">
-                      {this.props.usuario.errors.Errorpais.mensaje}
+                      {this.props.usuario.errors.Errorpassword.mensaje}
                     </span>
                   ) : (
                     ""

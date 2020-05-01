@@ -1,4 +1,20 @@
-const User = require("../models/user");
+const mongoose = require("mongoose");
+const path = require("path");
+const fs = require("fs");
+const Jimp = require("jimp");
+const uuidv4 = require("uuid/v4");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const User = mongoose.model("users");
+const Post = require("../models/Post");
+const Following = require("../models/Following");
+const Followers = require("../models/Followers");
+const Notificacion = require("../models/Notificacion");
+const Chat = require("../models/Chat");
+const Message = require("../models/Message");
+const NotificacionHandler = require("../handlers/NotificacionHandler");
+const messageHandler = require("../handlers/messageHandler");
 const { uploader, sendEmail } = require("../utils/index");
 
 // @route GET admin/user
@@ -117,7 +133,7 @@ exports.update = async function (req, res) {
     const user_ = await User.findByIdAndUpdate(
       id,
       { $set: update },
-      { $set: { profileImage: result.url } },
+      { $set: { fotoPerfil: result.url } },
       { new: true }
     );
 
