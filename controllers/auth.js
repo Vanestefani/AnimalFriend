@@ -13,12 +13,10 @@ exports.register = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user)
-      return res
-        .status(401)
-        .json({
-          message:
-            "La dirección de correo electrónico que ingresó ya está asociada con otra cuenta.",
-        });
+      return res.status(401).json({
+        message:
+          "La dirección de correo electrónico que ingresó ya está asociada con otra cuenta.",
+      });
 
     const newUser = new User({ ...req.body, role: "basic" });
 
@@ -40,14 +38,12 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user)
-      return res
-        .status(401)
-        .json({
-          msg:
-            "La direccion de correo electronico " +
-            email +
-            "no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
-        });
+      return res.status(401).json({
+        msg:
+          "La direccion de correo electronico " +
+          email +
+          "no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
+      });
 
     //validate password
     if (!user.comparePassword(password))
@@ -57,12 +53,10 @@ exports.login = async (req, res) => {
 
     // Make sure the user has been verified
     if (!user.isVerified)
-      return res
-        .status(401)
-        .json({
-          type: "not-verified",
-          message: "Tu cuenta no ha sido verificada.",
-        });
+      return res.status(401).json({
+        type: "not-verified",
+        message: "Tu cuenta no ha sido verificada.",
+      });
 
     // Login successful, write token, and send back user
     res.status(200).json({ token: user.generateJWT(), user: user });
@@ -86,21 +80,16 @@ exports.verify = async (req, res) => {
     const token = await Token.findOne({ token: req.params.token });
 
     if (!token)
-      return res
-        .status(400)
-        .json({
-          message:
-            "No pudimos encontrar un token válido. Tu ficha ha expirado.",
-        });
+      return res.status(400).json({
+        message: "No pudimos encontrar un token válido. Tu ficha ha expirado.",
+      });
 
     // If we found a token, find a matching user
     User.findOne({ _id: token.userId }, (err, user) => {
       if (!user)
-        return res
-          .status(400)
-          .json({
-            message: "No pudimos encontrar un usuario para este token.",
-          });
+        return res.status(400).json({
+          message: "No pudimos encontrar un usuario para este token.",
+        });
 
       if (user.isVerified)
         return res
@@ -130,21 +119,16 @@ exports.resendToken = async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ email });
     if (!user)
-      return res
-        .status(401)
-        .json({
-          message:
-            "La direccion de correo electronico" +
-            req.body.email +
-            " no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
-        });
+      return res.status(401).json({
+        message:
+          "La direccion de correo electronico" +
+          req.body.email +
+          " no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
+      });
     if (user.isVerified)
-      return res
-        .status(400)
-        .json({
-          message:
-            "Esta cuenta ya ha sido verificada. Por favor Iniciar sesión.",
-        });
+      return res.status(400).json({
+        message: "Esta cuenta ya ha sido verificada. Por favor Iniciar sesión.",
+      });
 
     await sendVerificationEmail(user, req, res);
   } catch (error) {
@@ -166,12 +150,9 @@ async function sendVerificationEmail(user, req, res) {
                   <br><p>Si no solicitó esto, ignore este correo electrónico.</p>`;
 
     await sendEmail({ to, from, subject, html });
-    res
-      .status(200)
-      .json({
-        message:
-          "Un email de verificación ha sido enviado a " + user.email + ".",
-      });
+    res.status(200).json({
+      message: "Un email de verificación ha sido enviado a " + user.email + ".",
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

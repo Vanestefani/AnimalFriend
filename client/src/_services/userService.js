@@ -22,7 +22,7 @@ function login(email, password) {
     body: JSON.stringify({ email, password }),
   };
 
-  return fetch("/api/user/login", requestOptions)
+  return fetch("/api/auth/login", requestOptions)
     .then(handleResponse)
     .then((res) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -56,33 +56,11 @@ function resetPassword(data) {
     body: JSON.stringify({ ...data }),
   };
 
-  return fetch("/api/user/passwordreset", requestOptions)
+  return fetch("/api/aut/reset", requestOptions)
     .then(handlePasswordResetResponse)
     .then((res) => {
       return res;
     });
-}
-
-function sendVerificationEmail(email) {
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email }),
-  };
-  return fetch("/api/user/sendVerificationEmail/", requestOptions).then(
-    handleResponse
-  );
-}
-
-function sendforgotPasswordEmail(email) {
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email }),
-  };
-  return fetch("/api/user/sendforgotPasswordEmail/", requestOptions).then(
-    handleResponse
-  );
 }
 
 function logout() {
@@ -95,7 +73,7 @@ function register(user) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user),
   };
-  return fetch("/api/user/signup/", requestOptions).then(handleResponse);
+  return fetch("/api/auth/register/", requestOptions).then(handleResponse);
 }
 
 function getUserData(queryParams) {
