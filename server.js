@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
 const cors = require("cors");
 const passport = require("passport");
 const path = require("path");
@@ -16,11 +17,8 @@ const app = express();
 
 app.use(cors());
 
-// for parsing application/json
-app.use(express.json());
-
-// for parsing application/xwww-
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 //form-urlencoded
 
 //=== 2 - SET UP DATABASE

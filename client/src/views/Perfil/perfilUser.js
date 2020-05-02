@@ -46,7 +46,7 @@ function PerfilUser() {
           <Container>
             <div className="button-container">
               <Button className="btn-round" color="info" size="lg">
-                <i class="fas fa-plus-circle"></i> Seguir
+                <i className="fas fa-plus-circle"></i> Seguir
               </Button>
             </div>
             <h3 className="title">Sobre mi</h3>

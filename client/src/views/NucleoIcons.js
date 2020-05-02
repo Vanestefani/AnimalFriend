@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, withRouter } from 'react-router-dom';
 
 function NucleoIcons() {
   const [open, setOpen] = React.useState(false);
@@ -13,11 +14,11 @@ function NucleoIcons() {
       <header>
         <h1>Nucleo Outline Web Font v2.9</h1>
         <p>
-          <a href="https://nucleoapp.com/?ref=1712">nucleoapp.com</a>
+          <Link href="https://nucleoapp.com/?ref=1712">nucleoapp.com</Link>
         </p>
       </header>
       <div id="cd-nav">
-        <a
+        <Link
           className={"cd-nav-trigger" + (open ? " menu-is-open" : "")}
           href="#pablo"
           id="cd-nav-trigger"
@@ -27,11 +28,11 @@ function NucleoIcons() {
           }}
         >
           Menu <span></span>
-        </a>
+        </Link>
         <nav>
           <ul id="cd-main-nav" className={open ? "is-visible" : ""}>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -40,10 +41,10 @@ function NucleoIcons() {
                 }}
               >
                 Arrows
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -52,10 +53,10 @@ function NucleoIcons() {
                 }}
               >
                 Business &amp; Finance
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -64,10 +65,10 @@ function NucleoIcons() {
                 }}
               >
                 Clothes &amp; Accessories
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -76,10 +77,10 @@ function NucleoIcons() {
                 }}
               >
                 Design &amp; Development
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -88,10 +89,10 @@ function NucleoIcons() {
                 }}
               >
                 Emoticons
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -100,10 +101,10 @@ function NucleoIcons() {
                 }}
               >
                 Files &amp; Folders
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -112,10 +113,10 @@ function NucleoIcons() {
                 }}
               >
                 Healthcare &amp; Medical
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -124,10 +125,10 @@ function NucleoIcons() {
                 }}
               >
                 Loaders
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -136,10 +137,10 @@ function NucleoIcons() {
                 }}
               >
                 Maps &amp; Location
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -148,10 +149,10 @@ function NucleoIcons() {
                 }}
               >
                 Media
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -160,10 +161,10 @@ function NucleoIcons() {
                 }}
               >
                 Objects
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -172,10 +173,10 @@ function NucleoIcons() {
                 }}
               >
                 School &amp; Education
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -184,10 +185,10 @@ function NucleoIcons() {
                 }}
               >
                 Shopping
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -196,10 +197,10 @@ function NucleoIcons() {
                 }}
               >
                 Sport
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -208,10 +209,10 @@ function NucleoIcons() {
                 }}
               >
                 Technology
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -220,10 +221,10 @@ function NucleoIcons() {
                 }}
               >
                 Text Editing
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -232,10 +233,10 @@ function NucleoIcons() {
                 }}
               >
                 Touch Gestures
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -244,10 +245,10 @@ function NucleoIcons() {
                 }}
               >
                 Transportation
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -256,10 +257,10 @@ function NucleoIcons() {
                 }}
               >
                 Travel
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -268,10 +269,10 @@ function NucleoIcons() {
                 }}
               >
                 User Interface
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#pablo"
                 onClick={e => {
                   e.preventDefault();
@@ -280,7 +281,7 @@ function NucleoIcons() {
                 }}
               >
                 Users
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

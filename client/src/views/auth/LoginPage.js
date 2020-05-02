@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom';
+
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
-
+import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/autenticacion/authContext";
 import compose from "recompose/compose";
 // reactstrap components
 import {
@@ -25,6 +27,21 @@ import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../components/Footers/TransparentFooter.js";
 
 function LoginPage(props) {
+  // extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+  const authContext = useContext(AuthContext);
+  const { mensaje, autenticado, iniciarSesion } = authContext;
+  // En caso de que el password o usuario no exista
+  useEffect(() => {
+    if (autenticado) {
+      props.history.push("/home");
+    }
+    if (mensaje) {
+      mostrarAlerta(mensaje.msg, mensaje.categoria);
+    }
+    // eslint-disable-next-line
+  }, [mensaje, autenticado, props.history]);
   //focus inputs
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
@@ -32,10 +49,10 @@ function LoginPage(props) {
   const [usuario, guardarUsuario] = useState({
     email: "",
     password: "",
-    errors: {},
+
   });
   // extraer de usuario
-  const { email, password, errors } = usuario;
+  const { email, password } = usuario;
 
   const onChange = (e) => {
     guardarUsuario({
@@ -55,33 +72,15 @@ function LoginPage(props) {
       document.body.classList.remove("sidebar-collapse");
     };
   });
-  const componentDidMount = () => {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/");
-    }
-  };
 
-  const componentWillReceiveProps = (nextProps) => {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/");
-    }
-
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors,
-      });
-    }
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const { signInUser } = props;
-    signInUser(usuario);
-
-    e.target.className += " was-validated";
-    if (email.trim() === "" || password.trim() === "") {
-      alert("Todos los campos son obligatorios", "alerta-error");
+    // Validar que no haya campos vacios
+    if(email.trim() === '' || password.trim() === '') {
+        mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
     }
+    // Pasarlo al action
+    iniciarSesion({ email, password });
   };
   return (
     <>
@@ -97,39 +96,12 @@ function LoginPage(props) {
         <div className="content">
           <Container>
             <Card className="card-login" data-background-color="blue">
-              <Form className="form" onSubmit={handleSubmit} noValidate>
+              <Form className="form" onSubmit={handleSubmit} >
                 <CardHeader className="text-center">
                   <CardTitle className="title-up" tag="h3">
                     Iniciar sesión
                   </CardTitle>
-                  <div className="social-line">
-                    <Button
-                      className="btn-neutral btn-icon btn-round"
-                      color="facebook"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-facebook-square"></i>
-                    </Button>
-                    <Button
-                      className="btn-neutral btn-icon btn-round"
-                      color="twitter"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="lg"
-                      small
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </Button>
-                    <Button
-                      className="btn-neutral btn-icon btn-round"
-                      color="google"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-google-plus"></i>
-                    </Button>
-                  </div>
+
                 </CardHeader>
                 <CardBody>
                   <InputGroup
@@ -140,7 +112,7 @@ function LoginPage(props) {
                   >
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <i class="fas fa-envelope"></i>
+                        <i className="fas fa-envelope"></i>
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
@@ -166,7 +138,7 @@ function LoginPage(props) {
                   >
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <i class="fas fa-key"></i>
+                        <i className="fas fa-key"></i>
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
@@ -194,7 +166,7 @@ function LoginPage(props) {
                   </Button>
                   <div className="pull-left">
                     <h6>
-                      <Link className="link" to="/crear-cuenta">
+                      <Link className="link" to="/register">
                         Crear cuenta
                       </Link>
                     </h6>

@@ -2,6 +2,7 @@ import React from "react";
 
 // reactstrap components
 import { Button, Container, Row, Col, UncontrolledTooltip } from "reactstrap";
+import { Link, withRouter } from "react-router-dom";
 
 // core components
 
@@ -55,12 +56,12 @@ function Download() {
               <h2>Want more?</h2>
               <h5 className="description">
                 We're going to launch{" "}
-                <a
+                <Link
                   href="http://demos.creative-tim.com/now-ui-kit-pro-react/#/presentation?ref=nukr-index-page"
-                  onClick={e => e.preventDefault()}
+                  onClick={(e) => e.preventDefault()}
                 >
                   Now UI Kit PRO React
-                </a>
+                </Link>
                 . It will have huge number of components, sections and example
                 pages so you can start your development with a badass Bootstrap
                 4 UI Kit.

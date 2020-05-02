@@ -21,7 +21,7 @@ function Mascota() {
                     src={require("../../assets//img/avatar.jpg")}
                   ></img>
                   <h4 className="title">Nombre de mascota</h4>
-                  <span class="badge badge-primary">Especie</span>
+                  <span className="badge badge-primary">Especie</span>
                   <br></br>
                   <Button
                     className="btn-info "
@@ -29,7 +29,7 @@ function Mascota() {
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
                   >
-                    <i class="far fa-eye"></i>
+                    <i className="far fa-eye"></i>
                     Ver más
                   </Button>
                 </div>
@@ -42,7 +42,7 @@ function Mascota() {
                     src={require("../../assets//img/ryan.jpg")}
                   ></img>
                      <h4 className="title">Nombre de mascota</h4>
-                  <span class="badge badge-primary">Especie</span>
+                  <span className="badge badge-primary">Especie</span>
                   <br></br>
                   <Button
                     className="btn-info "
@@ -50,7 +50,7 @@ function Mascota() {
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
                   >
-                    <i class="far fa-eye"></i>
+                    <i className="far fa-eye"></i>
                     Ver más
                   </Button>
                 </div>
@@ -63,7 +63,7 @@ function Mascota() {
                     src={require("../../assets//img/eva.jpg")}
                   ></img>
                       <h4 className="title">Nombre de mascota</h4>
-                  <span class="badge badge-primary">Especie</span>
+                  <span className="badge badge-primary">Especie</span>
                   <br></br>
                   <Button
                     className="btn-info "
@@ -71,7 +71,7 @@ function Mascota() {
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
                   >
-                    <i class="far fa-eye"></i>
+                    <i className="far fa-eye"></i>
                     Ver más
                   </Button>
                 </div>

@@ -15,7 +15,7 @@ import {
 class detallesUsuario extends Component {
   continue = (e) => {
     e.preventDefault();
-    this.props.nextStep();
+    this.props.handleSubmit()
   };
   back = (e) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ class detallesUsuario extends Component {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fab fa-font-awesome-flag"></i>
+                      <i className="fab fa-font-awesome-flag"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -99,7 +99,7 @@ class detallesUsuario extends Component {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-city"></i>
+                      <i className="fas fa-city"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input

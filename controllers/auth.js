@@ -157,3 +157,13 @@ async function sendVerificationEmail(user, req, res) {
     res.status(500).json({ message: error.message });
   }
 }
+exports.usuarioAutenticado = async (req, res) => {
+
+  try {
+      const user = await User.findById(req.users.id);
+      res.json({usuario});
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({msg: 'Hubo un error'});
+  }
+}

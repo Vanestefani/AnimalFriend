@@ -16,7 +16,7 @@ function ItemAnuncio() {
         <p>
           Nombre de anuncio
           <Button className="btn-round " color="neutral" size="sm">
-            <i class="fas fa-plus-circle"></i>Ver más
+            <i className="fas fa-plus-circle"></i>Ver más
           </Button>
         </p>
       </ListGroupItem>

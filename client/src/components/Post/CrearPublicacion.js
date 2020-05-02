@@ -60,14 +60,14 @@ export class CrearPublicacion extends Component {
           <CardBody>
             <div className="pull-left">
               <Button className="btn-small" size="sm">
-                <i class="fas fa-camera"></i>
+                <i className="fas fa-camera"></i>
               </Button>
             </div>
             <div className="pull-right">
               <Button className="btn-small" size="sm"
               type="sudmit"
               >
-                <i class="far fa-paper-plane"></i>Publicar
+                <i className="far fa-paper-plane"></i>Publicar
               </Button>
             </div>
           </CardBody>

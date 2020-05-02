@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, withRouter } from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -86,7 +87,7 @@ function CarouselSection() {
                     </CarouselItem>
                   );
                 })}
-                <a
+                <Link
                   className="carousel-control-prev"
                   data-slide="prev"
                   href="#pablo"
@@ -97,8 +98,8 @@ function CarouselSection() {
                   role="button"
                 >
                   <i className="now-ui-icons arrows-1_minimal-left"></i>
-                </a>
-                <a
+                </Link>
+                <Link
                   className="carousel-control-next"
                   data-slide="next"
                   href="#pablo"
@@ -109,7 +110,7 @@ function CarouselSection() {
                   role="button"
                 >
                   <i className="now-ui-icons arrows-1_minimal-right"></i>
-                </a>
+                </Link>
               </Carousel>
             </Col>
           </Row>

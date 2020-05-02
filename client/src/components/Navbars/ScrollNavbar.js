@@ -97,7 +97,7 @@ function ScrollNavbar() {
               <InputGroup className="has-white">
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <i class="fas fa-search"></i>
+                    <i className="fas fa-search"></i>
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input placeholder="Buscar" type="text"></Input>
@@ -106,7 +106,7 @@ function ScrollNavbar() {
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i class="fas fa-home"></i>
+                  <i className="fas fa-home"></i>
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -125,21 +125,21 @@ function ScrollNavbar() {
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i class="fas fa-calendar-alt"></i>
+                      <i className="fas fa-calendar-alt"></i>
                       Evento
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i class="fas fa-newspaper"></i>
+                      <i className="fas fa-newspaper"></i>
                       Anuncio
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i class="fas fa-store-alt"></i>
+                      <i className="fas fa-store-alt"></i>
                       Negocio
                     </DropdownItem>
                   </DropdownMenu>
@@ -147,23 +147,23 @@ function ScrollNavbar() {
               </NavItem>
               <NavItem>
                 <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i class="fas fa-globe"></i>
+                  <i className="fas fa-globe"></i>
                   <p>Explorar</p>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i class="fas fa-user-friends"></i>
+                  <i className="fas fa-user-friends"></i>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i class="fas fa-comments"></i>
+                  <i className="fas fa-comments"></i>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i class="fas fa-bell"></i>
+                  <i className="fas fa-bell"></i>
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -185,28 +185,28 @@ function ScrollNavbar() {
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i class="fas fa-user-astronaut"></i>
+                      <i className="fas fa-user-astronaut"></i>
                       Perfil
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i class="fas fa-paw"></i>
+                      <i className="fas fa-paw"></i>
                       Mascotas
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i class="fas fa-cogs"></i>
+                      <i className="fas fa-cogs"></i>
                       Configuración
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i class="fas fa-sign-in-alt"></i>
+                      <i className="fas fa-sign-in-alt"></i>
                       Cerrar sesión
                     </DropdownItem>
                   </DropdownMenu>

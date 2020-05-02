@@ -33,7 +33,7 @@ function PerfilMascotaHeader() {
             <img alt="..." src={require("../../assets//img/ryan.jpg")}></img>
           </div>
           <h3 className="title">Nombre de usuario</h3>
-          <span class="badge badge-pill badge-primary">Especie</span>
+          <span className="badge badge-pill badge-primary">Especie</span>
         </Container>
       </div>
     </>

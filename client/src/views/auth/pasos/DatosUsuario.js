@@ -32,7 +32,7 @@ class DatosUsuario extends Component {
             >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-user"></i>
+                  <i className="fas fa-user"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -70,7 +70,7 @@ class DatosUsuario extends Component {
             >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-envelope"></i>
+                  <i className="fas fa-envelope"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -109,7 +109,7 @@ class DatosUsuario extends Component {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-key"></i>
+                      <i className="fas fa-key"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -150,7 +150,7 @@ class DatosUsuario extends Component {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-key"></i>
+                      <i className="fas fa-key"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input

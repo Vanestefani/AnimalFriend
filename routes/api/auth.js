@@ -5,10 +5,8 @@ const Password = require("../../controllers/password");
 const validate = require("../../middlewares/validate");
 const router = express.Router();
 router.get("/", (req, res) => {
-  res.status(200).json({
-    message:
-      "Estás en el punto final de autenticación. Regístrese o inicie sesión para probar la autenticación.",
-  });
+
+  Auth.usuarioAutenticado
 });
 router.post(
   "/register",

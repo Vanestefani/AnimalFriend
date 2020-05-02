@@ -23,27 +23,27 @@ function VerticalMenu() {
             </NavLink>
 
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <i class="far fa-calendar-alt"></i>
+              <i className="far fa-calendar-alt"></i>
               Eventos
             </NavLink>
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <i class="fas fa-store-alt"></i>
+              <i className="fas fa-store-alt"></i>
               Negocios
             </NavLink>
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <i class="fas fa-map-marker-alt"></i>
+              <i className="fas fa-map-marker-alt"></i>
               Animales perdidos
             </NavLink>
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <i class="fas fa-house-damage"></i>
+              <i className="fas fa-house-damage"></i>
               Adopciones
             </NavLink>
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <i class="fas fa-heart"></i>
+              <i className="fas fa-heart"></i>
               Emparejar
             </NavLink>
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <i class="fas fa-book"></i>
+              <i className="fas fa-book"></i>
               Normatividad
             </NavLink>
           </Nav>

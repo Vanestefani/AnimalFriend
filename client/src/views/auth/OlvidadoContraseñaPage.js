@@ -79,7 +79,7 @@ function OlvidadoContraseñaPage() {
                   >
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <i class="fas fa-envelope"></i>
+                        <i className="fas fa-envelope"></i>
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input

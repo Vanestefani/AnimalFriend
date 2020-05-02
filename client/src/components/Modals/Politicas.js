@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React from "react";
+import { Link, withRouter } from 'react-router-dom';
 
 import { Button, Container, Modal, ModalBody, Row, Col } from "reactstrap";
 
@@ -7,9 +8,9 @@ function ModalPoliticas() {
   const [modalPoliticas, setModal1] = React.useState(false);
   return (
     <>
-      <a className="link-a"  onClick={() => setModal1(true)}>
+      <Link className="link-a"  onClick={() => setModal1(true)}>
         Políticas
-      </a>
+      </Link>
 
       <Modal isOpen={modalPoliticas} toggle={() => setModal1(false)}>
         <div className="modal-header justify-content-center">

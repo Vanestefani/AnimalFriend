@@ -55,7 +55,7 @@ function FormMascota(props) {
     <>
 
       <Button small  onClick={() => setModal1(true)}>
-        <i class="fas fa-plus"></i>
+        <i className="fas fa-plus"></i>
       </Button>
 
       <Modal isOpen={modalMascotas} toggle={() => setModal1(false)}>
@@ -80,7 +80,7 @@ function FormMascota(props) {
             >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-paw"></i>
+                  <i className="fas fa-paw"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -106,7 +106,7 @@ function FormMascota(props) {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-crow"></i>
+                      <i className="fas fa-crow"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -136,7 +136,7 @@ function FormMascota(props) {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-feather"></i>
+                      <i className="fas fa-feather"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -198,7 +198,7 @@ function FormMascota(props) {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-birthday-cake"></i>
+                      <i className="fas fa-birthday-cake"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -224,7 +224,7 @@ function FormMascota(props) {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-palette"></i>
+                      <i className="fas fa-palette"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -266,7 +266,7 @@ function FormMascota(props) {
         </ModalBody>
         <div className="modal-footer">
           <Button color="sucess" type="button" onClick={() => setModal1(false)}>
-            <i class="fas fa-paper-plane"></i> Enviar
+            <i className="fas fa-paper-plane"></i> Enviar
           </Button>
           <Button color="danger" type="button" onClick={() => setModal1(false)}>
             Cerrar

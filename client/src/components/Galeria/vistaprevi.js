@@ -25,7 +25,7 @@ function Vistaprevi() {
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
-                  class="img-fluid"
+                  className="img-fluid"
                   width="50px"
                 ></img>
               </Link>
@@ -33,7 +33,7 @@ function Vistaprevi() {
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
-                  class="img-fluid"
+                  className="img-fluid"
                   width="50px"
                 ></img>
               </Link>
@@ -41,7 +41,7 @@ function Vistaprevi() {
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
-                  class="img-fluid"
+                  className="img-fluid"
                   width="50px"
                 ></img>
               </Link>
@@ -49,7 +49,7 @@ function Vistaprevi() {
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
-                  class="img-fluid"
+                  className="img-fluid"
                   width="50px"
                 ></img>
               </Link>
@@ -57,7 +57,7 @@ function Vistaprevi() {
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
-                  class="img-fluid"
+                  className="img-fluid"
                   width="50px"
                 ></img>
               </Link>
@@ -65,7 +65,7 @@ function Vistaprevi() {
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
-                  class="img-fluid"
+                  className="img-fluid"
                   width="50px"
                 ></img>
               </Link>
@@ -73,7 +73,7 @@ function Vistaprevi() {
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
-                  class="img-fluid"
+                  className="img-fluid"
                   width="50px"
                 ></img>
               </Link>
@@ -81,7 +81,7 @@ function Vistaprevi() {
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
-                  class="img-fluid"
+                  className="img-fluid"
                   width="50px"
                 ></img>
               </Link>

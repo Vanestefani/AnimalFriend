@@ -1,14 +1,10 @@
 import React, { Suspense, lazy } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  withRouter,
-} from "react-router-dom";
-import { history } from "./_helpers/history";
-import withAnalytics, { initAnalytics } from "react-with-analytics";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { PrivateRoute } from "./PrivateRoute";
+import AlertaState from "./context/alertas/alertaState";
+import AuthState from "./context/autenticacion/authState";
+import tokenAuth from "./config/token";
+import PrivateRoute from "./PrivateRoute";
 // styles for this kit
 import "./assets/css/bootstrap.min.css";
 import "./assets/scss/now-ui-kit.scss";
@@ -41,95 +37,75 @@ const Following = lazy(() => import("./components/Following"));
 const PerfilMascota = lazy(() => import("./views/Mascotas/PerfilMascota"));
 const Mascotas = lazy(() => import("./views/Mascotas/Mascotas"));
 const LandingPage = lazy(() => import("./views/examples/LandingPage.js"));
-const Root = () => (
-  <Suspense fallback={<div>Cargando...</div>}>
-    <>
-      <Switch>
-        <PrivateRoute exact path="/home" component={Home} />
-        <Route
-          exact
-          path="/login"
-          render={(props) => <LoginPage {...props} />}
-        />
-        <Route
-          exact
-          path="/register"
-          render={(props) => <CrearCuentaPage {...props} />}
-        />
-        <PrivateRoute exact path="/perfil" component={Perfil} />
-        <PrivateRoute exact path="/posts/upload" component={PostUploadPage} />
-        <PrivateRoute exact path="/messages/chat" component={MessengerPage} />
-        <Route
-
-          path="/hashtags/:hashtag"
-          render={(props) => {
-            if (!localStorage.getItem("user")) {
-              history.push("/login");
-              window.location.reload();
-            }
-            return <HashtagPage key={props.match.params.hashtag} {...props} />;
-          }}
-        />
-        <Route
-          path="/p/:postId"
-          render={(props) => {
-            if (!localStorage.getItem("user")) {
-              history.push("/login");
-              window.location.reload();
-            }
-            return <PostPage key={props.match.params.postId} {...props} />;
-          }}
-        />
-        <Route
-          path="/location/:coordinates"
-          render={(props) => {
-            if (!localStorage.getItem("user")) {
-              history.push("/login");
-              window.location.reload();
-            }
-            return (
-              <LocationPage key={props.match.params.coordinates} {...props} />
-            );
-          }}
-        />
-        <Route
-          exact
-          path="/:id"
-          render={(props) => {
-            if (!localStorage.getItem("user")) {
-              history.push("/login");
-              window.location.reload();
-            }
-            return <Perfiluser key={props.match.params.username} {...props} />;
-          }}
-        />
-        <Route
-          exact
-          path="/auth/reset/password/:jwt"
-          render={(props) => <CambiarContraseñaPage {...props} />}
-        />
-            <Route
-          path="/olvido-contrasena"
-          render={(props) => <OlvidadoContraseñaPage {...props} />}
-        />
-        <PrivateRoute exact path="/anuncios" component={Anuncios} />
-        <PrivateRoute exact path="/explorar" component={ExplorarPage} />
-        <PrivateRoute exact path="/recordatorios" component={Recordatorio} />
-        <PrivateRoute exact path="/mascotas" component={Mascotas} />
-        <PrivateRoute exact path="/perfil-mascota" component={PerfilMascota} />
-
-        <Route component={NotFound} />
-      </Switch>
-    </>
-  </Suspense>
-);
-
-const App = withRouter(withAnalytics(Root));
-
+// Revisar si tenemos un token
+const token = localStorage.getItem("token");
+if (token) {
+  tokenAuth(token);
+}
+console.log(process.env.REACT_APP_BACKEND_URL);
 const AppWithRouter = () => (
-  <Router history={history}>
-    <App />
-  </Router>
+  <AlertaState>
+    <AuthState>
+      <Router>
+        <Suspense fallback={<div>Cargando...</div>}>
+
+            <Switch>
+              <PrivateRoute exact path="/home" component={Home} />
+              <Route
+                exact
+                path="/login"
+                component={LoginPage}
+              />
+              <Route
+                exact
+                path="/register"
+                component={CrearCuentaPage}
+
+              />
+              <PrivateRoute exact path="/perfil" component={Perfil} />
+              <PrivateRoute
+                exact
+                path="/posts/upload"
+                component={PostUploadPage}
+              />
+              <PrivateRoute
+                exact
+                path="/messages/chat"
+                component={MessengerPage}
+              />
+
+              <Route
+                exact
+                path="/auth/reset/password/:jwt"
+                component={CambiarContraseñaPage}
+
+              />
+
+              <Route
+                path="/olvido-contrasena"
+                component={OlvidadoContraseñaPage}
+
+              />
+              <PrivateRoute exact path="/anuncios" component={Anuncios} />
+              <PrivateRoute exact path="/explorar" component={ExplorarPage} />
+              <PrivateRoute
+                exact
+                path="/recordatorios"
+                component={Recordatorio}
+              />
+              <PrivateRoute exact path="/mascotas" component={Mascotas} />
+              <PrivateRoute
+                exact
+                path="/perfil-mascota"
+                component={PerfilMascota}
+              />
+
+              <Route component={NotFound} />
+            </Switch>
+        </Suspense>
+      </Router>
+    </AuthState>
+  </AlertaState>
 );
 
 export default AppWithRouter;

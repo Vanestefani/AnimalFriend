@@ -15,7 +15,7 @@ function itemSeguidores() {
         <p>
           Nombre de seguidor
           <Button className="btn-round " color="neutral" size="sm">
-            <i class="fas fa-plus-circle"></i>Añadir
+            <i className="fas fa-plus-circle"></i>Añadir
           </Button>
         </p>
       </ListGroupItem>

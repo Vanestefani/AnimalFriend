@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
+import AuthContext from "./context/autenticacion/authContext";
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      localStorage.getItem("user") ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
+const PrivateRoute = ({ component: Component, ...props }) => {
+  const authContext = useContext(AuthContext);
+  const { autenticado, cargando, usuarioAutenticado } = authContext;
+
+  useEffect(() => {
+    usuarioAutenticado();
+    // eslint-disable-next-line
+  }, []);
+
+  return (
+    <Route
+      {...props}
+      render={(props) =>
+        !autenticado && !cargando ? (
+          <Redirect to="/login" />
+        ) : (
+          <Component {...props} />
+        )
+      }
+    />
+  );
+};
+
+export default PrivateRoute;

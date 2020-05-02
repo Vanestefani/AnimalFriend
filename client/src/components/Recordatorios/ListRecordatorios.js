@@ -22,7 +22,7 @@ function ListRecordatorios() {
               <span className="form-check-sign">
                 <span className="check"></span>
               </span>
-              <span class="badge badge-primary">10/04/2020</span>
+              <span className="badge badge-primary">10/04/2020</span>
             </Label>
           </FormGroup>
         </Container>
@@ -34,7 +34,7 @@ function ListRecordatorios() {
               <span className="form-check-sign">
                 <span className="check"></span>
               </span>
-              <span class="badge badge-primary">10/04/2020</span>
+              <span className="badge badge-primary">10/04/2020</span>
             </Label>
           </FormGroup>
         </Container>
@@ -46,7 +46,7 @@ function ListRecordatorios() {
               <span className="form-check-sign">
                 <span className="check"></span>
               </span>
-              <span class="badge badge-primary">10/04/2020</span>
+              <span className="badge badge-primary">10/04/2020</span>
             </Label>
           </FormGroup>
         </Container>

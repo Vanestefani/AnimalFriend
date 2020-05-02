@@ -33,14 +33,14 @@ function PostList() {
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
                   >
-                    <i class="fas fa-edit"></i>
+                    <i className="fas fa-edit"></i>
                     Editar
                   </DropdownItem>
                   <DropdownItem
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
                   >
-                    <i class="fas fa-trash-alt"></i>
+                    <i className="fas fa-trash-alt"></i>
                     Eliminar
                   </DropdownItem>
                 </DropdownMenu>
@@ -78,13 +78,13 @@ function PostList() {
         <CardFooter>
           <div className="pull-left">
             <Button size="sm" color="neutral">
-              <i class="fas fa-bone"></i>
+              <i className="fas fa-bone"></i>
             </Button>
             <Button size="sm" color="neutral">
-              <i class="fas fa-comment-alt"></i>
+              <i className="fas fa-comment-alt"></i>
             </Button>
             <Button size="sm" color="neutral">
-              <i class="fas fa-share-square"></i>
+              <i className="fas fa-share-square"></i>
             </Button>
           </div>
         </CardFooter>

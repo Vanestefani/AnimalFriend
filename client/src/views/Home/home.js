@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 import { Container, Row, Col } from "reactstrap";
-
+import AuthContext from "../../context/autenticacion/authContext";
 // core components
 
 import HomeNarbar from "../../components/Navbars/homeNarbar";
@@ -24,7 +24,14 @@ function Home() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+  // Extraer la información de autenticación
+  const authContext = useContext(AuthContext);
+  const { usuarioAutenticado } = authContext;
 
+  useEffect(() => {
+    usuarioAutenticado();
+    // eslint-disable-next-line
+  }, []);
   return (
     <>
       <HomeNarbar></HomeNarbar>

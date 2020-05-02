@@ -1,10 +1,6 @@
-import React, { useState, setState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
-
-import compose from "recompose/compose";
 // reactstrap components
 import { Card, CardHeader, CardBody, Container, Form } from "reactstrap";
 // core components
@@ -12,8 +8,27 @@ import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../components/Footers/TransparentFooter.js";
 import DatosUsuario from "../../views/auth/pasos/DatosUsuario";
 import DetallesUsuario from "../../views/auth/pasos/detallesUsuario";
-
+import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/autenticacion/authContext";
 function CrearCuentaPage(props) {
+  // extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+
+  const authContext = useContext(AuthContext);
+  const { mensaje, autenticado, registrarUsuario } = authContext;
+  // En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
+  useEffect(() => {
+    if (autenticado) {
+      props.history.push("/proyectos");
+    }
+
+    if (mensaje) {
+      mostrarAlerta(mensaje.msg, mensaje.categoria);
+    }
+    // eslint-disable-next-line
+  }, [mensaje, autenticado, props.history]);
+
   //state inputs
   const [usuario, guardarUsuario] = useState({
     step: 1,
@@ -37,7 +52,6 @@ function CrearCuentaPage(props) {
       Errorciudad: { valido: true, mensaje: "" },
       Errorgenero: { valido: true, mensaje: "" },
       Errorpoliticas: { valido: true, mensaje: "" },
-
     },
   });
   const validate = () => {
@@ -67,7 +81,8 @@ function CrearCuentaPage(props) {
 
       if (usuario.password !== usuario.password2) {
         usuario.errors.Errorpassword2.valido = false;
-        usuario.errors.Errorpassword2.mensaje = "(Las contraseñas no coinciden)";
+        usuario.errors.Errorpassword2.mensaje =
+          "(Las contraseñas no coinciden)";
       } else {
         usuario.errors.Errorpassword2.valido = true;
       }
@@ -125,16 +140,18 @@ function CrearCuentaPage(props) {
       } else {
         usuario.errors.Errorgenero.valido = true;
       }
-      if (usuario.leePoliticas===false) {
+      if (usuario.leePoliticas === false) {
         usuario.errors.Errorpoliticas.valido = false;
-        usuario.errors.Errorpoliticas.mensaje = "(Debe de estar de acuerdo con las politicas)";
+        usuario.errors.Errorpoliticas.mensaje =
+          "(Debe de estar de acuerdo con las politicas)";
       } else {
         usuario.errors.Errorpoliticas.valido = true;
       }
       if (
         !usuario.errors.Errorpais.valido ||
         !usuario.errors.Errorciudad.valido ||
-        !usuario.errors.Errorgenero.valido|| !usuario.errors.Errorpoliticas.valido
+        !usuario.errors.Errorgenero.valido ||
+        !usuario.errors.Errorpoliticas.valido
       ) {
         isError = true;
       } else {
@@ -149,18 +166,17 @@ function CrearCuentaPage(props) {
     this.setState(() => ({ [name]: value }));
   };
 
-  /* eslint-disable react/destructuring-assignment, react/prop-types */
-  const componentDidMount = () => {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/home");
-    }
-  };
-
   /* eslint-enable react/destructuring-assignment, react/prop-types */
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    this.props.registerUser(usuario, this.props.history);
+    registrarUsuario({
+      'nombre': nombre,
+      'email': email,
+      'password': password,
+      'password2': password2,
+      'pais': pais,
+      'ciudad': ciudad,
+      'genero': genero,
+    });
   };
 
   // extraer de usuario
@@ -186,7 +202,7 @@ function CrearCuentaPage(props) {
     guardarUsuario({
       ...usuario,
       [e.target.name]: e.target.value,
-      leePoliticas:!leePoliticas
+      leePoliticas: !leePoliticas,
     });
   };
 
@@ -238,7 +254,6 @@ function CrearCuentaPage(props) {
         <DatosUsuario
           nextStep={nextStep}
           onChange={onChange}
-
           usuario={usuario}
           guardarUsuario={guardarUsuario}
           nombreFocus={nombreFocus}
@@ -249,6 +264,7 @@ function CrearCuentaPage(props) {
           setemailFocus={setemailFocus}
           setpasswordFocus={setpasswordFocus}
           setpassword2Focus={setpassword2Focus}
+          authContext={authContext}
         ></DatosUsuario>
       );
     if (usuario.step === 2)
@@ -256,7 +272,7 @@ function CrearCuentaPage(props) {
         <DetallesUsuario
           nextStep={nextStep}
           onChange={onChange}
-          onSubmit={handleSubmit}
+          handleSubmit={handleSubmit}
           usuario={usuario}
           paisFocus={paisFocus}
           ciudadFocus={ciudadFocus}
@@ -301,13 +317,5 @@ function CrearCuentaPage(props) {
     </>
   );
 }
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-  errors: state.errors,
-});
-CrearCuentaPage.propTypes = {
-  registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-};
+
 export default CrearCuentaPage;
