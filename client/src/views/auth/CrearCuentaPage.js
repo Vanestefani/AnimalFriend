@@ -1,4 +1,4 @@
-import React, { useState, setState, useEffect } from "react";
+import React, { useState, setState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -181,7 +181,6 @@ function CrearCuentaPage(props) {
     errors,
     leePoliticas,
   } = usuario;
-
 
   const onChange = (e) => {
     guardarUsuario({

@@ -1,77 +1,127 @@
-import React , { Suspense, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   withRouter,
 } from "react-router-dom";
-import { connect } from "react-redux";
-
+import { history } from "./_helpers/history";
 import withAnalytics, { initAnalytics } from "react-with-analytics";
 import "./App.css";
-import createHistory from "history/createBrowserHistory";
-
+import { PrivateRoute } from "./PrivateRoute";
 // styles for this kit
 import "./assets/css/bootstrap.min.css";
 import "./assets/scss/now-ui-kit.scss";
 import "./assets/demo/demo.css";
 import "./assets/demo/nucleo-icons-page-styles.css";
 //auth
-import LoginPage from "./views/auth/LoginPage.js";
-import CrearCuentaPage from "./views/auth/CrearCuentaPage";
-import CambiarContraseñaPage from "./views/auth/CambiarContraseñaPage";
-import OlvidadoContraseñaPage from "./views/auth/OlvidadoContraseñaPage";
+const CambiarContraseñaPage = lazy(() =>
+  import("./views/auth/CambiarContraseñaPage")
+);
+const LoginPage = lazy(() => import("./views/auth/LoginPage.js"));
+const CrearCuentaPage = lazy(() => import("./views/auth/CrearCuentaPage"));
+const OlvidadoContraseñaPage = lazy(() =>
+  import("./views/auth/OlvidadoContraseñaPage")
+);
+//pagina para eror 404
+const NotFound = lazy(() => import("./views/NotFound"));
 //pages
-import Home from "./views/Home/home";
-import Perfil from "./views/Perfil/perfil";
-import PerfilMascota from "./views/Mascotas/PerfilMascota";
-import Mascotas from "./views/Mascotas/Mascotas";
-import LandingPage from "./views/examples/LandingPage.js";
-import Recordatorios from "./views/Recordatorios/Recordatorio";
-import Anuncios from "./views/Anuncios/Anuncios";
-import NotFound from "./views/NotFound";
-import ExplorarPage from "./views/ExplorarPage";
-import Following from "./components/Following";
-
-initAnalytics("UA-126201794-1");
-export const history = createHistory();
+const Home = lazy(() => import("./views/Home/home"));
+const Perfil = lazy(() => import("./views/Perfil/perfil"));
+const Perfiluser = lazy(() => import("./views/Perfil/perfilUser"));
+const PostUploadPage = lazy(() => import("./views/Post/PostUploadPage"));
+const PostPage = lazy(() => import("./views/Post/PostPage"));
+const HashtagPage = lazy(() => import("./views/Hashtag/HashtagPage"));
+const LocationPage = lazy(() => import("./views/Location/LocationPage"));
+const MessengerPage = lazy(() => import("./views/Messenger/MessengerPage"));
+const Recordatorio = lazy(() => import("./views/Recordatorios/Recordatorio"));
+const Anuncios = lazy(() => import("./views/Anuncios/Anuncios"));
+const ExplorarPage = lazy(() => import("./views/ExplorarPage"));
+const Following = lazy(() => import("./components/Following"));
+const PerfilMascota = lazy(() => import("./views/Mascotas/PerfilMascota"));
+const Mascotas = lazy(() => import("./views/Mascotas/Mascotas"));
+const LandingPage = lazy(() => import("./views/examples/LandingPage.js"));
 const Root = () => (
-  <Switch>
-    <Route
-      path="/landing-page"
-      render={(props) => <LandingPage {...props} />}
-    />
-    <Route path="/seguidores" render={(props) => <Following {...props} />} />
+  <Suspense fallback={<div>Cargando...</div>}>
+    <>
+      <Switch>
+        <PrivateRoute exact path="/home" component={Home} />
+        <Route
+          exact
+          path="/login"
+          render={(props) => <LoginPage {...props} />}
+        />
+        <Route
+          exact
+          path="/register"
+          render={(props) => <CrearCuentaPage {...props} />}
+        />
+        <PrivateRoute exact path="/perfil" component={Perfil} />
+        <PrivateRoute exact path="/posts/upload" component={PostUploadPage} />
+        <PrivateRoute exact path="/messages/chat" component={MessengerPage} />
+        <Route
 
-    <Route path="/anuncios" render={(props) => <Anuncios {...props} />} />
-    <Route path="/explorar" render={(props) => <ExplorarPage {...props} />} />
+          path="/hashtags/:hashtag"
+          render={(props) => {
+            if (!localStorage.getItem("user")) {
+              history.push("/login");
+              window.location.reload();
+            }
+            return <HashtagPage key={props.match.params.hashtag} {...props} />;
+          }}
+        />
+        <Route
+          path="/p/:postId"
+          render={(props) => {
+            if (!localStorage.getItem("user")) {
+              history.push("/login");
+              window.location.reload();
+            }
+            return <PostPage key={props.match.params.postId} {...props} />;
+          }}
+        />
+        <Route
+          path="/location/:coordinates"
+          render={(props) => {
+            if (!localStorage.getItem("user")) {
+              history.push("/login");
+              window.location.reload();
+            }
+            return (
+              <LocationPage key={props.match.params.coordinates} {...props} />
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/:id"
+          render={(props) => {
+            if (!localStorage.getItem("user")) {
+              history.push("/login");
+              window.location.reload();
+            }
+            return <Perfiluser key={props.match.params.username} {...props} />;
+          }}
+        />
+        <Route
+          exact
+          path="/auth/reset/password/:jwt"
+          render={(props) => <CambiarContraseñaPage {...props} />}
+        />
+            <Route
+          path="/olvido-contrasena"
+          render={(props) => <OlvidadoContraseñaPage {...props} />}
+        />
+        <PrivateRoute exact path="/anuncios" component={Anuncios} />
+        <PrivateRoute exact path="/explorar" component={ExplorarPage} />
+        <PrivateRoute exact path="/recordatorios" component={Recordatorio} />
+        <PrivateRoute exact path="/mascotas" component={Mascotas} />
+        <PrivateRoute exact path="/perfil-mascota" component={PerfilMascota} />
 
-    <Route  exact  path="/" render={(props) => <Home {...props} />} />
-    <Route path="/perfil" render={(props) => <Perfil {...props} />} />
-    <Route
-      path="/recordatorios"
-      render={(props) => <Recordatorios {...props} />}
-    />
-    <Route path="/mascotas" render={(props) => <Mascotas {...props} />} />
-    <Route
-      path="/perfil-mascota"
-      render={(props) => <PerfilMascota {...props} />}
-    />
-    <Route
-      path="/crear-cuenta"
-      render={(props) => <CrearCuentaPage {...props} />}
-    />
-    <Route path="/login" render={(props) => <LoginPage {...props} />} />
-    <Route
-      path="/cambiar-contrasena"
-      render={(props) => <CambiarContraseñaPage {...props} />}
-    />
-    <Route
-      path="/olvido-contrasena"
-      render={(props) => <OlvidadoContraseñaPage {...props} />}
-    />
-    <Route component={NotFound} />
-  </Switch>
+        <Route component={NotFound} />
+      </Switch>
+    </>
+  </Suspense>
 );
 
 const App = withRouter(withAnalytics(Root));

@@ -1,8 +1,7 @@
 export const userService = {
   login,
   logout,
-  sendVerificationEmail,
-  sendforgotPasswordEmail,
+
   register,
   getUserData,
   resetPassword,
@@ -56,7 +55,7 @@ function resetPassword(data) {
     body: JSON.stringify({ ...data }),
   };
 
-  return fetch("/api/aut/reset", requestOptions)
+  return fetch("/api/aut/recover", requestOptions)
     .then(handlePasswordResetResponse)
     .then((res) => {
       return res;
