@@ -175,8 +175,6 @@ class detallesUsuario extends Component {
                 <Label check>
                   <Input
                     type="checkbox"
-                    onFocus={() => this.props.setleePoliticas(true)}
-                    onBlur={() => this.props.setleePoliticas(false)}
                     id="leePoliticas"
                     name="leePoliticas"
                     onChange={this.props.onChange}

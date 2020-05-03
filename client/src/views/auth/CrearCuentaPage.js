@@ -264,7 +264,7 @@ function CrearCuentaPage(props) {
     if (!err) {
       registrarUsuario({
         nombre: nombre,
-        email: email,
+        email: email.toLowerCase(),
         password: password,
         password2: password2,
         pais: pais,
