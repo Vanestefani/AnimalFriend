@@ -100,7 +100,7 @@ function CrearCuentaPage(props) {
       if (!pattern2.test(usuario.password)) {
         usuario.errors.Errorpassword.valido = false;
         usuario.errors.Errorpassword.mensaje =
-          "(Debe tener al menos una letra mayuscula ,una letra minuscula,un numero y un caracter especial)";
+          "(Debe tener al menos una letra mayuscula ,una letra minuscula y un numero)";
       } else {
         usuario.errors.Errorpassword.valido = true;
       }
