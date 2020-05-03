@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 // reactstrap components
-import { Card, CardHeader, CardBody, Container, Form } from "reactstrap";
+import { Card, CardHeader, CardBody, Container, Form, Alert } from "reactstrap";
 // core components
 import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../components/Footers/TransparentFooter.js";
@@ -19,10 +19,6 @@ function CrearCuentaPage(props) {
   const { mensaje, autenticado, registrarUsuario } = authContext;
   // En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
   useEffect(() => {
-    if (autenticado) {
-      props.history.push("/login");
-    }
-
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);
     }
@@ -42,7 +38,7 @@ function CrearCuentaPage(props) {
     ciudad: "",
     genero: "",
 
-    leePoliticas: false,
+    leePoliticas: true,
     errors: {
       Errornombre: { valido: true, mensaje: "" },
       Erroremail: { valido: true, mensaje: "" },
@@ -128,6 +124,7 @@ function CrearCuentaPage(props) {
       } else {
         usuario.errors.Errorpais.valido = true;
       }
+
       if (usuario.ciudad.length < 1) {
         usuario.errors.Errorciudad.valido = false;
         usuario.errors.Errorciudad.mensaje = "(Debe elegir un campo)";
@@ -160,20 +157,6 @@ function CrearCuentaPage(props) {
     }
 
     return isError;
-  };
-
-  /* eslint-enable react/destructuring-assignment, react/prop-types */
-  const handleSubmit = (e) => {
-    registrarUsuario({
-      'nombre': nombre,
-      'email': email,
-      'password': password,
-      'password2': password2,
-      'pais': pais,
-      'ciudad': ciudad,
-      'genero': genero,
-    });
-
   };
 
   // extraer de usuario
@@ -275,7 +258,21 @@ function CrearCuentaPage(props) {
         ></DetallesUsuario>
       );
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const err = validate();
+    if (!err) {
+      registrarUsuario({
+        nombre: nombre,
+        email: email,
+        password: password,
+        password2: password2,
+        pais: pais,
+        ciudad: ciudad,
+        genero: genero,
+      });
+    }
+  };
   return (
     <>
       <ExamplesNavbar />
@@ -298,7 +295,15 @@ function CrearCuentaPage(props) {
                   <h1>Crear cuenta</h1>
                   <h3>Paso {usuario.step} de 3.</h3>
                 </CardHeader>
-                <CardBody>{showStep()}</CardBody>
+                <CardBody>
+                  {alerta ? (
+                    <Alert color={alerta.categoria}>
+                      <i class="fas fa-exclamation-triangle"></i>
+                      {alerta.msg}
+                    </Alert>
+                  ) : null}
+                  {showStep()}
+                </CardBody>
               </Form>
             </Card>
           </Container>

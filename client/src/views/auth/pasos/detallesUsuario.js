@@ -13,10 +13,6 @@ import {
   FormGroup,
 } from "reactstrap";
 class detallesUsuario extends Component {
-  continue = (e) => {
-    e.preventDefault();
-    this.props.handleSubmit()
-  };
   back = (e) => {
     e.preventDefault();
     this.props.prevStep();
@@ -184,6 +180,7 @@ class detallesUsuario extends Component {
                     id="leePoliticas"
                     name="leePoliticas"
                     onChange={this.props.onChange}
+                    checked={this.props.usuario.leePoliticas}
                     required
                   ></Input>
                   <span className="form-check-sign"></span>
@@ -218,10 +215,10 @@ class detallesUsuario extends Component {
                 className="btn-round  "
                 color="default"
                 href="#"
-                onClick={this.continue}
+                onClick={this.props.handleSubmit}
                 size="lg"
               >
-                <b> Continuar </b>
+                <b> Registrarse </b>
               </Button>
             </Col>
           </Row>

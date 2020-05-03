@@ -111,9 +111,6 @@ function LoginPage(props) {
       // Pasarlo al action
       iniciarSesion({ email, password });
     }
-    if (!iniciarSesion) {
-      errors.Erroremail.mensaje = "Credenciales incorrectas";
-    }
   };
   return (
     <>
@@ -138,7 +135,7 @@ function LoginPage(props) {
                 <CardBody>
                   {alerta ? (
                     <Alert color={alerta.categoria}>
-<i class="fas fa-exclamation-triangle"></i>
+                      <i class="fas fa-exclamation-triangle"></i>
                       {alerta.msg}
                     </Alert>
                   ) : null}
