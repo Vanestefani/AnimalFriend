@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
@@ -33,7 +33,17 @@ function LoginPage(props) {
   const authContext = useContext(AuthContext);
   const { mensaje, autenticado, iniciarSesion } = authContext;
   // En caso de que el password o usuario no exista
+    //state inputs
+    const [usuario, guardarUsuario] = useState({
+      email: "",
+      password: "",
+      errors: {
+        Erroremail: { valido: true, mensaje: "" },
+        Errorpassword: { valido: true, mensaje: "" },
+      },
+    });
   useEffect(() => {
+
     if (autenticado) {
       props.history.push("/home");
     }
@@ -45,14 +55,9 @@ function LoginPage(props) {
   //focus inputs
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
-  //state inputs
-  const [usuario, guardarUsuario] = useState({
-    email: "",
-    password: "",
 
-  });
   // extraer de usuario
-  const { email, password } = usuario;
+  const { email, password, errors } = usuario;
 
   const onChange = (e) => {
     guardarUsuario({
@@ -60,7 +65,33 @@ function LoginPage(props) {
       [e.target.name]: e.target.value,
     });
   };
+  //errores de input :O
+  const validate = () => {
+    let isError = false;
+    if (usuario.email.indexOf("@") === -1) {
+      usuario.errors.Erroremail.valido = false;
+      usuario.errors.Erroremail.mensaje =
+        "(Por favor ingrese un correo valido)";
+    } else {
+      usuario.errors.Erroremail.valido = true;
+    }
 
+    if (usuario.password.length < 1) {
+      usuario.errors.Errorpassword.valido = false;
+      usuario.errors.Errorpassword.mensaje =
+        "(El campo contraseña no puede estar vacio)";
+    } else {
+      usuario.errors.Errorpassword.valido = true;
+    }
+    if (
+      !usuario.errors.Erroremail.valido ||
+      !usuario.errors.Errorpassword.valido
+    ) {
+      isError = true;
+    } else {
+      isError = false;
+    }
+  };
   React.useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
@@ -75,12 +106,14 @@ function LoginPage(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validar que no haya campos vacios
-    if(email.trim() === '' || password.trim() === '') {
-        mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
+    const err = validate();
+    if (!err) {
+      // Pasarlo al action
+      iniciarSesion({ email, password });
     }
-    // Pasarlo al action
-    iniciarSesion({ email, password });
+    if(!iniciarSesion){
+      errors.Erroremail.mensaje="Credenciales incorrectas";
+    }
   };
   return (
     <>
@@ -96,12 +129,11 @@ function LoginPage(props) {
         <div className="content">
           <Container>
             <Card className="card-login" data-background-color="blue">
-              <Form className="form" onSubmit={handleSubmit} >
+              <Form className="form">
                 <CardHeader className="text-center">
                   <CardTitle className="title-up" tag="h3">
                     Iniciar sesión
                   </CardTitle>
-
                 </CardHeader>
                 <CardBody>
                   <InputGroup
@@ -127,9 +159,20 @@ function LoginPage(props) {
                       required
                       autoComp
                       lete="email"
+                      className={
+                        errors.Erroremail.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                      }
                     ></Input>
                   </InputGroup>
-
+                  {!errors.Erroremail.valido ? (
+                    <span className="text-muted">
+                      {errors.Erroremail.mensaje}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                   <InputGroup
                     className={
                       "no-border input-lg" +
@@ -152,14 +195,25 @@ function LoginPage(props) {
                       onChange={onChange}
                       defaultValue={password}
                       autoComplete="current-password"
+                      className={
+                        errors.Errorpassword.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                      }
                     ></Input>
                   </InputGroup>
-
+                  {!errors.Errorpassword.valido ? (
+                    <span className="text-muted">
+                      {errors.Errorpassword.mensaje}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                   <Button
                     block
                     className="btn-round  "
                     color="default"
-                    type="submit"
+                    onClick={handleSubmit}
                     size="lg"
                   >
                     <b> Iniciar Sesión </b>

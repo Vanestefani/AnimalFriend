@@ -17,6 +17,7 @@ import {
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
+    userId:localStorage.getItem("userId"),
     autenticado: null,
     usuario: null,
     mensaje: null,
@@ -27,13 +28,15 @@ const AuthState = (props) => {
 
   const registrarUsuario = async (datos) => {
     try {
-      const respuesta = await clienteAxios.post("/api/auth/register", datos)
+      const respuesta = await clienteAxios.post("/api/user/{userId}", datos)
 
       dispatch({
         type: REGISTRO_EXITOSO,
         payload: respuesta.data,
       });
 
+      // Obtener el usuario
+      usuarioAutenticado();
     } catch (error) {
       // console.log(error.response.data.msg);
       const alerta = {
@@ -57,7 +60,7 @@ const AuthState = (props) => {
 
     try {
       const respuesta = await clienteAxios.get("/api/auth");
-      // console.log(respuesta);
+    console.log(respuesta);
       dispatch({
         type: OBTENER_USUARIO,
         payload: respuesta.data.usuario,

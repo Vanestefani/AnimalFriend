@@ -16,11 +16,10 @@ export default (state, action) => {
                 ...state,
                 autenticado: true,
                 mensaje: null,
-                cargando: true
+                cargando: false
             }
         case OBTENER_USUARIO:
-            localStorage.setItem('token', action.payload.token);
-        return {
+            return {
                 ...state,
                 autenticado: true,
                 user: action.payload,

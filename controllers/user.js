@@ -22,7 +22,7 @@ const { uploader, sendEmail ,checkFileTypem, storage,upload} = require("../utils
 // @access Public
 exports.index = async function (req, res) {
   const users = await User.find({});
-  res.status(200).json({ users });
+  res.status(200).json({users});
 };
 
 // @route POST api/user
