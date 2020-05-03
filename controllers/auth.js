@@ -39,10 +39,10 @@ exports.login = async (req, res) => {
 
     if (!user)
       return res.status(401).json({
-        msg:
+        message:
           "La direccion de correo electronico " +
           email +
-          "no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
+          ", no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
       });
 
     //validate password
@@ -121,9 +121,9 @@ exports.resendToken = async (req, res) => {
     if (!user)
       return res.status(401).json({
         message:
-          "La direccion de correo electronico" +
+          "La direccion de correo electronico " +
           req.body.email +
-          " no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
+          " , no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
       });
     if (user.isVerified)
       return res.status(400).json({

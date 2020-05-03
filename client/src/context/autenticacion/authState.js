@@ -35,7 +35,7 @@ const AuthState = (props) => {
         payload: respuesta.data,
       });
     } catch (error) {
-  console.log(error.response.data.msg);
+      console.log(error.response.data.msg);
       const alerta = {
         msg: error.response.data.msg,
         categoria: "alerta-error",
@@ -86,10 +86,9 @@ const AuthState = (props) => {
       // Obtener el usuario
       usuarioAutenticado();
     } catch (error) {
-      console.log(error.response);
       const alerta = {
-        msg: error.response,
-        categoria: "alerta-error",
+        msg: error.response.data.message,
+        categoria: "danger",
       };
 
       dispatch({

@@ -20,6 +20,7 @@ import {
   InputGroupText,
   InputGroup,
   Container,
+  Alert,
 } from "reactstrap";
 
 // core components
@@ -33,17 +34,16 @@ function LoginPage(props) {
   const authContext = useContext(AuthContext);
   const { mensaje, autenticado, iniciarSesion } = authContext;
   // En caso de que el password o usuario no exista
-    //state inputs
-    const [usuario, guardarUsuario] = useState({
-      email: "",
-      password: "",
-      errors: {
-        Erroremail: { valido: true, mensaje: "" },
-        Errorpassword: { valido: true, mensaje: "" },
-      },
-    });
+  //state inputs
+  const [usuario, guardarUsuario] = useState({
+    email: "",
+    password: "",
+    errors: {
+      Erroremail: { valido: true, mensaje: "" },
+      Errorpassword: { valido: true, mensaje: "" },
+    },
+  });
   useEffect(() => {
-
     if (autenticado) {
       props.history.push("/home");
     }
@@ -111,8 +111,8 @@ function LoginPage(props) {
       // Pasarlo al action
       iniciarSesion({ email, password });
     }
-    if(!iniciarSesion){
-      errors.Erroremail.mensaje="Credenciales incorrectas";
+    if (!iniciarSesion) {
+      errors.Erroremail.mensaje = "Credenciales incorrectas";
     }
   };
   return (
@@ -136,6 +136,12 @@ function LoginPage(props) {
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
+                  {alerta ? (
+                    <Alert color={alerta.categoria}>
+<i class="fas fa-exclamation-triangle"></i>
+                      {alerta.msg}
+                    </Alert>
+                  ) : null}
                   <InputGroup
                     className={
                       "no-border input-lg" +
