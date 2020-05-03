@@ -20,7 +20,7 @@ function CrearCuentaPage(props) {
   // En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
   useEffect(() => {
     if (autenticado) {
-      props.history.push("/proyectos");
+      props.history.push("/mascotas");
     }
 
     if (mensaje) {
@@ -161,10 +161,6 @@ function CrearCuentaPage(props) {
 
     return isError;
   };
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    this.setState(() => ({ [name]: value }));
-  };
 
   /* eslint-enable react/destructuring-assignment, react/prop-types */
   const handleSubmit = (e) => {
@@ -177,6 +173,7 @@ function CrearCuentaPage(props) {
       'ciudad': ciudad,
       'genero': genero,
     });
+
   };
 
   // extraer de usuario

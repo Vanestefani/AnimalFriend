@@ -647,7 +647,7 @@ exports.getUserPosts = (req, res, next) => {
         },
         description: 1,
         "autor._id": 1,
-        "autor.username": 1,
+        "autor.nombre": 1,
       },
     },
   ])
@@ -660,7 +660,7 @@ exports.getUserPosts = (req, res, next) => {
       res.status(500).json({ message: err.message });
     });
 };
-exports.searchUsersByUsername = (req, res) => {
+exports.searchUsersByNombre = (req, res) => {
   if (req.body.q) {
     User.find({
       $or: [

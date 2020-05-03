@@ -149,7 +149,7 @@ exports.getNotifications = (req, res) => {
           reply: 1,
           fecha_creacion: 1,
           "sender._id": 1,
-          "sender.username": 1,
+          "sender.nombre": 1,
           "sender.profilePicture": 1
         }
       }

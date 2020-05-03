@@ -27,16 +27,13 @@ const AuthState = (props) => {
 
   const registrarUsuario = async (datos) => {
     try {
-      const respuesta = await clienteAxios.post("/api/auth/register", datos).then(response => response.datos);;
-      console.log(respuesta.data);
+      const respuesta = await clienteAxios.post("/api/auth/register", datos)
 
       dispatch({
         type: REGISTRO_EXITOSO,
         payload: respuesta.data,
       });
 
-      // Obtener el usuario
-      usuarioAutenticado();
     } catch (error) {
       // console.log(error.response.data.msg);
       const alerta = {
