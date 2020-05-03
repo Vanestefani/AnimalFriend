@@ -175,7 +175,7 @@ class detallesUsuario extends Component {
             <Col md="12">
               <FormGroup>
                 <Label>
-                  Al registrarte, aceptas nuestras
+                  Al registrarte, aceptas nuestras {' '}
                   <ModalPoliticas></ModalPoliticas> .
                 </Label>
               </FormGroup>

@@ -7,6 +7,7 @@ import { Card, CardHeader, CardBody, Container, Form, Alert } from "reactstrap";
 import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../components/Footers/TransparentFooter.js";
 import DatosUsuario from "../../views/auth/pasos/DatosUsuario";
+
 import DetallesUsuario from "../../views/auth/pasos/detallesUsuario";
 import AlertaContext from "../../context/alertas/alertaContext";
 import AuthContext from "../../context/autenticacion/authContext";
@@ -22,6 +23,7 @@ function CrearCuentaPage(props) {
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);
     }
+
     // eslint-disable-next-line
   }, [mensaje, autenticado, props.history]);
 
@@ -250,6 +252,8 @@ function CrearCuentaPage(props) {
         ></DetallesUsuario>
       );
   };
+  const [modalMsnRegistroExitoso, setModal1] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const err = validate();
@@ -263,6 +267,7 @@ function CrearCuentaPage(props) {
         ciudad: ciudad,
         genero: genero,
       });
+
     }
   };
   return (
