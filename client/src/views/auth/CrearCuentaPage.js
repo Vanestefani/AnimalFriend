@@ -38,7 +38,6 @@ function CrearCuentaPage(props) {
     ciudad: "",
     genero: "",
 
-    leePoliticas: true,
     errors: {
       Errornombre: { valido: true, mensaje: "" },
       Erroremail: { valido: true, mensaje: "" },
@@ -137,18 +136,11 @@ function CrearCuentaPage(props) {
       } else {
         usuario.errors.Errorgenero.valido = true;
       }
-      if (usuario.leePoliticas === false) {
-        usuario.errors.Errorpoliticas.valido = false;
-        usuario.errors.Errorpoliticas.mensaje =
-          "(Debe de estar de acuerdo con las politicas)";
-      } else {
-        usuario.errors.Errorpoliticas.valido = true;
-      }
+
       if (
         !usuario.errors.Errorpais.valido ||
         !usuario.errors.Errorciudad.valido ||
-        !usuario.errors.Errorgenero.valido ||
-        !usuario.errors.Errorpoliticas.valido
+        !usuario.errors.Errorgenero.valido
       ) {
         isError = true;
       } else {

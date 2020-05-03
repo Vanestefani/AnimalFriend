@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import ModalPoliticas from "../../../components/Modals/Politicas";
+
 // reactstrap components
 import {
   Button,
@@ -171,26 +173,11 @@ class detallesUsuario extends Component {
           </Row>
           <Row>
             <Col md="12">
-              <FormGroup check>
-                <Label check>
-                  <Input
-                    type="checkbox"
-                    id="leePoliticas"
-                    name="leePoliticas"
-                    onChange={this.props.onChange}
-                    checked={this.props.usuario.leePoliticas}
-                    required
-                  ></Input>
-                  <span className="form-check-sign"></span>
-                  Si he leído los terminos y condiciones de AnimalFriend
+              <FormGroup>
+                <Label>
+                  Al registrarte, aceptas nuestras
+                  <ModalPoliticas></ModalPoliticas> .
                 </Label>
-                {!this.props.usuario.errors.Errorpoliticas.valido ? (
-                  <span className="text-muted">
-                    {this.props.usuario.errors.Errorpoliticas.mensaje}
-                  </span>
-                ) : (
-                  ""
-                )}
               </FormGroup>
             </Col>
           </Row>
