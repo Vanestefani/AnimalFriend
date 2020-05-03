@@ -293,7 +293,7 @@ function CrearCuentaPage(props) {
               <Form className="form" autocomplete="off">
                 <CardHeader className="text-center">
                   <h1>Crear cuenta</h1>
-                  <h3>Paso {usuario.step} de 3.</h3>
+                  <h3>Paso {usuario.step} de 2.</h3>
                 </CardHeader>
                 <CardBody>
                   {alerta ? (
