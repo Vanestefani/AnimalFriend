@@ -18,7 +18,7 @@ exports.register = async (req, res) => {
           "La dirección de correo electrónico que ingresó ya está asociada con otra cuenta.",
       });
 
-    const newUser = new User({ ...req.body, role: "basic" });
+    const newUser = new User({ ...req.body });
 
     const user_ = await newUser.save();
 

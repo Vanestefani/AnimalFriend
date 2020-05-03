@@ -20,7 +20,7 @@ function CrearCuentaPage(props) {
   // En caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
   useEffect(() => {
     if (autenticado) {
-      props.history.push("/mascotas");
+      props.history.push("/login");
     }
 
     if (mensaje) {
@@ -185,13 +185,7 @@ function CrearCuentaPage(props) {
     pais,
     ciudad,
     genero,
-    nombreMascota,
-    especie,
-    raza,
-    generoMascota,
-    fechanacimiento,
-    colorPrincipal,
-    errors,
+
     leePoliticas,
   } = usuario;
 

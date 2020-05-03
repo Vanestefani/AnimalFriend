@@ -22,7 +22,7 @@ router.post(
       .not()
       .isEmpty()
       .withMessage("You first name is required"),
-    check("lastName").not().isEmpty().withMessage("You last name is required"),
+    check("pais").not().isEmpty().withMessage("You last name is required"),
   ],
   validate,
   User.store
