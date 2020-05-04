@@ -62,8 +62,8 @@ router.post(
       .not()
       .isEmpty()
       .isLength({ min: 6 })
-      .withMessage("Ingrese una dirección de correo electrónico válida"),
-    check("confirmPassword", "Las contraseñas no coinciden").custom(
+      .withMessage("Ingrese una contraseña valida"),
+    check("password2", "Las contraseñas no coinciden").custom(
       (value, { req }) => value === req.body.password
     ),
   ],

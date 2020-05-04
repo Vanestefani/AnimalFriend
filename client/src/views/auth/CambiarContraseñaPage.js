@@ -38,7 +38,7 @@ function CambiarContraseñaPage({ match }) {
     };
   });
   useEffect(() => {
-    console.log( match.params.token);
+    console.log(match.params.token);
     localStorage.setItem("token", match.params.token);
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);
@@ -48,14 +48,14 @@ function CambiarContraseñaPage({ match }) {
   //state inputs
   const [usuario, guardarUsuario] = useState({
     password: "",
-    confirmar: "",
+    password2: "",
     errors: {
       Errorpassword: { valido: true, mensaje: "" },
       Errorpassword2: { valido: true, mensaje: "" },
     },
   });
   // extraer de usuario
-  const { password, confirmar, errors } = usuario;
+  const { password, password2, errors } = usuario;
   const onSubmit = (e) => {
     e.preventDefault();
     e.target.className += " was-validated";
@@ -97,7 +97,7 @@ function CambiarContraseñaPage({ match }) {
     const err = validate();
     if (!err) {
       // Pasarlo al action
-      password_cambio({ password });
+      password_cambio({ password: password, password2: password2 });
     }
   };
 
@@ -115,7 +115,7 @@ function CambiarContraseñaPage({ match }) {
         <div className="content">
           <Container>
             <Card className="card-login" data-background-color="blue">
-              <Form className="form" onSubmit={onSubmit}>
+              <Form className="form">
                 <CardHeader className="text-center">
                   <CardTitle className="title-up" tag="h3">
                     ¿Has olvidado tu contraseña?
@@ -181,12 +181,12 @@ function CambiarContraseñaPage({ match }) {
                     <Input
                       placeholder="Confirmar contraseña"
                       type="password"
-                      id="confirmar"
-                      name="confirmar"
+                      id="password2"
+                      name="password2"
                       onFocus={() => setconfirmarFocus(true)}
                       onBlur={() => setconfirmarFocus(false)}
                       onChange={onChange}
-                      defaultValue={confirmar}
+                      defaultValue={password2}
                       required
                       className={
                         errors.Errorpassword2.valido
@@ -207,7 +207,7 @@ function CambiarContraseñaPage({ match }) {
                     className="btn-round  "
                     color="default"
                     type="submit"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={handleSubmit}
                     size="lg"
                   >
                     <b> Enviar </b>
