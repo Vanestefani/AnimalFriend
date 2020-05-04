@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import ModalPoliticas from "../../../components/Modals/Politicas";
-
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData,
+} from "react-country-region-selector";
 // reactstrap components
 import {
   Button,
@@ -15,6 +18,19 @@ import {
   FormGroup,
 } from "reactstrap";
 class detallesUsuario extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { country: "", region: "" };
+  }
+
+  selectCountry(val) {
+    this.setState({ country: val });
+  }
+
+  selectRegion(val) {
+    this.setState({ region: val });
+  }
+
   back = (e) => {
     e.preventDefault();
     this.props.prevStep();
@@ -57,26 +73,18 @@ class detallesUsuario extends Component {
                       <i className="fab fa-font-awesome-flag"></i>
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input
-                    className={
-                      this.props.usuario.errors.Errorpais.valido
-                        ? ""
-                        : "is-invalid form-control-danger form-control"
-                    }
-                    type="select"
-                    onFocus={() => this.props.setpaisFocus(true)}
-                    onBlur={() => this.props.setpaisFocus(false)}
+                  <CountryDropdown
+                    className="form-control"
+                    value={this.props.usuario.pais}
                     id="pais"
                     name="pais"
-                    onChange={this.props.onChange}
-                    defaultValue={this.props.usuario.pais}
                     required
-                  >
-                    <option selected value="">
-                      Elija un país
-                    </option>
-                    <option value="Colombia">Colombia</option>
-                  </Input>
+                    defaultOptionLabel="Elija un país"
+                    onFocus={() => this.props.setpaisFocus(true)}
+                    onBlur={() => this.props.setpaisFocus(false)}
+
+                    onChange={this.props.onChangeCountry}
+                  />
                 </InputGroup>
               </FormGroup>
               {!this.props.usuario.errors.Errorpais.valido ? (
@@ -100,28 +108,17 @@ class detallesUsuario extends Component {
                       <i className="fas fa-city"></i>
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input
-                    className={
-                      this.props.usuario.errors.Errorciudad.valido
-                        ? ""
-                        : "is-invalid form-control-danger form-control"
-                    }
-                    type="select"
-                    onFocus={() => this.props.setciudadFocus(true)}
-                    onBlur={() => this.props.setciudadFocus(false)}
-                    id="ciudad"
+                  <RegionDropdown
+                    className="form-control"
                     name="ciudad"
-                    onChange={this.props.onChange}
-                    defaultValue={this.props.usuario.ciudad}
-                    required
-                  >
-                    <option selected value="">
-                      Elija una ciudad
-                    </option>
-                    <option value="Bogota">Bogota</option>
-                    <option value="Medellin">Medellin</option>
-                    <option value="Cali">Cali</option>
-                  </Input>
+                    id="ciudad"
+                    blankOptionLabel="
+  Ningún país seleccionado"
+                    defaultOptionLabel="Ahora selecciona una región"
+                    country={this.props.usuario.pais}
+                    value={this.props.usuario.ciudad}
+                    onChange={this.props.onChangeCity}
+                  />
                 </InputGroup>
                 {!this.props.usuario.errors.Errorciudad.valido ? (
                   <span className="text-muted">
@@ -175,7 +172,7 @@ class detallesUsuario extends Component {
             <Col md="12">
               <FormGroup>
                 <Label>
-                  Al registrarte, aceptas nuestras {' '}
+                  Al registrarte, aceptas nuestras{" "}
                   <ModalPoliticas></ModalPoliticas> .
                 </Label>
               </FormGroup>
@@ -207,7 +204,6 @@ class detallesUsuario extends Component {
               </Button>
             </Col>
           </Row>
-
         </div>
       </>
     );

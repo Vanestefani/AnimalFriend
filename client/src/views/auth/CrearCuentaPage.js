@@ -170,7 +170,19 @@ function CrearCuentaPage(props) {
     guardarUsuario({
       ...usuario,
       [e.target.name]: e.target.value,
-      leePoliticas: !leePoliticas,
+    });
+  };
+  const onChangeCountry = (e) => {
+    guardarUsuario({
+      ...usuario,
+      pais: e,
+    });
+  };
+
+  const onChangeCity = (e) => {
+    guardarUsuario({
+      ...usuario,
+      ciudad: e,
     });
   };
 
@@ -249,6 +261,8 @@ function CrearCuentaPage(props) {
           setpaisFocus={setpaisFocus}
           setciudadFocus={setciudadFocus}
           prevStep={prevStep}
+          onChangeCountry={onChangeCountry}
+          onChangeCity={onChangeCity}
         ></DetallesUsuario>
       );
   };
