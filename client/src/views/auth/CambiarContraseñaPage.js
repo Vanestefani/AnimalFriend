@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -13,16 +13,21 @@ import {
   InputGroupText,
   InputGroup,
   Container,
-  Col,
-  Row,
+  Alert,
 } from "reactstrap";
 // core components
 import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../components/Footers/TransparentFooter.js";
-function OlvidadoContraseñaPage() {
+import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/autenticacion/authContext";
+function CambiarContraseñaPage({ match }) {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [confirmarFocus, setconfirmarFocus] = React.useState(false);
-
+  // extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+  const authContext = useContext(AuthContext);
+  const { mensaje, password_cambio } = authContext;
   React.useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
@@ -32,13 +37,25 @@ function OlvidadoContraseñaPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+  useEffect(() => {
+    console.log( match.params.token);
+    localStorage.setItem("token", match.params.token);
+    if (mensaje) {
+      mostrarAlerta(mensaje.msg, mensaje.categoria);
+    }
+    // eslint-disable-next-line
+  }, [mensaje]);
   //state inputs
   const [usuario, guardarUsuario] = useState({
     password: "",
     confirmar: "",
+    errors: {
+      Errorpassword: { valido: true, mensaje: "" },
+      Errorpassword2: { valido: true, mensaje: "" },
+    },
   });
   // extraer de usuario
-  const { password, confirmar } = usuario;
+  const { password, confirmar, errors } = usuario;
   const onSubmit = (e) => {
     e.preventDefault();
     e.target.className += " was-validated";
@@ -49,6 +66,39 @@ function OlvidadoContraseñaPage() {
       ...usuario,
       [e.target.name]: e.target.value,
     });
+  };
+  const validate = () => {
+    let isError = false;
+    if (usuario.password.length < 6) {
+      usuario.errors.Errorpassword.valido = false;
+      usuario.errors.Errorpassword.mensaje =
+        "(La contraseña debe tener al menos 6 caracteres)";
+    } else {
+      usuario.errors.Errorpassword.valido = true;
+    }
+
+    if (usuario.password !== usuario.password2) {
+      usuario.errors.Errorpassword2.valido = false;
+      usuario.errors.Errorpassword2.mensaje = "(Las contraseñas no coinciden)";
+    } else {
+      usuario.errors.Errorpassword2.valido = true;
+    }
+    if (
+      !usuario.errors.Errorpassword.valido ||
+      !usuario.errors.Errorpassword2.valido
+    ) {
+      isError = true;
+    } else {
+      isError = false;
+    }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const err = validate();
+    if (!err) {
+      // Pasarlo al action
+      password_cambio({ password });
+    }
   };
 
   return (
@@ -76,6 +126,12 @@ function OlvidadoContraseñaPage() {
                   </p>
                 </CardHeader>
                 <CardBody>
+                  {alerta ? (
+                    <Alert color={alerta.categoria}>
+                      <i class="fas fa-exclamation-triangle"></i>
+                      {alerta.msg}
+                    </Alert>
+                  ) : null}
                   <InputGroup
                     className={
                       "no-border input-lg" +
@@ -97,8 +153,20 @@ function OlvidadoContraseñaPage() {
                       onChange={onChange}
                       defaultValue={password}
                       required
+                      className={
+                        errors.Errorpassword.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                      }
                     ></Input>
                   </InputGroup>
+                  {!errors.Errorpassword.valido ? (
+                    <span className="text-muted">
+                      {errors.Errorpassword.mensaje}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                   <InputGroup
                     className={
                       "no-border input-lg" +
@@ -120,9 +188,20 @@ function OlvidadoContraseñaPage() {
                       onChange={onChange}
                       defaultValue={confirmar}
                       required
+                      className={
+                        errors.Errorpassword2.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                      }
                     ></Input>
                   </InputGroup>
-
+                  {!errors.Errorpassword.valido ? (
+                    <span className="text-muted">
+                      {errors.Errorpassword2.mensaje}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                   <Button
                     block
                     className="btn-round  "
@@ -158,4 +237,4 @@ function OlvidadoContraseñaPage() {
   );
 }
 
-export default OlvidadoContraseñaPage;
+export default CambiarContraseñaPage;

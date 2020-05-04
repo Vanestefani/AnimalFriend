@@ -16,7 +16,7 @@ router.get("/", User.index);
 router.post(
   "/",
   [
-    check("email").isEmail().withMessage("Enter a valid email address"),
+    check("email").isEmail().withMessage("Ingrese una dirección de correo electrónico válida"),
     check("nombre").not().isEmpty().withMessage("You nombre is required"),
     check("nombre")
       .not()

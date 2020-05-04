@@ -7,13 +7,20 @@ import {
   VERIFICACIOM_ENVIADA,
   VERIFICACIOM_ERROR,
   CERRAR_SESION,
+  PASSWORD_RESET_EXITOSA,
+  PASSWORD_RESET_ERROR,
+  PASSWORD_CAMBIO_EXITO,
+  PASSWORD_CAMBIO_ERROR,
+
 } from "../../types";
 
 export default (state, action) => {
   switch (action.type) {
+    case PASSWORD_RESET_EXITOSA:
     case VERIFICACIOM_ENVIADA:
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
+    case PASSWORD_CAMBIO_EXITO:
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,
@@ -32,6 +39,8 @@ export default (state, action) => {
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
+    case PASSWORD_RESET_ERROR:
+    case PASSWORD_CAMBIO_ERROR:
       localStorage.removeItem("token");
       return {
         ...state,

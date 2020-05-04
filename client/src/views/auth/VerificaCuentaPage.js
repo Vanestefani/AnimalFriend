@@ -37,7 +37,6 @@ function VerificaCuentaPage() {
     };
   });
   useEffect(() => {
-
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);
     }
@@ -54,13 +53,13 @@ function VerificaCuentaPage() {
   const validate = () => {
     let isError = false;
     if (email.indexOf("@") === -1 || email.length < 1) {
-      Erroremail.valido = false;
-      Erroremail.mensaje = "(Por favor ingrese un correo valido)";
+      usuario.Erroremail.valido = false;
+      usuario.Erroremail.mensaje = "(Por favor ingrese un correo valido)";
     } else {
-      Erroremail.valido = true;
+      usuario.Erroremail.valido = true;
     }
 
-    if (!Erroremail.valido) {
+    if (!usuario.Erroremail.valido) {
       isError = true;
     } else {
       isError = false;
@@ -129,14 +128,14 @@ function VerificaCuentaPage() {
                       defaultValue={email}
                       required
                       className={
-                        Erroremail.valido
+                        usuario.Erroremail.valido
                           ? ""
                           : "is-invalid form-control-danger form-control"
                       }
                     ></Input>
                   </InputGroup>
-                  {!Erroremail.valido ? (
-                    <span className="text-muted">{Erroremail.mensaje}</span>
+                  {!usuario.Erroremail.valido ? (
+                    <span className="text-muted">{usuario.Erroremail.mensaje}</span>
                   ) : (
                     ""
                   )}

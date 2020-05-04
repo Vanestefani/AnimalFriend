@@ -38,7 +38,7 @@ router.post(
 router.post(
   "/login",
   [
-    check("email").isEmail().withMessage("Enter a valid email address"),
+    check("email").isEmail().withMessage("Ingrese una dirección de correo electrónico válida"),
     check("password").not().isEmpty(),
   ],
   validate,
@@ -50,7 +50,7 @@ router.post("/resend", Auth.resendToken);
 //Password RESET
 router.post(
   "/recover",
-  [check("email").isEmail().withMessage("Enter a valid email address")],
+  [check("email").isEmail().withMessage("Ingrese una dirección de correo electrónico válida")],
   validate,
   Password.recover
 );
@@ -62,8 +62,8 @@ router.post(
       .not()
       .isEmpty()
       .isLength({ min: 6 })
-      .withMessage("Must be at least 6 chars long"),
-    check("confirmPassword", "Passwords do not match").custom(
+      .withMessage("Ingrese una dirección de correo electrónico válida"),
+    check("confirmPassword", "Las contraseñas no coinciden").custom(
       (value, { req }) => value === req.body.password
     ),
   ],

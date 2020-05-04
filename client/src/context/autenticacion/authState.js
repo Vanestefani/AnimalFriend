@@ -14,6 +14,10 @@ import {
   CERRAR_SESION,
   VERIFICACIOM_ENVIADA,
   VERIFICACIOM_ERROR,
+  PASSWORD_RESET_EXITOSA,
+  PASSWORD_RESET_ERROR,
+  PASSWORD_CAMBIO_EXITO,
+  PASSWORD_CAMBIO_ERROR,
 } from "../../types";
 
 const AuthState = (props) => {
@@ -130,7 +134,55 @@ const AuthState = (props) => {
       });
     }
   };
+  //enviar correo de cambio de contraseña token
+  const password_reset = async (datos) => {
+    try {
+      const respuesta = await clienteAxios.post("/api/auth/recover", datos);
 
+      dispatch({
+        type: PASSWORD_RESET_EXITOSA,
+        payload: respuesta.data,
+      });
+    } catch (error) {
+      console.log(error.response.data.message);
+
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+      dispatch({
+        type: PASSWORD_RESET_ERROR,
+        payload: alerta,
+      });
+    }
+  };
+  //cambiar contraseña
+  const password_cambio = async (datos) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+
+    try {
+      const respuesta = await clienteAxios.post(`/api/auth/reset/${token}`, datos);
+
+      dispatch({
+        type: PASSWORD_CAMBIO_EXITO,
+        payload: respuesta.data,
+      });
+    } catch (error) {
+      console.log(error.response.data.message);
+
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+      dispatch({
+        type: PASSWORD_CAMBIO_ERROR,
+        payload: alerta,
+      });
+    }
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -144,6 +196,8 @@ const AuthState = (props) => {
         usuarioAutenticado,
         cerrarSesion,
         verificaremail,
+        password_reset,
+        password_cambio,
       }}
     >
       {props.children}

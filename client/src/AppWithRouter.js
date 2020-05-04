@@ -86,7 +86,7 @@ const AppWithRouter = () => (
 
               <Route
                 exact
-                path="/auth/reset/password/:jwt"
+                path="/auth/reset/password/:token"
                 component={CambiarContraseñaPage}
 
               />
@@ -96,6 +96,7 @@ const AppWithRouter = () => (
                 component={OlvidadoContraseñaPage}
 
               />
+
               <PrivateRoute exact path="/anuncios" component={Anuncios} />
               <PrivateRoute exact path="/explorar" component={ExplorarPage} />
               <PrivateRoute
