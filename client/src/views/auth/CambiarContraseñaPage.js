@@ -214,15 +214,22 @@ function CambiarContraseñaPage({ match }) {
                   </Button>
                   <div className="pull-left">
                     <h6>
-                      <Link className="link" to="/crear-cuenta">
+                      <Link className="link" to="/register">
                         Crear cuenta
                       </Link>
                     </h6>
                   </div>
                   <div className="pull-right">
                     <h6>
-                      <Link className="link" to="/">
+                      <Link className="link" to="/login">
                         Iniciar Sesión
+                      </Link>
+                    </h6>
+                  </div>
+                  <div className="pull-left pl-2">
+                    <h6>
+                      <Link className="link" to="/verificar">
+                        Verificar cuenta
                       </Link>
                     </h6>
                   </div>
