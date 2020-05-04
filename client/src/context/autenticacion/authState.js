@@ -12,6 +12,8 @@ import {
   LOGIN_EXITOSO,
   LOGIN_ERROR,
   CERRAR_SESION,
+  VERIFICACIOM_ENVIADA,
+  VERIFICACIOM_ERROR,
 } from "../../types";
 
 const AuthState = (props) => {
@@ -35,7 +37,6 @@ const AuthState = (props) => {
         payload: respuesta.data,
       });
     } catch (error) {
-
       const alerta = {
         msg: error.response.data.message,
         categoria: "danger",
@@ -65,12 +66,10 @@ const AuthState = (props) => {
         type: OBTENER_USUARIO,
         payload: respuesta.data.users,
       });
-
     } catch (error) {
       console.log(error.response);
       dispatch({
         type: LOGIN_ERROR,
-
       });
     }
   };
@@ -88,7 +87,6 @@ const AuthState = (props) => {
       // Obtener el usuario
       usuarioAutenticado();
     } catch (error) {
-
       const alerta = {
         msg: error.response.data.message,
         categoria: "danger",
@@ -108,6 +106,31 @@ const AuthState = (props) => {
     });
   };
 
+  //Verificar cuenta c
+  const verificaremail = async (datos) => {
+    try {
+      const respuesta = await clienteAxios.post("/api/auth/resend", datos);
+
+      dispatch({
+        type: VERIFICACIOM_ENVIADA,
+        payload: respuesta.data,
+      });
+
+      // Obtener el usuario
+      usuarioAutenticado();
+    } catch (error) {
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+
+      dispatch({
+        type: VERIFICACIOM_ERROR,
+        payload: alerta,
+      });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -120,6 +143,7 @@ const AuthState = (props) => {
         iniciarSesion,
         usuarioAutenticado,
         cerrarSesion,
+        verificaremail,
       }}
     >
       {props.children}

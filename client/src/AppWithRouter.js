@@ -5,6 +5,7 @@ import AlertaState from "./context/alertas/alertaState";
 import AuthState from "./context/autenticacion/authState";
 import tokenAuth from "./config/token";
 import PrivateRoute from "./PrivateRoute";
+
 // styles for this kit
 import "./assets/css/bootstrap.min.css";
 import "./assets/scss/now-ui-kit.scss";
@@ -16,6 +17,8 @@ const CambiarContraseñaPage = lazy(() =>
 );
 const LoginPage = lazy(() => import("./views/auth/LoginPage.js"));
 const CrearCuentaPage = lazy(() => import("./views/auth/CrearCuentaPage"));
+const VerificaCuentaPage = lazy(() => import("./views/auth/VerificaCuentaPage"));
+
 const OlvidadoContraseñaPage = lazy(() =>
   import("./views/auth/OlvidadoContraseñaPage")
 );
@@ -62,6 +65,13 @@ const AppWithRouter = () => (
                 component={CrearCuentaPage}
 
               />
+                 <Route
+                exact
+                path="/verificar"
+                component={VerificaCuentaPage}
+
+              />
+
               <PrivateRoute exact path="/perfil" component={Perfil} />
               <PrivateRoute
                 exact

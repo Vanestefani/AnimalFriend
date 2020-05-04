@@ -190,20 +190,7 @@ class DatosUsuario extends Component {
           >
             <b> Continuar </b>
           </Button>
-          <div className="pull-left">
-            <h6>
-              <Link className="link" to="/">
-                Iniciar sesión
-              </Link>
-            </h6>
-          </div>
-          <div className="pull-right">
-            <h6>
-              <Link className="link" to="/olvido-contrasena">
-                ¿Olvidaste tu contraseña?
-              </Link>
-            </h6>
-          </div>
+
         </div>
       </>
     );

@@ -267,7 +267,6 @@ function CrearCuentaPage(props) {
         ciudad: ciudad,
         genero: genero,
       });
-
     }
   };
   return (
@@ -300,6 +299,28 @@ function CrearCuentaPage(props) {
                     </Alert>
                   ) : null}
                   {showStep()}
+                  <div className="pull-left">
+                    <h6>
+                      <Link className="link" to="/login">
+                        Iniciar sesión
+                      </Link>
+                    </h6>
+                  </div>
+
+                  <div className="pull-right">
+                    <h6>
+                      <Link className="link" to="/olvido-contrasena">
+                        ¿Olvidaste tu contraseña?
+                      </Link>
+                    </h6>
+                  </div>
+                  <div className="pull-left pl-2">
+                    <h6>
+                      <Link className="link" to="/verificar">
+                        Verificar cuenta
+                      </Link>
+                    </h6>
+                  </div>
                 </CardBody>
               </Form>
             </Card>

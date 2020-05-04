@@ -44,6 +44,7 @@ function LoginPage(props) {
     },
   });
   useEffect(() => {
+
     if (autenticado) {
       props.history.push("/home");
     }
@@ -232,6 +233,13 @@ function LoginPage(props) {
                     <h6>
                       <Link className="link" to="/olvido-contrasena">
                         ¿Olvidaste tu contraseña?
+                      </Link>
+                    </h6>
+                  </div>
+                  <div className="pull-left pl-2">
+                    <h6>
+                      <Link className="link" to="/verificar">
+                        Verificar cuenta
                       </Link>
                     </h6>
                   </div>

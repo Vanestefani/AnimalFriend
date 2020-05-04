@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -13,14 +13,19 @@ import {
   InputGroupText,
   InputGroup,
   Container,
-  Col,
-  Row,
+  Alert,
 } from "reactstrap";
 // core components
 import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../components/Footers/TransparentFooter.js";
-function OlvidadoContraseñaPage() {
-  const [firstFocus, setFirstFocus] = React.useState(false);
+import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/autenticacion/authContext";
+function VerificaCuentaPage() {
+  // extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+  const authContext = useContext(AuthContext);
+  const { mensaje, verificaremail } = authContext;
 
   React.useEffect(() => {
     document.body.classList.add("login-page");
@@ -31,15 +36,44 @@ function OlvidadoContraseñaPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+  useEffect(() => {
+
+    if (mensaje) {
+      mostrarAlerta(mensaje.msg, mensaje.categoria);
+    }
+    // eslint-disable-next-line
+  }, [mensaje]);
   //state inputs
   const [usuario, guardarUsuario] = useState({
     email: "",
+    Erroremail: { valido: true, mensaje: "" },
   });
   // extraer de usuario
-  const { email } = usuario;
+  const { email, Erroremail } = usuario;
+  //errores de input :O
+  const validate = () => {
+    let isError = false;
+    if (email.indexOf("@") === -1 || email.length < 1) {
+      Erroremail.valido = false;
+      Erroremail.mensaje = "(Por favor ingrese un correo valido)";
+    } else {
+      Erroremail.valido = true;
+    }
+
+    if (!Erroremail.valido) {
+      isError = true;
+    } else {
+      isError = false;
+    }
+  };
   const onSubmit = (e) => {
     e.preventDefault();
-    e.target.className += " was-validated";
+    const err = validate();
+    if (!err) {
+      // Pasarlo al action
+      let dato = email.toLowerCase();
+      verificaremail({ email: dato });
+    }
   };
 
   const onChange = (e) => {
@@ -63,20 +97,24 @@ function OlvidadoContraseñaPage() {
         <div className="content">
           <Container>
             <Card className="card-login" data-background-color="blue">
-              <Form className="form" onSubmit={onSubmit}>
+              <Form className="form">
                 <CardHeader className="text-center">
                   <CardTitle className="title-up" tag="h3">
-                    ¿Has olvidado tu contraseña?
+                    Verificar cuenta
                   </CardTitle>
-                  <p>Ingresa el correo electrónico asociado a tu cuenta para enviarte un vínculo para restablecer tu contraseña</p>
+                  <p>
+                    Ingresa el correo electrónico asociado a tu cuenta para
+                    enviarte un vínculo para verificar tu cuenta
+                  </p>
                 </CardHeader>
                 <CardBody>
-                  <InputGroup
-                    className={
-                      "no-border input-lg" +
-                      (firstFocus ? " input-group-focus" : "")
-                    }
-                  >
+                  {alerta ? (
+                    <Alert color={alerta.categoria}>
+                      <i class="fas fa-exclamation-triangle"></i>
+                      {alerta.msg}
+                    </Alert>
+                  ) : null}
+                  <InputGroup className="no-border input-lg">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
                         <i className="fas fa-envelope"></i>
@@ -87,20 +125,26 @@ function OlvidadoContraseñaPage() {
                       type="email"
                       id="email"
                       name="email"
-                      onFocus={() => setFirstFocus(true)}
-                      onBlur={() => setFirstFocus(false)}
                       onChange={onChange}
                       defaultValue={email}
                       required
+                      className={
+                        Erroremail.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                      }
                     ></Input>
                   </InputGroup>
-
+                  {!Erroremail.valido ? (
+                    <span className="text-muted">{Erroremail.mensaje}</span>
+                  ) : (
+                    ""
+                  )}
                   <Button
                     block
                     className="btn-round  "
                     color="default"
-                    type="submit"
-                  onClick={(e) => e.preventDefault()}
+                    onClick={onSubmit}
                     size="lg"
                   >
                     <b> Enviar </b>
@@ -119,13 +163,6 @@ function OlvidadoContraseñaPage() {
                       </Link>
                     </h6>
                   </div>
-                  <div className="pull-left pl-2">
-                    <h6>
-                      <Link className="link" to="/verificar">
-                        Verificar cuenta
-                      </Link>
-                    </h6>
-                  </div>
                 </CardBody>
               </Form>
             </Card>
@@ -137,4 +174,4 @@ function OlvidadoContraseñaPage() {
   );
 }
 
-export default OlvidadoContraseñaPage;
+export default VerificaCuentaPage;

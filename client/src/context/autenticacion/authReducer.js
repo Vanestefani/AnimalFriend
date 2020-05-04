@@ -4,11 +4,14 @@ import {
   OBTENER_USUARIO,
   LOGIN_EXITOSO,
   LOGIN_ERROR,
+  VERIFICACIOM_ENVIADA,
+  VERIFICACIOM_ERROR,
   CERRAR_SESION,
 } from "../../types";
 
 export default (state, action) => {
   switch (action.type) {
+    case VERIFICACIOM_ENVIADA:
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
@@ -25,6 +28,7 @@ export default (state, action) => {
         usuario: action.payload,
         cargando: false,
       };
+    case VERIFICACIOM_ERROR:
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
