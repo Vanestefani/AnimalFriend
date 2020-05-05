@@ -1,12 +1,17 @@
 import React from "react";
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 // reactstrap components
 import {
   UncontrolledTooltip,
   NavbarBrand,
   Navbar,
   Container,
+  Collapse,
+  NavItem,
+  Nav,
+  DropdownItem,
+  UncontrolledDropdown,
 } from "reactstrap";
 
 function ExamplesNavbar() {
@@ -72,7 +77,23 @@ function ExamplesNavbar() {
               <span className="navbar-toggler-bar bar2"></span>
               <span className="navbar-toggler-bar bar3"></span>
             </button>
-          </div>
+            </div>
+            <Collapse
+              className="justify-content-end"
+              isOpen={collapseOpen}
+              navbar
+            >
+               <Nav className="ml-auto" navbar>
+              <NavItem className="btn btn-info">
+                <Link to="/login"><i class="fas fa-sign-in-alt"></i>Iniciar sesión</Link>
+              </NavItem>
+              <NavItem className="btn btn-success">
+
+                <Link to="/register"><i class="fas fa-paw"></i>Registrate</Link>
+              </NavItem>
+              </Nav>
+            </Collapse>
+
         </Container>
       </Navbar>
     </>
