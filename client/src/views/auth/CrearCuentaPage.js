@@ -144,28 +144,16 @@ function CrearCuentaPage(props) {
         !usuario.errors.Errorciudad.valido ||
         !usuario.errors.Errorgenero.valido
       ) {
-
         isError = true;
-        return isError;
       } else {
         isError = false;
-        return isError;
       }
     }
-
+    return isError;
   };
 
   // extraer de usuario
-  const {
-    nombre,
-    email,
-    password,
-    password2,
-    pais,
-    ciudad,
-    genero,
-
-  } = usuario;
+  const { nombre, email, password, password2, pais, ciudad, genero } = usuario;
 
   const onChange = (e) => {
     guardarUsuario({
@@ -270,10 +258,17 @@ function CrearCuentaPage(props) {
   const [modalMsnRegistroExitoso, setModal1] = useState(false);
 
   const handleSubmit = (e) => {
-
-    validate();
     const err = validate();
-    console.log(err);
+    if (
+      email.trim() === "" ||
+      password.trim() === "" ||
+      password2.trim() === "" ||
+      pais.trim() === "" ||
+      ciudad.trim() === "" ||
+      genero.trim() === ""
+    ) {
+      mostrarAlerta("Todos los campos son obligatorios", "danger");
+    }
     if (!err) {
       registrarUsuario({
         nombre: nombre,
