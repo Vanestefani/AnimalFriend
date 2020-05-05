@@ -114,6 +114,8 @@ function LoginPage(props) {
     if (!err) {
       // Pasarlo al action
       iniciarSesion({ email, password });
+    }else{
+      validate();
     }
   };
   return (

@@ -64,14 +64,22 @@ function VerificaCuentaPage() {
     } else {
       isError = false;
     }
+    return isError;
   };
   const onSubmit = (e) => {
     e.preventDefault();
     const err = validate();
-    if (!err) {
+    console.log(!err);
+    if (email.trim() === "") {
+      mostrarAlerta("Todos los campos son obligatorios", "danger");
+    }
+
+    if (err) {
       // Pasarlo al action
       let dato = email.toLowerCase();
       verificaremail({ email: dato });
+    }else{
+      validate();
     }
   };
 
@@ -135,7 +143,9 @@ function VerificaCuentaPage() {
                     ></Input>
                   </InputGroup>
                   {!usuario.Erroremail.valido ? (
-                    <span className="text-muted">{usuario.Erroremail.mensaje}</span>
+                    <span className="text-muted">
+                      {usuario.Erroremail.mensaje}
+                    </span>
                   ) : (
                     ""
                   )}

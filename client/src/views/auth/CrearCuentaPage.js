@@ -279,6 +279,8 @@ function CrearCuentaPage(props) {
         ciudad: ciudad,
         genero: genero,
       });
+    }else{
+      validate();
     }
   };
   return (

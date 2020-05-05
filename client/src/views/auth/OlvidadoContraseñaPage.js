@@ -60,19 +60,25 @@ function OlvidadoContraseñaPage() {
     }
 
     if (!usuario.Erroremail.valido) {
-
       isError = true;
     } else {
       isError = false;
     }
+    return isError;
   };
   const onSubmit = (e) => {
     e.preventDefault();
     const err = validate();
+    console.log(!err);
+    if (email.trim() === "") {
+      mostrarAlerta("Todos los campos son obligatorios", "danger");
+    }
     if (!err) {
       // Pasarlo al action
       let dato = email.toLowerCase();
       password_reset({ email: dato });
+    }else{
+      validate();
     }
   };
 
