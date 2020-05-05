@@ -82,7 +82,6 @@ class detallesUsuario extends Component {
                     defaultOptionLabel="Elija un país"
                     onFocus={() => this.props.setpaisFocus(true)}
                     onBlur={() => this.props.setpaisFocus(false)}
-
                     onChange={this.props.onChangeCountry}
                   />
                 </InputGroup>
@@ -140,6 +139,8 @@ class detallesUsuario extends Component {
                     name="genero"
                     type="radio"
                     onChange={this.props.onChange}
+                    checked={this.props.usuario.genero === "Femenino"}
+                    checked
                   ></Input>
                   <span className="form-check-sign"></span>
                   Femenino
@@ -152,6 +153,7 @@ class detallesUsuario extends Component {
                     id="genero"
                     name="genero"
                     type="radio"
+                    checked={this.props.usuario.genero === "Masculino"}
                     onChange={this.props.onChange}
                   ></Input>
                   <span className="form-check-sign"></span>

@@ -38,7 +38,7 @@ function CrearCuentaPage(props) {
     //paso2
     pais: "",
     ciudad: "",
-    genero: "",
+    genero: "Masculino",
 
     errors: {
       Errornombre: { valido: true, mensaje: "" },
@@ -144,13 +144,15 @@ function CrearCuentaPage(props) {
         !usuario.errors.Errorciudad.valido ||
         !usuario.errors.Errorgenero.valido
       ) {
+
         isError = true;
+        return isError;
       } else {
         isError = false;
+        return isError;
       }
     }
 
-    return isError;
   };
 
   // extraer de usuario
@@ -163,7 +165,6 @@ function CrearCuentaPage(props) {
     ciudad,
     genero,
 
-    leePoliticas,
   } = usuario;
 
   const onChange = (e) => {
@@ -269,8 +270,10 @@ function CrearCuentaPage(props) {
   const [modalMsnRegistroExitoso, setModal1] = useState(false);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+
+    validate();
     const err = validate();
+    console.log(err);
     if (!err) {
       registrarUsuario({
         nombre: nombre,

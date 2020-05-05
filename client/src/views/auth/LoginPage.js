@@ -21,6 +21,7 @@ import {
   InputGroup,
   Container,
   Alert,
+  FormGroup,
 } from "reactstrap";
 
 // core components
@@ -44,7 +45,6 @@ function LoginPage(props) {
     },
   });
   useEffect(() => {
-
     if (autenticado) {
       props.history.push("/home");
     }
@@ -88,17 +88,16 @@ function LoginPage(props) {
       !usuario.errors.Erroremail.valido ||
       !usuario.errors.Errorpassword.valido
     ) {
-      isError = true;
+      return (isError = true);
     } else {
-      isError = false;
+      return (isError = false);
     }
   };
   React.useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
+
     return function cleanup() {
       document.body.classList.remove("login-page");
       document.body.classList.remove("sidebar-collapse");
@@ -108,6 +107,10 @@ function LoginPage(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const err = validate();
+    if (email.trim() === "" || password.trim() === "") {
+      mostrarAlerta("Todos los campos son obligatorios", "danger");
+    }
+
     if (!err) {
       // Pasarlo al action
       iniciarSesion({ email, password });
@@ -140,79 +143,83 @@ function LoginPage(props) {
                       {alerta.msg}
                     </Alert>
                   ) : null}
-                  <InputGroup
-                    className={
-                      "no-border input-lg" +
-                      (firstFocus ? " input-group-focus" : "")
-                    }
-                  >
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="fas fa-envelope"></i>
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Email"
-                      type="email"
-                      id="email"
-                      name="email"
-                      onFocus={() => setFirstFocus(true)}
-                      onBlur={() => setFirstFocus(false)}
-                      onChange={onChange}
-                      defaultValue={email}
-                      required
-                      autoComp
-                      lete="email"
+                  <FormGroup>
+                    <InputGroup
                       className={
-                        errors.Erroremail.valido
-                          ? ""
-                          : "is-invalid form-control-danger form-control"
+                        "no-border input-lg" +
+                        (firstFocus ? " input-group-focus" : "")
                       }
-                    ></Input>
-                  </InputGroup>
-                  {!errors.Erroremail.valido ? (
-                    <span className="text-muted">
-                      {errors.Erroremail.mensaje}
-                    </span>
-                  ) : (
-                    ""
-                  )}
-                  <InputGroup
-                    className={
-                      "no-border input-lg" +
-                      (lastFocus ? " input-group-focus" : "")
-                    }
-                  >
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="fas fa-key"></i>
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Contraseña"
-                      type="password"
-                      id="password"
-                      name="password"
-                      onFocus={() => setLastFocus(true)}
-                      onBlur={() => setLastFocus(false)}
-                      required
-                      onChange={onChange}
-                      defaultValue={password}
-                      autoComplete="current-password"
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="fas fa-envelope"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder="Email"
+                        type="email"
+                        id="email"
+                        name="email"
+                        onFocus={() => setFirstFocus(true)}
+                        onBlur={() => setFirstFocus(false)}
+                        onChange={onChange}
+                        defaultValue={email}
+                        required
+                        autoComp
+                        lete="email"
+                        className={
+                          errors.Erroremail.valido
+                            ? ""
+                            : "is-invalid form-control-danger form-control"
+                        }
+                      ></Input>
+                    </InputGroup>
+                    {!errors.Erroremail.valido ? (
+                      <span className="text-muted">
+                        {errors.Erroremail.mensaje}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </FormGroup>
+                  <FormGroup>
+                    <InputGroup
                       className={
-                        errors.Errorpassword.valido
-                          ? ""
-                          : "is-invalid form-control-danger form-control"
+                        "no-border input-lg" +
+                        (lastFocus ? " input-group-focus" : "")
                       }
-                    ></Input>
-                  </InputGroup>
-                  {!errors.Errorpassword.valido ? (
-                    <span className="text-muted">
-                      {errors.Errorpassword.mensaje}
-                    </span>
-                  ) : (
-                    ""
-                  )}
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="fas fa-key"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder="Contraseña"
+                        type="password"
+                        id="password"
+                        name="password"
+                        onFocus={() => setLastFocus(true)}
+                        onBlur={() => setLastFocus(false)}
+                        required
+                        onChange={onChange}
+                        defaultValue={password}
+                        autoComplete="current-password"
+                        className={
+                          errors.Errorpassword.valido
+                            ? ""
+                            : "is-invalid form-control-danger form-control"
+                        }
+                      ></Input>
+                    </InputGroup>
+                    {!errors.Errorpassword.valido ? (
+                      <apan className="text-muted">
+                        {errors.Errorpassword.mensaje}
+                      </apan>
+                    ) : (
+                      ""
+                    )}
+                  </FormGroup>
                   <Button
                     block
                     className="btn-round  "
