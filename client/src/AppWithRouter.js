@@ -53,7 +53,7 @@ const AppWithRouter = () => (
         <Suspense fallback={<div>Cargando...</div>}>
 
             <Switch>
-              <PrivateRoute exact path="/home" component={Home} />
+              <PrivateRoute exact path="/" component={Home} />
               <Route
                 exact
                 path="/login"

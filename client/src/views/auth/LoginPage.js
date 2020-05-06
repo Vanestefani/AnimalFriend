@@ -44,7 +44,7 @@ function LoginPage(props) {
   });
   useEffect(() => {
     if (autenticado) {
-      props.history.push("/home");
+      props.history.push("/");
     }
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);
