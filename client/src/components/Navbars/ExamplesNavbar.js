@@ -10,8 +10,6 @@ import {
   Collapse,
   NavItem,
   Nav,
-  DropdownItem,
-  UncontrolledDropdown,
 } from "reactstrap";
 
 function ExamplesNavbar() {
@@ -77,23 +75,25 @@ function ExamplesNavbar() {
               <span className="navbar-toggler-bar bar2"></span>
               <span className="navbar-toggler-bar bar3"></span>
             </button>
-            </div>
-            <Collapse
-              className="justify-content-end"
-              isOpen={collapseOpen}
-              navbar
-            >
-               <Nav className="ml-auto" navbar>
+          </div>
+          <Collapse
+            className="justify-content-end"
+            isOpen={collapseOpen}
+            navbar
+          >
+            <Nav className="ml-auto" navbar>
               <NavItem className="btn btn-info">
-                <Link to="/login"><i class="fas fa-sign-in-alt"></i>Iniciar sesión</Link>
+                <Link to="/login">
+                  <i class="fas fa-sign-in-alt"></i>Iniciar sesión
+                </Link>
               </NavItem>
               <NavItem className="btn btn-success">
-
-                <Link to="/register"><i class="fas fa-paw"></i>Registrate</Link>
+                <Link to="/register">
+                  <i class="fas fa-paw"></i>Registrate
+                </Link>
               </NavItem>
-              </Nav>
-            </Collapse>
-
+            </Nav>
+          </Collapse>
         </Container>
       </Navbar>
     </>

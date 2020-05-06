@@ -1,12 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
 
-import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
+import { Link } from "react-router-dom";
+
 import AlertaContext from "../../context/alertas/alertaContext";
 import AuthContext from "../../context/autenticacion/authContext";
-import compose from "recompose/compose";
+
 // reactstrap components
 import {
   Button,
@@ -114,7 +112,7 @@ function LoginPage(props) {
     if (!err) {
       // Pasarlo al action
       iniciarSesion({ email, password });
-    }else{
+    } else {
       validate();
     }
   };

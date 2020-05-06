@@ -1,44 +1,58 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useContext, useEffect } from "react";
 
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import HomeNarbar from "../components/Navbars/homeNarbar";
-import DefaultFooter from "../components/Footers/DefaultFooter.js";
-const styles = {
-  container: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '400px',
-    justifyContent: 'center',
-    left: '50%',
-    outline: 'none',
-    position: 'absolute',
-    textAlign: 'center',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '90%'
-  }
-};
+import ExamplesNavbar from "../components/Navbars/ExamplesNavbar";
 
-const NotFound = ({ classes }) => (
-  <div>
-<HomeNarbar></HomeNarbar>
-    <Paper className={classes.container}>
-      <Typography variant="display4">404</Typography>
-      <Typography variant="headline">Page Not Found</Typography>
-      <Typography variant="subheading">
-        Sorry, the page you are looking for seems to be missing.
-      </Typography>
-    </Paper>
-    <DefaultFooter></DefaultFooter>
-  </div>
-);
+import TransparentFooter from "../components/Footers/TransparentFooter.js";
 
-NotFound.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+import AlertaContext from "../context/alertas/alertaContext";
+import AuthContext from "../context/autenticacion/authContext";
+import { CardBody, CardHeader, CardTitle, Container, Card } from "reactstrap";
 
-export default withStyles(styles)(NotFound);
+function NotFound() {
+  // extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+  const authContext = useContext(AuthContext);
+  const { mensaje, autenticado } = authContext;
+
+  return (
+    <>
+      {autenticado ? (
+        <HomeNarbar></HomeNarbar>
+      ) : (
+        <ExamplesNavbar></ExamplesNavbar>
+      )}
+      <div className="page-header clear-filter" filter-color="green">
+        <div
+          className="page-header-image"
+          style={{
+            backgroundImage:
+              "url(" + require("../assets//img/pet-fondo.jfif") + ")",
+          }}
+        ></div>
+        <div className="content">
+          <Container>
+            <Card>
+              <CardHeader>
+                <CardTitle>
+                  <h2 className="text-dark">404</h2>
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <h2 className="text-dark">Página no encontrada</h2>
+                <p className="text-dark">
+                  Lo sentimos, parece que falta la página que estás buscando.
+                </p>
+
+              </CardBody>
+            </Card>
+          </Container>
+        </div>
+        <TransparentFooter></TransparentFooter>
+      </div>
+    </>
+  );
+}
+
+export default NotFound;
