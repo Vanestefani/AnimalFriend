@@ -152,16 +152,31 @@ function HomeNarbar() {
                   </Link>
                 </NavLink>
               </NavItem>
-              <NavItem></NavItem>
+
               <NavItem>
-                <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i className="fas fa-comments"></i>
+                <NavLink onClick={(e) => e.preventDefault()}>
+                  <Link to="/messages/chat">
+                    <i className="fas fa-comments"></i>
+                  </Link>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i className="fas fa-bell"></i>
-                </NavLink>
+                <UncontrolledDropdown nav>
+                  <DropdownToggle
+                    aria-haspopup={true}
+                    caret
+                    color="default"
+                    href="#"
+                    nav
+                  >
+                    <i className="fas fa-bell"></i>
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Link className="text-dark">Notificacion prueba</Link>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               </NavItem>
               <NavItem>
                 <UncontrolledDropdown nav>
