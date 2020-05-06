@@ -106,7 +106,9 @@ function HomeNarbar() {
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink href="/" onClick={(e) => e.preventDefault()}>
-                  <i className="fas fa-home"></i>
+                  <Link to="/">
+                    <i className="fas fa-home"></i>
+                  </Link>
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -121,47 +123,36 @@ function HomeNarbar() {
                     <p>Crear</p>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem
-
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <Link to="/eventos"  className="text-dark">
-                      <i className="fas fa-calendar-alt"></i>
-                      Evento
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Link to="/eventos" className="text-dark">
+                        <i className="fas fa-calendar-alt"></i>
+                        Evento
                       </Link>
                     </DropdownItem>
-                    <DropdownItem
-
-                      onClick={(e) => e.preventDefault()}
-                    >
-                        <Link to="/anuncios"  className="text-dark">
-                      <i className="fas fa-newspaper"></i>
-                      Anuncio
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Link to="/anuncios" className="text-dark">
+                        <i className="fas fa-newspaper"></i>
+                        Anuncio
                       </Link>
                     </DropdownItem>
-                    <DropdownItem
-
-                      onClick={(e) => e.preventDefault()}
-                    >
-                         <Link to="/negocios"  className="text-dark">
-                      <i className="fas fa-store-alt"></i>
-                      Negocio
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Link to="/negocios" className="text-dark">
+                        <i className="fas fa-store-alt"></i>
+                        Negocio
                       </Link>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </NavItem>
               <NavItem>
-                <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i className="fas fa-globe"></i>
-                  <p>Explorar</p>
+                <NavLink onClick={(e) => e.preventDefault()}>
+                  <Link to="/explorar">
+                    <i className="fas fa-globe"></i>
+                    <p>Explorar</p>
+                  </Link>
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i className="fas fa-user-friends"></i>
-                </NavLink>
-              </NavItem>
+              <NavItem></NavItem>
               <NavItem>
                 <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
                   <i className="fas fa-comments"></i>
