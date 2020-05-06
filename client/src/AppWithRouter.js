@@ -35,6 +35,8 @@ const LocationPage = lazy(() => import("./views/Location/LocationPage"));
 const MessengerPage = lazy(() => import("./views/Messenger/MessengerPage"));
 const Recordatorio = lazy(() => import("./views/Recordatorios/Recordatorio"));
 const Anuncios = lazy(() => import("./views/Anuncios/Anuncios"));
+const Eventos = lazy(() => import("./views/Eventos/Eventos"));
+
 const ExplorarPage = lazy(() => import("./views/ExplorarPage"));
 const Following = lazy(() => import("./components/Following"));
 const PerfilMascota = lazy(() => import("./views/Mascotas/PerfilMascota"));
@@ -98,6 +100,8 @@ const AppWithRouter = () => (
               />
 
               <PrivateRoute exact path="/anuncios" component={Anuncios} />
+              <PrivateRoute exact path="/eventos" component={Eventos} />
+
               <PrivateRoute exact path="/explorar" component={ExplorarPage} />
               <PrivateRoute
                 exact

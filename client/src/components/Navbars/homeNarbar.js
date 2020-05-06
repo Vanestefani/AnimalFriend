@@ -105,7 +105,7 @@ function HomeNarbar() {
             </Form>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+                <NavLink href="/" onClick={(e) => e.preventDefault()}>
                   <i className="fas fa-home"></i>
                 </NavLink>
               </NavItem>
