@@ -122,25 +122,31 @@ function HomeNarbar() {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem
-                      href="#pablo"
+
                       onClick={(e) => e.preventDefault()}
                     >
+                      <Link to="/eventos"  className="text-dark">
                       <i className="fas fa-calendar-alt"></i>
                       Evento
+                      </Link>
                     </DropdownItem>
                     <DropdownItem
-                      href="#pablo"
+
                       onClick={(e) => e.preventDefault()}
                     >
+                        <Link to="/anuncios"  className="text-dark">
                       <i className="fas fa-newspaper"></i>
                       Anuncio
+                      </Link>
                     </DropdownItem>
                     <DropdownItem
-                      href="#pablo"
+
                       onClick={(e) => e.preventDefault()}
                     >
+                         <Link to="/negocios"  className="text-dark">
                       <i className="fas fa-store-alt"></i>
                       Negocio
+                      </Link>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
