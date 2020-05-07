@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import { NavLink, Nav, Container, Card } from "reactstrap";
+import AuthContext from "../../context/autenticacion/authContext";
 
 function VerticalMenu() {
+  const authContext = useContext(AuthContext);
+  const { usuario } = authContext;
   return (
     <>
       <Card className="card-general">
@@ -15,20 +18,24 @@ function VerticalMenu() {
               onClick={(e) => e.preventDefault()}
             >
               <img
-                src={require("../../assets/img/undraw_female_avatar_w3jk.png")}
+                src={"/images/profile-picture/" + usuario.fotoPerfil}
                 className="rounded-circle FotoUser "
               ></img>
 
-              <p className="text-center">Nombre del usuario</p>
+              <p className="text-center">{usuario.nombre}</p>
             </NavLink>
 
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <i className="far fa-calendar-alt"></i>
-              Eventos
+              <Link to="/eventos" className="text-dark">
+                <i className="fas fa-calendar-alt"></i>
+                Eventos
+              </Link>
             </NavLink>
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <i className="fas fa-store-alt"></i>
-              Negocios
+              <Link to="/negocios" className="text-dark">
+                <i className="fas fa-store-alt"></i>
+                Negocios
+              </Link>
             </NavLink>
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
               <i className="fas fa-map-marker-alt"></i>

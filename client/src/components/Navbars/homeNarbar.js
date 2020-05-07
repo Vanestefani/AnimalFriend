@@ -212,7 +212,7 @@ function HomeNarbar() {
                       Configuración
                     </DropdownItem>
                     <DropdownItem
-                      href="#pablo"
+
                       onClick={() => cerrarSesion() }
                     >
                       <i className="fas fa-sign-in-alt"></i>
