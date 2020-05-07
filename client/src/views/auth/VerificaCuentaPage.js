@@ -26,6 +26,7 @@ function VerificaCuentaPage() {
   const { alerta, mostrarAlerta } = alertaContext;
   const authContext = useContext(AuthContext);
   const { mensaje, verificaremail } = authContext;
+  const [firstFocus, setFirstFocus] = React.useState(false);
 
   React.useEffect(() => {
     document.body.classList.add("login-page");
@@ -74,7 +75,7 @@ function VerificaCuentaPage() {
       mostrarAlerta("Todos los campos son obligatorios", "danger");
     }
 
-    if (err) {
+    if (!err) {
       // Pasarlo al action
       let dato = email.toLowerCase();
       verificaremail({ email: dato });
@@ -132,6 +133,8 @@ function VerificaCuentaPage() {
                       type="email"
                       id="email"
                       name="email"
+                      onFocus={() => setFirstFocus(true)}
+                      onBlur={() => setFirstFocus(false)}
                       onChange={onChange}
                       defaultValue={email}
                       required

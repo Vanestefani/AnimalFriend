@@ -6,11 +6,6 @@ const PrivateRoute = ({ component: Component, ...props }) => {
   const authContext = useContext(AuthContext);
   const { autenticado, cargando, usuarioAutenticado } = authContext;
 
-  useEffect(() => {
-    usuarioAutenticado();
-    // eslint-disable-next-line
-  }, []);
-
   return (
     <Route
       {...props}

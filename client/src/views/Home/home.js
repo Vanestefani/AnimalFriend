@@ -26,11 +26,10 @@ function Home() {
   });
   // Extraer la información de autenticación
   const authContext = useContext(AuthContext);
-  const { usuarioAutenticado } = authContext;
+  const {  } = authContext;
 
   useEffect(() => {
-    usuarioAutenticado();
-    // eslint-disable-next-line
+
   }, []);
   return (
     <>

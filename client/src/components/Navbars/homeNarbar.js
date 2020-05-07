@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   Collapse,
@@ -9,21 +9,29 @@ import {
   NavLink,
   Nav,
   Container,
-  Form,
-  InputGroup,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
 } from "reactstrap";
-
+import { history } from "../../_helpers/history";
+import AuthContext from "../../context/autenticacion/authContext";
 function HomeNarbar() {
+  const authContext = useContext(AuthContext);
+  const { mensaje, usuario,cerrarSesion } = authContext;
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
+  const [user, setUser] = useState({
+    activePath: "",
+  });
+  // extraer de usuario
+  const { activePath } = user;
+
   React.useEffect(() => {
+    history.listen((location) => {
+      setUser({ activePath: location.pathname });
+    });
+
     const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 399 ||
@@ -90,20 +98,7 @@ function HomeNarbar() {
             isOpen={collapseOpen}
             navbar
           >
-            <Form
-              className="form-inline pull-left m-1"
-              data-background-color=""
-            >
-              <InputGroup className="has-white">
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="fas fa-search"></i>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input placeholder="Buscar" type="text"></Input>
-              </InputGroup>
-            </Form>
-            <Nav className="ml-auto" navbar>
+            <Nav className="ml-auto mt-2" navbar>
               <NavItem>
                 <NavLink href="/" onClick={(e) => e.preventDefault()}>
                   <Link to="/">
@@ -188,7 +183,9 @@ function HomeNarbar() {
                     nav
                   >
                     <img
-                      src={require("../../assets/img/undraw_female_avatar_w3jk.png")}
+                      src={
+                        "/images/profile-picture/100x100/" + usuario.fotoPerfil
+                      }
                       className="rounded-circle FotoUser"
                     ></img>
                   </DropdownToggle>
@@ -216,7 +213,7 @@ function HomeNarbar() {
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={() => cerrarSesion() }
                     >
                       <i className="fas fa-sign-in-alt"></i>
                       Cerrar sesión

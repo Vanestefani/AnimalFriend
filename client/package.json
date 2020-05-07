@@ -27,6 +27,7 @@
     "nouislider": "^14.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-autosuggest": "^10.0.2",
     "react-bootstrap-switch": "^15.5.3",
     "react-calendar": "^3.0.1",
     "react-country-region-selector": "^2.1.0",
@@ -44,6 +45,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "throttle-debounce": "^2.1.0",
     "uuid": "^7.0.3",
     "validator": "^13.0.0"
   },

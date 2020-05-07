@@ -11,7 +11,6 @@ import {
   PASSWORD_RESET_ERROR,
   PASSWORD_CAMBIO_EXITO,
   PASSWORD_CAMBIO_ERROR,
-
 } from "../../types";
 
 export default (state, action) => {
@@ -19,22 +18,26 @@ export default (state, action) => {
     case PASSWORD_RESET_EXITOSA:
     case VERIFICACIOM_ENVIADA:
     case REGISTRO_EXITOSO:
-    case LOGIN_EXITOSO:
     case PASSWORD_CAMBIO_EXITO:
       localStorage.setItem("token", action.payload.token);
+
       return {
         ...state,
         autenticado: true,
         mensaje: { msg: action.payload.message, categoria: "success" },
         cargando: false,
       };
-    case OBTENER_USUARIO:
+    case LOGIN_EXITOSO:
+      localStorage.setItem("token", action.payload.token);
+
       return {
         ...state,
         autenticado: true,
-        usuario: action.payload,
+        usuario: action.payload.user,
+        mensaje: { msg: action.payload.message, categoria: "success" },
         cargando: false,
       };
+
     case VERIFICACIOM_ERROR:
     case CERRAR_SESION:
     case LOGIN_ERROR:

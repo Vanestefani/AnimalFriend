@@ -15,14 +15,20 @@ const Chat = require("../models/Chat");
 const Message = require("../models/Message");
 const NotificacionHandler = require("../handlers/NotificacionHandler");
 const messageHandler = require("../handlers/messageHandler");
-const { uploader, sendEmail ,checkFileTypem, storage,upload} = require("../utils/index");
+const {
+  uploader,
+  sendEmail,
+  checkFileTypem,
+  storage,
+  upload,
+} = require("../utils/index");
 
 // @route GET admin/user
 // @desc Returns all users
 // @access Public
 exports.index = async function (req, res) {
   const users = await User.find({});
-  res.status(200).json({users});
+  res.status(200).json({ users });
 };
 
 // @route POST api/user
@@ -36,12 +42,10 @@ exports.store = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user)
-      return res
-        .status(401)
-        .json({
-          message:
-            "La direccion de correo electronico ingresado ya está asociado con otra cuenta. ",
-        });
+      return res.status(401).json({
+        message:
+          "La direccion de correo electronico ingresado ya está asociado con otra cuenta. ",
+      });
 
     const password = "_" + Math.random().toString(36).substr(2, 9); //generate a random password
     const newUser = new User({ ...req.body, password });
@@ -71,11 +75,9 @@ exports.store = async (req, res) => {
 
     await sendEmail({ to, from, subject, html });
 
-    res
-      .status(200)
-      .json({
-        message: "Se ha enviado un correo electrónico a " + user.email + ".",
-      });
+    res.status(200).json({
+      message: "Se ha enviado un correo electrónico a " + user.email + ".",
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -109,12 +111,9 @@ exports.update = async function (req, res) {
 
     //Make sure the passed id is that of the logged in user
     if (userId.toString() !== id.toString())
-      return res
-        .status(401)
-        .json({
-          message:
-            "Lo sentimos, no tienes permiso para actualizar estos datos.",
-        });
+      return res.status(401).json({
+        message: "Lo sentimos, no tienes permiso para actualizar estos datos.",
+      });
 
     const user = await User.findByIdAndUpdate(
       id,
@@ -156,11 +155,9 @@ exports.destroy = async function (req, res) {
 
     //Make sure the passed id is that of the logged in user
     if (user_id.toString() !== id.toString())
-      return res
-        .status(401)
-        .json({
-          message: "Lo sentimos, no tienes permiso para eliminar estos datos.",
-        });
+      return res.status(401).json({
+        message: "Lo sentimos, no tienes permiso para eliminar estos datos.",
+      });
 
     await User.findByIdAndDelete(id);
     res.status(200).json({ message: "El usuario ha sido eliminado" });
@@ -330,10 +327,7 @@ exports.followUser = (req, res) => {
           .save()
           .then((room) => {
             room
-              .populate(
-                "members",
-                "nombre fotoPerfil activityStatus"
-              )
+              .populate("members", "nombre fotoPerfil activityStatus")
               .execPopulate()
               .then((room) => {
                 messageHandler.sendRoom(req, {
@@ -666,7 +660,6 @@ exports.searchUsersByNombre = (req, res) => {
       $or: [
         { nombre: new RegExp("^" + req.body.q, "i") },
         { email: new RegExp("^" + req.body.q, "i") },
-
       ],
     })
       .limit(10)

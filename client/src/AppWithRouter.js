@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import AlertaState from "./context/alertas/alertaState";
 import AuthState from "./context/autenticacion/authState";
+import UsuariosState from "./context/usuarios/userState";
+
 import tokenAuth from "./config/token";
 import PrivateRoute from "./PrivateRoute";
 
@@ -54,58 +56,60 @@ console.log(process.env.REACT_APP_BACKEND_URL);
 const AppWithRouter = () => (
   <AlertaState>
     <AuthState>
-      <Router>
-        <Suspense fallback={<div>Cargando...</div>}>
-          <Switch>
-            <PrivateRoute exact path="/" component={Home} />
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/register" component={CrearCuentaPage} />
-            <Route exact path="/verificar" component={VerificaCuentaPage} />
+      <UsuariosState>
+        <Router>
+          <Suspense fallback={<div>Cargando...</div>}>
+            <Switch>
+              <PrivateRoute exact path="/" component={Home} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/register" component={CrearCuentaPage} />
+              <Route exact path="/verificar" component={VerificaCuentaPage} />
 
-            <PrivateRoute exact path="/perfil" component={Perfil} />
-            <PrivateRoute
-              exact
-              path="/posts/upload"
-              component={PostUploadPage}
-            />
-            <PrivateRoute
-              exact
-              path="/messages/chat"
-              component={MessengerPage}
-            />
+              <PrivateRoute exact path="/perfil" component={Perfil} />
+              <PrivateRoute
+                exact
+                path="/posts/upload"
+                component={PostUploadPage}
+              />
+              <PrivateRoute
+                exact
+                path="/messages/chat"
+                component={MessengerPage}
+              />
 
-            <Route
-              exact
-              path="/auth/reset/password/:token"
-              component={CambiarContraseñaPage}
-            />
+              <Route
+                exact
+                path="/auth/reset/password/:token"
+                component={CambiarContraseñaPage}
+              />
 
-            <Route
-              path="/olvido-contrasena"
-              component={OlvidadoContraseñaPage}
-            />
+              <Route
+                path="/olvido-contrasena"
+                component={OlvidadoContraseñaPage}
+              />
 
-            <PrivateRoute exact path="/anuncios" component={Anuncios} />
-            <PrivateRoute exact path="/eventos" component={Eventos} />
-            <PrivateRoute exact path="/negocios" component={Negocios} />
+              <PrivateRoute exact path="/anuncios" component={Anuncios} />
+              <PrivateRoute exact path="/eventos" component={Eventos} />
+              <PrivateRoute exact path="/negocios" component={Negocios} />
 
-            <PrivateRoute exact path="/explorar" component={ExplorarPage} />
-            <PrivateRoute
-              exact
-              path="/recordatorios"
-              component={Recordatorio}
-            />
-            <PrivateRoute exact path="/mascotas" component={Mascotas} />
-            <PrivateRoute
-              exact
-              path="/perfil-mascota"
-              component={PerfilMascota}
-            />
+              <PrivateRoute exact path="/explorar" component={ExplorarPage} />
+              <PrivateRoute
+                exact
+                path="/recordatorios"
+                component={Recordatorio}
+              />
+              <PrivateRoute exact path="/mascotas" component={Mascotas} />
+              <PrivateRoute
+                exact
+                path="/perfil-mascota"
+                component={PerfilMascota}
+              />
 
-            <Route component={NotFound} />
-          </Switch>
-        </Suspense>
-      </Router>
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
+        </Router>
+      </UsuariosState>
     </AuthState>
   </AlertaState>
 );

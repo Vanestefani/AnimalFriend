@@ -23,7 +23,7 @@ import {
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
-    userId: localStorage.getItem("userId"),
+
     autenticado: null,
     usuario: null,
     mensaje: null,
@@ -87,9 +87,6 @@ const AuthState = (props) => {
         type: LOGIN_EXITOSO,
         payload: respuesta.data,
       });
-
-      // Obtener el usuario
-      usuarioAutenticado();
     } catch (error) {
       const alerta = {
         msg: error.response.data.message,
@@ -120,8 +117,6 @@ const AuthState = (props) => {
         payload: respuesta.data,
       });
 
-      // Obtener el usuario
-      usuarioAutenticado();
     } catch (error) {
       const alerta = {
         msg: error.response.data.message,
@@ -164,7 +159,10 @@ const AuthState = (props) => {
     }
 
     try {
-      const respuesta = await clienteAxios.post(`/api/auth/reset/${token}`, datos);
+      const respuesta = await clienteAxios.post(
+        `/api/auth/reset/${token}`,
+        datos
+      );
 
       dispatch({
         type: PASSWORD_CAMBIO_EXITO,
@@ -193,7 +191,7 @@ const AuthState = (props) => {
         cargando: state.cargando,
         registrarUsuario,
         iniciarSesion,
-        usuarioAutenticado,
+
         cerrarSesion,
         verificaremail,
         password_reset,
