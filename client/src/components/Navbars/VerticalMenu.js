@@ -26,13 +26,13 @@ function VerticalMenu() {
             </NavLink>
 
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <Link to="/eventos" className="text-dark">
+              <Link to="/eventos" >
                 <i className="fas fa-calendar-alt"></i>
                 Eventos
               </Link>
             </NavLink>
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-              <Link to="/negocios" className="text-dark">
+              <Link to="/negocios" >
                 <i className="fas fa-store-alt"></i>
                 Negocios
               </Link>
