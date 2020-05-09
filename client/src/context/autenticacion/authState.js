@@ -183,23 +183,18 @@ const AuthState = (props) => {
     }
   };
   const addPost = async (datos) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
     try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        tokenAuth(token);
-      }
-      console.log(datos);
-      const requestOptions = {
-        headers: {
-          Authorization: JSON.parse(localStorage.getItem("token").token),
-          body: datos,
-        },
-      };
-      const respuesta = await clienteAxios.post(
-        "/api/post/addPost",
-        requestOptions
-      );
-
+      const respuesta = await clienteAxios
+        .post("/api/post/addPost", datos)
+        .then((response) => response.data)
+        .then((response) => {
+          console.log(response);
+        });
+      console.log(respuesta);
       dispatch({
         type: ADD_POST_SUCCESS,
         payload: respuesta.data,

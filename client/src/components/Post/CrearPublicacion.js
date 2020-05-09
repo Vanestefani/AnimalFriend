@@ -13,13 +13,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import AuthContext from "../../context/autenticacion/authContext";
-import PostContext from "../../context/post/postContext";
-import ReactCrop from "react-image-crop";
+
 import "react-image-crop/dist/ReactCrop.css";
-import {
-  extractImageFileExtensionFromBase64,
-  base64StringtoFile,
-} from "../reusable/ReusableUtils";
 
 function CrearPublicacion() {
   const imageMaxSize = 10000000; // bytes
@@ -33,45 +28,24 @@ function CrearPublicacion() {
   const [state, setstate] = useState({
     descripcion: " ",
   });
-  const [archivophoto, guardararchivophoto] = useState({
-    photo: null,
-  });
+  const [photo, guardararchivophoto] = useState(null);
   const { descripcion } = state;
-  const { photo } = archivophoto;
 
   const handleChange = (e) => {
     setstate({
       ...state,
-      [e.target.name]: e.target.value,
+      [e.target.name]: [e.target.value],
     });
   };
-  const onImageChange = (e) => {
-    guardararchivophoto({
-      ...archivophoto,
-      [e.target.name]: e.target.files[0],
-    });
-  };
-  const toBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     let userid = usuario._id;
-    const data = {
-      descripcion: descripcion,
-      imagen: await toBase64(photo),
-      autor: userid,
-    };
-    console.log(data);
-    addPost({
-      data,
-    });
+    let formData = new FormData();
+    formData.append("imagen", photo,photo.name);
+    formData.append("descripcion", descripcion);
+    formData.append("autor", userid);
+    addPost(formData);
   };
 
   return (
@@ -82,7 +56,7 @@ function CrearPublicacion() {
             <div className="media d-block d-md-flex mt-4">
               <img
                 className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3"
-                src={usuario.fotoPerfil}
+                src={ usuario.fotoPerfil}
                 width="60px"
               ></img>
               <div className="media-body text-center text-md-left ml-md-3 ml-0">
@@ -105,11 +79,11 @@ function CrearPublicacion() {
             <div className="pull-left">
               <Input
                 accept={acceptedFileTypes}
-                onChange={onImageChange}
+                onChange={(e) => guardararchivophoto(e.target.files[0])}
                 id="photo"
                 name="photo"
                 type="file"
-                defaultValue={photo}
+
                 className="btn-small"
                 size="sm"
               >
