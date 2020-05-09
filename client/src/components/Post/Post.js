@@ -33,16 +33,53 @@ function Post(props) {
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
   };
+  console.log(props.publicacion.autor.nombre);
   return (
     <>
-      <Card className="card-post">
+      <Card
+        className="card-post"
+
+      >
         <CardHeader>
-          <CardTitle></CardTitle>
+          <CardTitle>
+            <div className="pull-right">
+              <UncontrolledDropdown>
+                <DropdownToggle
+                  aria-haspopup={true}
+                  caret
+                  color="neutral"
+                  size="sm"
+                ></DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="fas fa-edit"></i>
+                    Editar
+                  </DropdownItem>
+                  <DropdownItem
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="fas fa-trash-alt"></i>
+                    Eliminar
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </div>
+          </CardTitle>
           <div className="media d-block d-md-flex mt-4">
+            <img
+              className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3 pull-right"
+              src={props.publicacion.autor.fotoPerfil}
+              width="80px"
+            />
             <div className="media-body text-center text-md-left ml-md-3 ml-0">
               <div className="pull-left">
-                <p className="font-weight-bold my-0"></p>
-
+                <p className="font-weight-bold my-0">
+                  {props.publicacion.autor.nombre}
+                </p>
                 <p>{props.publicacion.fecha_creacion}</p>
               </div>
             </div>
@@ -52,7 +89,7 @@ function Post(props) {
         <CardBody>
           <Container>
             <p>{props.publicacion.descripcion}</p>
-            <img alt="..." src={props.publicacion.imagen}></img>
+            <img width="400px" alt="..." src={props.publicacion.imagen}></img>
           </Container>
         </CardBody>
         <CardFooter>

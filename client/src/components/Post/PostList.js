@@ -28,13 +28,19 @@ function PostList() {
   return (
     <>
       <InfiniteScroll
+       style={{
+        "overflow":"none "
+
+       }}
         dataLength={publicaciones.length}
         next={allpost}
+
+        hasMore={true}
 
         loader={<h4>Cargando...</h4>}
         endMessage={
           <div horizontal>
-            <h4>Yay! Has visto todo</h4>
+            <span>Yay! Has visto todo</span>
           </div>
         }
       >
