@@ -112,16 +112,16 @@ exports.createPost = (req, res, next) => {
   validateObject.tags = JSON.parse(validateObject.tags);
 
   const schema = Joi.object({
-    description: Joi.string()
+    descripcion: Joi.string()
       .allow("")
       .required(),
-    tags: Joi.array().required(),
+    tags: Joi.array(),
     coordinates: Joi.string()
       .allow("")
-      .required(),
+      ,
     locationName: Joi.string()
       .allow("")
-      .required(),
+    ,
     photo: Joi.string().required()
   });
 

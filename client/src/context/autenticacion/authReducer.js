@@ -1,7 +1,8 @@
 import {
   REGISTRO_EXITOSO,
   REGISTRO_ERROR,
-  OBTENER_USUARIO,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAILURE,
   LOGIN_EXITOSO,
   LOGIN_ERROR,
   VERIFICACIOM_ENVIADA,
@@ -37,6 +38,16 @@ export default (state, action) => {
         mensaje: { msg: action.payload.message, categoria: "success" },
         cargando: false,
       };
+      case ADD_POST_SUCCESS:
+        return {
+          ...state,
+          mensaje:null
+        };
+      case ADD_POST_FAILURE:
+        return {
+          ...state,
+          mensaje: action.payload,
+        };
 
     case VERIFICACIOM_ERROR:
     case CERRAR_SESION:

@@ -18,7 +18,7 @@ import { history } from "../../_helpers/history";
 import AuthContext from "../../context/autenticacion/authContext";
 function HomeNarbar() {
   const authContext = useContext(AuthContext);
-  const { mensaje, usuario,cerrarSesion } = authContext;
+  const { mensaje, usuario, cerrarSesion } = authContext;
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [user, setUser] = useState({
@@ -66,7 +66,7 @@ function HomeNarbar() {
         <Container>
           <div className="navbar-translate">
             <NavbarBrand href="#" id="navbar-brand">
-              <Link to="/">
+              <Link to="/home">
                 <img
                   width="200px"
                   alt="..."
@@ -100,8 +100,8 @@ function HomeNarbar() {
           >
             <Nav className="ml-auto mt-2" navbar>
               <NavItem>
-                <NavLink href="/" onClick={(e) => e.preventDefault()}>
-                  <Link to="/">
+                <NavLink href="/home" onClick={(e) => e.preventDefault()}>
+                  <Link to="/home">
                     <i className="fas fa-home"></i>
                   </Link>
                 </NavLink>
@@ -183,9 +183,7 @@ function HomeNarbar() {
                     nav
                   >
                     <img
-                      src={
-                        "/images/profile-picture/100x100/" + usuario.fotoPerfil
-                      }
+                      src={usuario.fotoPerfil}
                       className="rounded-circle FotoUser"
                     ></img>
                   </DropdownToggle>
@@ -211,10 +209,7 @@ function HomeNarbar() {
                       <i className="fas fa-cogs"></i>
                       Configuración
                     </DropdownItem>
-                    <DropdownItem
-
-                      onClick={() => cerrarSesion() }
-                    >
+                    <DropdownItem onClick={() => cerrarSesion()}>
                       <i className="fas fa-sign-in-alt"></i>
                       Cerrar sesión
                     </DropdownItem>

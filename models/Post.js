@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-
+const {ObjectId} = mongoose.Schema.Types;
 const postSchema = new mongoose.Schema({
   descripcion: {
     type: String,
@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema({
   },
   imagen: {
     type: String,
-    required: "Please select image",
+    required: "Se requiere imagen",
   },
   fecha_creacion: {
     type: Date,
@@ -18,7 +18,7 @@ const postSchema = new mongoose.Schema({
   autor: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    required: "You must supply an author",
+    required: "Se requiere autorr",
   },
   hashtags: {
     type: Array,
@@ -37,6 +37,11 @@ const postSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
+  likes:[{type:ObjectId,ref:"User"}],
+  comments:[{
+      text:String,
+      postedBy:{type:ObjectId,ref:"User"}
+  }],
 });
 
 postSchema.index({ localizacion: "2dsphere" });

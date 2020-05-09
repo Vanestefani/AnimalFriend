@@ -18,7 +18,7 @@ function VerticalMenu() {
               onClick={(e) => e.preventDefault()}
             >
               <img
-                src={"/images/profile-picture/" + usuario.fotoPerfil}
+                src={usuario.fotoPerfil}
                 className="rounded-circle FotoUser "
               ></img>
 

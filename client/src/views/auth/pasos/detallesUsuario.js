@@ -140,7 +140,7 @@ class detallesUsuario extends Component {
                     type="radio"
                     onChange={this.props.onChange}
                     checked={this.props.usuario.genero === "Femenino"}
-                    checked
+
                   ></Input>
                   <span className="form-check-sign"></span>
                   Femenino

@@ -91,13 +91,6 @@ function CrearCuentaPage(props) {
         usuario.errors.Errornombre.valido = true;
       }
 
-      if (!pattern.test(usuario.nombre)) {
-        usuario.errors.Errornombre.valido = false;
-        usuario.errors.Errornombre.mensaje =
-          "(El campo nombre solo debe tener letras)";
-      } else {
-        usuario.errors.Errornombre.valido = true;
-      }
       if (!pattern2.test(usuario.password)) {
         usuario.errors.Errorpassword.valido = false;
         usuario.errors.Errorpassword.mensaje =
@@ -292,7 +285,7 @@ function CrearCuentaPage(props) {
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("../../assets//img/pet-fondo.jfif") + ")",
+              "url(" + require("../../assets/img/pet-fondo.jfif") + ")",
           }}
         ></div>
         <div className="content">
@@ -316,7 +309,7 @@ function CrearCuentaPage(props) {
                   {showStep()}
                   <div className="pull-left">
                     <h6>
-                      <Link className="link" to="/login">
+                      <Link className="link" to="/">
                         Iniciar sesión
                       </Link>
                     </h6>

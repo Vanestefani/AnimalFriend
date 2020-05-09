@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const passport = require("passport");
 const path = require("path");
@@ -43,15 +43,12 @@ require("./middlewares/jwt")(passport);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
 
 //=== 4 - CONFIGURE ROUTES
 //Configure Route
 require("./routes/api/index")(app);
-require("./routes/api/post");
-require("./routes/api/comment");
-require("./routes/api/notification");
-
+const postsRouter = require("./routes/api/post");
+app.use("/api/post/", postsRouter);
 //=== 5 - START SERVER
 app.listen(PORT, () =>
   console.log("Server running on http://localhost:" + PORT + "/")

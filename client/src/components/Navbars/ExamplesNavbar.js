@@ -53,7 +53,7 @@ function ExamplesNavbar() {
                 <img
                   width="200px"
                   alt="..."
-                  src={require("../../assets//img/Logotipo.png")}
+                  src={require("../../assets/img/Logotipo.png")}
                 ></img>
               </Link>
             </NavbarBrand>
@@ -83,7 +83,7 @@ function ExamplesNavbar() {
           >
             <Nav className="ml-auto" navbar>
               <NavItem className="btn btn-info">
-                <Link to="/login">
+                <Link to="/">
                   <i class="fas fa-sign-in-alt"></i>Iniciar sesión
                 </Link>
               </NavItem>

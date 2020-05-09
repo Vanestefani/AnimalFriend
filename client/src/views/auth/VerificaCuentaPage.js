@@ -170,7 +170,7 @@ function VerificaCuentaPage() {
                   </div>
                   <div className="pull-right">
                     <h6>
-                      <Link className="link" to="/login">
+                      <Link className="link" to="/">
                         Iniciar Sesión
                       </Link>
                     </h6>

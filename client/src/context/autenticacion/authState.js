@@ -18,6 +18,8 @@ import {
   PASSWORD_RESET_ERROR,
   PASSWORD_CAMBIO_EXITO,
   PASSWORD_CAMBIO_ERROR,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAILURE,
 } from "../../types";
 
 const AuthState = (props) => {
@@ -116,7 +118,6 @@ const AuthState = (props) => {
         type: VERIFICACIOM_ENVIADA,
         payload: respuesta.data,
       });
-
     } catch (error) {
       const alerta = {
         msg: error.response.data.message,
@@ -181,6 +182,40 @@ const AuthState = (props) => {
       });
     }
   };
+  const addPost = async (datos) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        tokenAuth(token);
+      }
+      console.log(datos);
+      const requestOptions = {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("token").token),
+          body: datos,
+        },
+      };
+      const respuesta = await clienteAxios.post(
+        "/api/post/addPost",
+        requestOptions
+      );
+
+      dispatch({
+        type: ADD_POST_SUCCESS,
+        payload: respuesta.data,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: ADD_POST_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -191,7 +226,7 @@ const AuthState = (props) => {
         cargando: state.cargando,
         registrarUsuario,
         iniciarSesion,
-
+        addPost,
         cerrarSesion,
         verificaremail,
         password_reset,
