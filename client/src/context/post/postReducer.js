@@ -11,7 +11,9 @@ import {
   INIT_COMMENT,
   POST_DELETE_SUCCESS,
   POST_DELETE_FAILURE,
-  PUBLICACION_ACTUAL
+  PUBLICACION_ACTUAL,
+  LIKE,
+  LIKE_ERROR
 } from "../../types";
 
 export default (state, action) => {
@@ -36,15 +38,23 @@ export default (state, action) => {
     case DISLIKE_POST_ERROR:
     case INIT_COMMENT_ERROR:
     case POST_DELETE_FAILURE:
+    case LIKE_ERROR:
       return {
         ...state,
         mensaje: action.payload,
       };
-case  PUBLICACION_ACTUAL :
-  return {
-    ...state,
-    publicacion: state.publicaciones.filter(publicacion => publicacion._id === action.payload )
-  };
+    case PUBLICACION_ACTUAL:
+      return {
+        ...state,
+        publicacion: state.publicaciones.filter(
+          (publicacion) => publicacion._id === action.payload
+        ),
+      };
+    case LIKE:
+      return {
+        ...state,
+        likes: state.likes.filter((like) => like._id === action.payload),
+      };
     default:
       return state;
   }

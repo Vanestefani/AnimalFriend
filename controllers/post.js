@@ -86,11 +86,10 @@ exports.mypost = async (req, res) => {
 };
 exports.like = async (req, res) => {
   console.log(req.body.postId);
-  console.log( req.user._id );
+  console.log(req.user._id);
 
   try {
     Post.findByIdAndUpdate(
-
       req.body.postId,
       {
         $push: { likes: req.user._id },
@@ -167,7 +166,7 @@ exports.deletepost = async (req, res) => {
         if (err || !post) {
           return res.status(422).json({ error: err });
         }
-        if (post.postedBy._id.toString() === req.user._id.toString()) {
+        if (post.autor._id.toString() === req.user._id.toString()) {
           post
             .remove()
             .then((result) => {
@@ -184,9 +183,13 @@ exports.deletepost = async (req, res) => {
 };
 
 exports.getPostLikes = (req, res) => {
-  PostLike.find({ post: req.body.postId })
-    .populate("users_likes.autor", "nombre fotoPerfil")
-    .then((users) => {
-      res.status(200).json({ users });
-    });
+  try {
+    PostLike.find( req.body.postId )
+      .populate("autor", "_id ")
+      .then((likes) => {
+        res.json({ likes });
+      });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 };

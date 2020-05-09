@@ -41,6 +41,8 @@ export const GET_POST_LIKES = "GET_POST_LIKES";
 export const INIT_COMMENT = "INIT_COMMENT";
 export const INIT_COMMENT_ERROR = "INIT_COMMENT_ERROR";
 export const PUBLICACION_ACTUAL = "PUBLICACION_ACTUAL";
+export const LIKE = "LIKE";
+export const LIKE_ERROR = "LIKE_ERROR";
 
 export const GET_POST = "GET_POST";
 export const GET_POST_ERROR = "GET_POST_ERROR";

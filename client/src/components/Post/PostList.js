@@ -22,21 +22,19 @@ function PostList() {
     allpost();
     // eslint-disable-next-line
   }, []);
+
   if (publicaciones.length === 0)
     return <p>No hay publicaciones, sigue a alguien :3</p>;
 
   return (
     <>
       <InfiniteScroll
-       style={{
-        "overflow":"none "
-
-       }}
+        style={{
+          overflow: "none ",
+        }}
         dataLength={publicaciones.length}
         next={allpost}
-
         hasMore={true}
-
         loader={<h4>Cargando...</h4>}
         endMessage={
           <div horizontal>

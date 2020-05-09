@@ -17,7 +17,7 @@ import {
 } from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
-
+import Like from "./Likes";
 function Post(props) {
   const authContext = useContext(AuthContext);
   const { usuario } = authContext;
@@ -25,15 +25,16 @@ function Post(props) {
   const postContext = useContext(PostContext);
   const {
     publicacionActual,
-    likePost,
-    unlikePost,
+
     makeComment,
     deletePost,
   } = postContext;
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
   };
-
+const [like, setLike] = useState({
+  count:0
+})
   console.log(props.publicacion.likes);
   return (
     <>
@@ -59,8 +60,9 @@ function Post(props) {
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={()=>deletePost(props.publicacion._id)}
                     >
+
                       <i className="fas fa-trash-alt"></i>
                       Eliminar
                     </DropdownItem>
@@ -71,13 +73,13 @@ function Post(props) {
               )}
             </div>
           </CardTitle>
-          <div className="media d-block d-md-flex mt-4 pull-left">
+          <div className="media d-block d-md-flex mt-4">
             <img
-              className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3 "
+              className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3  pull-left"
               src={props.publicacion.autor.fotoPerfil}
               width="80px"
             />
-            <div className="media-body text-center text-md-left ml-md-3 ml-0">
+            <div className="media-body text-center text-md-left ml-md-3 ml-0  pull-left">
               <div className="pull-left">
                 <p className="font-weight-bold my-0">
                   {props.publicacion.autor.nombre}
@@ -95,11 +97,7 @@ function Post(props) {
           </Container>
         </CardBody>
         <CardFooter>
-          <div className="pull-left">
-            {props.publicacion.likes.includes(usuario._id)}
-
-            {props.publicacion.likes.length}
-          </div>
+          <Like publicacion={props.publicacion}></Like>
         </CardFooter>
         <Container>
           <br></br>

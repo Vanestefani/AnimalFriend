@@ -19,6 +19,8 @@ import {
   POST_DELETE_SUCCESS,
   POST_DELETE_FAILURE,
   PUBLICACION_ACTUAL,
+  LIKE,
+  LIKE_ERROR,
 } from "../../types";
 
 const PostState = (props) => {
@@ -26,6 +28,7 @@ const PostState = (props) => {
     mensaje: null,
     publicaciones: [],
     publicacion: null,
+    likes: [],
   };
 
   const [state, dispatch] = useReducer(PostReducer, initialState);
@@ -90,12 +93,12 @@ const PostState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.put("/api/post/like", id);
+      getlikes();
 
       dispatch({
         type: LIKE_POST,
         payload: respuesta.data,
       });
-
     } catch (error) {
       console.log(error);
 
@@ -115,7 +118,7 @@ const PostState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.put("/api/post/like", id);
-
+      getlikes();
       dispatch({
         type: DISLIKE_POST,
         payload: respuesta.data,
@@ -156,14 +159,14 @@ const PostState = (props) => {
       });
     }
   };
-  const deletePost = async (id) => {
+  const deletePost = async (postId) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.delete(`/api/post/deletepost/${id}`);
-
+      const respuesta = await clienteAxios.delete(`/api/post/${postId}`);
+allpost();
       dispatch({
         type: POST_DELETE_SUCCESS,
         payload: respuesta.data,
@@ -187,18 +190,44 @@ const PostState = (props) => {
       payload: publicacionId,
     });
   };
+  const getlikes = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.get("/api/post/getPostLikes");
+
+      dispatch({
+        type:LIKE,
+        payload: respuesta.data.likes,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: LIKE_ERROR,
+        payload: alerta,
+      });
+    }
+  };
   return (
     <PostContext.Provider
       value={{
         addPost,
-        publicaciones:state.publicaciones,
+        publicaciones: state.publicaciones,
         publicacionActual,
         allpost,
         likePost,
         unlikePost,
         makeComment,
         deletePost,
-        publicacion:state.publicacion,
+        getlikes,
+        publicacion: state.publicacion,
+        likes: state.likes,
       }}
     >
       {props.children}
