@@ -33,45 +33,47 @@ function Post(props) {
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
   };
-  console.log(props.publicacion.autor.nombre);
+
+  console.log(props.publicacion.likes);
   return (
     <>
-      <Card
-        className="card-post"
-
-      >
+      <Card className="card-post">
         <CardHeader>
           <CardTitle>
             <div className="pull-right">
-              <UncontrolledDropdown>
-                <DropdownToggle
-                  aria-haspopup={true}
-                  caret
-                  color="neutral"
-                  size="sm"
-                ></DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fas fa-edit"></i>
-                    Editar
-                  </DropdownItem>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fas fa-trash-alt"></i>
-                    Eliminar
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              {props.publicacion.autor._id === usuario._id ? (
+                <UncontrolledDropdown>
+                  <DropdownToggle
+                    aria-haspopup={true}
+                    caret
+                    color="neutral"
+                    size="sm"
+                  ></DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      <i className="fas fa-edit"></i>
+                      Editar
+                    </DropdownItem>
+                    <DropdownItem
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      <i className="fas fa-trash-alt"></i>
+                      Eliminar
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              ) : (
+                ""
+              )}
             </div>
           </CardTitle>
-          <div className="media d-block d-md-flex mt-4">
+          <div className="media d-block d-md-flex mt-4 pull-left">
             <img
-              className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3 pull-right"
+              className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3 "
               src={props.publicacion.autor.fotoPerfil}
               width="80px"
             />
@@ -94,27 +96,7 @@ function Post(props) {
         </CardBody>
         <CardFooter>
           <div className="pull-left">
-            {props.publicacion.likes.includes(usuario._id) ? (
-              <Button
-                size="sm"
-                color="neutral"
-                onClick={() => {
-                  unlikePost(props.publicacion._id);
-                }}
-              >
-                <i className="fas fa-bone"></i>{" "}
-              </Button>
-            ) : (
-              <Button
-                size="sm"
-                color="danger"
-                onClick={() => {
-                  likePost(props.publicacion._id);
-                }}
-              >
-                <i className="fas fa-bone"></i>
-              </Button>
-            )}
+            {props.publicacion.likes.includes(usuario._id)}
 
             {props.publicacion.likes.length}
           </div>

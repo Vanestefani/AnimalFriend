@@ -85,8 +85,12 @@ exports.mypost = async (req, res) => {
   }
 };
 exports.like = async (req, res) => {
+  console.log(req.body.postId);
+  console.log( req.user._id );
+
   try {
     Post.findByIdAndUpdate(
+
       req.body.postId,
       {
         $push: { likes: req.user._id },

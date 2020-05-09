@@ -95,6 +95,7 @@ const PostState = (props) => {
         type: LIKE_POST,
         payload: respuesta.data,
       });
+
     } catch (error) {
       console.log(error);
 
