@@ -182,35 +182,7 @@ const AuthState = (props) => {
       });
     }
   };
-  const addPost = async (datos) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      tokenAuth(token);
-    }
-    try {
-      const respuesta = await clienteAxios
-        .post("/api/post/addPost", datos)
-        .then((response) => response.data)
-        .then((response) => {
-          console.log(response);
-        });
-      console.log(respuesta);
-      dispatch({
-        type: ADD_POST_SUCCESS,
-        payload: respuesta.data,
-      });
-    } catch (error) {
-      console.log(error);
 
-      const alerta = {
-        categoria: "danger",
-      };
-      dispatch({
-        type: ADD_POST_FAILURE,
-        payload: alerta,
-      });
-    }
-  };
   return (
     <AuthContext.Provider
       value={{
@@ -221,7 +193,7 @@ const AuthState = (props) => {
         cargando: state.cargando,
         registrarUsuario,
         iniciarSesion,
-        addPost,
+
         cerrarSesion,
         verificaremail,
         password_reset,

@@ -105,8 +105,8 @@ const UserSchema = new Schema({
   postLikes: [postLikeSchema],
   commentLikes: [commentLikeSchema],
   commentReplyLikes: [commentReplyLikeSchema],
-  followers:[{type:ObjectId,ref:"User"}],
-  following:[{type:ObjectId,ref:"User"}]
+  followers:[{type:ObjectId,ref:"users"}],
+  following:[{type:ObjectId,ref:"users"}]
 });
 UserSchema.pre("save", function (next) {
   const user = this;

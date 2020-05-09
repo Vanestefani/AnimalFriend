@@ -17,7 +17,7 @@ const postSchema = new mongoose.Schema({
   },
   autor: {
     type: mongoose.Schema.ObjectId,
-    ref: "User",
+    ref: "users",
     required: "Se requiere autorr",
   },
   hashtags: {
@@ -37,10 +37,10 @@ const postSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
-  likes:[{type:ObjectId,ref:"User"}],
+  likes:[{type:ObjectId,ref:"users"}],
   comments:[{
       text:String,
-      postedBy:{type:ObjectId,ref:"User"}
+      autor:{type:ObjectId,ref:"users"}
   }],
 });
 

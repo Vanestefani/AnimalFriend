@@ -33,10 +33,7 @@ const NotFound = lazy(() => import("./views/NotFound"));
 const Home = lazy(() => import("./views/Home/home"));
 const Perfil = lazy(() => import("./views/Perfil/perfil"));
 const Perfiluser = lazy(() => import("./views/Perfil/perfilUser"));
-const PostUploadPage = lazy(() => import("./views/Post/PostUploadPage"));
-const PostPage = lazy(() => import("./views/Post/PostPage"));
-const HashtagPage = lazy(() => import("./views/Hashtag/HashtagPage"));
-const LocationPage = lazy(() => import("./views/Location/LocationPage"));
+
 const MessengerPage = lazy(() => import("./views/Messenger/MessengerPage"));
 const Recordatorio = lazy(() => import("./views/Recordatorios/Recordatorio"));
 const Anuncios = lazy(() => import("./views/Anuncios/Anuncios"));
@@ -55,7 +52,7 @@ if (token) {
 }
 console.log(process.env.REACT_APP_BACKEND_URL);
 const AppWithRouter = () => (
-
+  <PostState>
     <AlertaState>
       <AuthState>
         <UsuariosState>
@@ -68,11 +65,7 @@ const AppWithRouter = () => (
                 <Route exact path="/verificar" component={VerificaCuentaPage} />
 
                 <PrivateRoute exact path="/perfil" component={Perfil} />
-                <PrivateRoute
-                  exact
-                  path="/posts/upload"
-                  component={PostUploadPage}
-                />
+
                 <PrivateRoute
                   exact
                   path="/messages/chat"
@@ -114,7 +107,7 @@ const AppWithRouter = () => (
         </UsuariosState>
       </AuthState>
     </AlertaState>
-
+  </PostState>
 );
 
 export default AppWithRouter;

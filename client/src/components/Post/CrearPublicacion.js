@@ -6,31 +6,36 @@ import {
   Card,
   CardBody,
   Form,
-  Modal,
+  Alert,
   ModalBody,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
 
 import "react-image-crop/dist/ReactCrop.css";
 
 function CrearPublicacion() {
-  const imageMaxSize = 10000000; // bytes
+    const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
   const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {
     return item.trim();
   });
+  const postContext = useContext(PostContext);
   const authContext = useContext(AuthContext);
-  const { usuario, addPost } = authContext;
+
+  const { usuario} = authContext;
+  const { addPost } = postContext;
+
   const [state, setstate] = useState({
     descripcion: " ",
   });
   const [photo, guardararchivophoto] = useState(null);
   const { descripcion } = state;
-
+  const [errores, seterrores] = useState(false);
   const handleChange = (e) => {
     setstate({
       ...state,
@@ -41,22 +46,40 @@ function CrearPublicacion() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let userid = usuario._id;
-    let formData = new FormData();
-    formData.append("imagen", photo,photo.name);
-    formData.append("descripcion", descripcion);
-    formData.append("autor", userid);
-    addPost(formData);
+    if (photo === null || state.descripcion === "") {
+      seterrores(true);
+    } else {
+      let formData = new FormData();
+      formData.append("imagen", photo, photo.name);
+      formData.append("descripcion", descripcion);
+      formData.append("autor", userid);
+      addPost(formData);
+    }
+    setstate({
+      descripcion: " ",
+    });
+    guardararchivophoto(null);
+    imageInputRef.current.value = ""; //Resets the file name of the file input - See #2
+  };
+  const mensaje_error = () => {
+    return (
+      <Alert color="danger">
+        <i class="fas fa-exclamation-triangle"></i>
+        "Todos los campos son obligatorios"
+      </Alert>
+    );
   };
 
   return (
     <>
       <Card className="card-post">
+        {errores ? mensaje_error : ""}
         <Form noValidate autoComplete="off">
           <CardHeader>
             <div className="media d-block d-md-flex mt-4">
               <img
                 className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3"
-                src={ usuario.fotoPerfil}
+                src={usuario.fotoPerfil}
                 width="60px"
               ></img>
               <div className="media-body text-center text-md-left ml-md-3 ml-0">
@@ -68,7 +91,7 @@ function CrearPublicacion() {
                   type="textarea"
                   id="descripcion"
                   name="descripcion"
-                  defaultValue={descripcion}
+                  value={descripcion}
                   onChange={handleChange}
                 ></Input>
               </div>
@@ -83,9 +106,9 @@ function CrearPublicacion() {
                 id="photo"
                 name="photo"
                 type="file"
-
                 className="btn-small"
                 size="sm"
+                ref={imageInputRef}
               >
                 <i className="fas fa-camera"></i>
               </Input>

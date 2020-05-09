@@ -24,13 +24,7 @@ function Home() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
-  // Extraer la información de autenticación
-  const authContext = useContext(AuthContext);
-  const {  } = authContext;
 
-  useEffect(() => {
-
-  }, []);
   return (
     <>
       <HomeNarbar></HomeNarbar>

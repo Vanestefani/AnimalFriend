@@ -1,109 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import {
-  UncontrolledDropdown,
-  DropdownToggle,
-  CardHeader,
-  Card,
-  CardBody,
-  Container,
-  DropdownMenu,
-  DropdownItem,
-  CardTitle,
-  CardFooter,
-  Button,
-  Input,
-} from "reactstrap";
+import React, { useContext, useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import Post from "./Post";
+import PostContext from "../../context/post/postContext";
 function PostList() {
+  const postContext = useContext(PostContext);
+
+  const [data, setData] = useState({
+    totalpost: "",
+  });
+  const { totalpost } = data;
+
+  const {
+    allpost,
+
+    publicaciones,
+  } = postContext;
+
+  // Obtener proyectos cuando carga el componente
+  useEffect(() => {
+    allpost();
+    // eslint-disable-next-line
+  }, []);
+  if (publicaciones.length === 0)
+    return <p>No hay publicaciones, sigue a alguien :3</p>;
+
   return (
     <>
-      <Card className="card-post">
-        <CardHeader>
-          <CardTitle>
-            <div className="pull-right">
-              <UncontrolledDropdown>
-                <DropdownToggle
-                  aria-haspopup={true}
-                  caret
-                  color="neutral"
-                  size="sm"
-                ></DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fas fa-edit"></i>
-                    Editar
-                  </DropdownItem>
-                  <DropdownItem
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fas fa-trash-alt"></i>
-                    Eliminar
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </div>
-          </CardTitle>
-          <div className="media d-block d-md-flex mt-4">
-            <img
-              className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3"
-              src="https://mdbootstrap.com/img/Photos/Avatars/img (27).jpg"
-              alt="Generic placeholder image"
-            />
-            <div className="media-body text-center text-md-left ml-md-3 ml-0">
-              <div className="pull-left">
-                <p className="font-weight-bold my-0">Nombre de usuario</p>
+      <InfiniteScroll
+        dataLength={publicaciones.length}
+        next={allpost}
 
-                <p>10/04/2019</p>
-              </div>
-            </div>
+        loader={<h4>Cargando...</h4>}
+        endMessage={
+          <div horizontal>
+            <h4>Yay! Has visto todo</h4>
           </div>
-        </CardHeader>
-
-        <CardBody>
-          <Container>
-            <p>
-              Lorem isiasdsdasjdkasdjkasjkdasjkdjkasjkdjasjdajskdjkasjkdjkasjkd
-              sadasdjkasdjasjdasjkdjk
-            </p>
-            <img
-              alt="..."
-              src={require("../../assets/img/pet-fondo.jfif")}
-            ></img>
-          </Container>
-        </CardBody>
-        <CardFooter>
-          <div className="pull-left">
-            <Button size="sm" color="neutral">
-              <i className="fas fa-bone"></i>
-            </Button>
-            <Button size="sm" color="neutral">
-              <i className="fas fa-comment-alt"></i>
-            </Button>
-            <Button size="sm" color="neutral">
-              <i className="fas fa-share-square"></i>
-            </Button>
-          </div>
-        </CardFooter>
-        <Container>
-          <div className="pull-right">
-            <Link>Ver comments</Link>
-          </div>
-          <br></br>
-          <h3>comments</h3>
-          <div>
-            <Input
-              placeholder="¿Que quieres compartir hoy?"
-              rows="3"
-              cols="2"
-              type="textarea"
-            ></Input>
-          </div>
-        </Container>
-      </Card>
+        }
+      >
+        {publicaciones.map((publicacion) => (
+          <Post key={publicacion._id} publicacion={publicacion} />
+        ))}
+      </InfiniteScroll>
     </>
   );
 }
