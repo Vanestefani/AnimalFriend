@@ -4,22 +4,17 @@ const Schema = mongoose.Schema;
 const User = mongoose.model("users");
 
 const Post = require("../models/Post");
-const PostLike = require("../models/PostLike");
+
 const Notificacion = require("../models/Notificacion");
-const Comment = require("../models/Comment");
-const Jimp = require("jimp");
-const path = require("path");
-const uuidv4 = require("uuid/v4");
-const multer = require("multer");
+
 const { uploader, sendEmail } = require("../utils/index");
-const notificationHandler = require("../handlers/NotificacionHandler");
+
 const linkify = require("linkifyjs");
 require("linkifyjs/plugins/hashtag")(linkify);
 require("linkifyjs/plugins/mention")(linkify);
 
 exports.createPost = async (req, res) => {
   try {
-
     const result = await uploader(req);
     const descripcion = req.body.descripcion;
     const autor = req.body.autor;
@@ -85,7 +80,6 @@ exports.mypost = async (req, res) => {
   }
 };
 exports.like = async (req, res) => {
-
   try {
     Post.findByIdAndUpdate(
       req.body.postId,
@@ -182,8 +176,8 @@ exports.deletepost = async (req, res) => {
 
 exports.getPostLikes = (req, res) => {
   try {
-    console.log(req)
-    PostLike.find( req.body.postId )
+    console.log(req);
+    PostLike.find(req.body.postId)
       .populate("autor", "_id ")
       .then((likes) => {
         res.json({ likes });
@@ -193,33 +187,34 @@ exports.getPostLikes = (req, res) => {
   }
 };
 // Actualiza un
-exports.actualizarPost= async (req, res) => {
-
+exports.actualizarPost = async (req, res) => {
   // extraer la información del proyecto
   const { descripcion } = req.body;
-  const nuevoPPost= {};
+  const nuevoPPost = {};
 
-  if(descripcion) {
+  if (descripcion) {
     nuevoPPost.descripcion = descripcion;
   }
 
   try {
+    // revisar el ID
+    let publicacion = await Post.findById(req.params.postId);
 
-      // revisar el ID
-      let publicacion = await Post.findById(req.params.postId);
+    // si el proyecto existe o no
+    if (!publicacion) {
+      return res.status(404).json({ msg: "Post  no encontrado" });
+    }
 
-      // si el proyecto existe o no
-      if(!publicacion) {
-          return res.status(404).json({msg: 'Post  no encontrado'})
-      }
+    // actualizar
+    publicacion = await publicacion.findByIdAndUpdate(
+      { _id: req.params.postId },
+      { $set: nuevoPost },
+      { new: true }
+    );
 
-      // actualizar
-      publicacion = await publicacion.findByIdAndUpdate({ _id: req.params.postId }, { $set : nuevoPost}, { new: true });
-
-      res.json({publicacion});
-
+    res.json({ publicacion });
   } catch (error) {
-      console.log(error);
-      res.status(500).send('Error en el servidor');
+    console.log(error);
+    res.status(500).send("Error en el servidor");
   }
-}
+};

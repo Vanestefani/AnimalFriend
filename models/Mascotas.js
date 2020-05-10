@@ -81,7 +81,7 @@ const mascotasSchema = new mongoose.Schema({
   },
   propietario: {
     type: mongoose.Schema.ObjectId,
-    ref: "User",
+    ref: "users",
     required: "Debe tener responsable",
   },
 });

@@ -7,7 +7,7 @@ const EventosSchema = new mongoose.Schema({
   autor: {
     type: mongoose.Schema.ObjectId,
     required: true,
-    ref: "User",
+    ref: "users",
   },
 
   tags: {
