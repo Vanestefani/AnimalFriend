@@ -1,8 +1,3 @@
-const fs = require("fs");
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const User = mongoose.model("users");
-
 const Anuncios = require("../models/Anuncios");
 
 exports.createAnuncios = async (req, res) => {
@@ -35,8 +30,7 @@ exports.createAnuncios = async (req, res) => {
 
 exports.anunciosByUser = async (req, res) => {
   try {
-    Anuncios
-      .find({ autor: req.user._id })
+    Anuncios.find({ autor: req.user._id })
       .populate("autor", "_id nombre ")
       .then((anuncios) => {
         res.json({ anuncios });
@@ -51,8 +45,7 @@ exports.anunciosByUser = async (req, res) => {
 
 exports.deleteanuncioss = async (req, res) => {
   try {
-    Anuncios
-      .findOne({ _id: req.params.anuncioId })
+    Anuncios.findOne({ _id: req.params.anuncioId })
       .populate("autor", "_id")
       .exec((err, anuncios) => {
         if (err || !anuncios) {

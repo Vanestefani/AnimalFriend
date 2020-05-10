@@ -1,8 +1,4 @@
-return res.status(404).json({ msg: "No existe " });
-const fs = require("fs");
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const User = mongoose.model("users");
+
 
 const Eventos = require("../models/Eventos");
 

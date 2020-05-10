@@ -11,14 +11,6 @@ router.get("/allpost", checkAuth, validate, postController.allpost);
 router.get("/getsubpost", checkAuth, validate, postController.allpost);
 router.get("/mypost", checkAuth, validate, postController.mypost);
 
-router.post(
-  "/getPostLikes",
-  checkAuth,
-  validate,
-
-  postController.getPostLikes
-);
-
 router.put("/like", checkAuth, validate, postController.like);
 router.put("/unlike", checkAuth, validate, postController.unlike);
 router.put("/comment", checkAuth, validate, postController.comment);

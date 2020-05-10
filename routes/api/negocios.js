@@ -5,7 +5,6 @@ const router = express.Router();
 const validate = require("../../middlewares/validate");
 
 router.post("/addnegocio", checkAuth, validate, negociosController.createnegocios);
-router.get("/getnegocios", checkAuth, validate, negociosController.negociosByUser);
 
 router.delete(
   "/:negocioId",

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
-const AnunciosSchema = new mongoose.Schema({
+const NegociosSchema = new mongoose.Schema({
   titulo: { type: String, required: true },
   categoria: { type: String, required: true },
   autor: {
@@ -29,4 +29,4 @@ const AnunciosSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Anuncios", AnunciosSchema);
+module.exports = mongoose.model("Negocios", NegociosSchema);
