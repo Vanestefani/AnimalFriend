@@ -192,3 +192,34 @@ exports.getPostLikes = (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+// Actualiza un
+exports.actualizarPost= async (req, res) => {
+
+  // extraer la información del proyecto
+  const { descripcion } = req.body;
+  const nuevoPPost= {};
+
+  if(descripcion) {
+    nuevoPPost.descripcion = descripcion;
+  }
+
+  try {
+
+      // revisar el ID
+      let publicacion = await Post.findById(req.params.postId);
+
+      // si el proyecto existe o no
+      if(!publicacion) {
+          return res.status(404).json({msg: 'Post  no encontrado'})
+      }
+
+      // actualizar
+      publicacion = await publicacion.findByIdAndUpdate({ _id: req.params.postId }, { $set : nuevoPost}, { new: true });
+
+      res.json({publicacion});
+
+  } catch (error) {
+      console.log(error);
+      res.status(500).send('Error en el servidor');
+  }
+}

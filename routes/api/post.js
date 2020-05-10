@@ -39,5 +39,6 @@ router.get("/mypost", checkAuth, (req, res) => {
       console.log(err);
     });
 });
+router.put("/:postId", checkAuth, validate, postController.actualizarPost);
 
 module.exports = router;

@@ -12,8 +12,11 @@ import {
   DropdownItem,
   CardTitle,
   CardFooter,
-  Button,
+  Modal,
   Input,
+  ModalBody,
+  Form,
+  Button,
 } from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
@@ -32,12 +35,67 @@ function Post(props) {
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
   };
-const [like, setLike] = useState({
-  count:0
-})
-
+  const [like, setLike] = useState({
+    count: 0,
+  });
+  const [modalEditar, setModaPost] = useState(false);
+  const [posteditor, setEditarPost] = useState({
+    texto: props.publicacion.descripcion,
+  });
+  const [comentarios, setcomentarios] = useState({
+    comentario: "",
+  });
+  const {comentario}= comentarios;
+  const handleChange = (e) => {
+    setEditarPost({
+      ...posteditor,
+      texto: [e.target.value],
+    });
+  };
+  const handleChangeCometario = (e) => {
+    setcomentarios({
+      ...comentarios,
+      comentario: e.target.value,
+    });
+  };
+  const onSubmitcomentario = (e) => {
+    let postId= props.publicacion._id;
+    e.preventDefault();
+    makeComment({
+      text:comentario,postId:postId});
+  };
   return (
     <>
+      <Modal isOpen={modalEditar} toggle={() => setModaPost(false)}>
+        <div className="modal-header justify-content-center">
+          <button
+            className="close"
+            type="button"
+            onClick={() => setModaPost(false)}
+          >
+            <i className="now-ui-icons ui-1_simple-remove"></i>
+          </button>
+          <h2 className="title title-up">Editar Post</h2>
+        </div>
+        <ModalBody>
+          <Form noValidate autoComplete="off">
+            <Input
+              type="textarea"
+              multiline
+              margin="normal"
+              rowsMax="5"
+              name="texto"
+              id="texto"
+              value={posteditor.texto}
+              onChange={handleChange}
+            />
+            <Button variant="contained" color="primary">
+              Editar
+            </Button>
+          </Form>
+        </ModalBody>
+      </Modal>
+
       <Card className="card-post">
         <CardHeader>
           <CardTitle>
@@ -51,18 +109,14 @@ const [like, setLike] = useState({
                     size="sm"
                   ></DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
+                    <DropdownItem onClick={() => setModaPost(true)}>
                       <i className="fas fa-edit"></i>
                       Editar
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
-                      onClick={()=>deletePost(props.publicacion._id)}
+                      onClick={() => deletePost(props.publicacion._id)}
                     >
-
                       <i className="fas fa-trash-alt"></i>
                       Eliminar
                     </DropdownItem>
@@ -105,25 +159,23 @@ const [like, setLike] = useState({
           {props.publicacion.comments.map((record) => {
             return (
               <h6 key={record._id}>
-                <span style={{ fontWeight: "500" }}>{record.autor.nombre}</span>{" "}
-                {record.text}
+                <span style={{ fontWeight: "500" }}>{record.autor.nombre}</span>
+              <span> {record.text}</span>
               </h6>
             );
           })}
           <div>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                makeComment(e.target[0].value, props.publicacion._id);
-              }}
-            >
+            <Form >
               <Input
                 placeholder="¿Que quieres compartir hoy?"
                 rows="3"
                 cols="2"
+                value={comentario}
+                onChange={handleChangeCometario}
                 type="textarea"
               ></Input>
-            </form>
+              <Button onClick={onSubmitcomentario}>Comentar</Button>
+            </Form>
           </div>
         </Container>
       </Card>

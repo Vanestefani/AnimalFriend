@@ -41,14 +41,13 @@ const PostState = (props) => {
     try {
       const respuesta = await clienteAxios
         .post("/api/post/addPost", datos)
-        .then((response) => response.data)
-
+        .then((response) => response.data);
+      allpost();
       dispatch({
         type: ADD_POST_SUCCESS,
         payload: respuesta.data,
       });
     } catch (error) {
-
       const alerta = {
         categoria: "danger",
       };
@@ -71,7 +70,6 @@ const PostState = (props) => {
         payload: respuesta.data.posts,
       });
     } catch (error) {
-
       const alerta = {
         categoria: "danger",
       };
@@ -143,7 +141,6 @@ const PostState = (props) => {
         payload: respuesta.data,
       });
     } catch (error) {
-
       const alerta = {
         categoria: "danger",
       };
@@ -160,7 +157,7 @@ const PostState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.delete(`/api/post/${postId}`);
-      
+      allpost();
       dispatch({
         type: POST_DELETE_SUCCESS,
         payload: respuesta.data,
