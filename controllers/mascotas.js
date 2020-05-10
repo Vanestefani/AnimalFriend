@@ -1,4 +1,4 @@
-return res.status(404).json({ msg: "No existe " });
+
 const fs = require("fs");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
@@ -51,7 +51,7 @@ exports.createMascota = async (req, res) => {
 
 exports.mascotasByUser = async (req, res) => {
   try {
-    mascotas
+    Mascota
       .find({ propietario: req.user._id })
       .populate("propietario", "_id nombre ")
       .then((mascotas) => {
@@ -66,8 +66,9 @@ exports.mascotasByUser = async (req, res) => {
 };
 
 exports.deletemascotas = async (req, res) => {
+
   try {
-    mascotas
+    Mascota
       .findOne({ _id: req.params.mascotasId })
       .populate("propietario", "_id")
       .exec((err, mascotas) => {
@@ -92,10 +93,6 @@ exports.deletemascotas = async (req, res) => {
 exports.actualizarRecordatorio = async (req, res) => {
   try {
     let mascotas = await mascotas.findById(req.params.id);
-
-    if (!mascotas) {
-      return res.status(404).json({ msg: "No existe " });
-    }
 
     const nuevamascotas = {};
     nuevamascotas.nombre = req.body.nombre;

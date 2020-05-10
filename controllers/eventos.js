@@ -41,7 +41,7 @@ exports.createeventos = async (req, res) => {
 
 exports.eventoByUser = async (req, res) => {
   try {
-    evento
+    Eventos
       .find({ autor: req.user._id })
       .populate("autor", "_id nombre ")
       .then((evento) => {
@@ -57,7 +57,7 @@ exports.eventoByUser = async (req, res) => {
 
 exports.deleteeventoss = async (req, res) => {
   try {
-    eventos
+    Eventos
       .findOne({ _id: req.params.eventosId })
       .populate("autor", "_id")
       .exec((err, eventos) => {
@@ -81,7 +81,7 @@ exports.deleteeventoss = async (req, res) => {
 };
 exports.actualizareventoso = async (req, res) => {
   try {
-    let eventos = await eventos.findById(req.params.id);
+    let eventos = await Eventos.findById(req.params.id);
 
     if (!eventos) {
       return res.status(404).json({ msg: "No existe " });

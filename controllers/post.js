@@ -174,18 +174,6 @@ exports.deletepost = async (req, res) => {
   }
 };
 
-exports.getPostLikes = (req, res) => {
-  try {
-    console.log(req);
-    PostLike.find(req.body.postId)
-      .populate("autor", "_id ")
-      .then((likes) => {
-        res.json({ likes });
-      });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
 // Actualiza un
 exports.actualizarPost = async (req, res) => {
   // extraer la información del proyecto
@@ -206,7 +194,7 @@ exports.actualizarPost = async (req, res) => {
     }
 
     // actualizar
-    publicacion = await publicacion.findByIdAndUpdate(
+    publicacion = await Post.findByIdAndUpdate(
       { _id: req.params.postId },
       { $set: nuevoPost },
       { new: true }

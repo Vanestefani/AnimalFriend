@@ -1,4 +1,3 @@
-return res.status(404).json({ msg: "No existe " });
 const fs = require("fs");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
@@ -16,7 +15,7 @@ exports.createAnuncios = async (req, res) => {
     const tags = req.body.tags;
     const descripcion = req.body.descripcion;
 
-    const newanuncios = new Mascota({
+    const newanuncios = new Anuncios({
       titulo: titulo,
       categoria: categoria,
       autor: autor,
@@ -36,7 +35,7 @@ exports.createAnuncios = async (req, res) => {
 
 exports.anunciosByUser = async (req, res) => {
   try {
-    anuncios
+    Anuncios
       .find({ autor: req.user._id })
       .populate("autor", "_id nombre ")
       .then((anuncios) => {
@@ -52,7 +51,7 @@ exports.anunciosByUser = async (req, res) => {
 
 exports.deleteanuncioss = async (req, res) => {
   try {
-    anuncios
+    Anuncios
       .findOne({ _id: req.params.anuncioId })
       .populate("autor", "_id")
       .exec((err, anuncios) => {
@@ -76,17 +75,11 @@ exports.deleteanuncioss = async (req, res) => {
 };
 exports.actualizaranuncioso = async (req, res) => {
   try {
-    let anuncios = await anuncios.findById(req.params.id);
+    let anuncios = await Anuncios.findById(req.params.id);
 
     if (!anuncios) {
       return res.status(404).json({ msg: "No existe " });
     }
-    const titulo sia = req.body.categoria;
-    const autor = req.body.autor;
-    const mascota = req.body.mascota;
-    const imagen = req.body.imagen;
-    const tags = req.body.tags;
-    const descripcion = req.body.descripcion;
 
     const nuevaanuncios = {};
     nuevaanuncios.titulo = titulo;

@@ -1,4 +1,3 @@
-return res.status(404).json({ msg: "No existe " });
 const fs = require("fs");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
@@ -35,7 +34,7 @@ exports.createnegocios = async (req, res) => {
 
 exports.negocioByUser = async (req, res) => {
   try {
-    negocio
+    Negocio
       .find({ autor: req.user._id })
       .populate("autor", "_id nombre ")
       .then((negocio) => {
@@ -51,7 +50,7 @@ exports.negocioByUser = async (req, res) => {
 
 exports.deletenegocioss = async (req, res) => {
   try {
-    negocios
+    Negocio
       .findOne({ _id: req.params.negociosId })
       .populate("autor", "_id")
       .exec((err, negocios) => {
@@ -75,7 +74,7 @@ exports.deletenegocioss = async (req, res) => {
 };
 exports.actualizarnegocioso = async (req, res) => {
   try {
-    let negocios = await negocios.findById(req.params.id);
+    let negocios = await Negocio.findById(req.params.id);
 
     if (!negocios) {
       return res.status(404).json({ msg: "No existe " });
@@ -92,7 +91,7 @@ exports.actualizarnegocioso = async (req, res) => {
     nuevanegocios.descripcion = req.body.descripcion;
 
     // Guardar la tarea
-    tarea = await negocios.findOneAndUpdate(
+    tarea = await Negocio.findOneAndUpdate(
       { _id: req.params.id },
       nuevanegocios,
       {
