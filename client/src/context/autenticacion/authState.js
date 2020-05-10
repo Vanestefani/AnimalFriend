@@ -73,7 +73,7 @@ const AuthState = (props) => {
         payload: respuesta.data.users,
       });
     } catch (error) {
-      console.log(error.response);
+
       dispatch({
         type: LOGIN_ERROR,
       });

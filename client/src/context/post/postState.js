@@ -42,16 +42,12 @@ const PostState = (props) => {
       const respuesta = await clienteAxios
         .post("/api/post/addPost", datos)
         .then((response) => response.data)
-        .then((response) => {
-          console.log(response);
-        });
 
       dispatch({
         type: ADD_POST_SUCCESS,
         payload: respuesta.data,
       });
     } catch (error) {
-      console.log(error);
 
       const alerta = {
         categoria: "danger",
@@ -75,7 +71,6 @@ const PostState = (props) => {
         payload: respuesta.data.posts,
       });
     } catch (error) {
-      console.log(error);
 
       const alerta = {
         categoria: "danger",
@@ -86,14 +81,14 @@ const PostState = (props) => {
       });
     }
   };
-  const likePost = async (id) => {
+  const likePost = async (postId) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put("/api/post/like", id);
-      getlikes();
+      const respuesta = await clienteAxios.put("/api/post/like", postId);
+      getlikes(postId);
 
       dispatch({
         type: LIKE_POST,
@@ -111,14 +106,14 @@ const PostState = (props) => {
       });
     }
   };
-  const unlikePost = async (id) => {
+  const unlikePost = async (postId) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put("/api/post/like", id);
-      getlikes();
+      const respuesta = await clienteAxios.put("/api/post/unlike", postId);
+      getlikes(postId);
       dispatch({
         type: DISLIKE_POST,
         payload: respuesta.data,
@@ -148,7 +143,6 @@ const PostState = (props) => {
         payload: respuesta.data,
       });
     } catch (error) {
-      console.log(error);
 
       const alerta = {
         categoria: "danger",
@@ -166,7 +160,7 @@ const PostState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.delete(`/api/post/${postId}`);
-allpost();
+      
       dispatch({
         type: POST_DELETE_SUCCESS,
         payload: respuesta.data,
@@ -190,16 +184,19 @@ allpost();
       payload: publicacionId,
     });
   };
-  const getlikes = async () => {
+  const getlikes = async (postId) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get("/api/post/getPostLikes");
+      const respuesta = await clienteAxios.post(
+        "/api/post/getPostLikes",
+        postId
+      );
 
       dispatch({
-        type:LIKE,
+        type: LIKE,
         payload: respuesta.data.likes,
       });
     } catch (error) {

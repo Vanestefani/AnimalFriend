@@ -13,7 +13,7 @@ import {
   POST_DELETE_FAILURE,
   PUBLICACION_ACTUAL,
   LIKE,
-  LIKE_ERROR
+  LIKE_ERROR,
 } from "../../types";
 
 export default (state, action) => {
@@ -50,11 +50,7 @@ export default (state, action) => {
           (publicacion) => publicacion._id === action.payload
         ),
       };
-    case LIKE:
-      return {
-        ...state,
-        likes: state.likes.filter((like) => like._id === action.payload),
-      };
+
     default:
       return state;
   }

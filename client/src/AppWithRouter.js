@@ -50,7 +50,7 @@ const token = localStorage.getItem("token");
 if (token) {
   tokenAuth(token);
 }
-console.log(process.env.REACT_APP_BACKEND_URL);
+
 const AppWithRouter = () => (
   <PostState>
     <AlertaState>

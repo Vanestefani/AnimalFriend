@@ -11,7 +11,7 @@ router.post("/addPost", checkAuth, validate, upload, postController.createPost);
 router.get("/allpost", checkAuth, validate, postController.allpost);
 
 router.get("/getsubpost", checkAuth, validate, postController.allpost);
-router.get(
+router.post(
   "/getPostLikes",
   checkAuth,
   validate,

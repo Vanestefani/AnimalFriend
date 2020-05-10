@@ -35,7 +35,7 @@ function Post(props) {
 const [like, setLike] = useState({
   count:0
 })
-  console.log(props.publicacion.likes);
+
   return (
     <>
       <Card className="card-post">

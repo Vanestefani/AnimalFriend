@@ -11,36 +11,47 @@ function Likes(props) {
   const { usuario } = authContext;
   const postContext = useContext(PostContext);
 
-  const { getlikes, likePost, unlikePost, likes } = postContext;
+  const { likePost, unlikePost, allpost, publicaciones } = postContext;
+  const checkedlike = (likes) => {
+    let match = likes.includes(usuario._id);
+    return match;
+  };
+  const [values, setvalues] = useState({
+    likes: props.publicacion.likes.length,
+    like: checkedlike(props.publicacion.likes),
+  });
 
-  // Obtener proyectos cuando carga el componente
-  useEffect(() => {
-    getlikes();
-  }, []);
-  const handleSubmit = (e) => {
+  const clicklike = (e) => {
     e.preventDefault();
-    if (likes.includes(usuario._id)) {
-      likePost(props.publicacion._id);
+    const postId = props.publicacion._id;
 
-      getlikes();
+    if (values.like) {
+      unlikePost({ postId: postId });
     } else {
-      unlikePost(props.publicacion._id);
-      getlikes();
+      likePost({ postId: postId });
     }
   };
+
+  useEffect(() => {
+    setvalues({
+      ...values,
+      likes: props.publicacion.likes.length,
+      like: checkedlike(props.publicacion.likes),
+    });
+  }, [publicaciones]);
   return (
     <>
       <div className="pull-left">
-        {likes.includes(usuario._id) ? (
-          <Button size="sm" color="neutral" onClick={handleSubmit}>
+        {values.like ? (
+          <Button size="sm" color="danger" onClick={clicklike}>
             <i className="fas fa-bone"></i>{" "}
           </Button>
         ) : (
-          <Button size="sm" color="neutral" onClick={handleSubmit}>
-            <i color="danger" className="fas fa-bone"></i>
+          <Button size="sm" color="neutral" onClick={clicklike}>
+            <i color="" className="fas fa-bone"></i>
           </Button>
         )}
-        {props.publicacion.likes.length} personas les gusto
+        {values.likes}
       </div>
     </>
   );

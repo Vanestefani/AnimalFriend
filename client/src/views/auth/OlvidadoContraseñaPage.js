@@ -69,7 +69,7 @@ function OlvidadoContraseñaPage() {
   const onSubmit = (e) => {
     e.preventDefault();
     const err = validate();
-    console.log(!err);
+
     if (email.trim() === "") {
       mostrarAlerta("Todos los campos son obligatorios", "danger");
     }

@@ -21,7 +21,7 @@ function PostList() {
   useEffect(() => {
     allpost();
     // eslint-disable-next-line
-  }, []);
+  }, [publicaciones]);
 
   if (publicaciones.length === 0)
     return <p>No hay publicaciones, sigue a alguien :3</p>;
@@ -43,7 +43,11 @@ function PostList() {
         }
       >
         {publicaciones.map((publicacion) => (
-          <Post key={publicacion._id} publicacion={publicacion} />
+          <Post
+
+            key={publicacion._id}
+            publicacion={publicacion}
+          />
         ))}
       </InfiniteScroll>
     </>

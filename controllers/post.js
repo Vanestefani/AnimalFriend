@@ -19,7 +19,7 @@ require("linkifyjs/plugins/mention")(linkify);
 
 exports.createPost = async (req, res) => {
   try {
-    console.log(req.body, req.file);
+
     const result = await uploader(req);
     const descripcion = req.body.descripcion;
     const autor = req.body.autor;
@@ -85,8 +85,6 @@ exports.mypost = async (req, res) => {
   }
 };
 exports.like = async (req, res) => {
-  console.log(req.body.postId);
-  console.log(req.user._id);
 
   try {
     Post.findByIdAndUpdate(
@@ -184,6 +182,7 @@ exports.deletepost = async (req, res) => {
 
 exports.getPostLikes = (req, res) => {
   try {
+    console.log(req)
     PostLike.find( req.body.postId )
       .populate("autor", "_id ")
       .then((likes) => {
