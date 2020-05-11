@@ -160,14 +160,16 @@ function Post(props) {
         <Container>
           <br></br>
           <h3 className="text-center">Comentarios</h3>
-          
+
           {props.publicacion.comments.map((record) => {
             return (
               <h6 key={record._id}>
-                <span style={{ fontWeight: "500" }}>
-                  {record.autor.nombre} :
-                </span>
-                <Badge color="info"></Badge>
+                <Badge color="info">
+                  {" "}
+                  <span style={{ fontWeight: "500" }}>
+                    {record.autor.nombre}
+                  </span>
+                </Badge>
                 {record.text}
               </h6>
             );
