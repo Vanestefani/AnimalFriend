@@ -188,17 +188,13 @@ function HomeNarbar() {
                     ></img>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fas fa-user-astronaut"></i>
-                      Perfil
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
+                      <Link to="/myperfil" ClassName="text-dark">
+                        <i className="fas fa-user-astronaut"></i>
+                        Perfil
+                      </Link>
                     </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
+                    <DropdownItem onClick={(e) => e.preventDefault()}>
                       <i className="fas fa-paw"></i>
                       Mascotas
                     </DropdownItem>

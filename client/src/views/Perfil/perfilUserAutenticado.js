@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../../context/autenticacion/authContext";
 
 // reactstrap components
 import {
@@ -26,6 +27,8 @@ import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
 
 import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores";
 function PerfilUser() {
+  const authContext = useContext(AuthContext);
+  const { mensaje, usuario, cerrarSesion } = authContext;
   const [pills, setPills] = React.useState("2");
   React.useEffect(() => {
     document.body.classList.add("profile-page");
@@ -41,7 +44,7 @@ function PerfilUser() {
     <>
       <ScrollNavbar />
       <div className="wrapper">
-        <ProfilePageHeader></ProfilePageHeader>
+        <ProfilePageHeader usuario={usuario}></ProfilePageHeader>
         <div className="section">
           <Container>
             <div className="button-container">
