@@ -29,8 +29,12 @@ function ProfilePageHeader(props) {
       >
         <div className="page-header-image" ref={pageHeader}></div>
         <Container>
-          <div className="photo-container">
-            <img alt="..." src={props.usuario.fotoPerfil}></img>
+          <div >
+            <img
+              className=" photo-container rounded-circle FotoUser"
+              alt="..."
+              src={props.usuario.fotoPerfil}
+            ></img>
           </div>
           <h3 className="title">{props.usuario.nombre}</h3>
           <p className="category">{props.usuario.pais}</p>
