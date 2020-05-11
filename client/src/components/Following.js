@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import equal from 'fast-deep-equal';
 
 import compose from 'recompose/compose';
-import classNames from 'classnames';
+
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 

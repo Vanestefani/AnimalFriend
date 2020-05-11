@@ -86,11 +86,11 @@ const PostState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.put("/api/post/like", postId);
-      getlikes(postId);
+      allpost();
 
       dispatch({
         type: LIKE_POST,
-        payload: respuesta.data,
+        payload: respuesta.data.result,
       });
     } catch (error) {
       console.log(error);
@@ -111,10 +111,10 @@ const PostState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.put("/api/post/unlike", postId);
-      getlikes(postId);
+      allpost();
       dispatch({
         type: DISLIKE_POST,
-        payload: respuesta.data,
+        payload: respuesta.data.result,
       });
     } catch (error) {
       console.log(error);
@@ -140,6 +140,7 @@ const PostState = (props) => {
         type: INIT_COMMENT,
         payload: respuesta.data,
       });
+      allpost();
     } catch (error) {
       const alerta = {
         categoria: "danger",
@@ -187,7 +188,7 @@ const PostState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.post(
+      const respuesta = await clienteAxios.get(
         "/api/post/getPostLikes",
         postId
       );
@@ -196,6 +197,7 @@ const PostState = (props) => {
         type: LIKE,
         payload: respuesta.data.likes,
       });
+     
     } catch (error) {
       console.log(error);
 

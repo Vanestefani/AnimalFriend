@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
+
 import {
   UncontrolledDropdown,
   DropdownToggle,
@@ -17,6 +18,7 @@ import {
   ModalBody,
   Form,
   Button,
+  Badge,
 } from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
@@ -45,7 +47,7 @@ function Post(props) {
   const [comentarios, setcomentarios] = useState({
     comentario: "",
   });
-  const {comentario}= comentarios;
+  const { comentario } = comentarios;
   const handleChange = (e) => {
     setEditarPost({
       ...posteditor,
@@ -59,10 +61,12 @@ function Post(props) {
     });
   };
   const onSubmitcomentario = (e) => {
-    let postId= props.publicacion._id;
+    let postId = props.publicacion._id;
     e.preventDefault();
     makeComment({
-      text:comentario,postId:postId});
+      text: comentario,
+      postId: postId,
+    });
   };
   return (
     <>
@@ -155,17 +159,21 @@ function Post(props) {
         </CardFooter>
         <Container>
           <br></br>
-          <h3>Comentarios</h3>
+          <h3 className="text-center">Comentarios</h3>
+          
           {props.publicacion.comments.map((record) => {
             return (
               <h6 key={record._id}>
-                <span style={{ fontWeight: "500" }}>{record.autor.nombre}</span>
-              <span> {record.text}</span>
+                <span style={{ fontWeight: "500" }}>
+                  {record.autor.nombre} :
+                </span>
+                <Badge color="info"></Badge>
+                {record.text}
               </h6>
             );
           })}
           <div>
-            <Form >
+            <Form>
               <Input
                 placeholder="¿Que quieres compartir hoy?"
                 rows="3"

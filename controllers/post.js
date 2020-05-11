@@ -89,7 +89,7 @@ exports.like = async (req, res) => {
       if (err) {
         return res.status(422).json({ error: err });
       } else {
-        res.json(result);
+        res.json(({result}));
       }
     });
   } catch (error) {

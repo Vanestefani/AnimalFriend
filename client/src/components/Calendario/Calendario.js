@@ -10,7 +10,7 @@ export default class Calendario extends React.PureComponent {
   render() {
     return (
       <div>
-        <h1 classname="text-center">Calendario</h1>
+        <h1 className="text-center">Calendario</h1>
         <Calendar onChange={this.onChange} value={this.state.date} />
       </div>
     );
