@@ -31,7 +31,7 @@ function ListRecordatorios() {
         <CardTitle mt-2>
           <h3 className="text-center">Recordatorios</h3>
         </CardTitle>
-        <p>No hay recordatorios, agregaga uno</p>
+        <p>No hay recordatorios, agrega uno</p>
       </Card>
     );
 

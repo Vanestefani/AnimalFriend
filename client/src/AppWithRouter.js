@@ -6,6 +6,7 @@ import AuthState from "./context/autenticacion/authState";
 import UsuariosState from "./context/usuarios/userState";
 import PostState from "./context/post/postState";
 import RecordatoriosState from "./context/recordatorios/recordatoriosState";
+import AnunciosState from "./context/anuncios/anunciosState";
 
 import tokenAuth from "./config/token";
 import PrivateRoute from "./PrivateRoute";
@@ -51,73 +52,75 @@ if (token) {
 }
 
 const AppWithRouter = () => (
-  <RecordatoriosState>
-    <PostState>
-      <AlertaState>
-        <AuthState>
-          <UsuariosState>
-            <Router>
-              <Suspense fallback={<div>Cargando...</div>}>
-                <Switch>
-                  <PrivateRoute exact path="/home" component={Home} />
-                  <Route exact path="/" component={LoginPage} />
-                  <Route exact path="/register" component={CrearCuentaPage} />
-                  <Route
-                    exact
-                    path="/verificar"
-                    component={VerificaCuentaPage}
-                  />
-                  <Route exact path="/verify/:token" component={Verificado} />
+  <AnunciosState>
+    <RecordatoriosState>
+      <PostState>
+        <AlertaState>
+          <AuthState>
+            <UsuariosState>
+              <Router>
+                <Suspense fallback={<div>Cargando...</div>}>
+                  <Switch>
+                    <PrivateRoute exact path="/home" component={Home} />
+                    <Route exact path="/" component={LoginPage} />
+                    <Route exact path="/register" component={CrearCuentaPage} />
+                    <Route
+                      exact
+                      path="/verificar"
+                      component={VerificaCuentaPage}
+                    />
+                    <Route exact path="/verify/:token" component={Verificado} />
 
-                  <PrivateRoute exact path="/perfil" component={Perfil} />
+                    <PrivateRoute exact path="/perfil" component={Perfil} />
 
-                  <PrivateRoute
-                    exact
-                    path="/messages/chat"
-                    component={MessengerPage}
-                  />
+                    <PrivateRoute
+                      exact
+                      path="/messages/chat"
+                      component={MessengerPage}
+                    />
 
-                  <Route
-                    exact
-                    path="/auth/reset/password/:token"
-                    component={CambiarContraseñaPage}
-                  />
+                    <Route
+                      exact
+                      path="/auth/reset/password/:token"
+                      component={CambiarContraseñaPage}
+                    />
 
-                  <Route
-                    path="/olvido-contrasena"
-                    component={OlvidadoContraseñaPage}
-                  />
+                    <Route
+                      path="/olvido-contrasena"
+                      component={OlvidadoContraseñaPage}
+                    />
 
-                  <PrivateRoute exact path="/anuncios" component={Anuncios} />
-                  <PrivateRoute exact path="/eventos" component={Eventos} />
-                  <PrivateRoute exact path="/negocios" component={Negocios} />
+                    <PrivateRoute exact path="/anuncios" component={Anuncios} />
+                    <PrivateRoute exact path="/eventos" component={Eventos} />
+                    <PrivateRoute exact path="/negocios" component={Negocios} />
 
-                  <PrivateRoute
-                    exact
-                    path="/explorar"
-                    component={ExplorarPage}
-                  />
-                  <PrivateRoute
-                    exact
-                    path="/recordatorios"
-                    component={Recordatorio}
-                  />
-                  <PrivateRoute exact path="/mascotas" component={Mascotas} />
-                  <PrivateRoute
-                    exact
-                    path="/perfil-mascota"
-                    component={PerfilMascota}
-                  />
+                    <PrivateRoute
+                      exact
+                      path="/explorar"
+                      component={ExplorarPage}
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/recordatorios"
+                      component={Recordatorio}
+                    />
+                    <PrivateRoute exact path="/mascotas" component={Mascotas} />
+                    <PrivateRoute
+                      exact
+                      path="/perfil-mascota"
+                      component={PerfilMascota}
+                    />
 
-                  <Route component={NotFound} />
-                </Switch>
-              </Suspense>
-            </Router>
-          </UsuariosState>
-        </AuthState>
-      </AlertaState>
-    </PostState>
-  </RecordatoriosState>
+                    <Route component={NotFound} />
+                  </Switch>
+                </Suspense>
+              </Router>
+            </UsuariosState>
+          </AuthState>
+        </AlertaState>
+      </PostState>
+    </RecordatoriosState>
+  </AnunciosState>
 );
 
 export default AppWithRouter;
