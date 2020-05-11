@@ -41,7 +41,6 @@ function Home() {
               <PostList></PostList>
             </Col>
             <Col md="3">
-              <Calendario></Calendario>
               <ListRecordatorios></ListRecordatorios>
             </Col>
           </Row>
