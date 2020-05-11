@@ -64,7 +64,10 @@ function Verificado({ match }) {
                     <i class="fas fa-exclamation-triangle"></i>
                     {mensaje.msg}
                   </Alert>
-                ) : null}
+                ) :  <Alert color="success">
+                <i class="fas fa-exclamation-triangle"></i>
+               Su cuenta a sido verificado ,inicie sesión
+              </Alert>}
                 <div className="pull-right">
                   <h6 className="text-dark">
                     <Link   to="/">
