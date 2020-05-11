@@ -189,7 +189,7 @@ function ScrollNavbar() {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Link to="/myperfil" ClassName="text-dark">
+                      <Link to="/myperfil" className="text-dark">
                         <i className="fas fa-user-astronaut"></i>
                         Perfil
                       </Link>
