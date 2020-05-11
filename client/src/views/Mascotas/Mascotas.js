@@ -66,8 +66,8 @@ function Mascotas() {
       [e.target.name]: URL.createObjectURL(e.target.files[0]),
     });
   };
-//focus
-const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
+  //focus
+  const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
   const [especieFocus, setespecieFocus] = React.useState(false);
   const [razaFocus, setrazaFocus] = React.useState(false);
   const [generoMascotaFocus, setgeneroMascotaFocus] = React.useState(false);
@@ -83,13 +83,11 @@ const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
           <Row>
             <Col md="3">
               <VerticalMenu></VerticalMenu>
-              <ListMascotas></ListMascotas>
             </Col>
             <Col md="6">
               <SubMenu></SubMenu>
               <FormMascota
                 onChange={onChange}
-
                 mascota={mascota}
                 archivoImagen={archivoImagen}
                 guardarMascota={guardarMascota}
@@ -112,13 +110,11 @@ const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
               ></FormMascota>
               <h2 className="pull-left p-2">
                 <b>Mascotas</b>
-
               </h2>
 
               <Mascota></Mascota>
             </Col>
             <Col md="3">
-              <Calendario></Calendario>
               <ListRecordatorios></ListRecordatorios>
             </Col>
           </Row>
