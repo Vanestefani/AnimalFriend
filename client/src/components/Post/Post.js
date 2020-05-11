@@ -67,6 +67,11 @@ function Post(props) {
       text: comentario,
       postId: postId,
     });
+    setcomentarios({
+
+      comentario:"",
+    });
+
   };
   return (
     <>
