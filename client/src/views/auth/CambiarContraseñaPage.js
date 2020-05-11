@@ -38,7 +38,7 @@ function CambiarContraseñaPage({ match }) {
     };
   });
   useEffect(() => {
-    console.log(match.params.token);
+
     localStorage.setItem("token", match.params.token);
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);

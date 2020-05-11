@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Token = require("../models/token");
-const {ObjectId} = mongoose.Schema.Types;
+const { ObjectId } = mongoose.Schema.Types;
 const postLikeSchema = new mongoose.Schema({
   post: {
     type: mongoose.Schema.ObjectId,
@@ -36,7 +36,6 @@ const UserSchema = new Schema({
     minlength: 3,
     maxlength: 30,
     trim: true,
-
   },
   email: {
     type: String,
@@ -54,21 +53,16 @@ const UserSchema = new Schema({
   pais: {
     type: String,
     required: true,
-
-    match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,
   },
   ciudad: {
     type: String,
     required: true,
-
-    match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,
   },
   genero: {
     type: String,
     required: true,
     minlength: 3,
     maxlength: 10,
-    match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,
   },
   fecha_creacion: {
     type: Date,
@@ -82,7 +76,8 @@ const UserSchema = new Schema({
   },
   fotoPerfil: {
     type: String,
-    default: "https://res.cloudinary.com/animalfriendsocial/image/upload/v1588920197/profile-picture/undraw_happy_music_g6wc_bqxw4e.png",
+    default:
+      "https://res.cloudinary.com/animalfriendsocial/image/upload/v1588920197/profile-picture/undraw_happy_music_g6wc_bqxw4e.png",
   },
   activityStatus: {
     type: String,
@@ -105,8 +100,8 @@ const UserSchema = new Schema({
   postLikes: [postLikeSchema],
   commentLikes: [commentLikeSchema],
   commentReplyLikes: [commentReplyLikeSchema],
-  followers:[{type:ObjectId,ref:"users"}],
-  following:[{type:ObjectId,ref:"users"}]
+  followers: [{ type: ObjectId, ref: "users" }],
+  following: [{ type: ObjectId, ref: "users" }],
 });
 UserSchema.pre("save", function (next) {
   const user = this;
@@ -142,8 +137,8 @@ UserSchema.methods.generateJWT = function () {
     expiresIn: parseInt(expirationDate.getTime() / 1000, 10),
   });
 };
-UserSchema.methods.generatePasswordReset = function() {
-  this.resetPasswordToken = crypto.randomBytes(20).toString('hex');
+UserSchema.methods.generatePasswordReset = function () {
+  this.resetPasswordToken = crypto.randomBytes(20).toString("hex");
   this.resetPasswordExpires = Date.now() + 3600000; //expires in an hour
 };
 UserSchema.methods.generateVerificationToken = function () {

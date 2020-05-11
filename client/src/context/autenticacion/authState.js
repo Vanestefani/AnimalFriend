@@ -18,8 +18,8 @@ import {
   PASSWORD_RESET_ERROR,
   PASSWORD_CAMBIO_EXITO,
   PASSWORD_CAMBIO_ERROR,
-  ADD_POST_SUCCESS,
-  ADD_POST_FAILURE,
+  VERIFICADO_ERROR,
+  VERIFICADO,
 } from "../../types";
 
 const AuthState = (props) => {
@@ -73,7 +73,6 @@ const AuthState = (props) => {
         payload: respuesta.data.users,
       });
     } catch (error) {
-
       dispatch({
         type: LOGIN_ERROR,
       });
@@ -182,7 +181,32 @@ const AuthState = (props) => {
       });
     }
   };
+  const verificado = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
 
+    try {
+      const respuesta = await clienteAxios.get(`/api/auth/verify/${token}`);
+
+      dispatch({
+        type: VERIFICADO,
+        payload: respuesta.data,
+      });
+    } catch (error) {
+      console.log(error.response.data.message);
+
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+      dispatch({
+        type: VERIFICADO_ERROR,
+        payload: alerta,
+      });
+    }
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -193,7 +217,7 @@ const AuthState = (props) => {
         cargando: state.cargando,
         registrarUsuario,
         iniciarSesion,
-
+        verificado,
         cerrarSesion,
         verificaremail,
         password_reset,

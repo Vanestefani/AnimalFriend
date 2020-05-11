@@ -32,7 +32,7 @@ const NotFound = lazy(() => import("./views/NotFound"));
 //pages
 const Home = lazy(() => import("./views/Home/home"));
 const Perfil = lazy(() => import("./views/Perfil/perfil"));
-const Perfiluser = lazy(() => import("./views/Perfil/perfilUser"));
+const Verificado = lazy(() => import("./views/auth/verificado"));
 
 const MessengerPage = lazy(() => import("./views/Messenger/MessengerPage"));
 const Recordatorio = lazy(() => import("./views/Recordatorios/Recordatorio"));
@@ -41,10 +41,8 @@ const Eventos = lazy(() => import("./views/Eventos/Eventos"));
 const Negocios = lazy(() => import("./views/Negocios/Negocios"));
 
 const ExplorarPage = lazy(() => import("./views/ExplorarPage"));
-const Following = lazy(() => import("./components/Following"));
 const PerfilMascota = lazy(() => import("./views/Mascotas/PerfilMascota"));
 const Mascotas = lazy(() => import("./views/Mascotas/Mascotas"));
-const LandingPage = lazy(() => import("./views/examples/LandingPage.js"));
 // Revisar si tenemos un token
 const token = localStorage.getItem("token");
 if (token) {
@@ -63,6 +61,7 @@ const AppWithRouter = () => (
                 <Route exact path="/" component={LoginPage} />
                 <Route exact path="/register" component={CrearCuentaPage} />
                 <Route exact path="/verificar" component={VerificaCuentaPage} />
+                <Route exact path="/verify/:token" component={Verificado} />
 
                 <PrivateRoute exact path="/perfil" component={Perfil} />
 

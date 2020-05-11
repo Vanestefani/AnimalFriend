@@ -12,6 +12,8 @@ import {
   PASSWORD_RESET_ERROR,
   PASSWORD_CAMBIO_EXITO,
   PASSWORD_CAMBIO_ERROR,
+  VERIFICADO,
+  VERIFICADO_ERROR,
 } from "../../types";
 
 export default (state, action) => {
@@ -20,6 +22,7 @@ export default (state, action) => {
     case VERIFICACIOM_ENVIADA:
     case REGISTRO_EXITOSO:
     case PASSWORD_CAMBIO_EXITO:
+    case VERIFICADO:
       localStorage.setItem("token", action.payload.token);
 
       return {
@@ -45,6 +48,7 @@ export default (state, action) => {
     case REGISTRO_ERROR:
     case PASSWORD_RESET_ERROR:
     case PASSWORD_CAMBIO_ERROR:
+    case VERIFICADO_ERROR:
       localStorage.removeItem("token");
       return {
         ...state,
