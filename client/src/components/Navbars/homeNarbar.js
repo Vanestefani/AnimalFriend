@@ -195,7 +195,7 @@ function HomeNarbar() {
                       </Link>
                     </DropdownItem>
                     <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Link to="/mascotas" className="text-dark">
+                      <Link to="/mis-mascotas" className="text-dark">
                         <i className="fas fa-paw"></i>
                         Mis Mascotas
                       </Link>

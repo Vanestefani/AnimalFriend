@@ -47,6 +47,8 @@ const Negocios = lazy(() => import("./views/Negocios/Negocios"));
 const ExplorarPage = lazy(() => import("./views/ExplorarPage"));
 const PerfilMascota = lazy(() => import("./views/Mascotas/PerfilMascota"));
 const Mascotas = lazy(() => import("./views/Mascotas/Mascotas"));
+const MisMascotas = lazy(() => import("./views/Mascotas/MisMascotas"));
+
 // Revisar si tenemos un token
 const token = localStorage.getItem("token");
 if (token) {
@@ -133,6 +135,11 @@ const AppWithRouter = () => (
                           exact
                           path="/mascotas"
                           component={Mascotas}
+                        />
+                         <PrivateRoute
+                          exact
+                          path="/mis-mascotas"
+                          component={MisMascotas}
                         />
                         <PrivateRoute
                           exact
