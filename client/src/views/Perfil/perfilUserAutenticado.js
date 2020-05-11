@@ -54,10 +54,7 @@ function PerfilUser() {
             </div>
             <h3 className="title">Sobre mi</h3>
             <h5 className="description">
-              An artist of considerable range, Ryan — the name taken by
-              Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-              and records all of his own music, giving it a warm, intimate feel
-              with a solid groove structure. An artist of considerable range.
+          {usuario.bio}
             </h5>
           </Container>
           <div className="wrapper">
