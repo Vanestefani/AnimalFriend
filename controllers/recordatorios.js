@@ -44,8 +44,8 @@ exports.RecordatoriosByUser = async (req, res) => {
     Recordatorios.find({ autor: req.user._id })
       .populate("autor", "_id nombre ")
       .populate("mascota", "_id nombre foto")
-      .then((recorddatorio) => {
-        res.json({ recorddatorio });
+      .then((recordatorios) => {
+        res.json({ recordatorios});
       })
       .catch((err) => {
         console.log(err);
