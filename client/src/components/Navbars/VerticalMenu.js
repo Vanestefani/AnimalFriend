@@ -14,15 +14,17 @@ function VerticalMenu() {
           <Nav className="flex-column" tag="nav">
             <NavLink
               className="active"
-              href="#pablo"
+          
               onClick={(e) => e.preventDefault()}
             >
-              <img
+              <Link    to="/myperfil">              <img
                 src={usuario.fotoPerfil}
                 className="rounded-circle FotoUser "
               ></img>
 
               <p className="text-center">{usuario.nombre}</p>
+              </Link>
+
             </NavLink>
 
             <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
