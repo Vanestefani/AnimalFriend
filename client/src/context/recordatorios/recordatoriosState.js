@@ -49,18 +49,18 @@ const RecordatoriosState = (props) => {
       });
     }
   };
-  const recordatoriosUsuario = async () => {
+
+ const recordatoriosUsuario = async () => {
+
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get(
-        "/api/recordatorio/recordatorios"
-      );
+      const respuesta = await clienteAxios.get("/api/recordatorio/recordatorios");
 
       dispatch({
-        type: GET_RECORDATORIO_SUCCESS,
+        type:GET_RECORDATORIO_SUCCESS,
         payload: respuesta.data.recordatorios,
       });
     } catch (error) {
@@ -68,12 +68,11 @@ const RecordatoriosState = (props) => {
         categoria: "danger",
       };
       dispatch({
-        type: GET_RECORDATORIO_FAILURE,
+        type:GET_RECORDATORIO_FAILURE,
         payload: alerta,
       });
     }
   };
-
   const deleteRecordatorios = async (recordatorioId) => {
     const token = localStorage.getItem("token");
     if (token) {

@@ -17,17 +17,16 @@ import RContext from "../../context/recordatorios/recordatoriosContex";
 import AlertaContext from "../../context/alertas/alertaContext";
 import FormRecordatorio from "./form/FormRecordatorio";
 import AuthContext from "../../context/autenticacion/authContext";
+import MascotasContext from "../../context/mascotas/mascotasContext";
 
-function ListRecordatorios() {
+function ListRecordatorios(props) {
+  const mContext = useContext(MascotasContext);
+  const { mascotas, mascotasUsuario } = mContext;
   const rContext = useContext(RContext);
+  const { addRecordatorios, recordatorios, recordatoriosUsuario } = rContext;
   const alertaContext = useContext(AlertaContext);
   const { alerta, mostrarAlerta } = alertaContext;
-  const {
-    addRecordatorios,
-    recordatorios,
 
-    recordatoriosUsuario,
-  } = RContext;
   const authContext = useContext(AuthContext);
   const { usuario, mensaje } = authContext;
 
@@ -85,6 +84,8 @@ function ListRecordatorios() {
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);
     }
+    mascotasUsuario();
+    recordatoriosUsuario();
   }, [mensaje]);
   if (recordatorios) {
     if (recordatorios.length === 0)
