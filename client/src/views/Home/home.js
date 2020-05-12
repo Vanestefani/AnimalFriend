@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col} from "reactstrap";
 import AuthContext from "../../context/autenticacion/authContext";
 // core components
 

@@ -56,7 +56,7 @@ const RecordatoriosState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.get(
-        "/api/recordatorio/recordtorios"
+        "/api/recordatorio/recordatorios"
       );
 
       dispatch({
