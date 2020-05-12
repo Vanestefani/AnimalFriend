@@ -87,17 +87,6 @@ function ListRecordatorios(props) {
     mascotasUsuario();
     recordatoriosUsuario();
   }, [mensaje]);
-  if (recordatorios) {
-    if (recordatorios.length === 0)
-      return (
-        <Card className="shadow p-3 mb-5 bg-white rounded">
-          <CardTitle mt-2>
-            <h3 className="text-center">Recordatorios</h3>
-          </CardTitle>
-          <p>No hay recordatorios, agrega uno</p>
-        </Card>
-      );
-  }
 
   return (
     <>
