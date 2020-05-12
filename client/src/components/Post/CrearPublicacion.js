@@ -9,16 +9,14 @@ import {
   Alert,
   ModalBody,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
 
 import "react-image-crop/dist/ReactCrop.css";
 
 function CrearPublicacion() {
-    const imageInputRef = React.useRef();
+  const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
   const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {
@@ -27,7 +25,7 @@ function CrearPublicacion() {
   const postContext = useContext(PostContext);
   const authContext = useContext(AuthContext);
 
-  const { usuario} = authContext;
+  const { usuario } = authContext;
   const { addPost } = postContext;
 
   const [state, setstate] = useState({

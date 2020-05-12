@@ -3,8 +3,9 @@ const MascotaController = require("../../controllers/mascotas");
 const checkAuth = require("../../middlewares/authenticate");
 const router = express.Router();
 const validate = require("../../middlewares/validate");
-
-router.post("/addmascota", checkAuth, validate, MascotaController.createMascota);
+const multer = require("multer");
+const upload = multer().single("foto");
+router.post("/addmascota",upload, checkAuth, validate, MascotaController.createMascota);
 router.get("/getmascotas", checkAuth, validate, MascotaController.mascotasByUser);
 
 router.delete(
@@ -15,6 +16,6 @@ router.delete(
   MascotaController.deletemascotas
 );
 
-router.put("/:mascotasId", checkAuth, validate, MascotaController.actualizarRecordatorio);
+router.put("/:mascotasId",upload, checkAuth, validate, MascotaController.actualizarRecordatorio);
 
 module.exports = router;

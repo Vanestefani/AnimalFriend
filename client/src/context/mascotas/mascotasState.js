@@ -32,7 +32,7 @@ const MascotasState = (props) => {
     }
     try {
       const respuesta = await clienteAxios
-        .mascotas("/api/mascota/addmascota", datos)
+        .post("/api/mascota/addmascota", datos)
         .then((response) => response.data);
       mascotasUsuario();
       dispatch({
@@ -55,9 +55,7 @@ const MascotasState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get(
-        "/api/mascota/mascotas"
-      );
+      const respuesta = await clienteAxios.get("/api/mascota/getmascotas");
 
       dispatch({
         type: GET_MASCOTAS_SUCCESS,
@@ -80,9 +78,7 @@ const MascotasState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.delete(
-        `/api/mascota/${mascotaId}`
-      );
+      const respuesta = await clienteAxios.delete(`/api/mascota/${mascotaId}`);
       mascotasUsuario();
       dispatch({
         type: MASCOTAS_DELETE_SUCCESS,
@@ -106,9 +102,7 @@ const MascotasState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(
-        `/api/mascota/${mascotaId}`
-      );
+      const respuesta = await clienteAxios.put(`/api/mascota/${mascotaId}`);
       mascotasUsuario();
       dispatch({
         type: EDIT_MASCOTAS_SUCCESS,

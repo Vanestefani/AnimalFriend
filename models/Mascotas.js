@@ -8,13 +8,11 @@ const mascotasSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 30,
     trim: true,
-    match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,
   },
   especie: {
     type: String,
     required: true,
-    minlength: 15,
-    maxlength: 15,
+
     match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,
   },
   raza: {
@@ -33,8 +31,7 @@ const mascotasSchema = new mongoose.Schema({
   },
   chip: {
     type: String,
-    required: true,
-    minlength: 15,
+
     maxlength: 15,
     match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,
   },
@@ -66,7 +63,7 @@ const mascotasSchema = new mongoose.Schema({
   },
   color: {
     type: String,
-    required: true,
+
     minlength: 3,
     maxlength: 30,
     match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,

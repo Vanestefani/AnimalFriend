@@ -1,9 +1,8 @@
-
-
 const Mascota = require("../models/Mascotas");
-
+const { uploader, sendEmail } = require("../utils/index");
 exports.createMascota = async (req, res) => {
   try {
+    const result = await uploader(req);
     const nombre = req.body.nombre;
     const especie = req.body.especie;
     const raza = req.body.raza;
@@ -17,7 +16,6 @@ exports.createMascota = async (req, res) => {
     const fecha_nacimiento = req.body.fecha_nacimiento;
     const descripcion = req.body.descripcion;
     const color = req.body.color;
-    const foto = req.body.foto;
     const propietario = req.body.propietario;
     const newmascotas = new Mascota({
       nombre: nombre,
@@ -33,7 +31,7 @@ exports.createMascota = async (req, res) => {
       fecha_nacimiento: fecha_nacimiento,
       descripcion: descripcion,
       color: color,
-      foto: foto,
+      foto: result.url,
       propietario: propietario,
     });
 
@@ -47,8 +45,7 @@ exports.createMascota = async (req, res) => {
 
 exports.mascotasByUser = async (req, res) => {
   try {
-    Mascota
-      .find({ propietario: req.user._id })
+    Mascota.find({ propietario: req.user._id })
       .populate("propietario", "_id nombre ")
       .then((mascotas) => {
         res.json({ mascotas });
@@ -62,10 +59,8 @@ exports.mascotasByUser = async (req, res) => {
 };
 
 exports.deletemascotas = async (req, res) => {
-
   try {
-    Mascota
-      .findOne({ _id: req.params.mascotasId })
+    Mascota.findOne({ _id: req.params.mascotasId })
       .populate("propietario", "_id")
       .exec((err, mascotas) => {
         if (err || !mascotas) {

@@ -1,5 +1,4 @@
-/*eslint-disable*/
-import React from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 
 import {
   Button,
@@ -16,16 +15,32 @@ import {
   InputGroup,
 } from "reactstrap";
 
-function FormMascota(props) {
-  const [modalMascotas, setModal1] = React.useState(false);
+import MascotasContext from "../../../context/mascotas/mascotasContext";
+import AuthContext from "../../../context/autenticacion/authContext";
 
+import "react-image-crop/dist/ReactCrop.css";
+function FormMascota(props) {
+  //imgen parametros
+  const imageInputRef = React.useRef();
+  const acceptedFileTypes =
+    "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
+  const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {
+    return item.trim();
+  });
+  //context
+  const mContext = useContext(MascotasContext);
+  const authContext = useContext(AuthContext);
+  const { usuario } = authContext;
+  const { addMascotas } = mContext;
+  //modal
+  const [modalMascotas, setModal1] = React.useState(false);
+  //previw imagen
   let imgPreview;
-  if (props.archivoImagen.fotoMascota) {
-    imgPreview = (
-      <img width="100px" src={props.archivoImagen.fotoMascota} alt="" />
-    );
+  if (props.archivoImagen) {
+    let preview = URL.createObjectURL(props.archivoImagen);
+    imgPreview = <img width="100px" src={preview} alt="" />;
   } else {
-    if (props.mascota.especie === "Gato") {
+    if (props.Fmascota.especie === "Gato") {
       imgPreview = (
         <img
           width="100px"
@@ -33,7 +48,7 @@ function FormMascota(props) {
           alt=""
         />
       );
-    } else if (props.mascota.especie === "Perro") {
+    } else if (props.Fmascota.especie === "Perro") {
       imgPreview = (
         <img
           width="100px"
@@ -51,10 +66,10 @@ function FormMascota(props) {
       );
     }
   }
+
   return (
     <>
-
-      <Button small  onClick={() => setModal1(true)}>
+      <Button small onClick={() => setModal1(true)}>
         <i className="fas fa-plus"></i>
       </Button>
 
@@ -88,12 +103,11 @@ function FormMascota(props) {
                 type="text"
                 onFocus={() => props.setnombreMascotaFocus(true)}
                 onBlur={() => props.setnombreMascotaFocus(false)}
-                id="nombre"
-                name="nombre"
+                id="nombreMascota"
+                name="nombreMascota"
                 onChange={props.onChange}
-                defaultValue={props.mascota.nombreMascota}
+                defaultValue={props.Fmascota.nombreMascota}
                 required
-                data-background-color="blue"
               ></Input>
             </InputGroup>
             <Row>
@@ -117,7 +131,7 @@ function FormMascota(props) {
                     id="especie"
                     name="especie"
                     onChange={props.onChange}
-                    defaultValue={props.mascota.especie}
+                    defaultValue={props.Fmascota.especie}
                     required
                   >
                     <option selected="">Elija una especie</option>
@@ -147,7 +161,7 @@ function FormMascota(props) {
                     id="raza"
                     name="raza"
                     onChange={props.onChange}
-                    defaultValue={props.mascota.raza}
+                    defaultValue={props.Fmascota.raza}
                     required
                   >
                     <option selected="">Elija una raza</option>
@@ -167,7 +181,7 @@ function FormMascota(props) {
                       name="generoMascota"
                       type="radio"
                       onChange={props.onChange}
-                      defaultValue={props.mascota.generoMascota}
+                      defaultValue={props.Fmascota.generoMascota}
                     ></Input>
                     <span className="form-check-sign"></span>
                     Hembra
@@ -182,7 +196,7 @@ function FormMascota(props) {
                       name="generoMascota"
                       type="radio"
                       onChange={props.onChange}
-                      defaultValue={props.mascota.generoMascota}
+                      defaultValue={props.Fmascota.generoMascota}
                     ></Input>
                     <span className="form-check-sign"></span>
                     Macho
@@ -208,7 +222,7 @@ function FormMascota(props) {
                     id="fechanacimiento"
                     name="fechanacimiento"
                     onChange={props.onChange}
-                    defaultValue={props.mascota.fechanacimiento}
+                    defaultValue={props.Fmascota.fechanacimiento}
                     required
                   ></Input>
                 </InputGroup>
@@ -235,7 +249,7 @@ function FormMascota(props) {
                     id="colorPrincipal"
                     name="colorPrincipal"
                     onChange={props.onChange}
-                    defaultValue={props.mascota.colorPrincipal}
+                    defaultValue={props.Fmascota.colorPrincipal}
                     required
                   >
                     <option selected="">Elija un color</option>
@@ -253,19 +267,22 @@ function FormMascota(props) {
                 </p>
                 {imgPreview}
                 <Input
+                  accept={acceptedFileTypes}
                   id="fotoMascota"
                   name="fotoMascota"
                   type="file"
-                  onChange={props.onChangeImages}
-                  defaultValue={props.archivoImagen.fotoMascota}
+                  onChange={(e) =>
+                    props.guardararchivoImagen(e.target.files[0])
+                  }
+                  defaultValue={props.archivoImagen}
+                  ref={imageInputRef}
                 ></Input>
               </Col>
             </Row>
-
           </div>
         </ModalBody>
         <div className="modal-footer">
-          <Button color="sucess" type="button" onClick={() => setModal1(false)}>
+          <Button color="sucess" type="button" onClick={props.onSubmit}>
             <i className="fas fa-paper-plane"></i> Enviar
           </Button>
           <Button color="danger" type="button" onClick={() => setModal1(false)}>

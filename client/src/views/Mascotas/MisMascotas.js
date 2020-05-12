@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-
+import React, { useState, useContext, useEffect, useRef } from "react";
 // reactstrap components
 import { Container, Row, Col, Button } from "reactstrap";
-
 // core components
 
 import HomeNarbar from "../../components/Navbars/homeNarbar";
@@ -16,8 +14,16 @@ import Calendario from "../../components/Calendario/Calendario";
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 import FormMascota from "./Form/FormMascota";
 import { Link } from "react-router-dom";
+import MascotasContext from "../../context/mascotas/mascotasContext";
+import AuthContext from "../../context/autenticacion/authContext";
 
 function MisMascota() {
+  //context
+  const mContext = useContext(MascotasContext);
+  const authContext = useContext(AuthContext);
+  const { usuario } = authContext;
+  const { addMascotas } = mContext;
+  //navbar effect
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -27,8 +33,8 @@ function MisMascota() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
-  const [mascota, guardarMascota] = useState({
-    //paso 3
+  //state mascota
+  const [Fmascota, guardarMascota] = useState({
     nombreMascota: "",
     especie: "",
     raza: "",
@@ -36,11 +42,8 @@ function MisMascota() {
     fechanacimiento: "",
     colorPrincipal: "",
   });
-  const [archivoImagen, guardararchivoImagen] = useState({
-    fotoMascota: null,
-  });
-  //extraer archivos
-  const { fotoMascota } = archivoImagen;
+  const [archivoImagen, guardararchivoImagen] = useState(null);
+
   const {
     nombreMascota,
     especie,
@@ -48,24 +51,18 @@ function MisMascota() {
     generoMascota,
     fechanacimiento,
     colorPrincipal,
-  } = mascota;
-  const onSubmit = (e) => {
-    e.preventDefault();
-    e.target.className += " was-validated";
-  };
+  } = Fmascota;
 
   const onChange = (e) => {
     guardarMascota({
-      ...mascota,
+      ...Fmascota,
       [e.target.name]: e.target.value,
     });
   };
-  const onChangeImages = (e) => {
-    guardararchivoImagen({
-      ...archivoImagen,
-      [e.target.name]: URL.createObjectURL(e.target.files[0]),
-    });
-  };
+
+  //error state
+  const [errores, seterrores] = useState(false);
+
   //focus
   const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
   const [especieFocus, setespecieFocus] = React.useState(false);
@@ -73,8 +70,30 @@ function MisMascota() {
   const [generoMascotaFocus, setgeneroMascotaFocus] = React.useState(false);
   const [fechanacimientoFocus, setfechanacimientoFocus] = React.useState(false);
   const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
-  const [leePoliticasFocus, setleePoliticas] = React.useState(false);
+
   const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    e.target.className += " was-validated";
+    let userid = usuario._id;
+
+    if (archivoImagen === null || nombreMascota === "") {
+      seterrores(true);
+      console.log("esta vacio");
+    } else {
+      let formData = new FormData();
+      formData.append("foto", archivoImagen, archivoImagen.name);
+      formData.append("nombre", nombreMascota);
+      formData.append("especie", especie);
+      formData.append("raza", raza);
+      formData.append("genero", generoMascota);
+      formData.append("fechanacimiento", fechanacimiento);
+      formData.append("color", colorPrincipal);
+      formData.append("propietario", userid);
+      addMascotas(formData);
+      console.log("no esta vacio");
+    }
+  };
   return (
     <>
       <HomeNarbar></HomeNarbar>
@@ -88,10 +107,9 @@ function MisMascota() {
               <SubMenu></SubMenu>
               <FormMascota
                 onChange={onChange}
-                mascota={mascota}
+                Fmascota={Fmascota}
                 archivoImagen={archivoImagen}
                 guardarMascota={guardarMascota}
-                onChangeImages={onChangeImages}
                 nombreMascotaFocus={nombreMascotaFocus}
                 setnombreMascotaFocus={setnombreMascotaFocus}
                 especieFocus={especieFocus}
@@ -107,6 +125,7 @@ function MisMascota() {
                 fotoMascotaFocus={fotoMascotaFocus}
                 setfotoMascota={setfotoMascota}
                 onSubmit={onSubmit}
+                guardararchivoImagen={guardararchivoImagen}
               ></FormMascota>
               <h2 className="pull-left p-2">
                 <b>Mascotas</b>
