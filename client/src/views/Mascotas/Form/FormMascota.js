@@ -57,7 +57,7 @@ function FormMascota(props) {
           alt=""
         />
       );
-    } else {
+    } else if (props.Fmascota.especie === "Ave") {
       imgPreview = (
         <img
           width="100px"
@@ -65,7 +65,41 @@ function FormMascota(props) {
           alt=""
         />
       );
-    }
+    } 
+ else if (props.Fmascota.especie === "Animal de corral") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/easter_egg.svg")}
+          alt=""
+        />
+      );
+    } else if (props.Fmascota.especie === "Reptil") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/undraw_happy_music_g6wc.png")}
+          alt=""
+        />
+      );
+    } 
+    else if (props.Fmascota.especie === "Animal de corral") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/easter_egg.svg")}
+          alt=""
+        />
+      );
+    } else if (props.Fmascota.especie === "Ave") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/undraw_happy_music_g6wc.png")}
+          alt=""
+        />
+      );
+    } 
   }
   const traducir = (especie) => {
     switch (especie) {
@@ -78,7 +112,7 @@ function FormMascota(props) {
       case "barnyard":
         return "Animal de corral";
       case "reptile":
-        return "Reptile";
+        return "Reptil";
       case "smallfurry":
         return "Roedores";
       case "horse":
@@ -87,7 +121,31 @@ function FormMascota(props) {
         return "Cerdo";
     }
   };
-
+  //cargar razaas
+const  getBreeds() {
+  if (especie) {
+    petfinder.breed
+      .list({ animal: especie })
+      .then(data => {
+        if (
+          data.petfinder &&
+          data.petfinder.breeds &&
+          Array.isArray(data.petfinder.breeds.breed)
+        ) {
+          this.setState({
+            breeds: data.petfinder.breeds.breed
+          });
+        } else {
+          this.setState({ breeds: [] });
+        }
+      })
+      .catch(console.error);
+  } else {
+    this.setState({
+      breeds: []
+    });
+  }
+}
   return (
     <>
       <Button small onClick={() => setModal1(true)}>
@@ -155,7 +213,6 @@ function FormMascota(props) {
                     defaultValue={props.Fmascota.especie}
                     required
                   >
-                    <option selected="">Elija una especie</option>
                     {ANIMALS.map((especie) => (
                       <option key={especie} value={traducir(especie)}>
                         {traducir(especie)}

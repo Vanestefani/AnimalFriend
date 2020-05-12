@@ -4,6 +4,7 @@ import HomeNarbar from "../components/Navbars/homeNarbar";
 import ExamplesNavbar from "../components/Navbars/ExamplesNavbar";
 
 import TransparentFooter from "../components/Footers/TransparentFooter.js";
+import { Link } from "react-router-dom";
 
 import AlertaContext from "../context/alertas/alertaContext";
 import AuthContext from "../context/autenticacion/authContext";
@@ -28,7 +29,7 @@ function NotFound() {
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("../assets//img/pet-fondo.jfif") + ")",
+              "url(" + require("../assets/img/pet-fondo.jfif") + ")",
           }}
         ></div>
         <div className="content">
@@ -41,10 +42,11 @@ function NotFound() {
               </CardHeader>
               <CardBody>
                 <h2 className="text-dark">Página no encontrada</h2>
+                <img width="400px" src={ require("../assets/img/404 Error with a cute animal-pana.svg")}></img>
                 <p className="text-dark">
                   Lo sentimos, parece que falta la página que estás buscando.
                 </p>
-
+<Link to="/" className="btn btn-info">Volver</Link>
               </CardBody>
             </Card>
           </Container>
