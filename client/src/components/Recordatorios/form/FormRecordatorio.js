@@ -20,18 +20,8 @@ import AuthContext from "../../../context/autenticacion/authContext";
 
 import "react-image-crop/dist/ReactCrop.css";
 function FormRecordatorio(props) {
-  //context
-  const authContext = useContext(AuthContext);
-  const { usuario } = authContext;
-  const RContext = useContext(RecordatoriosContex);
   const [modalMascotas, setModal1] = React.useState(false);
 
-  const {
-    addRecordatorios,
-    recordatorios,
-    recordatorio,
-    recordatoriosUsuario,
-  } = RContext;
   //modal
 
   return (
@@ -147,13 +137,19 @@ function FormRecordatorio(props) {
                   <Input
                     placeholder="Tipo"
                     type="select"
-                    id="tipo"
-                    name="tipo"
+                    id="mascota"
+                    name="mascota"
                     onChange={props.onChange}
                     defaultValue={props.Frecordatorio.mascota}
                     required
                   >
                     <option selected="">Elija una mascota</option>
+                    {props.mascotas.map((mascota) => (
+                      <option key={mascota._id}>
+                        {mascota.nombre}
+                      </option>
+                    ))}
+                     <option >todas</option>
                   </Input>
                 </InputGroup>
               </Col>

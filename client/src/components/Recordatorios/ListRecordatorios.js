@@ -97,6 +97,7 @@ function ListRecordatorios(props) {
             onChange={onChange}
             Frecordatorio={Frecordatorio}
             onSubmit={onSubmit}
+            mascotas={mascotas}
             guardarrecordatorio={guardarrecordatorio}
           ></FormRecordatorio>
         </CardTitle>
