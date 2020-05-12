@@ -36,7 +36,7 @@ function ListRecordatorios(props) {
     tipo: "",
     mascota: "",
     fecha_expiracion: "",
-    notas: "",
+
     completo: false,
   });
   const {
@@ -45,7 +45,7 @@ function ListRecordatorios(props) {
     tipo,
     mascota,
     fecha_expiracion,
-    notas,
+
     completo,
   } = Frecordatorio;
   const onChange = (e) => {
@@ -72,7 +72,7 @@ function ListRecordatorios(props) {
       formData.append("tipo", tipo);
       formData.append("mascota", mascota);
       formData.append("fecha_expiracion", fecha_expiracion);
-      formData.append("notas", notas);
+
       formData.append("autor", userid);
       formData.append("completo", completo);
 

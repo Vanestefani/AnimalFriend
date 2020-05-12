@@ -87,8 +87,8 @@ function FormRecordatorio(props) {
                   </InputGroupAddon>
                   <Input
                     type="date"
-                    id=" fecha_expiracion"
-                    name=" fecha_expiracion"
+                    id="fecha_expiracion"
+                    name="fecha_expiracion"
                     onChange={props.onChange}
                     defaultValue={props.Frecordatorio.fecha_expiracion}
                     required

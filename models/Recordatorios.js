@@ -22,12 +22,7 @@ const RecordatoriosSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  notas: {
-    type: String,
-    default: "",
-    trim: true,
-    maxlength: 250,
-  },
+
   completo: {
     type: Boolean,
     default: false,

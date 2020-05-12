@@ -16,7 +16,6 @@ exports.createRecordatorio = async (req, res) => {
     const mascota = req.body.mascota;
     const fecha_expiracion = req.body.fecha_expiracion;
 
-    const notas = req.body.notas;
     const completo = req.body.completo;
     const autor = req.body.autor;
 
@@ -27,7 +26,7 @@ exports.createRecordatorio = async (req, res) => {
       tipo: tipo,
       mascota: mascota,
       fecha_expiracion: fecha_expiracion,
-      notas: notas,
+
       completo: completo,
     });
 
@@ -90,7 +89,7 @@ exports.actualizarRecordatorio = async (req, res) => {
     nuevorecordatorio.tipo = req.body.tipo;
     nuevorecordatorio.mascota = req.body.mascota;
     nuevorecordatorio.fecha_expiracion = req.body.fecha_expiracion;
-    nuevorecordatorio.notas = req.body.notas;
+    nuevorecordatorio.descripcion = req.body.descripcion;
     nuevorecordatorio.completo = req.body.completo;
 
     // Guardar
