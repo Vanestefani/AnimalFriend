@@ -65,8 +65,7 @@ function FormMascota(props) {
           alt=""
         />
       );
-    } 
- else if (props.Fmascota.especie === "Animal de corral") {
+    } else if (props.Fmascota.especie === "Animal de corral") {
       imgPreview = (
         <img
           width="100px"
@@ -78,28 +77,35 @@ function FormMascota(props) {
       imgPreview = (
         <img
           width="100px"
-          src={require("../../../assets/img/undraw_happy_music_g6wc.png")}
+          src={require("../../../assets/img/yegor-denisov-ZCt2ayQCre8-unsplash.jpg")}
           alt=""
         />
       );
-    } 
-    else if (props.Fmascota.especie === "Animal de corral") {
+    } else if (props.Fmascota.especie === "Roedor") {
       imgPreview = (
         <img
           width="100px"
-          src={require("../../../assets/img/easter_egg.svg")}
+          src={require("../../../assets/img/easter_bunny (1).svg")}
           alt=""
         />
       );
-    } else if (props.Fmascota.especie === "Ave") {
+    } else if (props.Fmascota.especie === "Caballo") {
       imgPreview = (
         <img
           width="100px"
-          src={require("../../../assets/img/undraw_happy_music_g6wc.png")}
+          src={require("../../../assets/img/undraw_Ride_till_I_can_no_more_44wq.svg")}
           alt=""
         />
       );
-    } 
+    } else if (props.Fmascota.especie === "Cerdo") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/undraw_Savings_dwkw.svg")}
+          alt=""
+        />
+      );
+    }
   }
   const traducir = (especie) => {
     switch (especie) {
@@ -114,7 +120,7 @@ function FormMascota(props) {
       case "reptile":
         return "Reptil";
       case "smallfurry":
-        return "Roedores";
+        return "Roedor";
       case "horse":
         return "Caballo";
       case "pig":
@@ -122,30 +128,30 @@ function FormMascota(props) {
     }
   };
   //cargar razaas
-const  getBreeds() {
-  if (especie) {
-    petfinder.breed
-      .list({ animal: especie })
-      .then(data => {
-        if (
-          data.petfinder &&
-          data.petfinder.breeds &&
-          Array.isArray(data.petfinder.breeds.breed)
-        ) {
-          this.setState({
-            breeds: data.petfinder.breeds.breed
-          });
-        } else {
-          this.setState({ breeds: [] });
-        }
-      })
-      .catch(console.error);
-  } else {
-    this.setState({
-      breeds: []
-    });
-  }
-}
+  const getBreeds = () => {
+    if (props.Fmascota.especie) {
+      petfinder.breed
+        .list({ animal: props.Fmascota.especie })
+        .then((data) => {
+          if (
+            data.petfinder &&
+            data.petfinder.breeds &&
+            Array.isArray(data.petfinder.breeds.breed)
+          ) {
+            this.setState({
+              breeds: data.petfinder.breeds.breed,
+            });
+          } else {
+            this.setState({ breeds: [] });
+          }
+        })
+        .catch(console.error);
+    } else {
+      this.setState({
+        breeds: [],
+      });
+    }
+  };
   return (
     <>
       <Button small onClick={() => setModal1(true)}>
