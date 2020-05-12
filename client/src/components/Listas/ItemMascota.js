@@ -1,20 +1,20 @@
 import React from "react";
 import { ListGroupItem, Badge } from "reactstrap";
-function ItemMascota() {
+function ItemMascota(props) {
   return (
     <>
       <ListGroupItem>
         <center>
           {" "}
           <img
-            src={require("../../assets/img/undraw_female_avatar_w3jk.png")}
+            src={props.mascota.foto}
             className="rounded-circle FotoUser"
             width="60px"
           ></img>
         </center>
-        <p>Nombre de mascota</p>
+        <p>{props.mascota.nombre}</p>
         <Badge color="info" href="#pablo" onClick={(e) => e.preventDefault()}>
-          Especie
+          {props.mascota.especie}
         </Badge>
       </ListGroupItem>
     </>
