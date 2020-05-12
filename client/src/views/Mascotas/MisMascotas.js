@@ -22,7 +22,7 @@ function MisMascota() {
   const mContext = useContext(MascotasContext);
   const authContext = useContext(AuthContext);
   const { usuario } = authContext;
-  const { addMascotas } = mContext;
+  const { addMascotas, mascotas, mascotasUsuario } = mContext;
   //navbar effect
   React.useEffect(() => {
     document.body.classList.add("landing-page");
@@ -72,6 +72,9 @@ function MisMascota() {
   const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
 
   const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
+  useEffect(() => {
+    mascotasUsuario();
+  }, []);
   const onSubmit = (e) => {
     e.preventDefault();
     e.target.className += " was-validated";
@@ -130,8 +133,17 @@ function MisMascota() {
               <h2 className="pull-left p-2">
                 <b>Mascotas</b>
               </h2>
-
-              <Mascota></Mascota>
+              <div className="section section-team text-center">
+                <Container>
+                  <div className="team">
+                    <Row>
+                      {mascotas.map((mascota) => (
+                        <Mascota key={mascota._id} mascota={mascota}></Mascota>
+                      ))}
+                    </Row>
+                  </div>
+                </Container>
+              </div>
             </Col>
             <Col md="3">
               <ListRecordatorios></ListRecordatorios>

@@ -115,6 +115,7 @@ function Mascotas() {
               <Mascota></Mascota>
             </Col>
             <Col md="3">
+              
               <ListRecordatorios></ListRecordatorios>
             </Col>
           </Row>
