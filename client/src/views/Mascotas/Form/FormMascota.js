@@ -17,7 +17,8 @@ import {
 
 import MascotasContext from "../../../context/mascotas/mascotasContext";
 import AuthContext from "../../../context/autenticacion/authContext";
-
+import petfinder from "../../../config/petfinder.js";
+import { ANIMALS } from "petfinder-client";
 import "react-image-crop/dist/ReactCrop.css";
 function FormMascota(props) {
   //imgen parametros
@@ -66,6 +67,26 @@ function FormMascota(props) {
       );
     }
   }
+  const traducir = (especie) => {
+    switch (especie) {
+      case "dog":
+        return "Perro";
+      case "cat":
+        return "Gato";
+      case "bird":
+        return "Ave";
+      case "barnyard":
+        return "Animal de corral";
+      case "reptile":
+        return "Reptile";
+      case "smallfurry":
+        return "Roedores";
+      case "horse":
+        return "Caballo";
+      case "pig":
+        return "Cerdo";
+    }
+  };
 
   return (
     <>
@@ -135,9 +156,11 @@ function FormMascota(props) {
                     required
                   >
                     <option selected="">Elija una especie</option>
-                    <option>Gato</option>
-                    <option>Perro</option>
-                    <option>Ave</option>
+                    {ANIMALS.map((especie) => (
+                      <option key={especie} value={traducir(especie)}>
+                        {traducir(especie)}
+                      </option>
+                    ))}
                   </Input>
                 </InputGroup>
               </Col>
