@@ -145,11 +145,11 @@ function FormRecordatorio(props) {
                   >
                     <option selected="">Elija una mascota</option>
                     {props.mascotas.map((mascota) => (
-                      <option key={mascota._id}>
+                      <option key={mascota._id} value={mascota._id}>
                         {mascota.nombre}
                       </option>
                     ))}
-                     <option >todas</option>
+                   
                   </Input>
                 </InputGroup>
               </Col>

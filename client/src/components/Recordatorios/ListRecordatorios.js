@@ -18,6 +18,8 @@ import AlertaContext from "../../context/alertas/alertaContext";
 import FormRecordatorio from "./form/FormRecordatorio";
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
+import moment from "moment";
+import 'moment/locale/es';
 
 function ListRecordatorios(props) {
   const mContext = useContext(MascotasContext);
@@ -66,18 +68,24 @@ function ListRecordatorios(props) {
       seterrores(true);
       console.log("esta vacio");
     } else {
-      let formData = new FormData();
-      formData.append("descripcion", descripcion);
-      formData.append("nombre", nombre);
-      formData.append("tipo", tipo);
-      formData.append("mascota", mascota);
-      formData.append("fecha_expiracion", fecha_expiracion);
+      addRecordatorios({
+        descripcion: descripcion,
+        autor: userid,
+        nombre: nombre,
+        tipo: tipo,
+        mascota: mascota,
+        fecha_expiracion: fecha_expiracion,
+        completo: completo,
+      });
+      guardarrecordatorio({
+        descripcion: "",
+        nombre: "",
+        tipo: "",
+        mascota: "",
+        fecha_expiracion: "",
 
-      formData.append("autor", userid);
-      formData.append("completo", completo);
-
-      addRecordatorios(formData);
-      console.log("no esta vacio");
+        completo: false,
+      });
     }
   };
   useEffect(() => {
@@ -87,7 +95,18 @@ function ListRecordatorios(props) {
     mascotasUsuario();
     recordatoriosUsuario();
   }, [mensaje]);
-
+  moment.lang("es", {
+    months: "Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split(
+      "_"
+    ),
+    monthsShort: "Enero._Feb._Mar_Abr._May_Jun_Jul._Ago_Sept._Oct._Nov._Dec.".split(
+      "_"
+    ),
+    weekdays: "Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado".split("_"),
+    weekdaysShort: "Dom._Lun._Mar._Mier._Jue._Vier._Sab.".split("_"),
+    weekdaysMin: "Do_Lu_Ma_Mi_Ju_Vi_Sa".split("_"),
+  });
+  moment.locale('es');
   return (
     <>
       <Card className="shadow p-3 mb-5 bg-white rounded">
@@ -104,13 +123,38 @@ function ListRecordatorios(props) {
 
         {recordatorios ? (
           recordatorios.map((recordatorio) => (
-            <div>
-              <h3>{recordatorio.nombre}</h3>
-              <Badge color="info">{recordatorio.tipo}</Badge>
-
-              <Badge color="success">{recordatorio.mascota.nombre}</Badge>
-              <p>{recordatorio.fecha_expiracion.nombre}</p>
-            </div>
+            <InfiniteScroll
+              style={{
+                overflow: "none ",
+              }}
+              dataLength={recordatorios.length}
+              next={recordatoriosUsuario}
+              hasMore={false}
+              loader={<h4>Cargando...</h4>}
+              endMessage={
+                <div horizontal>
+                  <span>Yay! Has visto todo</span>
+                </div>
+              }
+            >
+              <div className="shadow p-3 mb-5 bg-white rounded">
+                <h3>
+                  <b>Titulo:</b>
+                  {recordatorio.nombre}
+                </h3>
+                <b>Categoria:</b>{" "}
+                <Badge color="info">{recordatorio.tipo}</Badge>
+                <br></br>
+                <b>Mascota:</b>
+                <Badge color="success">{recordatorio.mascota.nombre}</Badge>
+                <div>
+                <b>Fecha:</b>
+                  <em>
+                    {moment(new Date(recordatorio.fecha_expiracion)).fromNow()}
+                  </em>
+                </div>
+              </div>
+            </InfiniteScroll>
           ))
         ) : (
           <p>No hay recordatorios, agrega uno</p>

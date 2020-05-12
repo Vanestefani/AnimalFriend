@@ -32,7 +32,7 @@ const RecordatoriosState = (props) => {
     }
     try {
       const respuesta = await clienteAxios
-        .recordatorios("/api/recordatorio/addrecordatorio", datos)
+        .post("/api/recordatorio/addrecordatorio", datos)
         .then((response) => response.data);
       recordatoriosUsuario();
       dispatch({
@@ -57,7 +57,7 @@ const RecordatoriosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get("/api/recordatorio/recordatorios");
+      const respuesta = await clienteAxios.get("/api/recordatorio/recordtorios");
 
       dispatch({
         type:GET_RECORDATORIO_SUCCESS,
@@ -79,9 +79,7 @@ const RecordatoriosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.delete(
-        `/api/recordatorio/${recordatorioId}`
-      );
+      const respuesta = await clienteAxios.delete(`/api/recordatorio/${recordatorioId}`);
       recordatoriosUsuario();
       dispatch({
         type: RECORDATORIO_DELETE_SUCCESS,
@@ -105,9 +103,7 @@ const RecordatoriosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(
-        `/api/recordatorio/${recordatorioId}`
-      );
+      const respuesta = await clienteAxios.put(`/api/recordatorio/${recordatorioId}`);
       recordatoriosUsuario();
       dispatch({
         type: EDIT_RECORDATORIO_SUCCESS,

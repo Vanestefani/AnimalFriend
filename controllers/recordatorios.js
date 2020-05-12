@@ -16,7 +16,9 @@ exports.createRecordatorio = async (req, res) => {
     const mascota = req.body.mascota;
     const fecha_expiracion = req.body.fecha_expiracion;
 
+    const descripcion = req.body.descripcion;
     const completo = req.body.completo;
+
     const autor = req.body.autor;
 
     const newRecordatorios = new Recordatorios({
@@ -44,7 +46,7 @@ exports.RecordatoriosByUser = async (req, res) => {
       .populate("autor", "_id nombre ")
       .populate("mascota", "_id nombre foto")
       .then((recordatorios) => {
-        res.json({ recordatorios});
+        res.json({ recordatorios });
       })
       .catch((err) => {
         console.log(err);
