@@ -1,4 +1,3 @@
-
 const Post = require("../models/Post");
 
 const Notificacion = require("../models/Notificacion");
@@ -89,7 +88,7 @@ exports.like = async (req, res) => {
       if (err) {
         return res.status(422).json({ error: err });
       } else {
-        res.json(({result}));
+        res.json({ result });
       }
     });
   } catch (error) {
@@ -172,15 +171,12 @@ exports.deletepost = async (req, res) => {
 
 // Actualiza un
 exports.actualizarPost = async (req, res) => {
-  // extraer la información del proyecto
-  const { descripcion } = req.body;
-  const nuevoPPost = {};
-
-  if (descripcion) {
-    nuevoPPost.descripcion = descripcion;
-  }
-
   try {
+    // extraer la información del proyecto
+    const nuevoPost = {};
+
+    nuevoPost.descripcion = req.body.descripcion;
+
     // revisar el ID
     let publicacion = await Post.findById(req.params.postId);
 
@@ -190,9 +186,10 @@ exports.actualizarPost = async (req, res) => {
     }
 
     // actualizar
-    publicacion = await Post.findByIdAndUpdate(
+    publicacion = await Post.findOneAndUpdate(
       { _id: req.params.postId },
-      { $set: nuevoPost },
+
+      nuevoPost,
       { new: true }
     );
 

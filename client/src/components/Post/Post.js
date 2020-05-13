@@ -30,7 +30,7 @@ function Post(props) {
   const postContext = useContext(PostContext);
   const {
     publicacionActual,
-
+    actualizarPost,
     makeComment,
     deletePost,
   } = postContext;
@@ -51,7 +51,7 @@ function Post(props) {
   const handleChange = (e) => {
     setEditarPost({
       ...posteditor,
-      texto: [e.target.value],
+      texto: e.target.value,
     });
   };
   const handleChangeCometario = (e) => {
@@ -68,11 +68,20 @@ function Post(props) {
       postId: postId,
     });
     setcomentarios({
-
-      comentario:"",
+      comentario: "",
     });
-
   };
+  const onSubmitPost = (e) => {
+    let postId = props.publicacion._id;
+    e.preventDefault();
+
+    actualizarPost({
+      descripcion: posteditor.texto,
+      postId: postId,
+    });
+    setModaPost(false);
+  };
+
   return (
     <>
       <Modal isOpen={modalEditar} toggle={() => setModaPost(false)}>
@@ -98,7 +107,7 @@ function Post(props) {
               value={posteditor.texto}
               onChange={handleChange}
             />
-            <Button variant="contained" color="primary">
+            <Button onClick={onSubmitPost} variant="contained" color="primary">
               Editar
             </Button>
           </Form>

@@ -8,6 +8,8 @@ import tokenAuth from "../../config/token";
 import {
   ADD_POST_SUCCESS,
   ADD_POST_FAILURE,
+  EDIT_POST_SUCCESS,
+  EDIT_POST_FAILURE,
   GET_POST,
   GET_POST_ERROR,
   LIKE_POST,
@@ -197,7 +199,6 @@ const PostState = (props) => {
         type: LIKE,
         payload: respuesta.data.likes,
       });
-     
     } catch (error) {
       console.log(error);
 
@@ -210,6 +211,31 @@ const PostState = (props) => {
       });
     }
   };
+  const actualizarPost = async (datos) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.put(`/api/post/${datos.postId}`,datos);
+      allpost();
+      dispatch({
+        type: EDIT_POST_SUCCESS,
+        payload: respuesta.data,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: EDIT_POST_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -224,6 +250,7 @@ const PostState = (props) => {
         getlikes,
         publicacion: state.publicacion,
         likes: state.likes,
+        actualizarPost,
       }}
     >
       {props.children}

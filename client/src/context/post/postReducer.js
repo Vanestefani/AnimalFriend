@@ -14,6 +14,8 @@ import {
   PUBLICACION_ACTUAL,
   LIKE,
   LIKE_ERROR,
+  EDIT_POST_SUCCESS,
+  EDIT_POST_FAILURE,
 } from "../../types";
 
 export default (state, action) => {
@@ -24,6 +26,7 @@ export default (state, action) => {
         publicaciones: action.payload,
       };
     case LIKE_POST:
+    case EDIT_POST_SUCCESS:
     case ADD_POST_SUCCESS:
     case DISLIKE_POST:
     case INIT_COMMENT:
@@ -33,6 +36,8 @@ export default (state, action) => {
         mensaje: null,
       };
     case GET_POST_ERROR:
+
+    case EDIT_POST_FAILURE:
     case LIKE_POST_ERROR:
     case ADD_POST_FAILURE:
     case DISLIKE_POST_ERROR:
