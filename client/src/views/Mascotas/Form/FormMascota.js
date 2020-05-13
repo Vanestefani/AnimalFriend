@@ -14,11 +14,16 @@ import {
   InputGroupText,
   InputGroup,
 } from "reactstrap";
-
+import Gato from "../breed/gato";
+import Perro from "../breed/perro";
+import Ave from "../breed/ave";
+import Barnyard from "../breed/barnyard";
+import Caballo from "../breed/Caballo";
+import Reptil from "../breed/Reptil";
+import Roedor from "../breed/Roedor";
 import MascotasContext from "../../../context/mascotas/mascotasContext";
 import AuthContext from "../../../context/autenticacion/authContext";
-import petfinder from "../../../config/petfinder.js";
-import { ANIMALS } from "petfinder-client";
+
 import "react-image-crop/dist/ReactCrop.css";
 function FormMascota(props) {
   //imgen parametros
@@ -36,7 +41,13 @@ function FormMascota(props) {
   //modal
   const [modalMascotas, setModal1] = React.useState(false);
   //previw imagen
-  let imgPreview;
+  let imgPreview = (
+    <img
+      width="100px"
+      src={require("../../../assets/img/undraw_Cautious_dog_q83f.png")}
+      alt=""
+    />
+  );
   if (props.archivoImagen) {
     let preview = URL.createObjectURL(props.archivoImagen);
     imgPreview = <img width="100px" src={preview} alt="" />;
@@ -97,61 +108,24 @@ function FormMascota(props) {
           alt=""
         />
       );
-    } else if (props.Fmascota.especie === "Cerdo") {
-      imgPreview = (
-        <img
-          width="100px"
-          src={require("../../../assets/img/undraw_Savings_dwkw.svg")}
-          alt=""
-        />
-      );
     }
   }
-  const traducir = (especie) => {
-    switch (especie) {
-      case "dog":
-        return "Perro";
-      case "cat":
-        return "Gato";
-      case "bird":
-        return "Ave";
-      case "barnyard":
-        return "Animal de corral";
-      case "reptile":
-        return "Reptil";
-      case "smallfurry":
-        return "Roedor";
-      case "horse":
-        return "Caballo";
-      case "pig":
-        return "Cerdo";
-    }
-  };
-  //cargar razaas
-  const getBreeds = () => {
-    if (props.Fmascota.especie) {
-      petfinder.breed
-        .list({ animal: props.Fmascota.especie })
-        .then((data) => {
-          if (
-            data.petfinder &&
-            data.petfinder.breeds &&
-            Array.isArray(data.petfinder.breeds.breed)
-          ) {
-            this.setState({
-              breeds: data.petfinder.breeds.breed,
-            });
-          } else {
-            this.setState({ breeds: [] });
-          }
-        })
-        .catch(console.error);
-    } else {
-      this.setState({
-        breeds: [],
-      });
-    }
-  };
+  let breed;
+  if (props.Fmascota.especie === "Gato") {
+    breed = <Gato></Gato>;
+  } else if (props.Fmascota.especie === "Perro") {
+    breed = <Perro></Perro>;
+  } else if (props.Fmascota.especie === "Ave") {
+    breed = <Ave></Ave>;
+  } else if (props.Fmascota.especie === "Animal de corral") {
+    breed = <Barnyard></Barnyard>;
+  } else if (props.Fmascota.especie === "Reptil") {
+    breed = <Reptil></Reptil>;
+  } else if (props.Fmascota.especie === "Roedor") {
+    breed = <Roedor></Roedor>;
+  } else if (props.Fmascota.especie === "Caballo") {
+    breed = <Caballo></Caballo>;
+  }
   return (
     <>
       <Button small onClick={() => setModal1(true)}>
@@ -219,11 +193,13 @@ function FormMascota(props) {
                     defaultValue={props.Fmascota.especie}
                     required
                   >
-                    {ANIMALS.map((especie) => (
-                      <option key={especie} value={traducir(especie)}>
-                        {traducir(especie)}
-                      </option>
-                    ))}
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Ave">Ave</option>
+                    <option value="Animal de corral">Animal de corral</option>
+                    <option value="Reptil">Reptil</option>
+                    <option value="Roedor">Roedor</option>
+                    <option value="Caballo">Caballo</option>
                   </Input>
                 </InputGroup>
               </Col>
@@ -250,8 +226,7 @@ function FormMascota(props) {
                     defaultValue={props.Fmascota.raza}
                     required
                   >
-                    <option selected="">Elija una raza</option>
-                    <option>Criollo</option>
+                    {breed}
                   </Input>
                 </InputGroup>
               </Col>

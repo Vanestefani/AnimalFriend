@@ -36,7 +36,7 @@ function MisMascota() {
   //state mascota
   const [Fmascota, guardarMascota] = useState({
     nombreMascota: "",
-    especie: "",
+    especie: "Perro",
     raza: "",
     generoMascota: "",
     fechanacimiento: "",
@@ -58,6 +58,7 @@ function MisMascota() {
       ...Fmascota,
       [e.target.name]: e.target.value,
     });
+    getBreeds(especie);
   };
 
   //error state
@@ -95,6 +96,12 @@ function MisMascota() {
       formData.append("propietario", userid);
       addMascotas(formData);
       console.log("no esta vacio");
+    }
+  };
+
+  //cargar razaas
+  const getBreeds = (especie) => {
+    if (Fmascota.especie) {
     }
   };
   return (
