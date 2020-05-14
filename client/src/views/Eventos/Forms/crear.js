@@ -18,8 +18,8 @@ import EventosContex from "../../../context/eventos/eventosContex";
 import AuthContext from "../../../context/autenticacion/authContext";
 
 function CrearEventos(props) {
-    const authContext = useContext(AuthContext);
-    const { usuario } = authContext;
+  const authContext = useContext(AuthContext);
+  const { usuario } = authContext;
   const EContex = useContext(EventosContex);
   const { addEventos } = EContex;
   const [modalEventos, setModal1] = React.useState(false);
@@ -58,7 +58,6 @@ function CrearEventos(props) {
     let userid = usuario._id;
 
     if (AarchivoImagen === null || titulo === "") {
-
       console.log("esta vacio");
     } else {
       let formData = new FormData();
@@ -70,7 +69,8 @@ function CrearEventos(props) {
       formData.append("descripcion", descripcion);
       formData.append("autor", userid);
       addEventos(formData);
-    }}
+    }
+  };
   return (
     <>
       <Button small onClick={() => setModal1(true)}>
@@ -107,69 +107,63 @@ function CrearEventos(props) {
                 required
               ></Input>
             </InputGroup>
-            <Row>
-              <Col md="3">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i class="fab fa-microsoft"></i>
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Elige la Categoria del evento"
-                    type="select"
-                    id="categoria"
-                    name="categoria"
-                    onChange={onChange}
-                    defaultValue={AEnventos.categoria}
-                    required
-                  >
-                    <option value="Vacunas">Vacunas</option>
-                    <option value="Estelirizacion">Estelirizacion</option>
-                    <option value="Caminatas">Caminatas</option>
-                    <option value="Concursos">Concursos</option>
-                  </Input>
-                </InputGroup>
-              </Col>
 
-              <Col md="3">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i class="fas fa-kiwi-bird"></i>
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    type="datetime-local"
-                    id="fecha_inicio"
-                    name="fecha_inicio"
-                    placeholder={AEnventos.fecha_inicio}
-                    onChange={onChange}
-                    defaultValue={AEnventos.fecha_inicio}
-                    required
-                  ></Input>
-                </InputGroup>
-              </Col>
-              <Col md="3">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i class="fas fa-kiwi-bird"></i>
-                      <i class="fas fa-flag"></i>
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    type="datetime-local"
-                    id="fecha_finalizacion"
-                    name="fecha_finalizacion"
-                    placeholder={AEnventos.fecha_finalizacion}
-                    onChange={onChange}
-                    defaultValue={AEnventos.fecha_finalizacion}
-                    required
-                  ></Input>
-                </InputGroup>
-              </Col>
-            </Row>
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">
+                <InputGroupText>
+                  <i class="fab fa-microsoft"></i>
+                </InputGroupText>
+              </InputGroupAddon>
+              <Input
+                placeholder="Elige la Categoria del evento"
+                type="select"
+                id="categoria"
+                name="categoria"
+                onChange={onChange}
+                defaultValue={AEnventos.categoria}
+                required
+              >
+                <option value="Vacunas">Vacunas</option>
+                <option value="Estelirizacion">Estelirizacion</option>
+                <option value="Caminatas">Caminatas</option>
+                <option value="Concursos">Concursos</option>
+              </Input>
+            </InputGroup>
+
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">
+                <InputGroupText>
+                  <i class="fas fa-kiwi-bird"></i>
+                </InputGroupText>
+              </InputGroupAddon>
+              <Input
+                type="datetime-local"
+                id="fecha_inicio"
+                name="fecha_inicio"
+                placeholder={AEnventos.fecha_inicio}
+                onChange={onChange}
+                defaultValue={AEnventos.fecha_inicio}
+                required
+              ></Input>
+            </InputGroup>
+
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">
+                <InputGroupText>
+                  <i class="fas fa-flag"></i>
+                </InputGroupText>
+              </InputGroupAddon>
+              <Input
+                type="datetime-local"
+                id="fecha_finalizacion"
+                name="fecha_finalizacion"
+                placeholder={AEnventos.fecha_finalizacion}
+                onChange={onChange}
+                defaultValue={AEnventos.fecha_finalizacion}
+                required
+              ></Input>
+            </InputGroup>
+
             <Input
               type="textarea"
               id="descripcion"

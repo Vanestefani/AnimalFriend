@@ -32,7 +32,7 @@ const EventosState = (props) => {
     }
     try {
       const respuesta = await clienteAxios
-        .eventos("/api/evento/addevento", datos)
+        .eventos("/api/eventos/addevento", datos)
         .then((response) => response.data);
       eventosUsuario();
       dispatch({
@@ -56,7 +56,7 @@ const EventosState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.get(
-        "/api/evento/eventos"
+        "/api/eventos/getneventos"
       );
 
       dispatch({
@@ -81,7 +81,7 @@ const EventosState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.delete(
-        `/api/evento/${eventoId}`
+        `/api/eventos/${eventoId}`
       );
       eventosUsuario();
       dispatch({
@@ -107,7 +107,7 @@ const EventosState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.put(
-        `/api/evento/${eventoId}`
+        `/api/eventos/${eventoId}`
       );
       eventosUsuario();
       dispatch({

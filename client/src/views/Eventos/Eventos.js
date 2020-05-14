@@ -63,13 +63,16 @@ function Eventos() {
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
-                  {eventos.length === 0 ? (
+                  {
+                  eventos?
+
+                  eventos.length === 0 ? (
                     <p>No hay eventos, añade uno </p>
                   ) : (
                     eventos.map((evento) => (
                       <Itemevento key={evento._id} evento={evento}></Itemevento>
                     ))
-                  )}
+                  ): <p>No hay eventos, añade uno </p>}
                 </CardBody>
               </Card>
             </Col>

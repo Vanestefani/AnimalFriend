@@ -50,21 +50,16 @@ function FormEditarEventos(props) {
   } = BEventos;
   const onSubmit = (e) => {
     e.preventDefault();
-    e.target.className += " was-validated";
 
-    if (archivoImagen === null || titulo === "") {
+    let formData = new FormData();
+    formData.append("imagen", archivoImagen, archivoImagen.name);
+    formData.append("titulo", titulo);
+    formData.append("categoria", categoria);
+    formData.append("fecha_inicio", fecha_inicio);
+    formData.append("fecha_finalizacion", fecha_finalizacion);
+    formData.append("descripcion", descripcion);
 
-    } else {
-      let formData = new FormData();
-      formData.append("imagen", archivoImagen, archivoImagen.name);
-      formData.append("titulo", titulo);
-      formData.append("categoria", categoria);
-      formData.append("fecha_inicio", fecha_inicio);
-      formData.append("fecha_finalizacion", fecha_finalizacion);
-      formData.append("descripcion", descripcion);
-
-      actualizarEventos(formData);
-    }
+    actualizarEventos(formData);
   };
   return (
     <>
@@ -174,23 +169,20 @@ function FormEditarEventos(props) {
               defaultValue={BEventos.descripcion}
               required
             ></Input>
-            <Row>
-              <Col md="6">
-                <Input
-                  accept={acceptedFileTypes}
-                  id="fotoEvento"
-                  name="fotoEvento"
-                  type="file"
-                  onChange={(e) => guardararchivoImagen(e.target.files[0])}
-                  defaultValue={archivoImagen}
-                  ref={imageInputRef}
-                ></Input>
-              </Col>
-            </Row>
+
+            <Input
+              accept={acceptedFileTypes}
+              id="fotoEvento"
+              name="fotoEvento"
+              type="file"
+              onChange={(e) => guardararchivoImagen(e.target.files[0])}
+              defaultValue={archivoImagen}
+              ref={imageInputRef}
+            ></Input>
           </div>
         </ModalBody>
         <div className="modal-footer">
-          <Button color="sucess" type="button" onClick={onSubmit}>
+          <Button color="sucess"  onClick={onSubmit}>
             <i className="fas fa-paper-plane"></i> Enviar
           </Button>
           <Button color="danger" type="button" onClick={() => setModal1(false)}>
