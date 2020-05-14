@@ -50,6 +50,20 @@ exports.eventoByUser = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+exports.evento = async (req, res) => {
+  try {
+    Eventos.findOne({_id: req.params.eventosId})
+      .populate("autor", "_id nombre ")
+      .then((evento) => {
+        res.json({ evento });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 exports.alleventos = async (req, res) => {
   try {
     Eventos.find()
@@ -68,7 +82,7 @@ exports.alleventos = async (req, res) => {
 
 exports.deleteeventoss = async (req, res) => {
   try {
-    Eventos.findOne({ _id: req.params.eventosId })
+    Eventos.find({ _id: req.params.eventosId })
       .populate("autor", "_id")
       .exec((err, eventos) => {
         if (err || !eventos) {

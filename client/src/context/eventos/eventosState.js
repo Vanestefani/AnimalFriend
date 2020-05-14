@@ -14,6 +14,8 @@ import {
   GET_EVENTOS_FAILURE,
   GET_EVENTOS_SUCCESS,
   EVENTOS_DELETE_FAILURE,
+  EVENTO_SUCCESS,
+  EVENTO_FAILURE
 } from "../../types";
 
 const EventosState = (props) => {
@@ -119,6 +121,31 @@ const EventosState = (props) => {
       });
     }
   };
+  const getevento = async (eventoId) => {
+    const token = localStorage.getItem("token");
+    console.log(eventoId);
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.get(`/api/eventos/evento/${eventoId}`);
+
+      dispatch({
+        type: EVENTO_SUCCESS,
+        payload: respuesta.data.evento,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: EVENTO_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
   const actualizarEventos = async (eventoId) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -143,7 +170,6 @@ const EventosState = (props) => {
       });
     }
   };
-
   return (
     <EventosContext.Provider
       value={{
@@ -154,7 +180,7 @@ const EventosState = (props) => {
         mensaje: state.mensaje,
         eventos: state.eventos,
         evento: state.evento,
-        alleventos,
+        alleventos,getevento
       }}
     >
       {props.children}

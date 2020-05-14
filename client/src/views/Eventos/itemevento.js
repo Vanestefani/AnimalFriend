@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -37,7 +38,9 @@ function Itemevento(props) {
               <CardTitle>{props.evento.titulo}</CardTitle>
               <CardSubtitle>{props.evento.categoria}</CardSubtitle>
               <CardText>{props.evento.descripcion}</CardText>
-              <Button>Ver mas</Button>
+              <Link to={"/evento/"+props.evento._id} className="btn btn-info">
+                Ver más
+              </Link>
             </CardBody>
           </Card>
         </Col>

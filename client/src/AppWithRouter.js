@@ -42,6 +42,8 @@ const MessengerPage = lazy(() => import("./views/Messenger/MessengerPage"));
 const Recordatorio = lazy(() => import("./views/Recordatorios/Recordatorio"));
 const Anuncios = lazy(() => import("./views/Anuncios/Anuncios"));
 const Eventos = lazy(() => import("./views/Eventos/Eventos"));
+const Evento = lazy(() => import("./views/Eventos/Evento"));
+
 const Negocios = lazy(() => import("./views/Negocios/Negocios"));
 
 const ExplorarPage = lazy(() => import("./views/ExplorarPage"));
@@ -86,7 +88,11 @@ const AppWithRouter = () => (
                           component={Verificado}
                         />
 
-                        <PrivateRoute exact path="/myperfil" component={MyPerfil} />
+                        <PrivateRoute
+                          exact
+                          path="/myperfil"
+                          component={MyPerfil}
+                        />
 
                         <PrivateRoute
                           exact
@@ -116,6 +122,10 @@ const AppWithRouter = () => (
                           component={Eventos}
                         />
                         <PrivateRoute
+                          path="/evento/:eventoId"
+                          component={Evento}
+                        />
+                        <PrivateRoute
                           exact
                           path="/negocios"
                           component={Negocios}
@@ -136,7 +146,7 @@ const AppWithRouter = () => (
                           path="/mascotas"
                           component={Mascotas}
                         />
-                         <PrivateRoute
+                        <PrivateRoute
                           exact
                           path="/mis-mascotas"
                           component={MisMascotas}

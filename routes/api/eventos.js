@@ -9,7 +9,8 @@ router.post("/addevento",upload, checkAuth, validate, eventosController.createev
 //eventos usuario autenticado
 router.get("/getneventos", checkAuth, validate, eventosController.eventoByUser);
 //todos los eventos
-router.get("/alleventos", checkAuth, validate, eventosController.eventoByUser);
+router.get("/alleventos", checkAuth, validate, eventosController.alleventos);
+router.get("/evento/:eventosId", checkAuth, validate, eventosController.evento);
 
 router.delete(
   "/:eventoId",
