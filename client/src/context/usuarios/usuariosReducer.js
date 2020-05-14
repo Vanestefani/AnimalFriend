@@ -13,7 +13,7 @@ export default (state, action) => {
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,
-        result_user: action.payload.users,
+        usuarioactual: action.payload,
         mensaje: { msg: action.payload.message, categoria: "success" },
       };
     case BUSCAR_USUARIO_ERROR:

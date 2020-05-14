@@ -23,6 +23,7 @@ import {
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
 import Like from "./Likes";
+import { Link } from "react-router-dom";
 function Post(props) {
   const authContext = useContext(AuthContext);
   const { usuario } = authContext;
@@ -146,16 +147,20 @@ function Post(props) {
             </div>
           </CardTitle>
           <div className="media d-block d-md-flex mt-4">
-            <img
-              className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3  pull-left"
-              src={props.publicacion.autor.fotoPerfil}
-              width="80px"
-            />
+            <Link to={"/perfil/" + props.publicacion.autor._id}>
+              <img
+                className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3  pull-left"
+                src={props.publicacion.autor.fotoPerfil}
+                width="80px"
+              />
+            </Link>
             <div className="media-body text-center text-md-left ml-md-3 ml-0  pull-left">
               <div className="pull-left">
-                <p className="font-weight-bold my-0">
-                  {props.publicacion.autor.nombre}
-                </p>
+                <Link to={"/perfil/" + props.publicacion.autor._id}>
+                  <p className="font-weight-bold my-0">
+                    {props.publicacion.autor.nombre}
+                  </p>
+                </Link>
                 <p>{props.publicacion.fecha_creacion}</p>
               </div>
             </div>
@@ -178,12 +183,14 @@ function Post(props) {
           {props.publicacion.comments.map((record) => {
             return (
               <h6 key={record._id}>
-                <Badge color="info">
-                  {" "}
-                  <span style={{ fontWeight: "500" }}>
-                    {record.autor.nombre}
-                  </span>
-                </Badge>
+                <Link to={"/perfil/" + usuario._id}>
+                  <Badge color="info">
+                    {" "}
+                    <span style={{ fontWeight: "500" }}>
+                      {record.autor.nombre}
+                    </span>
+                  </Badge>
+                </Link>
                 {record.text}
               </h6>
             );

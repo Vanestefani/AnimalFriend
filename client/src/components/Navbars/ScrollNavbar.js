@@ -66,7 +66,7 @@ function ScrollNavbar() {
         <Container>
           <div className="navbar-translate">
             <NavbarBrand href="#" id="navbar-brand">
-              <Link to="/home">
+            <Link to={"/perfil/"+usuario._id}>
                 <img
                   width="200px"
                   alt="..."
@@ -182,6 +182,7 @@ function ScrollNavbar() {
                     href="#"
                     nav
                   >
+
                     <img
                       src={usuario.fotoPerfil}
                       className="rounded-circle FotoUser"
@@ -189,7 +190,7 @@ function ScrollNavbar() {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Link to="/myperfil" className="text-dark">
+                      <Link to={"/perfil/"+usuario._id} className="text-dark">
                         <i className="fas fa-user-astronaut"></i>
                         Perfil
                       </Link>

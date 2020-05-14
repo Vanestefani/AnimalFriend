@@ -8,7 +8,6 @@ import tokenAuth from "../../config/token";
 import {
   BUSCAR_USUARIO,
   BUSCAR_USUARIO_ERROR,
-  GETUSER_REQUEST,
   GETUSER_SUCCESS,
   GETUSER_FAILURE,
 } from "../../types";
@@ -17,6 +16,7 @@ const UsuariosState = (props) => {
   const initialState = {
     token: null,
     result_user: null,
+    usuarioactual: "",
     mensaje: null,
     cargando: true,
   };
@@ -47,6 +47,27 @@ const UsuariosState = (props) => {
       });
     }
   };
+  //user show
+  const Showuserid = async (id) => {
+    try {
+      const respuesta = await clienteAxios.get(`api/user/${id}`);
+
+      dispatch({
+        type: BUSCAR_USUARIO,
+        payload: respuesta.data.user,
+      });
+    } catch (error) {
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+
+      dispatch({
+        type: BUSCAR_USUARIO_ERROR,
+        payload: alerta,
+      });
+    }
+  };
   const getUserData = async (queryParams) => {
     try {
       const respuesta = await clienteAxios.post(
@@ -55,7 +76,7 @@ const UsuariosState = (props) => {
       );
 
       dispatch({
-        type:  GETUSER_SUCCESS,
+        type: GETUSER_SUCCESS,
         payload: respuesta.data,
       });
     } catch (error) {
@@ -65,7 +86,7 @@ const UsuariosState = (props) => {
       };
 
       dispatch({
-        type:  GETUSER_FAILURE,
+        type: GETUSER_FAILURE,
         payload: alerta,
       });
     }
@@ -78,6 +99,8 @@ const UsuariosState = (props) => {
         getUserData,
         token: state.token,
         result_user: state.result_user,
+        usuarioactual: state.usuarioactual,
+        Showuserid
       }}
     >
       {props.children}

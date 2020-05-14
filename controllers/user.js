@@ -646,13 +646,13 @@ exports.getUserPosts = (req, res, next) => {
 };
 exports.searchUsersByNombre = (req, res) => {
   if (req.body.q) {
-    User.find({
-      id: req.body.q,
+    User.findById({
+      _id: req.body.q,
     })
       .limit(10)
       .select("nombre fotoPerfil pais ciudad genero bio   ")
-      .then((users) => {
-        return res.status(200).json({ users });
+      .then((user) => {
+        return res.status(200).json({ user });
       })
       .catch((err) => res.status(500).json({ message: err.message }));
   }

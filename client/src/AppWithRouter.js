@@ -35,7 +35,8 @@ const OlvidadoContraseñaPage = lazy(() =>
 const NotFound = lazy(() => import("./views/NotFound"));
 //pages
 const Home = lazy(() => import("./views/Home/home"));
-const MyPerfil = lazy(() => import("./views/Perfil/perfilUserAutenticado"));
+const Perfil = lazy(() => import("./views/Perfil/perfil"));
+
 const Verificado = lazy(() => import("./views/auth/verificado"));
 
 const MessengerPage = lazy(() => import("./views/Messenger/MessengerPage"));
@@ -88,12 +89,7 @@ const AppWithRouter = () => (
                           component={Verificado}
                         />
 
-                        <PrivateRoute
-                          exact
-                          path="/myperfil"
-                          component={MyPerfil}
-                        />
-
+                        <PrivateRoute path="/perfil/:q" component={Perfil} />
                         <PrivateRoute
                           exact
                           path="/messages/chat"

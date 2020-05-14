@@ -33,11 +33,11 @@ function ProfilePageHeader(props) {
             <img
               className=" photo-container rounded-circle FotoUser"
               alt="..."
-              src={props.usuario.fotoPerfil}
+              src={props.dato.fotoPerfil}
             ></img>
           </div>
-          <h3 className="title">{props.usuario.nombre}</h3>
-          <p className="category">{props.usuario.pais}</p>
+          <h3 className="title">{props.dato.nombre}</h3>
+          <p className="category">{props.dato.pais}</p>
           <div className="content">
             <div className="social-description">
               <h2>26</h2>

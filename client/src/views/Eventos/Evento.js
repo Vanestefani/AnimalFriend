@@ -21,11 +21,7 @@ import {
 
 import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
-import VerticalMenu from "../../components/Navbars/VerticalMenu";
-import ListMascotas from "../../components/Listas/ListMascotas";
-import SubMenu from "../../components/Navbars/SubMenu";
 
-import CategoriasEventosNavbar from "../../components/Navbars/CategoriasEventosNavbar";
 import { Link } from "react-router-dom";
 import EventosContex from "../../context/eventos/eventosContex";
 
@@ -76,18 +72,23 @@ function Eventos({ match }) {
                 </CardBody>
                 <CardFooter>
                   <Media>
-                    <Media left top href="#">
-                      <Media
-                        object
-                        width="64px"
-                        src={evento.autor.fotoPerfil}
-                        alt="Generic placeholder image"
-                      />
-                    </Media>
+                    <Link to={"/perfil/" + evento.autor._id}>
+                      <Media left top href="#">
+                        <Media
+                          object
+                          width="64px"
+                          src={evento.autor.fotoPerfil}
+                          alt="Generic placeholder image"
+                        />
+                      </Media>
+                    </Link>
+
                     <Media body>
                       <Media heading>
-                        <b>Autor :</b>
-                        {evento.autor.nombre}
+                        <Link to={"/perfil/" + evento.autor._id}>
+                          <b>Autor :</b>
+                          {evento.autor.nombre}
+                        </Link>
                       </Media>
                       <Button>Seguir</Button>
                     </Media>

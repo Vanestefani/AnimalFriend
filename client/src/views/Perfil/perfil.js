@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useContext } from "react";
 
 // reactstrap components
 import {
@@ -22,11 +22,21 @@ import SubMenu from "../../components/Navbars/SubMenu";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import Vistaprevi from "../../components/Galeria/vistaprevi";
-import ListaAnuncio from '../../components/Listas/Anuncios/ListaAnuncio';
+import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
 
 import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores";
-function Perfil() {
-  const [pills, setPills] = React.useState("2");
+
+import UsuarioContext from "../../context/usuarios/usuarioContext";
+
+function Perfil({ match }) {
+  const UContext = useContext(UsuarioContext);
+  const { Showuserid, usuarioactual } = UContext;
+  useEffect(() => {
+    const detailuserid = match.params.q;
+    Showuserid(detailuserid);
+  }, []);
+  let pageHeader = React.createRef();
+
   React.useEffect(() => {
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");
@@ -41,7 +51,7 @@ function Perfil() {
     <>
       <ScrollNavbar />
       <div className="wrapper">
-        <ProfilePageHeader></ProfilePageHeader>
+        <ProfilePageHeader dato={usuarioactual}></ProfilePageHeader>
         <div className="section">
           <Container>
             <div className="button-container">
@@ -50,12 +60,11 @@ function Perfil() {
               </Button>
             </div>
             <h3 className="title">Sobre mi</h3>
-            <h5 className="description">
-              An artist of considerable range, Ryan — the name taken by
-              Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-              and records all of his own music, giving it a warm, intimate feel
-              with a solid groove structure. An artist of considerable range.
-            </h5>
+            {usuarioactual.bio != "" ? (
+              <h5 className="description">{usuarioactual.bio}</h5>
+            ) : (
+              ""
+            )}
           </Container>
           <div className="wrapper">
             <Container>
@@ -70,8 +79,8 @@ function Perfil() {
                   <PostList></PostList>
                 </Col>
                 <Col md="3">
-<Vistaprevi></Vistaprevi>
-<ListaAnuncio></ListaAnuncio>
+                  <Vistaprevi></Vistaprevi>
+                  <ListaAnuncio></ListaAnuncio>
                 </Col>
               </Row>
             </Container>
