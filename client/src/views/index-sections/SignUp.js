@@ -46,7 +46,7 @@ function SignUp() {
                     <Button
                       className="btn-neutral btn-icon btn-round"
                       color="facebook"
-                      href="#pablo"
+                      href="#AnimalFriend"
                       onClick={e => e.preventDefault()}
                     >
                       <i className="fab fa-facebook-square"></i>
@@ -54,7 +54,7 @@ function SignUp() {
                     <Button
                       className="btn-neutral btn-icon btn-round"
                       color="twitter"
-                      href="#pablo"
+                      href="#AnimalFriend"
                       onClick={e => e.preventDefault()}
                       size="lg"
                     >
@@ -63,7 +63,7 @@ function SignUp() {
                     <Button
                       className="btn-neutral btn-icon btn-round"
                       color="google"
-                      href="#pablo"
+                      href="#AnimalFriend"
                       onClick={e => e.preventDefault()}
                     >
                       <i className="fab fa-google-plus"></i>
@@ -127,7 +127,7 @@ function SignUp() {
                   <Button
                     className="btn-neutral btn-round"
                     color="info"
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                     size="lg"
                   >

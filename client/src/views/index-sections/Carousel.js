@@ -90,7 +90,7 @@ function CarouselSection() {
                 <Link
                   className="carousel-control-prev"
                   data-slide="prev"
-                  href="#pablo"
+                  href="#AnimalFriend"
                   onClick={e => {
                     e.preventDefault();
                     previous();
@@ -102,7 +102,7 @@ function CarouselSection() {
                 <Link
                   className="carousel-control-next"
                   data-slide="next"
-                  href="#pablo"
+                  href="#AnimalFriend"
                   onClick={e => {
                     e.preventDefault();
                     next();

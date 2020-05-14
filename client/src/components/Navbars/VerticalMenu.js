@@ -22,27 +22,26 @@ function VerticalMenu() {
               </Link>
             </NavLink>
 
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <Link to="/eventos">
                 <i className="fas fa-calendar-alt"></i>
                 Eventos
               </Link>
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <Link to="/negocios">
                 <i className="fas fa-store-alt"></i>
                 Negocios
               </Link>
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
-
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <Link to="/anuncios">
-              <i className="fas fa-map-marker-alt"></i>
+                <i className="fas fa-map-marker-alt"></i>
                 Anuncios
               </Link>
             </NavLink>
 
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <i className="fas fa-book"></i>
               Normatividad
             </NavLink>

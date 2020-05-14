@@ -132,7 +132,7 @@ function Post(props) {
                       Editar
                     </DropdownItem>
                     <DropdownItem
-                      href="#pablo"
+                      href="#AnimalFriend"
                       onClick={() => deletePost(props.publicacion._id)}
                     >
                       <i className="fas fa-trash-alt"></i>

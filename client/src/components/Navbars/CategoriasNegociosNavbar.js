@@ -10,23 +10,23 @@ function CategoriasNegociosNavbar() {
         <Container>
           <Nav className="flex-column" tag="nav">
             <h3>Categorias</h3>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <i class="fas fa-bone"></i>
               Comida
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <i class="fas fa-hat-wizard"></i>
               Ropa
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <i class="fas fa-volleyball-ball"></i>
               Juguetes
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <i class="fas fa-clinic-medical"></i>
               Veterinaria
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <i class="fas fa-cut"></i>
               Peluqueria
             </NavLink>

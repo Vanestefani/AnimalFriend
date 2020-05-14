@@ -10,27 +10,27 @@ function CategoriasAnunciosNavbar() {
         <Container>
           <Nav className="flex-column" tag="nav">
            <h3>Categorias</h3>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
             <i className="fas fa-thumbtack"></i>
              Mis anuncios
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
             <i className="fas fa-binoculars"></i>
              Mascotas perdidas
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
             <i className="fas fa-hand-holding-heart"></i>
              Adopciones
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
             <i className="fas fa-map-pin"></i>
               Animales encontrados
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
               <i className="fas fa-house-damage"></i>
               Adopciones
             </NavLink>
-            <NavLink href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
             <i className="far fa-grin-hearts"></i>
               Emparejar
             </NavLink>

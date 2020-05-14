@@ -38,7 +38,7 @@ function LandingPageHeader() {
               <Button
                 className="btn-icon btn-round"
                 color="info"
-                href="#pablo"
+                href="#AnimalFriend"
                 onClick={e => e.preventDefault()}
               >
                 <i className="fab fa-facebook-square"></i>
@@ -46,7 +46,7 @@ function LandingPageHeader() {
               <Button
                 className="btn-icon btn-round"
                 color="info"
-                href="#pablo"
+                href="#AnimalFriend"
                 onClick={e => e.preventDefault()}
               >
                 <i className="fab fa-twitter"></i>
@@ -54,7 +54,7 @@ function LandingPageHeader() {
               <Button
                 className="btn-icon btn-round"
                 color="info"
-                href="#pablo"
+                href="#AnimalFriend"
                 onClick={e => e.preventDefault()}
               >
                 <i className="fab fa-google-plus"></i>

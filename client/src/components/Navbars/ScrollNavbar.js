@@ -201,7 +201,7 @@ function ScrollNavbar() {
                       </Link>
                     </DropdownItem>
                     <DropdownItem
-                      href="#pablo"
+                      href="#AnimalFriend"
                       onClick={(e) => e.preventDefault()}
                     >
                       <i className="fas fa-cogs"></i>

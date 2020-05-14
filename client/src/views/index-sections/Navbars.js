@@ -30,7 +30,7 @@ function Navbars() {
               <h4>Menu</h4>
               <Navbar className="bg-primary" expand="lg">
                 <Container>
-                  <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+                  <NavbarBrand href="#AnimalFriend" onClick={e => e.preventDefault()}>
                     Menu
                   </NavbarBrand>
                   <button
@@ -49,7 +49,7 @@ function Navbars() {
                     <Nav navbar>
                       <NavItem className="active">
                         <NavLink
-                          href="#pablo"
+                          href="#AnimalFriend"
                           onClick={e => e.preventDefault()}
                         >
                           <p>Link</p>
@@ -57,7 +57,7 @@ function Navbars() {
                       </NavItem>
                       <NavItem>
                         <NavLink
-                          href="#pablo"
+                          href="#AnimalFriend"
                           onClick={e => e.preventDefault()}
                         >
                           <p>Link</p>
@@ -75,19 +75,19 @@ function Navbars() {
                         </DropdownToggle>
                         <DropdownMenu>
                           <DropdownItem
-                            href="#pablo"
+                            href="#AnimalFriend"
                             onClick={e => e.preventDefault()}
                           >
                             Action
                           </DropdownItem>
                           <DropdownItem
-                            href="#pablo"
+                            href="#AnimalFriend"
                             onClick={e => e.preventDefault()}
                           >
                             Another action
                           </DropdownItem>
                           <DropdownItem
-                            href="#pablo"
+                            href="#AnimalFriend"
                             onClick={e => e.preventDefault()}
                           >
                             Something else here
@@ -103,7 +103,7 @@ function Navbars() {
               <h4>Menu with Icons</h4>
               <Navbar className="bg-info" expand="lg">
                 <Container>
-                  <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+                  <NavbarBrand href="#AnimalFriend" onClick={e => e.preventDefault()}>
                     Icons
                   </NavbarBrand>
                   <button
@@ -123,7 +123,7 @@ function Navbars() {
                     <Nav className="ml-auto" navbar>
                       <NavItem>
                         <NavLink
-                          href="#pablo"
+                          href="#AnimalFriend"
                           onClick={e => e.preventDefault()}
                         >
                           <i
@@ -134,7 +134,7 @@ function Navbars() {
                       </NavItem>
                       <NavItem>
                         <NavLink
-                          href="#pablo"
+                          href="#AnimalFriend"
                           onClick={e => e.preventDefault()}
                         >
                           <i
@@ -147,7 +147,7 @@ function Navbars() {
                         <DropdownToggle
                           caret
                           color="default"
-                          href="#pablo"
+                          href="#AnimalFriend"
                           nav
                           onClick={e => e.preventDefault()}
                         >
@@ -161,33 +161,33 @@ function Navbars() {
                             Dropdown header
                           </DropdownItem>
                           <DropdownItem
-                            href="#pablo"
+                            href="#AnimalFriend"
                             onClick={e => e.preventDefault()}
                           >
                             Action
                           </DropdownItem>
                           <DropdownItem
-                            href="#pablo"
+                            href="#AnimalFriend"
                             onClick={e => e.preventDefault()}
                           >
                             Another action
                           </DropdownItem>
                           <DropdownItem
-                            href="#pablo"
+                            href="#AnimalFriend"
                             onClick={e => e.preventDefault()}
                           >
                             Something else here
                           </DropdownItem>
                           <div className="divider"></div>
                           <DropdownItem
-                            href="#pablo"
+                            href="#AnimalFriend"
                             onClick={e => e.preventDefault()}
                           >
                             Separated link
                           </DropdownItem>
                           <div className="divider"></div>
                           <DropdownItem
-                            href="#pablo"
+                            href="#AnimalFriend"
                             onClick={e => e.preventDefault()}
                           >
                             One more separated link
@@ -212,7 +212,7 @@ function Navbars() {
             <Navbar className="bg-primary" expand="lg">
               <Container>
                 <div className="navbar-translate">
-                  <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+                  <NavbarBrand href="#AnimalFriend" onClick={e => e.preventDefault()}>
                     Primary color
                   </NavbarBrand>
                   <button
@@ -232,19 +232,19 @@ function Navbars() {
                 <Collapse isOpen={collapseOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem className="active">
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="now-ui-icons objects_globe"></i>
                         <p>Discover</p>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="now-ui-icons users_circle-08"></i>
                         <p>Profile</p>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="now-ui-icons ui-1_settings-gear-63"></i>
                         <p>Settings</p>
                       </NavLink>
@@ -256,7 +256,7 @@ function Navbars() {
             <Navbar className="bg-info" expand="lg">
               <Container>
                 <div className="navbar-translate">
-                  <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+                  <NavbarBrand href="#AnimalFriend" onClick={e => e.preventDefault()}>
                     Info Color
                   </NavbarBrand>
                   <button
@@ -276,17 +276,17 @@ function Navbars() {
                 <Collapse isOpen={collapseOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem className="active">
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <p>Discover</p>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <p>Profile</p>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <p>Settings</p>
                       </NavLink>
                     </NavItem>
@@ -297,7 +297,7 @@ function Navbars() {
             <Navbar className="bg-success" expand="lg">
               <Container>
                 <div className="navbar-translate">
-                  <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+                  <NavbarBrand href="#AnimalFriend" onClick={e => e.preventDefault()}>
                     Success Color
                   </NavbarBrand>
                   <button
@@ -317,17 +317,17 @@ function Navbars() {
                 <Collapse isOpen={collapseOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem className="active">
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="now-ui-icons objects_globe"></i>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="now-ui-icons users_circle-08"></i>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="now-ui-icons ui-1_settings-gear-63"></i>
                       </NavLink>
                     </NavItem>
@@ -338,7 +338,7 @@ function Navbars() {
             <Navbar className="bg-warning" expand="lg">
               <Container>
                 <div className="navbar-translate">
-                  <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+                  <NavbarBrand href="#AnimalFriend" onClick={e => e.preventDefault()}>
                     Warning Color
                   </NavbarBrand>
                   <button
@@ -358,22 +358,22 @@ function Navbars() {
                 <Collapse isOpen={collapseOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-facebook-square"></i>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-twitter"></i>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-google-plus"></i>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-instagram"></i>
                       </NavLink>
                     </NavItem>
@@ -384,7 +384,7 @@ function Navbars() {
             <Navbar className="bg-danger" expand="lg">
               <Container>
                 <div className="navbar-translate">
-                  <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+                  <NavbarBrand href="#AnimalFriend" onClick={e => e.preventDefault()}>
                     Danger Color
                   </NavbarBrand>
                   <button
@@ -404,19 +404,19 @@ function Navbars() {
                 <Collapse isOpen={collapseOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-facebook-square"></i>
                         <p>Share</p>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-twitter"></i>
                         <p>Tweet</p>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-pinterest"></i>
                         <p>Pin</p>
                       </NavLink>
@@ -428,7 +428,7 @@ function Navbars() {
             <Navbar className="navbar-transparent" expand="lg">
               <Container>
                 <div className="navbar-translate">
-                  <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+                  <NavbarBrand href="#AnimalFriend" onClick={e => e.preventDefault()}>
                     Transparent
                   </NavbarBrand>
                   <button
@@ -448,19 +448,19 @@ function Navbars() {
                 <Collapse isOpen={collapseOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-facebook-square"></i>
                         <p>Facebook</p>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-twitter"></i>
                         <p>Twitter</p>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                      <NavLink href="#AnimalFriend" onClick={e => e.preventDefault()}>
                         <i className="fab fa-instagram"></i>
                         <p>Instagram</p>
                       </NavLink>

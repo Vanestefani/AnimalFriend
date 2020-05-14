@@ -37,14 +37,14 @@ function Post() {
                 ></DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={(e) => e.preventDefault()}
                   >
                     <i className="fas fa-edit"></i>
                     Editar
                   </DropdownItem>
                   <DropdownItem
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={(e) => e.preventDefault()}
                   >
                     <i className="fas fa-trash-alt"></i>

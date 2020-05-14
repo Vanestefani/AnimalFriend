@@ -24,7 +24,6 @@ import SubMenu from "../../components/Navbars/SubMenu";
 import CategoriasEventosNavbar from "../../components/Navbars/CategoriasEventosNavbar";
 import { Link } from "react-router-dom";
 import EventosContex from "../../context/eventos/eventosContex";
-import Crear from "./Forms/crear";
 import Editar from "./Forms/editar";
 import Itemevento from "./itemevento";
 
@@ -82,7 +81,7 @@ function Eventos() {
                 <CardHeader>
                   <CardTitle>
                     <h3>Eventos</h3>
-                    <Crear></Crear>
+
                   </CardTitle>
                 </CardHeader>
                 <CardBody>

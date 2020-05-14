@@ -48,7 +48,7 @@ function PaginationSection() {
                 <NavItem>
                   <NavLink
                     className={pills === "1" ? "active" : ""}
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => {
                       e.preventDefault();
                       setPills("1");
@@ -60,7 +60,7 @@ function PaginationSection() {
                 <NavItem>
                   <NavLink
                     className={pills === "2" ? "active" : ""}
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => {
                       e.preventDefault();
                       setPills("2");
@@ -72,7 +72,7 @@ function PaginationSection() {
                 <NavItem>
                   <NavLink
                     className={pills === "3" ? "active" : ""}
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => {
                       e.preventDefault();
                       setPills("3");
@@ -82,7 +82,7 @@ function PaginationSection() {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#pablo" disabled>
+                  <NavLink href="#AnimalFriend" disabled>
                     <i className="fa fa-exclamation"></i>
                   </NavLink>
                 </NavItem>
@@ -96,7 +96,7 @@ function PaginationSection() {
               >
                 <PaginationItem className="active">
                   <PaginationLink
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     1
@@ -104,7 +104,7 @@ function PaginationSection() {
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     2
@@ -112,7 +112,7 @@ function PaginationSection() {
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     3
@@ -120,7 +120,7 @@ function PaginationSection() {
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     4
@@ -128,7 +128,7 @@ function PaginationSection() {
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     5
@@ -139,7 +139,7 @@ function PaginationSection() {
                 <PaginationItem>
                   <PaginationLink
                     aria-label="Previous"
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     <span aria-hidden={true}>
@@ -152,7 +152,7 @@ function PaginationSection() {
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     1
@@ -160,7 +160,7 @@ function PaginationSection() {
                 </PaginationItem>
                 <PaginationItem className="active">
                   <PaginationLink
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     2
@@ -168,7 +168,7 @@ function PaginationSection() {
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     3
@@ -177,7 +177,7 @@ function PaginationSection() {
                 <PaginationItem>
                   <PaginationLink
                     aria-label="Next"
-                    href="#pablo"
+                    href="#AnimalFriend"
                     onClick={e => e.preventDefault()}
                   >
                     <span aria-hidden={true}>

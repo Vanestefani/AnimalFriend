@@ -85,7 +85,7 @@ function IndexNavbar() {
             <Nav navbar>
               <NavItem>
                 <NavLink
-                  href="#pablo"
+                  href="#AnimalFriend"
                   onClick={e => {
                     e.preventDefault();
                     document
@@ -101,7 +101,7 @@ function IndexNavbar() {
                 <DropdownToggle
                   caret
                   color="default"
-                  href="#pablo"
+                  href="#AnimalFriend"
                   nav
                   onClick={e => e.preventDefault()}
                 >
@@ -126,7 +126,7 @@ function IndexNavbar() {
                 <Button
                   className="nav-link btn-neutral"
                   color="info"
-                  href="#pablo"
+                  href="#AnimalFriend"
                   id="upgrade-to-pro"
                   onClick={e => e.preventDefault()}
                 >

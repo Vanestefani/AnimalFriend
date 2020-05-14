@@ -13,7 +13,7 @@ function ItemMascota(props) {
           ></img>
         </center>
         <p>{props.mascota.nombre}</p>
-        <Badge color="info" href="#pablo" onClick={(e) => e.preventDefault()}>
+        <Badge color="info" href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
           {props.mascota.especie}
         </Badge>
       </ListGroupItem>

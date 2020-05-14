@@ -71,7 +71,7 @@ function CrearEventos(props) {
   return (
     <>
       <Button small onClick={() => setModal1(true)}>
-        <i className="fas fa-plus"></i>
+        <i className="fas fa-plus"></i>Añadir Evento
       </Button>
 
       <Modal isOpen={modalEventos} toggle={() => setModal1(false)}>
