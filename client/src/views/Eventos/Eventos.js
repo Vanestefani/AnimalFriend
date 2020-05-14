@@ -49,7 +49,7 @@ function Eventos() {
   const onChangeSearch = (e) => {
     setbusqueda({
       ...busqueda,
-      [e.target.name]: e.target.value,
+      search: e.target.value,
     });
   };
   const items = eventos
@@ -81,14 +81,15 @@ function Eventos() {
                 <CardHeader>
                   <CardTitle>
                     <h3>Eventos</h3>
-
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Input
                     name="search"
                     type="search"
+                    id="search"
                     placeholder="Buscar eventos"
+                    value={search}
                     onChange={onChangeSearch}
                   ></Input>
                   {items.length === 0 ? (
@@ -100,7 +101,11 @@ function Eventos() {
               </Card>
             </Col>
             <Col md="3">
-              <CategoriasEventosNavbar></CategoriasEventosNavbar>
+              <CategoriasEventosNavbar
+                search={search}
+                busqueda={busqueda}
+                setbusqueda={setbusqueda}
+              ></CategoriasEventosNavbar>
             </Col>
           </Row>
         </Container>
