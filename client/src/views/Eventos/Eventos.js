@@ -10,6 +10,7 @@ import {
   CardHeader,
   Button,
   CardBody,
+  Input,
 } from "reactstrap";
 
 // core components
@@ -42,7 +43,29 @@ function Eventos() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
-
+  const [busqueda, setbusqueda] = useState({
+    search: "",
+  });
+  const { search } = busqueda;
+  const onChangeSearch = (e) => {
+    setbusqueda({
+      ...busqueda,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const items = eventos
+    .filter((data) => {
+      if (search == "") return data;
+      else if (
+        data.titulo.toLowerCase().includes(search.toLowerCase()) ||
+        data.categoria.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return data;
+      }
+    })
+    .map((data) => {
+      return <Itemevento key={data._id} evento={data}></Itemevento>;
+    });
   return (
     <>
       <HomeNarbar></HomeNarbar>
@@ -63,16 +86,17 @@ function Eventos() {
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
-                  {
-                  eventos?
-
-                  eventos.length === 0 ? (
+                  <Input
+                    name="search"
+                    type="search"
+                    placeholder="Buscar eventos"
+                    onChange={onChangeSearch}
+                  ></Input>
+                  {items.length === 0 ? (
                     <p>No hay eventos, añade uno </p>
                   ) : (
-                    eventos.map((evento) => (
-                      <Itemevento key={evento._id} evento={evento}></Itemevento>
-                    ))
-                  ): <p>No hay eventos, añade uno </p>}
+                    items
+                  )}
                 </CardBody>
               </Card>
             </Col>
