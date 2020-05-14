@@ -9,6 +9,11 @@ const RecordatoriosSchema = new mongoose.Schema({
     required: true,
     ref: "users",
   },
+  descripcion: {
+    type: String,
+    trim: true,
+    default: "",
+  },
   mascota: {
     type: mongoose.Schema.ObjectId,
     required: true,

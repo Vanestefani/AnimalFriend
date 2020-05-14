@@ -1,5 +1,3 @@
-
-
 const Eventos = require("../models/Eventos");
 
 exports.createeventos = async (req, res) => {
@@ -37,8 +35,7 @@ exports.createeventos = async (req, res) => {
 
 exports.eventoByUser = async (req, res) => {
   try {
-    Eventos
-      .find({ autor: req.user._id })
+    Eventos.find({ autor: req.user._id })
       .populate("autor", "_id nombre ")
       .then((evento) => {
         res.json({ evento });
@@ -53,8 +50,7 @@ exports.eventoByUser = async (req, res) => {
 
 exports.deleteeventoss = async (req, res) => {
   try {
-    Eventos
-      .findOne({ _id: req.params.eventosId })
+    Eventos.findOne({ _id: req.params.eventosId })
       .populate("autor", "_id")
       .exec((err, eventos) => {
         if (err || !eventos) {
@@ -77,7 +73,7 @@ exports.deleteeventoss = async (req, res) => {
 };
 exports.actualizareventoso = async (req, res) => {
   try {
-    let eventos = await Eventos.findById(req.params.id);
+    let eventos = await Eventos.findById(req.params.eventoId);
 
     if (!eventos) {
       return res.status(404).json({ msg: "No existe " });
@@ -90,7 +86,6 @@ exports.actualizareventoso = async (req, res) => {
     const descripcion = req.body.descripcion;
     const fecha_inicio = req.body.fecha_inicio;
     const fecha_finalizacion = req.body.fecha_finalizacion;
-    const privado = req.body.privado;
 
     const nuevaeventos = {};
     nuevaeventos.titulo = titulo;
@@ -101,7 +96,6 @@ exports.actualizareventoso = async (req, res) => {
     nuevaeventos.descripcion = descripcion;
     nuevaeventos.fecha_inicio = fecha_inicio;
     nuevaeventos.fecha_finalizacion = fecha_finalizacion;
-    nuevaeventos.privado = privado;
 
     // Guardar la tarea
     tarea = await eventos.findOneAndUpdate(

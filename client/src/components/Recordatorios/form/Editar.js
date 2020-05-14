@@ -19,15 +19,45 @@ import RecordatoriosContex from "../../../context/recordatorios/recordatoriosCon
 import AuthContext from "../../../context/autenticacion/authContext";
 
 import "react-image-crop/dist/ReactCrop.css";
-function FormRecordatorio(props) {
+function Editar(props) {
   const [modalMascotas, setModal1] = React.useState(false);
-
+  const rContext = useContext(RecordatoriosContex);
+  const { actualizarRecordatorios } = rContext;
   //modal
 
+  const [Frecordatorio, guardarrecordatorio] = useState({
+    descripcion: props.recordatorio.descripcion,
+    nombre: props.recordatorio.nombre,
+    tipo: props.recordatorio.tipo,
+    mascota: props.recordatorio.mascota._id,
+    fecha_expiracion: props.recordatorio.fecha_expiracion,
+  });
+  const onSubmitEditar = (e) => {
+    e.preventDefault();
+    e.target.className += " was-validated";
+
+    actualizarRecordatorios({
+      descripcion: Frecordatorio.descripcion,
+
+      nombre: Frecordatorio.nombre,
+      tipo: Frecordatorio.tipo,
+      mascota: Frecordatorio.mascota,
+      fecha_expiracion: Frecordatorio.fecha_expiracion,
+
+      recordatorioId: props.recordatorio._id,
+    });
+  };
+  const onChange = (e) => {
+    guardarrecordatorio({
+      ...Frecordatorio,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const dateref = useRef(props.recordatorio.fecha_expiracion);
   return (
     <>
-      <Button small onClick={() => setModal1(true)}>
-        <i className="fas fa-plus"></i>
+      <Button sm onClick={() => setModal1(true)}>
+        <i className="fas fa-edit"></i>
       </Button>
 
       <Modal isOpen={modalMascotas} toggle={() => setModal1(false)}>
@@ -55,8 +85,8 @@ function FormRecordatorio(props) {
                 type="text"
                 id="nombre"
                 name="nombre"
-                onChange={props.onChange}
-                defaultValue={props.Frecordatorio.nombre}
+                onChange={onChange}
+                defaultValue={Frecordatorio.nombre}
                 required
               ></Input>
             </InputGroup>
@@ -72,8 +102,8 @@ function FormRecordatorio(props) {
                 type="textarea"
                 id="descripcion"
                 name="descripcion"
-                onChange={props.onChange}
-                defaultValue={props.Frecordatorio.descripcion}
+                onChange={onChange}
+                defaultValue={Frecordatorio.descripcion}
               ></Input>
             </InputGroup>
 
@@ -88,9 +118,11 @@ function FormRecordatorio(props) {
                   <Input
                     type="datetime-local"
                     id="fecha_expiracion"
+                    ref={dateref}
                     name="fecha_expiracion"
-                    onChange={props.onChange}
-                    defaultValue={props.Frecordatorio.fecha_expiracion}
+                    placeholder={Frecordatorio.fecha_expiracion}
+                    onChange={onChange}
+                    defaultValue={Frecordatorio.fecha_expiracion}
                     required
                   ></Input>
                 </InputGroup>
@@ -107,8 +139,8 @@ function FormRecordatorio(props) {
                     type="select"
                     id="tipo"
                     name="tipo"
-                    onChange={props.onChange}
-                    defaultValue={props.Frecordatorio.tipo}
+                    onChange={onChange}
+                    defaultValue={Frecordatorio.tipo}
                     required
                   >
                     <option selected="">Elija una categoria</option>
@@ -139,8 +171,8 @@ function FormRecordatorio(props) {
                     type="select"
                     id="mascota"
                     name="mascota"
-                    onChange={props.onChange}
-                    defaultValue={props.Frecordatorio.mascota}
+                    onChange={onChange}
+                    defaultValue={Frecordatorio.mascota}
                     required
                   >
                     <option selected="">Elija una mascota</option>
@@ -149,7 +181,6 @@ function FormRecordatorio(props) {
                         {mascota.nombre}
                       </option>
                     ))}
-
                   </Input>
                 </InputGroup>
               </Col>
@@ -157,7 +188,7 @@ function FormRecordatorio(props) {
           </div>
         </ModalBody>
         <div className="modal-footer">
-          <Button color="sucess" type="button" onClick={props.onSubmit}>
+          <Button color="sucess" type="button" onClick={onSubmitEditar}>
             <i className="fas fa-paper-plane"></i> Enviar
           </Button>
           <Button color="danger" type="button" onClick={() => setModal1(false)}>
@@ -169,4 +200,4 @@ function FormRecordatorio(props) {
   );
 }
 
-export default FormRecordatorio;
+export default Editar;

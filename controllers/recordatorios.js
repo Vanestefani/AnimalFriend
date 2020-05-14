@@ -81,8 +81,8 @@ exports.deleterecordatorio = async (req, res) => {
 };
 exports.actualizarRecordatorio = async (req, res) => {
   try {
-    let recordatorio = await Recordatorios.findById(req.params.id);
-
+    let recordatorio = await Recordatorios.findById(req.params.recordatorioId);
+console.log(req.params.recordatorioId);
     if (!recordatorio) {
       return res.status(404).json({ msg: "No existe " });
     }
@@ -92,11 +92,10 @@ exports.actualizarRecordatorio = async (req, res) => {
     nuevorecordatorio.mascota = req.body.mascota;
     nuevorecordatorio.fecha_expiracion = req.body.fecha_expiracion;
     nuevorecordatorio.descripcion = req.body.descripcion;
-    nuevorecordatorio.completo = req.body.completo;
 
     // Guardar
     recordatorio = await Recordatorios.findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: req.params.recordatorioId },
       nuevorecordatorio,
       {
         new: true,

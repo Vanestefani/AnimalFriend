@@ -9,6 +9,7 @@ import {
   CardBody,
   FormGroup,
   Badge,
+  Button,
   CardTitle,
 } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -16,16 +17,24 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import RContext from "../../context/recordatorios/recordatoriosContex";
 import AlertaContext from "../../context/alertas/alertaContext";
 import FormRecordatorio from "./form/FormRecordatorio";
+import Editar from "./form/Editar";
+
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import moment from "moment";
-import 'moment/locale/es';
+import "moment/locale/es";
 
 function ListRecordatorios(props) {
   const mContext = useContext(MascotasContext);
   const { mascotas, mascotasUsuario } = mContext;
   const rContext = useContext(RContext);
-  const { addRecordatorios, recordatorios, recordatoriosUsuario } = rContext;
+  const {
+    addRecordatorios,
+    actualizarRecordatorios,
+    recordatorios,
+    recordatoriosUsuario,
+    deleteRecordatorios,
+  } = rContext;
   const alertaContext = useContext(AlertaContext);
   const { alerta, mostrarAlerta } = alertaContext;
 
@@ -75,7 +84,7 @@ function ListRecordatorios(props) {
         tipo: tipo,
         mascota: mascota,
         fecha_expiracion: fecha_expiracion,
-        completo: completo,
+
       });
       guardarrecordatorio({
         descripcion: "",
@@ -84,10 +93,10 @@ function ListRecordatorios(props) {
         mascota: "",
         fecha_expiracion: "",
 
-        completo: false,
       });
     }
   };
+
   useEffect(() => {
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);
@@ -106,7 +115,8 @@ function ListRecordatorios(props) {
     weekdaysShort: "Dom._Lun._Mar._Mier._Jue._Vier._Sab.".split("_"),
     weekdaysMin: "Do_Lu_Ma_Mi_Ju_Vi_Sa".split("_"),
   });
-  moment.locale('es');
+  moment.locale("es");
+
   return (
     <>
       <Card className="shadow p-3 mb-5 bg-white rounded">
@@ -123,20 +133,7 @@ function ListRecordatorios(props) {
 
         {recordatorios ? (
           recordatorios.map((recordatorio) => (
-            <InfiniteScroll
-              style={{
-                overflow: "none ",
-              }}
-              dataLength={recordatorios.length}
-              next={recordatoriosUsuario}
-              hasMore={false}
-              loader={<h4>Cargando...</h4>}
-              endMessage={
-                <div horizontal>
-                  <span>Yay! Has visto todo</span>
-                </div>
-              }
-            >
+
               <div className="shadow p-3 mb-5 bg-white rounded">
                 <h3>
                   <b>Titulo:</b>
@@ -148,13 +145,22 @@ function ListRecordatorios(props) {
                 <b>Mascota:</b>
                 <Badge color="success">{recordatorio.mascota.nombre}</Badge>
                 <div>
-                <b>Fecha:</b>
+                  <b>Fecha:</b>
                   <em>
                     {moment(new Date(recordatorio.fecha_expiracion)).fromNow()}
                   </em>
                 </div>
+                
+                <Button
+                  sm
+                  onClick={() => {
+                    deleteRecordatorios(recordatorio._id);
+                  }}
+                >
+                  <i className="fas fa-trash-alt"></i>
+                </Button>
               </div>
-            </InfiniteScroll>
+
           ))
         ) : (
           <p>No hay recordatorios, agrega uno</p>

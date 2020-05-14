@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 // reactstrap components
-import { Container, Row, Col, Card, Badge } from "reactstrap";
+import { Container, Row, Col, Card, Badge, CardBody, Button } from "reactstrap";
 
 // core components
 
@@ -117,6 +117,14 @@ function Recordatorio() {
                     <p>{recordatorio.fecha_expiracion.nombre}</p>
                   </div>
                 ))}
+                <CardBody>
+                  <Button sm>
+                    <i className="fas fa-edit"></i>
+                  </Button>
+                  <Button sm>
+                    <i className="fas fa-trash-alt"></i>
+                  </Button>
+                </CardBody>
               </Card>
             </Col>
           </Row>

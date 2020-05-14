@@ -25,14 +25,12 @@ import { Link } from "react-router-dom";
 import EventosContex from "../../context/eventos/eventosContex";
 import Crear from "./Forms/crear";
 import Editar from "./Forms/editar";
-import Itemevento from "./itemevento";
+import Evento from "./itemeventoento.js";
 
 function Eventos() {
   const EContex = useContext(EventosContex);
-  const { eventosUsuario, eventos } = EContex;
-  useEffect(() => {
-    eventosUsuario();
-  }, []);
+  const { eventosUsuario, evento } = EContex;
+
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -48,35 +46,19 @@ function Eventos() {
       <HomeNarbar></HomeNarbar>
       <div className="wrapper">
         <Container>
-          <Row>
-            <Col md="3">
-              <VerticalMenu></VerticalMenu>
-              <ListMascotas></ListMascotas>
-            </Col>
-            <Col md="6">
-              <SubMenu></SubMenu>
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    <h3>Eventos</h3>
-                    <Crear></Crear>
-                  </CardTitle>
-                </CardHeader>
-                <CardBody>
-                  {eventos.length === 0 ? (
-                    <p>No hay eventos, añade uno </p>
-                  ) : (
-                    eventos.map((evento) => (
-                      <Itemevento key={evento._id} evento={evento}></Itemevento>
-                    ))
-                  )}
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="3">
-              <CategoriasEventosNavbar></CategoriasEventosNavbar>
-            </Col>
-          </Row>
+          <Card>
+            <CardImg
+              top
+              width="100%"
+              src={evento.imagen}
+              alt="Card image cap"
+            />
+            <CardBody>
+              <CardTitle>{evento.titulo}</CardTitle>
+              <CardSubtitle>{evento.categoria}</CardSubtitle>
+              <CardText>{evento.descripcion}</CardText>
+            </CardBody>
+          </Card>
         </Container>
         <DefaultFooter></DefaultFooter>
       </div>

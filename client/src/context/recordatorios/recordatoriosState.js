@@ -97,13 +97,13 @@ const RecordatoriosState = (props) => {
       });
     }
   };
-  const actualizarRecordatorios = async (recordatorioId) => {
+  const actualizarRecordatorios = async (datos) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(`/api/recordatorio/${recordatorioId}`);
+      const respuesta = await clienteAxios.put(`/api/recordatorio/${datos.recordatorioId}`,datos);
       recordatoriosUsuario();
       dispatch({
         type: EDIT_RECORDATORIO_SUCCESS,

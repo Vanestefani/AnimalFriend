@@ -4,8 +4,18 @@ const checkAuth = require("../../middlewares/authenticate");
 const router = express.Router();
 const validate = require("../../middlewares/validate");
 
-router.post("/addrecordatorio", checkAuth, validate, RecordatorioController.createRecordatorio);
-router.get("/recordtorios", checkAuth, validate, RecordatorioController.RecordatoriosByUser);
+router.post(
+  "/addrecordatorio",
+  checkAuth,
+  validate,
+  RecordatorioController.createRecordatorio
+);
+router.get(
+  "/recordtorios",
+  checkAuth,
+  validate,
+  RecordatorioController.RecordatoriosByUser
+);
 
 router.delete(
   "/:recordatorioId",
@@ -15,6 +25,11 @@ router.delete(
   RecordatorioController.deleterecordatorio
 );
 
-router.put("/:recordatoriId", checkAuth, validate, RecordatorioController.actualizarRecordatorio);
+router.put(
+  "/:recordatorioId",
+  checkAuth,
+  validate,
+  RecordatorioController.actualizarRecordatorio
+);
 
 module.exports = router;
