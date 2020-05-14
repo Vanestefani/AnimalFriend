@@ -39,6 +39,22 @@ exports.eventoByUser = async (req, res) => {
   try {
     Eventos.find({ autor: req.user._id })
       .populate("autor", "_id nombre ")
+      .sort("-fecha_creacion")
+      .then((eventos) => {
+        res.json({ eventos });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+exports.alleventos = async (req, res) => {
+  try {
+    Eventos.find()
+      .populate("autor", "_id nombre fotoPerfil")
+      .sort("-fecha_creacion")
       .then((eventos) => {
         res.json({ eventos });
       })

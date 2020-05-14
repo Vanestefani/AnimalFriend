@@ -29,9 +29,9 @@ import Itemevento from "./itemevento";
 
 function Eventos() {
   const EContex = useContext(EventosContex);
-  const { eventosUsuario, eventos } = EContex;
+  const { alleventos, eventos } = EContex;
   useEffect(() => {
-    eventosUsuario();
+    alleventos();
   }, []);
   React.useEffect(() => {
     document.body.classList.add("landing-page");

@@ -6,7 +6,10 @@ const validate = require("../../middlewares/validate");
 const multer = require("multer");
 const upload = multer().single("imagen");
 router.post("/addevento",upload, checkAuth, validate, eventosController.createeventos);
+//eventos usuario autenticado
 router.get("/getneventos", checkAuth, validate, eventosController.eventoByUser);
+//todos los eventos
+router.get("/alleventos", checkAuth, validate, eventosController.eventoByUser);
 
 router.delete(
   "/:eventoId",

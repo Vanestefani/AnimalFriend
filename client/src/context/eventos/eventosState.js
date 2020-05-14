@@ -31,8 +31,11 @@ const EventosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.post("/api/eventos/addevento",datos);
-      eventosUsuario();
+      const respuesta = await clienteAxios.post(
+        "/api/eventos/addevento",
+        datos
+      );
+      alleventos();
       dispatch({
         type: ADD_EVENTOS_SUCCESS,
         payload: respuesta.data,
@@ -69,6 +72,28 @@ const EventosState = (props) => {
       });
     }
   };
+  const alleventos = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.get("/api/eventos/alleventos");
+
+      dispatch({
+        type: GET_EVENTOS_SUCCESS,
+        payload: respuesta.data.eventos,
+      });
+    } catch (error) {
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: GET_EVENTOS_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
 
   const deleteEventos = async (eventoId) => {
     const token = localStorage.getItem("token");
@@ -77,7 +102,7 @@ const EventosState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.delete(`/api/eventos/${eventoId}`);
-      eventosUsuario();
+      alleventos();
       dispatch({
         type: EVENTOS_DELETE_SUCCESS,
         payload: respuesta.data,
@@ -101,7 +126,7 @@ const EventosState = (props) => {
     }
     try {
       const respuesta = await clienteAxios.put(`/api/eventos/${eventoId}`);
-      eventosUsuario();
+      alleventos();
       dispatch({
         type: EDIT_EVENTOS_SUCCESS,
         payload: respuesta.data,
@@ -129,6 +154,7 @@ const EventosState = (props) => {
         mensaje: state.mensaje,
         eventos: state.eventos,
         evento: state.evento,
+        alleventos,
       }}
     >
       {props.children}
