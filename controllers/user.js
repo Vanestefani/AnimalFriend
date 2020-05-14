@@ -647,13 +647,10 @@ exports.getUserPosts = (req, res, next) => {
 exports.searchUsersByNombre = (req, res) => {
   if (req.body.q) {
     User.find({
-      $or: [
-        { nombre: new RegExp("^" + req.body.q, "i") },
-        { email: new RegExp("^" + req.body.q, "i") },
-      ],
+      id: req.body.q,
     })
       .limit(10)
-      .select("nombre fotoPerfil   ")
+      .select("nombre fotoPerfil pais ciudad genero bio   ")
       .then((users) => {
         return res.status(200).json({ users });
       })
