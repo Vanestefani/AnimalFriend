@@ -31,9 +31,7 @@ const EventosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios
-        .eventos("/api/eventos/addevento", datos)
-        .then((response) => response.data);
+      const respuesta = await clienteAxios.post("/api/eventos/addevento",datos);
       eventosUsuario();
       dispatch({
         type: ADD_EVENTOS_SUCCESS,
@@ -55,9 +53,7 @@ const EventosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get(
-        "/api/eventos/getneventos"
-      );
+      const respuesta = await clienteAxios.get("/api/eventos/getneventos");
 
       dispatch({
         type: GET_EVENTOS_SUCCESS,
@@ -80,9 +76,7 @@ const EventosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.delete(
-        `/api/eventos/${eventoId}`
-      );
+      const respuesta = await clienteAxios.delete(`/api/eventos/${eventoId}`);
       eventosUsuario();
       dispatch({
         type: EVENTOS_DELETE_SUCCESS,
@@ -106,9 +100,7 @@ const EventosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(
-        `/api/eventos/${eventoId}`
-      );
+      const respuesta = await clienteAxios.put(`/api/eventos/${eventoId}`);
       eventosUsuario();
       dispatch({
         type: EDIT_EVENTOS_SUCCESS,

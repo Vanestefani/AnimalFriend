@@ -1,12 +1,14 @@
 const Eventos = require("../models/Eventos");
+const { uploader, sendEmail } = require("../utils/index");
 
 exports.createeventos = async (req, res) => {
   try {
+    const result = await uploader(req);
     const titulo = req.body.titulo;
     const categoria = req.body.categoria;
     const autor = req.body.autor;
     const tags = req.body.tags;
-    const imagen = req.body.imagen;
+
     const descripcion = req.body.descripcion;
     const fecha_inicio = req.body.fecha_inicio;
     const fecha_finalizacion = req.body.fecha_finalizacion;
@@ -22,10 +24,10 @@ exports.createeventos = async (req, res) => {
       privado: privado,
 
       descripcion: descripcion,
-      imagen: imagen,
+      imagen: result.url,
     });
 
-    const evento = await newevento.save().then((result) => {
+    const eventos = await neweventos.save().then((result) => {
       res.json({ newevento: result });
     });
   } catch (error) {
@@ -37,8 +39,8 @@ exports.eventoByUser = async (req, res) => {
   try {
     Eventos.find({ autor: req.user._id })
       .populate("autor", "_id nombre ")
-      .then((evento) => {
-        res.json({ evento });
+      .then((eventos) => {
+        res.json({ eventos });
       })
       .catch((err) => {
         console.log(err);

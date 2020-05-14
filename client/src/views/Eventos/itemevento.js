@@ -10,6 +10,7 @@ import {
   CardImg,
   Button,
   CardBody,
+  Col,
 } from "reactstrap";
 
 import EventosContex from "../../context/eventos/eventosContex";
@@ -23,20 +24,23 @@ function Itemevento(props) {
   return (
     <>
       <div>
-        <Card>
-          <CardImg
-            top
-            width="100%"
-            src={props.evento.imagen}
-            alt="Card image cap"
-          />
-          <CardBody>
-            <CardTitle>{props.evento.titulo}</CardTitle>
-            <CardSubtitle>{props.evento.categoria}</CardSubtitle>
-            <CardText>{props.evento.descripcion}</CardText>
-            <Button>Ver mas</Button>
-          </CardBody>
-        </Card>
+        <Col md="6">
+          <Card>
+            <CardImg
+              top
+              width="80px"
+              height="100px"
+              src={props.evento.imagen}
+              alt="Card image cap"
+            />
+            <CardBody>
+              <CardTitle>{props.evento.titulo}</CardTitle>
+              <CardSubtitle>{props.evento.categoria}</CardSubtitle>
+              <CardText>{props.evento.descripcion}</CardText>
+              <Button>Ver mas</Button>
+            </CardBody>
+          </Card>
+        </Col>
       </div>
     </>
   );

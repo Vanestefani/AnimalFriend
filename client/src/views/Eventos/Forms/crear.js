@@ -57,19 +57,16 @@ function CrearEventos(props) {
     e.target.className += " was-validated";
     let userid = usuario._id;
 
-    if (AarchivoImagen === null || titulo === "") {
-      console.log("esta vacio");
-    } else {
-      let formData = new FormData();
-      formData.append("imagen", AarchivoImagen, AarchivoImagen.name);
-      formData.append("titulo", titulo);
-      formData.append("categoria", categoria);
-      formData.append("fecha_inicio", fecha_inicio);
-      formData.append("fecha_finalizacion", fecha_finalizacion);
-      formData.append("descripcion", descripcion);
-      formData.append("autor", userid);
-      addEventos(formData);
-    }
+    let formData = new FormData();
+    formData.append("imagen", AarchivoImagen, AarchivoImagen.name);
+    formData.append("titulo", titulo);
+    formData.append("categoria", categoria);
+    formData.append("fecha_inicio", fecha_inicio);
+    formData.append("fecha_finalizacion", fecha_finalizacion);
+    formData.append("descripcion", descripcion);
+    formData.append("autor", userid);
+    addEventos(formData);
+    console.log("click");
   };
   return (
     <>
@@ -189,7 +186,7 @@ function CrearEventos(props) {
           </div>
         </ModalBody>
         <div className="modal-footer">
-          <Button color="sucess" type="button" onClick={onSubmit}>
+          <Button color="sucess" onClick={onSubmit}>
             <i className="fas fa-paper-plane"></i> Enviar
           </Button>
           <Button color="danger" type="button" onClick={() => setModal1(false)}>

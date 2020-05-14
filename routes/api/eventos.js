@@ -3,8 +3,9 @@ const eventosController = require("../../controllers/eventos");
 const checkAuth = require("../../middlewares/authenticate");
 const router = express.Router();
 const validate = require("../../middlewares/validate");
-
-router.post("/addeventos", checkAuth, validate, eventosController.createeventos);
+const multer = require("multer");
+const upload = multer().single("imagen");
+router.post("/addevento",upload, checkAuth, validate, eventosController.createeventos);
 router.get("/getneventos", checkAuth, validate, eventosController.eventoByUser);
 
 router.delete(
