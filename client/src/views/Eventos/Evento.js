@@ -12,6 +12,9 @@ import {
   Button,
   CardBody,
   CardSubtitle,
+  CardFooter,
+  Media,
+  Badge,
 } from "reactstrap";
 
 // core components
@@ -55,15 +58,41 @@ function Eventos({ match }) {
               <div>
                 <CardImg
                   top
-                  width="100%"
+                  width="400px"
+                  height="400px"
                   src={evento.imagen}
                   alt="Card image cap"
                 ></CardImg>
                 <CardBody>
-                  <CardTitle>{evento.titulo}</CardTitle>
-                  <CardSubtitle>{evento.categoria}</CardSubtitle>
+                  <CardTitle>
+                    <h1 className="text-center">{evento.titulo}</h1>
+                  </CardTitle>
+                  <CardSubtitle>
+                    <center>
+                      <Badge color="primary"> {evento.categoria}</Badge>
+                    </center>
+                  </CardSubtitle>
                   <CardText>{evento.descripcion}</CardText>
                 </CardBody>
+                <CardFooter>
+                  <Media>
+                    <Media left top href="#">
+                      <Media
+                        object
+                        width="64px"
+                        src={evento.autor.fotoPerfil}
+                        alt="Generic placeholder image"
+                      />
+                    </Media>
+                    <Media body>
+                      <Media heading>
+                        <b>Autor :</b>
+                        {evento.autor.nombre}
+                      </Media>
+                      <Button>Seguir</Button>
+                    </Media>
+                  </Media>
+                </CardFooter>
               </div>
             ) : (
               <p>Este evento no existe o fue eliminado</p>

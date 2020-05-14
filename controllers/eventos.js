@@ -53,7 +53,7 @@ exports.eventoByUser = async (req, res) => {
 exports.evento = async (req, res) => {
   try {
     Eventos.findOne({_id: req.params.eventosId})
-      .populate("autor", "_id nombre ")
+      .populate("autor", "_id nombre fotoPerfil")
       .then((evento) => {
         res.json({ evento });
       })
