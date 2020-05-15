@@ -70,7 +70,7 @@ function HomeNarbar() {
                 <img
                   width="200px"
                   alt="..."
-                  src={require("../../assets//img/Logotipo.png")}
+                  src={require("../../assets/img/Logotipo.png")}
                 ></img>
               </Link>
             </NavbarBrand>
@@ -189,7 +189,7 @@ function HomeNarbar() {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Link to="/myperfil" className="text-dark">
+                      <Link to={"/perfil/" + usuario._id} className="text-dark">
                         <i className="fas fa-user-astronaut"></i>
                         Perfil
                       </Link>

@@ -13,7 +13,7 @@ function VerticalMenu() {
         <Container>
           <Nav className="flex-column" tag="nav">
             <NavLink className="active" onClick={(e) => e.preventDefault()}>
-              <Link to={"/perfil/"+usuario._id}>
+              <Link to={"/perfil/" + usuario._id}>
                 <img
                   src={usuario.fotoPerfil}
                   className="rounded-circle FotoUser "

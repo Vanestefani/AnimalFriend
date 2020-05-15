@@ -54,9 +54,8 @@ function Perfil({ match }) {
   // Obtener proyectos cuando carga el componente
   useEffect(() => {
     const autorId = match.params.q;
-    console.log(match.params.q)
+    console.log(match.params.q);
     getpost(autorId);
-
   }, []);
 
   return (
@@ -71,9 +70,13 @@ function Perfil({ match }) {
                 <i className="fas fa-plus-circle"></i> Seguir
               </Button>
             </div>
-            <h3 className="title">Sobre mi</h3>
+
             {usuarioactual.bio != "" ? (
-              <h5 className="description">{usuarioactual.bio}</h5>
+              <div>
+                {" "}
+                <h3 className="title">Sobre mi</h3>
+                <h5 className="description">{usuarioactual.bio}</h5>
+              </div>
             ) : (
               ""
             )}
@@ -89,14 +92,14 @@ function Perfil({ match }) {
                   <SubMenu></SubMenu>
 
                   <CrearPublicacion></CrearPublicacion>
-                 {publicaciones ?
-                  <PostList
-                  publicaciones={publicaciones}
-                  next={getpost}
-                ></PostList>
-                : ""
-                }
-
+                  {publicaciones ? (
+                    <PostList
+                      publicaciones={publicaciones}
+                      next={getpost}
+                    ></PostList>
+                  ) : (
+                    ""
+                  )}
                 </Col>
                 <Col md="3">
                   <Vistaprevi></Vistaprevi>
