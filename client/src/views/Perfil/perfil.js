@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useContext } from "react";
-
+import PostContext from "../../context/post/postContext";
+import AlertaContext from "../../context/alertas/alertaContext";
 // reactstrap components
 import {
   Button,
@@ -26,16 +27,15 @@ import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
 
 import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores";
 
-import UsuarioContext from "../../context/usuarios/usuarioContext";
+import AuthContext from "../../context/autenticacion/authContext";
 
 function Perfil({ match }) {
-  const UContext = useContext(UsuarioContext);
-  const { Showuserid, usuarioactual } = UContext;
+  const AContext = useContext(AuthContext);
+  const { Showuserid, usuarioactual } = AContext;
   useEffect(() => {
     const detailuserid = match.params.q;
     Showuserid(detailuserid);
   }, []);
-  let pageHeader = React.createRef();
 
   React.useEffect(() => {
     document.body.classList.add("profile-page");
@@ -46,6 +46,18 @@ function Perfil({ match }) {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+  const postContext = useContext(PostContext);
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+
+  const { allpost, mensaje, publicaciones, getpost } = postContext;
+  // Obtener proyectos cuando carga el componente
+  useEffect(() => {
+    const autorId = match.params.q;
+    console.log(match.params.q)
+    getpost(autorId);
+
+  }, []);
 
   return (
     <>
@@ -75,8 +87,16 @@ function Perfil({ match }) {
                 </Col>
                 <Col md="6">
                   <SubMenu></SubMenu>
+
                   <CrearPublicacion></CrearPublicacion>
-                  <PostList></PostList>
+                 {publicaciones ?
+                  <PostList
+                  publicaciones={publicaciones}
+                  next={getpost}
+                ></PostList>
+                : ""
+                }
+
                 </Col>
                 <Col md="3">
                   <Vistaprevi></Vistaprevi>

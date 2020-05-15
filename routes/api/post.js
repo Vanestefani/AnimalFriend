@@ -9,7 +9,7 @@ router.post("/addPost", checkAuth, validate, upload, postController.createPost);
 router.get("/allpost", checkAuth, validate, postController.allpost);
 
 router.get("/getsubpost", checkAuth, validate, postController.allpost);
-router.get("/mypost", checkAuth, validate, postController.mypost);
+router.get("/mypost/:postid", checkAuth, validate, postController.postbyuser);
 
 router.put("/like", checkAuth, validate, postController.like);
 router.put("/unlike", checkAuth, validate, postController.unlike);

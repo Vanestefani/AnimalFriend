@@ -14,7 +14,7 @@ import {
 
 const UsuariosState = (props) => {
   const initialState = {
-    token: null,
+    token: localStorage.getItem("token"),
     result_user: null,
     usuarioactual: "",
     mensaje: null,
@@ -25,6 +25,11 @@ const UsuariosState = (props) => {
 
   // seach usario
   const seachusers = async (q) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      tokenAuth(token);
+    }
     try {
       const respuesta = await clienteAxios.post(
         "/api/user/searchByUsername",
@@ -49,6 +54,11 @@ const UsuariosState = (props) => {
   };
   //user show
   const Showuserid = async (id) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      tokenAuth(token);
+    }
     try {
       const respuesta = await clienteAxios.get(`api/user/${id}`);
 
@@ -69,6 +79,11 @@ const UsuariosState = (props) => {
     }
   };
   const getUserData = async (queryParams) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      tokenAuth(token);
+    }
     try {
       const respuesta = await clienteAxios.post(
         "/api/user/getUserData",
@@ -100,7 +115,7 @@ const UsuariosState = (props) => {
         token: state.token,
         result_user: state.result_user,
         usuarioactual: state.usuarioactual,
-        Showuserid
+        Showuserid,
       }}
     >
       {props.children}

@@ -20,12 +20,14 @@ import {
   PASSWORD_CAMBIO_ERROR,
   VERIFICADO_ERROR,
   VERIFICADO,
+  BUSCAR_USUARIO,
+  BUSCAR_USUARIO_ERROR,
 } from "../../types";
 
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
-
+    usuarioactual:"",
     autenticado: null,
     usuario: null,
     mensaje: null,
@@ -54,30 +56,32 @@ const AuthState = (props) => {
       });
     }
   };
-
-  // Retorna el usuario autenticado
-  const usuarioAutenticado = async () => {
+  const Showuserid = async (id) => {
     const token = localStorage.getItem("token");
+
     if (token) {
       tokenAuth(token);
     }
-
     try {
-      const respuesta = await clienteAxios.get("/api/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const respuesta = await clienteAxios.get(`api/user/${id}`);
+
       dispatch({
-        type: OBTENER_USUARIO,
-        payload: respuesta.data.users,
+        type: BUSCAR_USUARIO,
+        payload: respuesta.data,
       });
     } catch (error) {
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+
       dispatch({
-        type: LOGIN_ERROR,
+        type: BUSCAR_USUARIO_ERROR,
+        payload: alerta,
       });
     }
   };
+  // Retorna el usuario autenticado
 
   // Cuando el usuario inicia sesión
   const iniciarSesion = async (datos) => {
@@ -222,6 +226,8 @@ const AuthState = (props) => {
         verificaremail,
         password_reset,
         password_cambio,
+        Showuserid,
+        usuarioactual: state.usuarioactual
       }}
     >
       {props.children}

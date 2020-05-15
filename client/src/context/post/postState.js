@@ -81,6 +81,31 @@ const PostState = (props) => {
       });
     }
   };
+  const getpost = async (postId) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.get(`/api/post/mypost/${postId}`);
+
+      dispatch({
+        type: GET_POST,
+        payload: respuesta.data.posts,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: GET_POST_ERROR,
+        payload: alerta,
+      });
+    }
+  };
   const likePost = async (postId) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -217,7 +242,10 @@ const PostState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(`/api/post/${datos.postId}`,datos);
+      const respuesta = await clienteAxios.put(
+        `/api/post/${datos.postId}`,
+        datos
+      );
       allpost();
       dispatch({
         type: EDIT_POST_SUCCESS,
@@ -251,6 +279,7 @@ const PostState = (props) => {
         publicacion: state.publicacion,
         likes: state.likes,
         actualizarPost,
+        getpost,
       }}
     >
       {props.children}

@@ -89,7 +89,11 @@ const AppWithRouter = () => (
                           component={Verificado}
                         />
 
-                        <PrivateRoute path="/perfil/:q" component={Perfil} />
+                        <PrivateRoute
+                          exact
+                          path="/perfil/:q"
+                          component={Perfil}
+                        />
                         <PrivateRoute
                           exact
                           path="/messages/chat"

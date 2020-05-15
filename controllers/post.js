@@ -60,12 +60,15 @@ exports.getsubpost = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-exports.mypost = async (req, res) => {
+exports.postbyuser = async (req, res) => {
   try {
-    Post.find({ autor: req.user._id })
-      .populate("fecha_creacion", "_id nombre")
-      .then((mypost) => {
-        res.json({ mypost });
+    Post.find({ autor: req.params.postid })
+      .populate("autor", "_id nombre fotoPerfil")
+      .populate("comments.autor", "_id nombre fotoPerfil")
+      .sort("-fecha_creacion")
+
+      .then((posts) => {
+        res.json({ posts });
       })
       .catch((err) => {
         console.log(err);

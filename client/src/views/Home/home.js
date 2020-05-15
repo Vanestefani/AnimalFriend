@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 
-import { Container, Row, Col} from "reactstrap";
-import AuthContext from "../../context/autenticacion/authContext";
+import { Container, Row, Col } from "reactstrap";
+
 // core components
 
 import HomeNarbar from "../../components/Navbars/homeNarbar";
@@ -11,10 +11,27 @@ import ListMascotas from "../../components/Listas/ListMascotas";
 import SubMenu from "../../components/Navbars/SubMenu";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
-import Calendario from "../../components/Calendario/Calendario";
+import PostContext from "../../context/post/postContext";
+import AlertaContext from "../../context/alertas/alertaContext";
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 
 function Home() {
+  const postContext = useContext(PostContext);
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+
+  const { allpost, mensaje, publicaciones } = postContext;
+  // Obtener proyectos cuando carga el componente
+  useEffect(() => {
+    if (mensaje) {
+      mostrarAlerta(mensaje.msg, mensaje.categoria);
+    }
+    allpost();
+  }, [mensaje]);
+  useEffect(() => {
+
+    allpost();
+  }, []);
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -38,7 +55,9 @@ function Home() {
             <Col md="6">
               <SubMenu></SubMenu>
               <CrearPublicacion></CrearPublicacion>
-              <PostList></PostList>
+              <PostList publicaciones={publicaciones}
+              next={allpost}
+              ></PostList>
             </Col>
             <Col md="3">
               <ListRecordatorios></ListRecordatorios>

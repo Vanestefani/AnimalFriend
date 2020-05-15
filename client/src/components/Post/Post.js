@@ -183,7 +183,7 @@ function Post(props) {
           {props.publicacion.comments.map((record) => {
             return (
               <h6 key={record._id}>
-                <Link to={"/perfil/" + usuario._id}>
+                <Link to={"/perfil/" + props.publicacion.autor._id}>
                   <Badge color="info">
                     {" "}
                     <span style={{ fontWeight: "500" }}>

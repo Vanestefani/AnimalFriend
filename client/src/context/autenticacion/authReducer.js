@@ -14,10 +14,22 @@ import {
   PASSWORD_CAMBIO_ERROR,
   VERIFICADO,
   VERIFICADO_ERROR,
+  BUSCAR_USUARIO,
+  BUSCAR_USUARIO_ERROR,
 } from "../../types";
 
 export default (state, action) => {
   switch (action.type) {
+    case BUSCAR_USUARIO:
+    
+
+      return {
+        ...state,
+        autenticado: true,
+        mensaje: { msg: action.payload.message, categoria: "success" },
+        cargando: false,
+        usuarioactual:action.payload.user
+      };
     case PASSWORD_RESET_EXITOSA:
     case VERIFICACIOM_ENVIADA:
     case REGISTRO_EXITOSO:
