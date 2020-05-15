@@ -34,12 +34,24 @@ function CategoriasEventosNavbar(props) {
     });
   };
 
+  const allClick = (e) => {
+    e.preventDefault();
+    props.setbusqueda({
+      ...props.busqueda,
+      search: "",
+    });
+  };
+
   return (
     <>
       <Card className="card-general">
         <Container>
           <Nav className="flex-column" tag="nav">
             <h3>Categorias</h3>
+            <NavLink href="#" onClick={allClick}>
+            <i class="fas fa-globe"></i>
+              Todas
+            </NavLink>
             <NavLink href="#" onClick={VacunasClick}>
               <i class="fas fa-prescription-bottle-alt"></i>
               Vacunas
