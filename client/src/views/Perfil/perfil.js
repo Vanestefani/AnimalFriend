@@ -31,7 +31,7 @@ import AuthContext from "../../context/autenticacion/authContext";
 
 function Perfil({ match }) {
   const AContext = useContext(AuthContext);
-  const { Showuserid, usuarioactual } = AContext;
+  const { Showuserid, usuarioactual, usuario } = AContext;
   useEffect(() => {
     const detailuserid = match.params.q;
     Showuserid(detailuserid);
@@ -62,13 +62,22 @@ function Perfil({ match }) {
     <>
       <ScrollNavbar />
       <div className="wrapper">
-        <ProfilePageHeader dato={usuarioactual}></ProfilePageHeader>
+        <ProfilePageHeader
+          dato={usuarioactual}
+          publicaciones={publicaciones}
+        ></ProfilePageHeader>
         <div className="section">
           <Container>
             <div className="button-container">
-              <Button className="btn-round" color="info" size="lg">
-                <i className="fas fa-plus-circle"></i> Seguir
-              </Button>
+              {usuarioactual._id == usuario._id ? (
+                <Button className="btn-round" color="info" size="lg">
+                  <i className="fas fa-plus-circle"></i> Editar
+                </Button>
+              ) : (
+                <Button className="btn-round" color="info" size="lg">
+                  <i className="fas fa-plus-circle"></i> Seguir
+                </Button>
+              )}
             </div>
 
             {usuarioactual.bio != "" ? (
@@ -90,8 +99,11 @@ function Perfil({ match }) {
                 </Col>
                 <Col md="6">
                   <SubMenu></SubMenu>
-
-                  <CrearPublicacion></CrearPublicacion>
+                  {usuarioactual._id == usuario._id ? (
+                    <CrearPublicacion></CrearPublicacion>
+                  ) : (
+                    ""
+                  )}
                   {publicaciones ? (
                     <PostList
                       publicaciones={publicaciones}

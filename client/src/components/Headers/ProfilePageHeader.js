@@ -16,7 +16,7 @@ function ProfilePageHeader(props) {
       >
         <div className="page-header-image" ref={pageHeader}></div>
         <Container>
-          <div >
+          <div>
             <img
               className=" photo-container rounded-circle FotoUser"
               alt="..."
@@ -31,7 +31,7 @@ function ProfilePageHeader(props) {
               <p>Publicaciones</p>
             </div>
             <div className="social-description">
-              <h2>26</h2>
+              <h2>{props.publicaciones.lenght}</h2>
               <p>Anuncios</p>
             </div>
             <div className="social-description">
