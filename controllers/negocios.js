@@ -1,9 +1,10 @@
-
-
 const Negocio = require("../models/Negocio");
+const { uploader, sendEmail } = require("../utils/index");
 
 exports.createnegocios = async (req, res) => {
   try {
+    const result = await uploader(req);
+
     const titulo = req.body.titulo;
     const categoria = req.body.categoria;
     const autor = req.body.autor;
@@ -18,7 +19,7 @@ exports.createnegocios = async (req, res) => {
       tags: tags,
 
       descripcion: descripcion,
-      imagen: imagen,
+      imagen: result.url,
     });
 
     const negocio = await newnegocio.save().then((result) => {
@@ -31,9 +32,39 @@ exports.createnegocios = async (req, res) => {
 
 exports.negocioByUser = async (req, res) => {
   try {
-    Negocio
-      .find({ autor: req.user._id })
-      .populate("autor", "_id nombre ")
+    Negocio.find({ autor: req.user._id })
+      .populate("autor", "_id nombre fotoPerfil")
+      .sort("-fecha_creacion")
+
+      .then((negocio) => {
+        res.json({ negocio });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+exports.negocio = async (req, res) => {
+  try {
+    Negocio.findOne({_id: req.params.negocioId})
+      .populate("autor", "_id nombre fotoPerfil")
+      .then((negocio) => {
+        res.json({ negocio });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+exports.allnegocios = async (req, res) => {
+  try {
+    Negocio.find()
+      .populate("autor", "_id nombre fotoPerfil")
+      .sort("-fecha_creacion")
       .then((negocio) => {
         res.json({ negocio });
       })
@@ -47,8 +78,7 @@ exports.negocioByUser = async (req, res) => {
 
 exports.deletenegocioss = async (req, res) => {
   try {
-    Negocio
-      .findOne({ _id: req.params.negociosId })
+    Negocio.findOne({ _id: req.params.negociosId })
       .populate("autor", "_id")
       .exec((err, negocios) => {
         if (err || !negocios) {
@@ -71,6 +101,8 @@ exports.deletenegocioss = async (req, res) => {
 };
 exports.actualizarnegocioso = async (req, res) => {
   try {
+    const result = await uploader(req);
+
     let negocios = await Negocio.findById(req.params.id);
 
     if (!negocios) {
@@ -83,12 +115,12 @@ exports.actualizarnegocioso = async (req, res) => {
     nuevanegocios.titulo = titulo;
     nuevanegocios.categoria = categoria;
     nuevanegocios.autor = req.body.autor;
-    nuevanegocios.imagen = req.body.imagen;
+    nuevanegocios.imagen = result.url;
     nuevanegocios.tags = req.body.tags;
     nuevanegocios.descripcion = req.body.descripcion;
 
     // Guardar la tarea
-    tarea = await Negocio.findOneAndUpdate(
+    tarea = await negocios.findOneAndUpdate(
       { _id: req.params.id },
       nuevanegocios,
       {

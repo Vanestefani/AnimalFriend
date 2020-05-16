@@ -1,7 +1,10 @@
 const Anuncios = require("../models/Anuncios");
+const { uploader, sendEmail } = require("../utils/index");
 
 exports.createAnuncios = async (req, res) => {
   try {
+    const result = await uploader(req);
+
     const titulo = req.body.titulo;
     const categoria = req.body.categoria;
     const autor = req.body.autor;
@@ -15,7 +18,7 @@ exports.createAnuncios = async (req, res) => {
       categoria: categoria,
       autor: autor,
       mascota: mascota,
-      imagen: imagen,
+      imagen: result.url,
       tags: tags,
       descripcion: descripcion,
     });
@@ -31,7 +34,9 @@ exports.createAnuncios = async (req, res) => {
 exports.anunciosByUser = async (req, res) => {
   try {
     Anuncios.find({ autor: req.user._id })
-      .populate("autor", "_id nombre ")
+      .populate("autor", "_id nombre  fotoPerfil")
+      .sort("-fecha_creacion")
+
       .then((anuncios) => {
         res.json({ anuncios });
       })
@@ -42,6 +47,36 @@ exports.anunciosByUser = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+exports.anuncio = async (req, res) => {
+  try {
+    Anuncios.findOne({_id: req.params.anuncioId})
+      .populate("autor", "_id nombre fotoPerfil")
+      .then((anuncio) => {
+        res.json({ anuncio });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+exports.allanuncios = async (req, res) => {
+  try {
+    Anuncios.find()
+      .populate("autor", "_id nombre fotoPerfil")
+      .sort("-fecha_creacion")
+      .then((anuncio) => {
+        res.json({ anuncio });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 
 exports.deleteanuncioss = async (req, res) => {
   try {
@@ -68,6 +103,9 @@ exports.deleteanuncioss = async (req, res) => {
 };
 exports.actualizaranuncioso = async (req, res) => {
   try {
+    const result = await uploader(req);
+
+
     let anuncios = await Anuncios.findById(req.params.id);
 
     if (!anuncios) {
@@ -79,12 +117,11 @@ exports.actualizaranuncioso = async (req, res) => {
     nuevaanuncios.categoria = categoria;
     nuevaanuncios.autor = req.body.autor;
     nuevaanuncios.mascota = req.body.mascota;
-    nuevaanuncios.imagen = req.body.imagen;
+    nuevaanuncios.imagen =  result.url;
     nuevaanuncios.tags = req.body.tags;
     nuevaanuncios.descripcion = req.body.descripcion;
 
-    // Guardar la tarea
-    anuncios = await Anuncios.findOneAndUpdate(
+    tarea = await anuncios.findOneAndUpdate(
       { _id: req.params.id },
       nuevaanuncios,
       {

@@ -3,8 +3,14 @@ const negociosController = require("../../controllers/negocios");
 const checkAuth = require("../../middlewares/authenticate");
 const router = express.Router();
 const validate = require("../../middlewares/validate");
-
-router.post("/addnegocio", checkAuth, validate, negociosController.createnegocios);
+const multer = require("multer");
+const upload = multer().single("imagen");
+router.post("/addnegocio",upload, checkAuth, validate, negociosController.createnegocios);
+//negocios usuario autenticado
+router.get("/getnnegocios", checkAuth, validate, negociosController.negocioByUser);
+//todos los negocios
+router.get("/allnegocios", checkAuth, validate, negociosController.allnegocios);
+router.get("/negocio/:negociosId", checkAuth, validate, negociosController.negocio);
 
 router.delete(
   "/:negocioId",
@@ -14,6 +20,6 @@ router.delete(
   negociosController.deletenegocioss
 );
 
-router.put("/:negocioId", checkAuth, validate, negociosController.actualizarnegocioso);
+router.put("/:negociosId", checkAuth, validate, negociosController.actualizarnegocioso);
 
 module.exports = router;
