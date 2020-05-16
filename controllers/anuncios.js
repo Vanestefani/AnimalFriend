@@ -66,8 +66,8 @@ exports.allanuncios = async (req, res) => {
     Anuncios.find()
       .populate("autor", "_id nombre fotoPerfil")
       .sort("-fecha_creacion")
-      .then((anuncio) => {
-        res.json({ anuncio });
+      .then((anuncios) => {
+        res.json({ anuncios });
       })
       .catch((err) => {
         console.log(err);
@@ -76,7 +76,6 @@ exports.allanuncios = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
 
 exports.deleteanuncioss = async (req, res) => {
   try {
@@ -104,7 +103,6 @@ exports.deleteanuncioss = async (req, res) => {
 exports.actualizaranuncioso = async (req, res) => {
   try {
     const result = await uploader(req);
-
 
     let anuncios = await Anuncios.findById(req.params.id);
 

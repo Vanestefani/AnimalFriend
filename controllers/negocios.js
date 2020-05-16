@@ -65,8 +65,8 @@ exports.allnegocios = async (req, res) => {
     Negocio.find()
       .populate("autor", "_id nombre fotoPerfil")
       .sort("-fecha_creacion")
-      .then((negocio) => {
-        res.json({ negocio });
+      .then((negocios) => {
+        res.json({ negocios });
       })
       .catch((err) => {
         console.log(err);

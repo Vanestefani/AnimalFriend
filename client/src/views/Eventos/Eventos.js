@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-
 // reactstrap components
 import {
   Container,
@@ -20,11 +19,8 @@ import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
 import SubMenu from "../../components/Navbars/SubMenu";
-
 import CategoriasEventosNavbar from "../../components/Navbars/CategoriasEventosNavbar";
-import { Link } from "react-router-dom";
 import EventosContex from "../../context/eventos/eventosContex";
-import Editar from "./Forms/editar";
 import Itemevento from "./itemevento";
 
 function Eventos() {
