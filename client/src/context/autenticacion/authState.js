@@ -229,6 +229,8 @@ const AuthState = (props) => {
         type: FOLLOW_SUCCESS,
         payload: respuesta.data.result,
       });
+alluser();
+
     } catch (error) {
       console.log(error);
 
@@ -252,7 +254,7 @@ const AuthState = (props) => {
         "/api/user/unfollow",
         userId
       );
-
+alluser();
       dispatch({
         type: UNFOLLOW_SUCCESS,
         payload: respuesta.data.result,
@@ -275,7 +277,6 @@ const AuthState = (props) => {
     if (token) {
       tokenAuth(token);
     }
-    alluser();
     try {
       const respuesta = await clienteAxios.get("/api/user/all");
 
@@ -285,6 +286,7 @@ const AuthState = (props) => {
       });
     } catch (error) {
       const alerta = {
+        msg: error.response.data.message,
         categoria: "danger",
       };
       dispatch({

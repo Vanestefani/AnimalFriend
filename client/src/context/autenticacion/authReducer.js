@@ -26,7 +26,7 @@ import {
 
 export default (state, action) => {
   switch (action.type) {
-   
+    case GETALLUSER_SUCCESS:
     case UNFOLLOW_SUCCESS:
     case FOLLOW_SUCCESS:
       return {
@@ -34,7 +34,7 @@ export default (state, action) => {
         mensaje: null,
       };
       case BUSCAR_USUARIO:
-      case GETALLUSER_SUCCESS:
+
       return {
         ...state,
         autenticado: true,
