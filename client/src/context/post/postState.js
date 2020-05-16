@@ -81,9 +81,9 @@ const PostState = (props) => {
       });
     }
   };
-  const getpost = async (postId) => {
+  const getpost = async postId => {
     const token = localStorage.getItem("token");
-
+console.log(postId)
     if (token) {
       tokenAuth(token);
     }

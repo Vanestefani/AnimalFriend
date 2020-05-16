@@ -22,12 +22,18 @@ import {
   VERIFICADO,
   BUSCAR_USUARIO,
   BUSCAR_USUARIO_ERROR,
+  GETALLUSER_SUCCESS,
+  GETALLUSER_FAILURE,
+  FOLLOW_SUCCESS,
+  FOLLOW_FAILURE,
+  UNFOLLOW_SUCCESS,
+  UNFOLLOW_FAILURE,
 } from "../../types";
 
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
-    usuarioactual:"",
+    usuarioactual: "",
     autenticado: null,
     usuario: null,
     mensaje: null,
@@ -211,6 +217,82 @@ const AuthState = (props) => {
       });
     }
   };
+  const seguir = async (userId) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.put("/api/user/follow", userId);
+
+      dispatch({
+        type: FOLLOW_SUCCESS,
+        payload: respuesta.data.result,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+      dispatch({
+        type: FOLLOW_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
+  const noseguir = async (userId) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.put(
+        "/api/user/unfollow",
+        userId
+      );
+
+      dispatch({
+        type: UNFOLLOW_SUCCESS,
+        payload: respuesta.data.result,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+      dispatch({
+        type: UNFOLLOW_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
+  const alluser = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    alluser();
+    try {
+      const respuesta = await clienteAxios.get("/api/user/all");
+
+      dispatch({
+        type: GETALLUSER_SUCCESS,
+        payload: respuesta.data.posts,
+      });
+    } catch (error) {
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: GETALLUSER_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -227,7 +309,10 @@ const AuthState = (props) => {
         password_reset,
         password_cambio,
         Showuserid,
-        usuarioactual: state.usuarioactual
+        usuarioactual: state.usuarioactual,
+        alluser,
+        seguir,
+        noseguir,
       }}
     >
       {props.children}

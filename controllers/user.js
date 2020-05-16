@@ -99,12 +99,6 @@ exports.update = async function (req, res) {
     const id = req.params.id;
     const userId = req.user._id;
 
-    //Make sure the passed id is that of the logged in user
-    if (userId.toString() !== id.toString())
-      return res.status(401).json({
-        message: "Lo sentimos, no tienes permiso para actualizar estos datos.",
-      });
-
     const user = await User.findByIdAndUpdate(
       id,
       { $set: update },
@@ -144,10 +138,6 @@ exports.destroy = async function (req, res) {
     const user_id = req.user._id;
 
     //Make sure the passed id is that of the logged in user
-    if (user_id.toString() !== id.toString())
-      return res.status(401).json({
-        message: "Lo sentimos, no tienes permiso para eliminar estos datos.",
-      });
 
     await User.findByIdAndDelete(id);
     res.status(200).json({ message: "El usuario ha sido eliminado" });
@@ -772,5 +762,73 @@ exports.changeStatus = (userId, clients, io) => {
     )
       .then(() => {})
       .catch((err) => console.log(err.message));
+  }
+};
+exports.addFollowing = async (req, res) => {
+  try {
+    User.findByIdAndUpdate(
+      req.user.id,
+      {
+        $push: { following: req.body.userId },
+      },
+      {
+        new: true,
+      }
+    ) .then((result) => {
+      res.json({ result });
+    })
+    .catch((err) => {
+      console.log(err);
+    }),
+      User.findByIdAndUpdate(
+        req.body.userId,
+        {
+          $push: { followers: req.user.id },
+        },
+        {
+          new: true,
+        }
+      ).then((result) => {
+        res.json({ result });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+exports.unFollow = async (req, res) => {
+  try {
+    User.findByIdAndUpdate(
+      req.user.id,
+      {
+        $pull: { following: req.body.userId },
+      },
+      {
+        new: true,
+      }
+    ) .then((result) => {
+      res.json({ result });
+    })
+    .catch((err) => {
+      console.log(err);
+    }),
+      User.findByIdAndUpdate(
+        req.body.userId,
+        {
+          $pull: { followers: req.user.id },
+        },
+        {
+          new: true,
+        }
+      ).then((result) => {
+        res.json({ result });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
 };

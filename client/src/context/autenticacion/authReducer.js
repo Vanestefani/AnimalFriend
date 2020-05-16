@@ -16,25 +16,38 @@ import {
   VERIFICADO_ERROR,
   BUSCAR_USUARIO,
   BUSCAR_USUARIO_ERROR,
+  GETALLUSER_SUCCESS,
+  GETALLUSER_FAILURE,
+  FOLLOW_SUCCESS,
+  FOLLOW_FAILURE,
+  UNFOLLOW_SUCCESS,
+  UNFOLLOW_FAILURE,
 } from "../../types";
 
 export default (state, action) => {
   switch (action.type) {
-    case BUSCAR_USUARIO:
-    
-
+   
+    case UNFOLLOW_SUCCESS:
+    case FOLLOW_SUCCESS:
+      return {
+        ...state,
+        mensaje: null,
+      };
+      case BUSCAR_USUARIO:
+      case GETALLUSER_SUCCESS:
       return {
         ...state,
         autenticado: true,
         mensaje: { msg: action.payload.message, categoria: "success" },
         cargando: false,
-        usuarioactual:action.payload.user
+        usuarioactual: action.payload.user,
       };
     case PASSWORD_RESET_EXITOSA:
     case VERIFICACIOM_ENVIADA:
     case REGISTRO_EXITOSO:
     case PASSWORD_CAMBIO_EXITO:
     case VERIFICADO:
+
       localStorage.setItem("token", action.payload.token);
 
       return {
@@ -61,6 +74,10 @@ export default (state, action) => {
     case PASSWORD_RESET_ERROR:
     case PASSWORD_CAMBIO_ERROR:
     case VERIFICADO_ERROR:
+    case GETALLUSER_FAILURE:
+    case BUSCAR_USUARIO_ERROR:
+    case FOLLOW_FAILURE:
+    case UNFOLLOW_FAILURE:
       localStorage.removeItem("token");
       return {
         ...state,

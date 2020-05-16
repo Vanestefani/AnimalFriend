@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext, useState } from "react";
 import PostContext from "../../context/post/postContext";
 import AlertaContext from "../../context/alertas/alertaContext";
 // reactstrap components
@@ -31,12 +31,11 @@ import AuthContext from "../../context/autenticacion/authContext";
 
 function Perfil({ match }) {
   const AContext = useContext(AuthContext);
-  const { Showuserid, usuarioactual, usuario } = AContext;
+  const { Showuserid, usuarioactual, usuario, seguir, noseguir } = AContext;
+  const detailuserid = match.params.q;
   useEffect(() => {
-    const detailuserid = match.params.q;
     Showuserid(detailuserid);
-  }, []);
-
+  }, [detailuserid]);
   React.useEffect(() => {
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");
@@ -57,6 +56,44 @@ function Perfil({ match }) {
     console.log(match.params.q);
     getpost(autorId);
   }, []);
+  const [showfollow, setShowFollow] = useState(
+    !usuario.following.includes(usuarioactual._id) ? true : false
+  );
+
+  const follow = (e) => {
+    e.preventDefault();
+    seguir({ userId: usuarioactual._id });
+    setShowFollow(false);
+  };
+  const unfollow = (e) => {
+    e.preventDefault();
+    noseguir({ userId: usuarioactual._id });
+    setShowFollow(true);
+  };
+
+  const botonSeguir = () => {
+    console.log(showfollow)
+    if (showfollow==false)
+      return (
+        <Button onClick={unfollow} className="btn-round" color="info" size="lg">
+          <i className="fas fa-plus-circle"></i> No Seguir
+        </Button>
+      );
+    if (showfollow==true)
+      return (
+        <Button
+          onClick={follow}
+          className="btn-round"
+          color="success"
+          size="lg"
+        >
+          <i className="fas fa-plus-circle"></i> Seguir
+        </Button>
+      );
+  };
+  const next = () => {
+    getpost(match.params.q);
+  };
 
   return (
     <>
@@ -74,15 +111,12 @@ function Perfil({ match }) {
                   <i className="fas fa-plus-circle"></i> Editar
                 </Button>
               ) : (
-                <Button className="btn-round" color="info" size="lg">
-                  <i className="fas fa-plus-circle"></i> Seguir
-                </Button>
+                botonSeguir()
               )}
             </div>
 
             {usuarioactual.bio != "" ? (
               <div>
-                {" "}
                 <h3 className="title">Sobre mi</h3>
                 <h5 className="description">{usuarioactual.bio}</h5>
               </div>
@@ -107,7 +141,7 @@ function Perfil({ match }) {
                   {publicaciones ? (
                     <PostList
                       publicaciones={publicaciones}
-                      next={getpost}
+                      next={next}
                     ></PostList>
                   ) : (
                     ""
