@@ -130,8 +130,10 @@ function Perfil({ match }) {
                 <Col md="3">
                   <ListMascotas></ListMascotas>
                   <ListaSeguidores></ListaSeguidores>
+                  <ListaAnuncio></ListaAnuncio>
+
                 </Col>
-                <Col md="6">
+                <Col md="9">
                   <SubMenu></SubMenu>
                   {usuarioactual._id == usuario._id ? (
                     <CrearPublicacion></CrearPublicacion>
@@ -147,10 +149,7 @@ function Perfil({ match }) {
                     ""
                   )}
                 </Col>
-                <Col md="3">
-                  <Vistaprevi></Vistaprevi>
-                  <ListaAnuncio></ListaAnuncio>
-                </Col>
+
               </Row>
             </Container>
             <DefaultFooter></DefaultFooter>
