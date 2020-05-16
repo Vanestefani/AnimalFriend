@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import { NavLink, Nav, Container, Card, Button } from "reactstrap";
+import Crear from "../../views/Negocios/Forms/crear";
 
 function CategoriasNegociosNavbar(props) {
   const ComidaClick = (e) => {
@@ -78,7 +79,7 @@ function CategoriasNegociosNavbar(props) {
               Peluqueria
             </NavLink>
 
-            <Button className="pull-left">Agregar anuncio</Button>
+            <Crear></Crear>
           </Nav>
         </Container>
       </Card>

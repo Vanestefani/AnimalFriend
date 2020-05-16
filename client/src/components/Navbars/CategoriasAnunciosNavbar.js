@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import { NavLink, Nav, Container, Card, Button } from "reactstrap";
+import Crear from "../../views/Anuncios/Forms/crear";
 
 function CategoriasAnunciosNavbar(props) {
   const MascotaPerdidaaClick = (e) => {
@@ -68,7 +69,7 @@ function CategoriasAnunciosNavbar(props) {
               <i className="far fa-grin-hearts"></i>
               Emparejar
             </NavLink>
-            <Button className="pull-left">Agregar anuncio</Button>
+            <Crear></Crear>
           </Nav>
         </Container>
       </Card>

@@ -14,7 +14,7 @@ import {
   InputGroupText,
   InputGroup,
 } from "reactstrap";
-import AnunciosContex from "../../../context/anuncios/anunciosContex";
+import AnunciosContex from "../../../context/anuncios/anunciosContext";
 import AuthContext from "../../../context/autenticacion/authContext";
 
 function CrearAnuncios(props) {

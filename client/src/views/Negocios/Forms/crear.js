@@ -2,13 +2,10 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 
 import {
   Button,
-  Container,
   Modal,
   ModalBody,
   Row,
   Col,
-  FormGroup,
-  Label,
   Input,
   InputGroupAddon,
   InputGroupText,
@@ -22,7 +19,7 @@ function CrearNegocios(props) {
   const { usuario } = authContext;
   const EContex = useContext(NegociosContex);
   const { addNegocios } = EContex;
-  const [modalNegocios, setModal1] = React.useState(false);
+
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
@@ -68,18 +65,19 @@ function CrearNegocios(props) {
     addNegocios(formData);
     console.log("click");
   };
+  const [modalNegocios, setModal1] = React.useState(false);
   return (
     <>
       <Button small onClick={() => setModal1(true)}>
         <i className="fas fa-plus"></i>Añadir Negocio
       </Button>
 
-      <Modal isOpen={modalNegocios} toggle={() => setModal1(false)}>
+      <Modal isOpen={modalNegocios} toggle={() =>setModal1(false)}>
         <div className="modal-header justify-content-center">
           <button
             className="close"
             type="button"
-            onClick={() => setModal1(false)}
+            onClick={()=>setModal1(false)}
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
