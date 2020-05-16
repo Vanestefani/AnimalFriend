@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 const Chat = new mongoose.Schema({
-  members: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  members: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
   roomName: { type: String, default: "" },
   lastActive: { type: Date, default: Date.now },
   createdAt: { type: Date, default: Date.now },

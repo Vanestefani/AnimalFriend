@@ -15,12 +15,12 @@ function TransparentFooter() {
         <nav>
           <ul>
             <li>
-              <Link
+              <a
                 href="http://animalfriendblog.gearhostpreview.com/"
                 target="_blank"
               >
                 Sobre nosotros
-              </Link>
+              </a>
             </li>
 
             <li>

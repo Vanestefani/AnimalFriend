@@ -84,7 +84,7 @@ function ExamplesNavbar() {
             <Nav className="ml-auto" navbar>
               <NavItem className="btn btn-info">
                 <Link to="/">
-                  <i class="fas fa-sign-in-alt"></i>Iniciar sesión
+                  <i class="fas fa-sign-in-alt"></i> Iniciar sesión
                 </Link>
               </NavItem>
               <NavItem className="btn btn-success">
