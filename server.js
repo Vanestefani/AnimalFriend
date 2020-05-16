@@ -8,9 +8,18 @@ const passport = require("passport");
 const path = require("path");
 require("./socketio");
 // Setting up port
-const connUri = process.env.MOGOURI;
-let PORT = process.env.PORT || 5000;
+mongoose.connect(process.env.MOGOURI || "mongodb://localhost/my_database", {
+  useNewUrlParser: true,
+});
 
+let PORT = process.env.PORT || 5000;
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html")); // relative path
+  });
+}
 //=== 1 - CREATE APP
 // Creating express app and configuring middleware needed for authentication
 const app = express();
