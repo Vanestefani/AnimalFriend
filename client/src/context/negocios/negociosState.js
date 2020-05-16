@@ -1,45 +1,45 @@
 import React, { useReducer } from "react";
-import AnunciosContext from "./anunciosContext";
-import AnunciosReducer from "./anunciosReducer";
+import NegociosContext from "./negociosContex";
+import NegociosReducer from "./negociosReducer";
 
 import clienteAxios from "../../config/axios";
 import tokenAuth from "../../config/token";
 
 import {
-  ADD_ANUNCIOS_SUCCESS,
-  ADD_ANUNCIOS_FAILURE,
-  ANUNCIOS_DELETE_SUCCESS,
-  EDIT_ANUNCIOS_FAILURE,
-  EDIT_ANUNCIOS_SUCCESS,
-  GET_ANUNCIOS_FAILURE,
-  GET_ANUNCIOS_SUCCESS,
-  ANUNCIOS_DELETE_FAILURE,
-  ANUNCIO_SUCCESS,
-  ANUNCIO_FAILURE,
+  ADD_NEGOCIOS_SUCCESS,
+  ADD_NEGOCIOS_FAILURE,
+  NEGOCIOS_DELETE_SUCCESS,
+  EDIT_NEGOCIOS_FAILURE,
+  EDIT_NEGOCIOS_SUCCESS,
+  GET_NEGOCIOS_FAILURE,
+  GET_NEGOCIOS_SUCCESS,
+  NEGOCIOS_DELETE_FAILURE,
+  NEGOCIO_SUCCESS,
+  NEGOCIO_FAILURE,
 } from "../../types";
 
-const AnunciosState = (props) => {
+const NegociosState = (props) => {
   const initialState = {
     mensaje: null,
-    anuncios: [],
-    anuncio: null,
+    negocios: [],
+    negocio: null,
   };
 
-  const [state, dispatch] = useReducer(AnunciosReducer, initialState);
+  const [state, dispatch] = useReducer(NegociosReducer, initialState);
 
-  const addAnuncios = async (datos) => {
+  const addNegocios = async (datos) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
       const respuesta = await clienteAxios.post(
-        "/api/anuncios/addanuncio",
+        "/api/negocios/addnegocio",
         datos
       );
-      allanuncios();
+      allnegocios();
       dispatch({
-        type: ADD_ANUNCIOS_SUCCESS,
+        type: ADD_NEGOCIOS_SUCCESS,
         payload: respuesta.data,
       });
     } catch (error) {
@@ -47,66 +47,66 @@ const AnunciosState = (props) => {
         categoria: "danger",
       };
       dispatch({
-        type: ADD_ANUNCIOS_FAILURE,
+        type: ADD_NEGOCIOS_FAILURE,
         payload: alerta,
       });
     }
   };
-  const anunciosUsuario = async () => {
+  const negociosUsuario = async () => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get("/api/anuncios/getnanuncios");
+      const respuesta = await clienteAxios.get("/api/negocios/getnnegocios");
 
       dispatch({
-        type: GET_ANUNCIOS_SUCCESS,
-        payload: respuesta.data.anuncios,
+        type: GET_NEGOCIOS_SUCCESS,
+        payload: respuesta.data.negocios,
       });
     } catch (error) {
       const alerta = {
         categoria: "danger",
       };
       dispatch({
-        type: GET_ANUNCIOS_FAILURE,
+        type: GET_NEGOCIOS_FAILURE,
         payload: alerta,
       });
     }
   };
-  const allanuncios = async () => {
+  const allnegocios = async () => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get("/api/anuncios/allanuncios");
+      const respuesta = await clienteAxios.get("/api/negocios/allnegocios");
 
       dispatch({
-        type: GET_ANUNCIOS_SUCCESS,
-        payload: respuesta.data.anuncios,
+        type: GET_NEGOCIOS_SUCCESS,
+        payload: respuesta.data.negocios,
       });
     } catch (error) {
       const alerta = {
         categoria: "danger",
       };
       dispatch({
-        type: GET_ANUNCIOS_FAILURE,
+        type: GET_NEGOCIOS_FAILURE,
         payload: alerta,
       });
     }
   };
 
-  const deleteAnuncios = async (anuncioId) => {
+  const deleteNegocios = async (negocioId) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.delete(`/api/anuncios/${anuncioId}`);
-      allanuncios();
+      const respuesta = await clienteAxios.delete(`/api/negocios/${negocioId}`);
+      allnegocios();
       dispatch({
-        type: ANUNCIOS_DELETE_SUCCESS,
+        type: NEGOCIOS_DELETE_SUCCESS,
         payload: respuesta.data,
       });
     } catch (error) {
@@ -116,25 +116,25 @@ const AnunciosState = (props) => {
         categoria: "danger",
       };
       dispatch({
-        type: ANUNCIOS_DELETE_FAILURE,
+        type: NEGOCIOS_DELETE_FAILURE,
         payload: alerta,
       });
     }
   };
-  const getanuncio = async (anuncioId) => {
+  const getnegocio = async (negocioId) => {
     const token = localStorage.getItem("token");
-    console.log(anuncioId);
+    console.log(negocioId);
     if (token) {
       tokenAuth(token);
     }
     try {
       const respuesta = await clienteAxios.get(
-        `/api/anuncios/anuncio/${anuncioId}`
+        `/api/negocios/negocio/${negocioId}`
       );
 
       dispatch({
-        type: ANUNCIO_SUCCESS,
-        payload: respuesta.data.anuncio,
+        type: NEGOCIO_SUCCESS,
+        payload: respuesta.data.negocio,
       });
     } catch (error) {
       console.log(error);
@@ -143,21 +143,21 @@ const AnunciosState = (props) => {
         categoria: "danger",
       };
       dispatch({
-        type: ANUNCIO_FAILURE,
+        type: NEGOCIO_FAILURE,
         payload: alerta,
       });
     }
   };
-  const actualizarAnuncios = async (anuncioId) => {
+  const actualizarNegocios = async (negocioId) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(`/api/anuncios/${anuncioId}`);
-      allanuncios();
+      const respuesta = await clienteAxios.put(`/api/negocios/${negocioId}`);
+      allnegocios();
       dispatch({
-        type: EDIT_ANUNCIOS_SUCCESS,
+        type: EDIT_NEGOCIOS_SUCCESS,
         payload: respuesta.data,
       });
     } catch (error) {
@@ -167,27 +167,27 @@ const AnunciosState = (props) => {
         categoria: "danger",
       };
       dispatch({
-        type: EDIT_ANUNCIOS_FAILURE,
+        type: EDIT_NEGOCIOS_FAILURE,
         payload: alerta,
       });
     }
   };
   return (
-    <AnunciosContext.Provider
+    <NegociosContext.Provider
       value={{
-        addAnuncios,
-        anunciosUsuario,
-        deleteAnuncios,
-        actualizarAnuncios,
+        addNegocios,
+        negociosUsuario,
+        deleteNegocios,
+        actualizarNegocios,
         mensaje: state.mensaje,
-        anuncios: state.anuncios,
-        anuncio: state.anuncio,
-        allanuncios,
-        getanuncio,
+        negocios: state.negocios,
+        negocio: state.negocio,
+        allnegocios,
+        getnegocio,
       }}
     >
       {props.children}
-    </AnunciosContext.Provider>
+    </NegociosContext.Provider>
   );
 };
-export default AnunciosState;
+export default NegociosState;
