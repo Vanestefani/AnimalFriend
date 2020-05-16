@@ -44,6 +44,8 @@ const Verificado = lazy(() => import("./views/auth/verificado"));
 const MessengerPage = lazy(() => import("./views/Messenger/MessengerPage"));
 const Recordatorio = lazy(() => import("./views/Recordatorios/Recordatorio"));
 const Anuncios = lazy(() => import("./views/Anuncios/Anuncios"));
+const Anuncio = lazy(() => import("./views/Anuncios/Anuncio"));
+
 const Eventos = lazy(() => import("./views/Eventos/Eventos"));
 const Evento = lazy(() => import("./views/Eventos/Evento"));
 
@@ -128,6 +130,11 @@ const AppWithRouter = () => (
                             path="/evento/:eventoId"
                             component={Evento}
                           />
+                          <PrivateRoute
+                            path="/anuncio/:anunciosId"
+                            component={Anuncio}
+                          />
+
                           <PrivateRoute
                             exact
                             path="/negocios"

@@ -28,10 +28,11 @@ import AnunciosContext from "../../context/anuncios/anunciosContext";
 import Editar from "./Forms/editar";
 
 function Anuncios({ match }) {
-  const AContex = useContext(AnunciosContex);
+  const AContex = useContext(AnunciosContext);
   const { getanuncio, anuncio } = AContex;
   useEffect(() => {
-    const anuncioId = match.params.anuncioId;
+    const anuncioId = match.params.anunciosId;
+    console.log(anuncioId)
     getanuncio(anuncioId);
   }, []);
   React.useEffect(() => {

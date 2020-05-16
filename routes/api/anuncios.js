@@ -10,7 +10,7 @@ router.post("/addanuncio",upload, checkAuth, validate, anunciosController.create
 router.get("/getnanuncios", checkAuth, validate, anunciosController.anunciosByUser);
 //todos los anuncios
 router.get("/allanuncios", checkAuth, validate, anunciosController.allanuncios);
-router.get("/anuncio/:anunciosId", checkAuth, validate, anunciosController.anuncio);
+router.get("/anuncio/:anuncioId", checkAuth, validate, anunciosController.anuncio);
 
 router.delete(
   "/:anuncioId",
@@ -20,6 +20,6 @@ router.delete(
   anunciosController.deleteanuncioss
 );
 
-router.put("/:anunciosId", checkAuth, validate, anunciosController.actualizaranuncioso);
+router.put("/:anuncioId", checkAuth, validate, anunciosController.actualizaranuncioso);
 
 module.exports = router;
