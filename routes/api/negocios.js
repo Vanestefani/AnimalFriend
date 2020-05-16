@@ -10,7 +10,7 @@ router.post("/addnegocio",upload, checkAuth, validate, negociosController.create
 router.get("/getnnegocios", checkAuth, validate, negociosController.negocioByUser);
 //todos los negocios
 router.get("/allnegocios", checkAuth, validate, negociosController.allnegocios);
-router.get("/negocio/:negociosId", checkAuth, validate, negociosController.negocio);
+router.get("/negocio/:negocioId", checkAuth, validate, negociosController.negocio);
 
 router.delete(
   "/:negocioId",

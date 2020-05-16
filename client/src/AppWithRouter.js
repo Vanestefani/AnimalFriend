@@ -50,6 +50,7 @@ const Eventos = lazy(() => import("./views/Eventos/Eventos"));
 const Evento = lazy(() => import("./views/Eventos/Evento"));
 
 const Negocios = lazy(() => import("./views/Negocios/Negocios"));
+const Negocio = lazy(() => import("./views/Negocios/Negocio"));
 
 const ExplorarPage = lazy(() => import("./views/ExplorarPage"));
 const PerfilMascota = lazy(() => import("./views/Mascotas/PerfilMascota"));
@@ -133,6 +134,11 @@ const AppWithRouter = () => (
                           <PrivateRoute
                             path="/anuncio/:anunciosId"
                             component={Anuncio}
+                          />
+
+                          <PrivateRoute
+                            path="/negocio/:negocioId"
+                            component={Negocio}
                           />
 
                           <PrivateRoute

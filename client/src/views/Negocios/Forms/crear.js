@@ -30,16 +30,11 @@ function CrearNegocios(props) {
   const [ANegocios, agregarNegocios] = useState({
     titulo: "",
     categoria: "",
-    fecha_inicio: "",
-    fecha_finalizacion: "",
+
     descripcion: "",
   });
   const {
-    titulo,
-    categoria,
-    fecha_inicio,
-    fecha_finalizacion,
-    descripcion,
+    titulo, categoria, mascota, descripcion
   } = ANegocios;
   const [AarchivoImagen, AguardararchivoImagen] = useState(null);
 
@@ -58,8 +53,7 @@ function CrearNegocios(props) {
     formData.append("imagen", AarchivoImagen, AarchivoImagen.name);
     formData.append("titulo", titulo);
     formData.append("categoria", categoria);
-    formData.append("fecha_inicio", fecha_inicio);
-    formData.append("fecha_finalizacion", fecha_finalizacion);
+
     formData.append("descripcion", descripcion);
     formData.append("autor", userid);
     addNegocios(formData);
@@ -118,45 +112,13 @@ function CrearNegocios(props) {
                 defaultValue={ANegocios.categoria}
                 required
               >
-                <option value="Vacunas">Vacunas</option>
-                <option value="Estelirizacion">Estelirizacion</option>
-                <option value="Caminatas">Caminatas</option>
-                <option value="Concursos">Concursos</option>
+                <option value="Comida">Comida</option>
+                <option value="Ropa">Ropa</option>
+                <option value="Juguetes">Juguetes</option>
+                <option value="Veterinaria">Veterinaria</option>
+                <option value="PeluqueriaVeterinaria">Peluqueria</option>
+
               </Input>
-            </InputGroup>
-
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>
-                  <i class="fas fa-kiwi-bird"></i>
-                </InputGroupText>
-              </InputGroupAddon>
-              <Input
-                type="datetime-local"
-                id="fecha_inicio"
-                name="fecha_inicio"
-                placeholder={ANegocios.fecha_inicio}
-                onChange={onChange}
-                defaultValue={ANegocios.fecha_inicio}
-                required
-              ></Input>
-            </InputGroup>
-
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>
-                  <i class="fas fa-flag"></i>
-                </InputGroupText>
-              </InputGroupAddon>
-              <Input
-                type="datetime-local"
-                id="fecha_finalizacion"
-                name="fecha_finalizacion"
-                placeholder={ANegocios.fecha_finalizacion}
-                onChange={onChange}
-                defaultValue={ANegocios.fecha_finalizacion}
-                required
-              ></Input>
             </InputGroup>
 
             <Input

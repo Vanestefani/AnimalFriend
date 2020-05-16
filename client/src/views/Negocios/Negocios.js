@@ -48,7 +48,7 @@ function Negocios() {
       search: e.target.value,
     });
   };
-  
+
     let items = negocios
       .filter((data) => {
         if (search == "") return data;
@@ -60,9 +60,9 @@ function Negocios() {
         }
       })
       .map((data) => {
-        return <Itemnegocio key={data._id} evento={data}></Itemnegocio>;
+        return <Itemnegocio key={data._id} negocio={data}></Itemnegocio>;
       });
-  
+
   return (
     <>
       <HomeNarbar></HomeNarbar>

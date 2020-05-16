@@ -22,7 +22,7 @@ exports.createnegocios = async (req, res) => {
       imagen: result.url,
     });
 
-    const negocio = await newnegocio.save().then((result) => {
+    const negocio = await newnegocios.save().then((result) => {
       res.json({ newnegocio: result });
     });
   } catch (error) {

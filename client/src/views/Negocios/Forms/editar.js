@@ -67,12 +67,12 @@ function FormEditarNegocios(props) {
         <i className="fas fa-plus"></i>
       </Button>
 
-      <Modal isOpen={modalNegocios} toggle={() => setModal1(false)}>
+      <Modal isOpen={modalNegocios} toggle={() =>setModal1(false)}>
         <div className="modal-header justify-content-center">
           <button
             className="close"
             type="button"
-            onClick={() => setModal1(false)}
+            onClick={()=>setModal1(false)}
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
@@ -80,7 +80,7 @@ function FormEditarNegocios(props) {
         </div>
         <ModalBody>
           <div>
-            <h4>Información de evento</h4>
+            <h4>Información de negocio</h4>
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
@@ -88,7 +88,7 @@ function FormEditarNegocios(props) {
                 </InputGroupText>
               </InputGroupAddon>
               <Input
-                placeholder="Titulo de evento"
+                placeholder="Titulo de negocio"
                 type="text"
                 id="titulo"
                 name="titulo"
@@ -97,92 +97,57 @@ function FormEditarNegocios(props) {
                 required
               ></Input>
             </InputGroup>
-            <Row>
-              <Col md="3">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i class="fab fa-microsoft"></i>
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Elige la Categoria del evento"
-                    type="select"
-                    id="categoria"
-                    name="categoria"
-                    onChange={onChange}
-                    defaultValue={BNegocios.categoria}
-                    required
-                  >
-                    <option value="Vacunas">Vacunas</option>
-                    <option value="Estelirizacion">Estelirizacion</option>
-                    <option value="Caminatas">Caminatas</option>
-                    <option value="Concursos">Concursos</option>
-                  </Input>
-                </InputGroup>
-              </Col>
 
-              <Col md="3">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i class="fas fa-kiwi-bird"></i>
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    type="datetime-local"
-                    id="fecha_inicio"
-                    name="fecha_inicio"
-                    placeholder={BNegocios.fecha_inicio}
-                    onChange={onChange}
-                    defaultValue={BNegocios.fecha_inicio}
-                    required
-                  ></Input>
-                </InputGroup>
-              </Col>
-              <Col md="3">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i class="fas fa-kiwi-bird"></i>
-                      <i class="fas fa-flag"></i>
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    type="datetime-local"
-                    id="fecha_finalizacion"
-                    name="fecha_finalizacion"
-                    placeholder={BNegocios.fecha_finalizacion}
-                    onChange={onChange}
-                    defaultValue={BNegocios.fecha_finalizacion}
-                    required
-                  ></Input>
-                </InputGroup>
-              </Col>
-            </Row>
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">
+                <InputGroupText>
+                  <i class="fab fa-microsoft"></i>
+                </InputGroupText>
+              </InputGroupAddon>
+              <Input
+                placeholder="Elige la Categoria del negocio"
+                type="select"
+                id="categoria"
+                name="categoria"
+                onChange={onChange}
+                defaultValue={BNegocios.categoria}
+                required
+              >
+                <option value="Comida">Comida</option>
+                <option value="Ropa">Ropa</option>
+                <option value="Juguetes">Juguetes</option>
+                <option value="Veterinaria">Veterinaria</option>
+                <option value="PeluqueriaVeterinaria">Peluqueria</option>
+
+              </Input>
+            </InputGroup>
+
             <Input
               type="textarea"
               id="descripcion"
               name="descripcion"
-              placeholder="Escribe la descripcion del evento"
+              placeholder="Escribe la descripcion del negocio"
               onChange={onChange}
               defaultValue={BNegocios.descripcion}
               required
             ></Input>
-
-            <Input
-              accept={acceptedFileTypes}
-              id="fotoEvento"
-              name="fotoEvento"
-              type="file"
-              onChange={(e) => guardararchivoImagen(e.target.files[0])}
-              defaultValue={archivoImagen}
-              ref={imageInputRef}
-            ></Input>
+            <Row>
+              <Col md="6">
+                <Input
+                  accept={acceptedFileTypes}
+                  id="fotoNegocio"
+                  name="fotoNegocio"
+                  type="file"
+                  onChange={(e) =>guardararchivoImagen(e.target.files[0])}
+                  defaultValue={archivoImagen}
+                  ref={imageInputRef}
+                ></Input>
+              </Col>
+            </Row>
           </div>
         </ModalBody>
         <div className="modal-footer">
-          <Button color="sucess"  onClick={onSubmit}>
+          <Button color="sucess" onClick={onSubmit}>
             <i className="fas fa-paper-plane"></i> Enviar
           </Button>
           <Button color="danger" type="button" onClick={() => setModal1(false)}>
