@@ -93,14 +93,15 @@ exports.show = async function (req, res) {
 // @route PUT api/user/{id}
 // @desc Update user details
 // @access Public
-exports.update = async function (req, res) {
+exports.update =async (req, res) => {
   try {
     const update = req.body;
+    console.log(req.body);
     const id = req.params.id;
     const userId = req.user._id;
 
     const user = await User.findByIdAndUpdate(
-      id,
+      userId,
       { $set: update },
       { new: true }
     );
@@ -109,7 +110,7 @@ exports.update = async function (req, res) {
     if (!req.file)
       return res
         .status(200)
-        .json({ user, message: "El usuario ha sido actualizado" });
+        .json({user,message: "El usuario ha sido actualizado" });
 
     //Attempt to upload to cloudinary
     const result = await uploader(req);
@@ -774,12 +775,13 @@ exports.addFollowing = async (req, res) => {
       {
         new: true,
       }
-    ) .then((result) => {
-      res.json({ result });
-    })
-    .catch((err) => {
-      console.log(err);
-    }),
+    )
+      .then((result) => {
+        res.json({ result });
+      })
+      .catch((err) => {
+        console.log(err);
+      }),
       User.findByIdAndUpdate(
         req.body.userId,
         {
@@ -788,12 +790,13 @@ exports.addFollowing = async (req, res) => {
         {
           new: true,
         }
-      ).then((result) => {
-        res.json({ result });
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+      )
+        .then((result) => {
+          res.json({ result });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -808,12 +811,13 @@ exports.unFollow = async (req, res) => {
       {
         new: true,
       }
-    ) .then((result) => {
-      res.json({ result });
-    })
-    .catch((err) => {
-      console.log(err);
-    }),
+    )
+      .then((result) => {
+        res.json({ result });
+      })
+      .catch((err) => {
+        console.log(err);
+      }),
       User.findByIdAndUpdate(
         req.body.userId,
         {
@@ -822,12 +826,13 @@ exports.unFollow = async (req, res) => {
         {
           new: true,
         }
-      ).then((result) => {
-        res.json({ result });
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+      )
+        .then((result) => {
+          res.json({ result });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

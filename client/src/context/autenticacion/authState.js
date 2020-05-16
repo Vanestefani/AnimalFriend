@@ -28,6 +28,8 @@ import {
   FOLLOW_FAILURE,
   UNFOLLOW_SUCCESS,
   UNFOLLOW_FAILURE,
+  EDIT_PERFIL_SUCCESS,
+  EDIT_PERFIL_FAILURE,
 } from "../../types";
 
 const AuthState = (props) => {
@@ -229,8 +231,7 @@ const AuthState = (props) => {
         type: FOLLOW_SUCCESS,
         payload: respuesta.data.result,
       });
-alluser();
-
+      alluser();
     } catch (error) {
       console.log(error);
 
@@ -250,11 +251,8 @@ alluser();
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(
-        "/api/user/unfollow",
-        userId
-      );
-alluser();
+      const respuesta = await clienteAxios.put("/api/user/unfollow", userId);
+      alluser();
       dispatch({
         type: UNFOLLOW_SUCCESS,
         payload: respuesta.data.result,
@@ -295,6 +293,31 @@ alluser();
       });
     }
   };
+  const actualizarperfil = async (datos) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.put(`/api/user/${datos.id}`,datos);
+
+      dispatch({
+        type: EDIT_PERFIL_SUCCESS,
+        payload: respuesta.data,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+      dispatch({
+        type: EDIT_PERFIL_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -315,6 +338,7 @@ alluser();
         alluser,
         seguir,
         noseguir,
+        actualizarperfil,
       }}
     >
       {props.children}

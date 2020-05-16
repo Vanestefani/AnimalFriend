@@ -22,19 +22,17 @@ import {
   FOLLOW_FAILURE,
   UNFOLLOW_SUCCESS,
   UNFOLLOW_FAILURE,
+  EDIT_PERFIL_SUCCESS,
+  EDIT_PERFIL_FAILURE,
 } from "../../types";
 
 export default (state, action) => {
   switch (action.type) {
-    case GETALLUSER_SUCCESS:
+    case BUSCAR_USUARIO:
     case UNFOLLOW_SUCCESS:
     case FOLLOW_SUCCESS:
-      return {
-        ...state,
-        mensaje: null,
-      };
-      case BUSCAR_USUARIO:
-
+    case GETALLUSER_SUCCESS:
+    case EDIT_PERFIL_SUCCESS:
       return {
         ...state,
         autenticado: true,
@@ -47,7 +45,6 @@ export default (state, action) => {
     case REGISTRO_EXITOSO:
     case PASSWORD_CAMBIO_EXITO:
     case VERIFICADO:
-
       localStorage.setItem("token", action.payload.token);
 
       return {
@@ -77,6 +74,7 @@ export default (state, action) => {
     case GETALLUSER_FAILURE:
     case BUSCAR_USUARIO_ERROR:
     case FOLLOW_FAILURE:
+    case EDIT_PERFIL_FAILURE:
     case UNFOLLOW_FAILURE:
       localStorage.removeItem("token");
       return {

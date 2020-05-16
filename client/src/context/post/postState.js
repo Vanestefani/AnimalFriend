@@ -241,6 +241,7 @@ console.log(postId)
     if (token) {
       tokenAuth(token);
     }
+    console.log(datos)
     try {
       const respuesta = await clienteAxios.put(
         `/api/post/${datos.postId}`,

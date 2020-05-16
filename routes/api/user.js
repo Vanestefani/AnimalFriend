@@ -32,5 +32,6 @@ router.get(
 );
 router.put("/follow", checkAuth, validate,User.addFollowing);
 router.put("/unfollow", checkAuth, validate,User.unFollow);
+router.put("/:userId", checkAuth, validate,User.update);
 
 module.exports = router;
