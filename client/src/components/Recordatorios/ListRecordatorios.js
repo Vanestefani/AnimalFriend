@@ -84,7 +84,6 @@ function ListRecordatorios(props) {
         tipo: tipo,
         mascota: mascota,
         fecha_expiracion: fecha_expiracion,
-
       });
       guardarrecordatorio({
         descripcion: "",
@@ -92,7 +91,6 @@ function ListRecordatorios(props) {
         tipo: "",
         mascota: "",
         fecha_expiracion: "",
-
       });
     }
   };
@@ -133,34 +131,30 @@ function ListRecordatorios(props) {
 
         {recordatorios ? (
           recordatorios.map((recordatorio) => (
-
-              <div className="shadow p-3 mb-5 bg-white rounded">
-                <h3>
-                  <b>Titulo:</b>
-                  {recordatorio.nombre}
-                </h3>
-                <b>Categoria:</b>{" "}
-                <Badge color="info">{recordatorio.tipo}</Badge>
-                <br></br>
-                <b>Mascota:</b>
-                <Badge color="success">{recordatorio.mascota.nombre}</Badge>
-                <div>
-                  <b>Fecha:</b>
-                  <em>
-                    {moment(new Date(recordatorio.fecha_expiracion)).fromNow()}
-                  </em>
-                </div>
-                
-                <Button
-                  sm
-                  onClick={() => {
-                    deleteRecordatorios(recordatorio._id);
-                  }}
-                >
-                  <i className="fas fa-trash-alt"></i>
-                </Button>
+            <div className="shadow p-3 mb-5 bg-white rounded">
+              <h3>
+                <b>Titulo:</b>
+                {recordatorio.nombre}
+              </h3>
+              <b>Categoria:</b> <Badge color="info">{recordatorio.tipo}</Badge>
+              <br></br>
+              <b>Mascota:</b>
+              <Badge color="success">{recordatorio.mascota.nombre}</Badge>
+              <div>
+                <b>Fecha:</b>
+                <em>
+                  {moment(new Date(recordatorio.fecha_expiracion)).fromNow()}
+                </em>
               </div>
-
+              <Button
+                sm
+                onClick={() => {
+                  deleteRecordatorios(recordatorio._id);
+                }}
+              >
+                <i className="fas fa-trash-alt"></i>
+              </Button>
+            </div>
           ))
         ) : (
           <p>No hay recordatorios, agrega uno</p>

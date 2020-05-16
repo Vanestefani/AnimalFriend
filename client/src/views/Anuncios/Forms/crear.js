@@ -16,8 +16,11 @@ import {
 } from "reactstrap";
 import AnunciosContex from "../../../context/anuncios/anunciosContext";
 import AuthContext from "../../../context/autenticacion/authContext";
+import MascotasContext from "../../../context/mascotas/mascotasContext";
 
 function CrearAnuncios(props) {
+  const mContext = useContext(MascotasContext);
+  const { mascotas, mascotasUsuario } = mContext;
   const authContext = useContext(AuthContext);
   const { usuario } = authContext;
   const EContex = useContext(AnunciosContex);
@@ -33,19 +36,14 @@ function CrearAnuncios(props) {
   const [AAnuncios, agregarAnuncios] = useState({
     titulo: "",
     categoria: "",
-    fecha_inicio: "",
-    fecha_finalizacion: "",
+    mascota: "",
     descripcion: "",
   });
-  const {
-    titulo,
-    categoria,
-    fecha_inicio,
-    fecha_finalizacion,
-    descripcion,
-  } = AAnuncios;
+  const { titulo, categoria, mascota, descripcion } = AAnuncios;
   const [AarchivoImagen, AguardararchivoImagen] = useState(null);
-
+  useEffect(() => {
+    mascotasUsuario();
+  }, []);
   const onChange = (e) => {
     agregarAnuncios({
       ...AAnuncios,
@@ -61,10 +59,10 @@ function CrearAnuncios(props) {
     formData.append("imagen", AarchivoImagen, AarchivoImagen.name);
     formData.append("titulo", titulo);
     formData.append("categoria", categoria);
-    formData.append("fecha_inicio", fecha_inicio);
-    formData.append("fecha_finalizacion", fecha_finalizacion);
-    formData.append("descripcion", descripcion);
     formData.append("autor", userid);
+    formData.append("mascota", mascota);
+
+    formData.append("descripcion", descripcion);
     addAnuncios(formData);
     console.log("click");
   };
@@ -120,45 +118,38 @@ function CrearAnuncios(props) {
                 defaultValue={AAnuncios.categoria}
                 required
               >
-                <option value="Vacunas">Vacunas</option>
-                <option value="Estelirizacion">Estelirizacion</option>
-                <option value="Caminatas">Caminatas</option>
-                <option value="Concursos">Concursos</option>
+                <option selected="">Elija una categoria</option>
+                <option value="Mascotas Perdidas">Mascotas Perdidas</option>
+                <option value="Adopciones">Adopciones</option>
+                <option value="Animales encontrados">
+                  Animales encontrados
+                </option>
+                <option value="Emparejar">Emparejar</option>
               </Input>
             </InputGroup>
 
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-kiwi-bird"></i>
+                  <i class="fas fa-feather-alt"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
-                type="datetime-local"
-                id="fecha_inicio"
-                name="fecha_inicio"
-                placeholder={AAnuncios.fecha_inicio}
+                placeholder="Tipo"
+                type="select"
+                id="mascota"
+                name="mascota"
                 onChange={onChange}
-                defaultValue={AAnuncios.fecha_inicio}
+                defaultValue={mascota}
                 required
-              ></Input>
-            </InputGroup>
-
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>
-                  <i class="fas fa-flag"></i>
-                </InputGroupText>
-              </InputGroupAddon>
-              <Input
-                type="datetime-local"
-                id="fecha_finalizacion"
-                name="fecha_finalizacion"
-                placeholder={AAnuncios.fecha_finalizacion}
-                onChange={onChange}
-                defaultValue={AAnuncios.fecha_finalizacion}
-                required
-              ></Input>
+              >
+                <option selected="">Elija una mascota</option>
+                {mascotas.map((mascota) => (
+                  <option key={mascota._id} value={mascota._id}>
+                    {mascota.nombre}
+                  </option>
+                ))}
+              </Input>
             </InputGroup>
 
             <Input

@@ -58,7 +58,7 @@ function Anuncios() {
       }
     })
     .map((data) => {
-      return <Itemanuncio key={data._id} evento={data}></Itemanuncio>;
+      return <Itemanuncio key={data._id} anuncio={data}></Itemanuncio>;
     });
   return (
     <>

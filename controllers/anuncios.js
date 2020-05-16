@@ -9,7 +9,7 @@ exports.createAnuncios = async (req, res) => {
     const categoria = req.body.categoria;
     const autor = req.body.autor;
     const mascota = req.body.mascota;
-    const imagen = req.body.imagen;
+
     const tags = req.body.tags;
     const descripcion = req.body.descripcion;
 
@@ -19,12 +19,12 @@ exports.createAnuncios = async (req, res) => {
       autor: autor,
       mascota: mascota,
       imagen: result.url,
-      tags: tags,
+
       descripcion: descripcion,
     });
 
     const anuncios = await newanuncios.save().then((result) => {
-      res.json({ anuncios: result });
+      res.json({ anuncio: result });
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

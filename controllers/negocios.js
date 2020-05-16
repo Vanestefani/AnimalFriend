@@ -9,7 +9,7 @@ exports.createnegocios = async (req, res) => {
     const categoria = req.body.categoria;
     const autor = req.body.autor;
     const tags = req.body.tags;
-    const imagen = req.body.imagen;
+
     const descripcion = req.body.descripcion;
 
     const newnegocios = new Negocio({
