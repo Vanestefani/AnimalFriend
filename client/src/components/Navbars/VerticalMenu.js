@@ -40,11 +40,6 @@ function VerticalMenu() {
                 Anuncios
               </Link>
             </NavLink>
-
-            <NavLink href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
-              <i className="fas fa-book"></i>
-              Normatividad
-            </NavLink>
           </Nav>
         </Container>
       </Card>
