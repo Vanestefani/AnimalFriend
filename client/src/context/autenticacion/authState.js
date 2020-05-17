@@ -299,7 +299,7 @@ const AuthState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(`/api/user/${datos.id}`,datos);
+      const respuesta = await clienteAxios.put(`/api/user/${datos.id}`, datos);
 
       dispatch({
         type: EDIT_PERFIL_SUCCESS,
