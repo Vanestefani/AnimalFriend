@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const passport = require("passport");
 const path = require("path");
-require("./socketio");
+
 // Setting up port
 mongoose.connect(process.env.MOGOURI || "mongodb://localhost/my_database", {
   useNewUrlParser: true,
@@ -22,6 +22,20 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+//socket i.o
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('User Disconnected');
+  });
+  socket.on('example_message', function(msg){
+    console.log('message: ' + msg);
+  });
+});
+io.listen(8000);
+
 //form-urlencoded
 
 const connection = mongoose.connection;

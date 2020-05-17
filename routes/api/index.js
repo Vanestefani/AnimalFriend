@@ -3,15 +3,14 @@ const user = require("./user");
 const recordatorio = require("./recordatorios");
 const mascota = require("./mascotas");
 const post = require("./post");
-
 const anuncios = require("./anuncios");
 const negocios = require("./negocios");
 const eventos = require("./eventos");
+const notification = require("./notification");
 
 const authenticate = require("../../middlewares/authenticate");
 
 module.exports = (app) => {
-
   app.use("/api/auth", auth);
   app.use("/api/user", authenticate, user);
   app.use("/api/post", authenticate, post);
@@ -20,4 +19,6 @@ module.exports = (app) => {
   app.use("/api/anuncios", authenticate, anuncios);
   app.use("/api/negocios", authenticate, negocios);
   app.use("/api/eventos", authenticate, eventos);
+  app.use("/api/notificacion", authenticate, notification);
+
 };
