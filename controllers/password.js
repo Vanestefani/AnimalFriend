@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../models/User");
 const { sendEmail } = require("../utils/index");
 const host = process.env.HOST_FRONTEND; // FRONTEND Host
 // @route POST api/auth/recover
