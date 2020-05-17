@@ -47,6 +47,10 @@ app.use(express.urlencoded({ extended: false }));
 require("./routes/api/index")(app);
 const postsRouter = require("./routes/api/post");
 app.use("/api/post/", postsRouter);
+//front end
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
 //=== 5 - START SERVER
 app.listen(PORT, () =>
   console.log("Server running on http://localhost:" + PORT + "/")
