@@ -8,7 +8,7 @@ const passport = require("passport");
 const path = require("path");
 require("./socketio");
 // Setting up port
-mongoose.connect(process.env.MOGOURI || "mongodb://localhost/my_database", {
+mongoose.connect(process.env.MOGOURI || "mongodb+srv://vanessa:4EGlZKBRQleKYr2H@cluster0-zfkc3.mongodb.net/test?retryWrites=true&w=majority", {
   useNewUrlParser: true,
 });
 
