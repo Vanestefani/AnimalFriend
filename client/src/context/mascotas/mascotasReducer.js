@@ -14,6 +14,7 @@ import {
       case  EDIT_MASCOTAS_SUCCESS:
         return {
           ...state,
+          loading:false,
           mascotas: action.payload,
         };
       case ADD_MASCOTAS_SUCCESS:

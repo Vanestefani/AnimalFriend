@@ -21,6 +21,7 @@ const MascotasState = (props) => {
     mensaje: null,
     mascotas: [],
     mascota: null,
+    loading:true
   };
 
   const [state, dispatch] = useReducer(MascotasReducer, initialState);
@@ -131,6 +132,7 @@ const MascotasState = (props) => {
         mensaje: state.mensaje,
         mascotas: state.mascotas,
         mascota: state.mascota,
+        loading:state.loading
       }}
     >
       {props.children}

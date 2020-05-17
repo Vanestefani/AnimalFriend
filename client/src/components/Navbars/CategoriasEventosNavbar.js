@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 // reactstrap components
-import { NavLink, Nav, Container, Card, Button } from "reactstrap";
+import { NavLink, Nav, Container, Card } from "reactstrap";
 import Crear from "../../views/Eventos/Forms/crear";
 
 function CategoriasEventosNavbar(props) {

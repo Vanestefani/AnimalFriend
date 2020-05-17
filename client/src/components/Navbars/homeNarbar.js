@@ -18,14 +18,12 @@ import { history } from "../../_helpers/history";
 import AuthContext from "../../context/autenticacion/authContext";
 function HomeNarbar() {
   const authContext = useContext(AuthContext);
-  const { mensaje, usuario, cerrarSesion } = authContext;
+  const { usuario, cerrarSesion } = authContext;
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [user, setUser] = useState({
     activePath: "",
   });
-  // extraer de usuario
-  const { activePath } = user;
 
   React.useEffect(() => {
     history.listen((location) => {

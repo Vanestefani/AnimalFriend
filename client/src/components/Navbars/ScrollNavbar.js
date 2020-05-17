@@ -11,11 +11,6 @@ import {
   NavLink,
   Nav,
   Container,
-  Form,
-  InputGroup,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
@@ -27,9 +22,6 @@ function ScrollNavbar() {
   const authContext = useContext(AuthContext);
   const { mensaje, usuario, cerrarSesion } = authContext;
 
-  const [user, setUser] = useState({
-    activePath: "",
-  });
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   React.useEffect(() => {
@@ -66,11 +58,11 @@ function ScrollNavbar() {
         <Container>
           <div className="navbar-translate">
             <NavbarBrand href="#" id="navbar-brand">
-            <Link to={"/perfil/"+usuario._id}>
+            <Link to="/home">
                 <img
                   width="200px"
                   alt="..."
-                  src={require("../../assets//img/Logotipo.png")}
+                  src={require("../../assets/img/Logotipo.png")}
                 ></img>
               </Link>
             </NavbarBrand>
