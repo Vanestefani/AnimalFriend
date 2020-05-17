@@ -8,7 +8,7 @@ const passport = require("passport");
 const path = require("path");
 require("./socketio");
 // Setting up port
-mongoose.connect(process.env.MOGOURI || "mongodb+srv://vanessa:4EGlZKBRQleKYr2H@cluster0-zfkc3.mongodb.net/test?retryWrites=true&w=majority", {
+mongoose.connect(process.env.MOGOURI || "mongodb://localhost/my_database", {
   useNewUrlParser: true,
 });
 
@@ -23,11 +23,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //form-urlencoded
-
-//=== 2 - SET UP DATABASE
-//Configure mongoose's promise to global promise
-mongoose.promise = global.Promise;
-mongoose.connect(connUri, { useNewUrlParser: true, useCreateIndex: true });
 
 const connection = mongoose.connection;
 connection.once("open", () =>
