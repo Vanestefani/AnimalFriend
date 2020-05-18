@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import {
-  Label,
-  Input,
-  CardHeader,
+  ListGroupItem,
   Card,
-  Container,
-  CardBody,
-  FormGroup,
+  ListGroup,
+  ListGroupItemHeading,
   Badge,
   Button,
   CardTitle,
@@ -17,12 +14,12 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import RContext from "../../context/recordatorios/recordatoriosContex";
 import AlertaContext from "../../context/alertas/alertaContext";
 import FormRecordatorio from "./form/FormRecordatorio";
-import Editar from "./form/Editar";
 
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import moment from "moment";
 import "moment/locale/es";
+import Skeleton from "react-loading-skeleton";
 
 function ListRecordatorios(props) {
   const mContext = useContext(MascotasContext);
@@ -30,7 +27,7 @@ function ListRecordatorios(props) {
   const rContext = useContext(RContext);
   const {
     addRecordatorios,
-    actualizarRecordatorios,
+    loading,
     recordatorios,
     recordatoriosUsuario,
     deleteRecordatorios,
@@ -47,8 +44,14 @@ function ListRecordatorios(props) {
     tipo: "",
     mascota: "",
     fecha_expiracion: "",
-
     completo: false,
+    errors: {
+      Errordescripcion: { valido: true, mensaje: "" },
+      Errornombre: { valido: true, mensaje: "" },
+      Errortipo: { valido: true, mensaje: "" },
+      Errormascota: { valido: true, mensaje: "" },
+      Errorfecha_expiracion: { valido: true, mensaje: "" },
+    },
   });
   const {
     descripcion,
@@ -56,7 +59,6 @@ function ListRecordatorios(props) {
     tipo,
     mascota,
     fecha_expiracion,
-
     completo,
   } = Frecordatorio;
   const onChange = (e) => {
@@ -65,18 +67,66 @@ function ListRecordatorios(props) {
       [e.target.name]: e.target.value,
     });
   };
-  //error state
-  const [errores, seterrores] = useState(false);
+  const validate = () => {
+    let isError = false;
 
+    if (Frecordatorio.descripcion.trim() == "") {
+      Frecordatorio.errors.Errordescripcion.valido = false;
+      Frecordatorio.errors.Errordescripcion.mensaje =
+        "(El campo descripción no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errordescripcion.valido = true;
+    }
+    if (Frecordatorio.nombre.trim() == "") {
+      Frecordatorio.errors.Errornombre.valido = false;
+      Frecordatorio.errors.Errornombre.mensaje =
+        "(El campo nombre no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errornombre.valido = true;
+    }
+    if (Frecordatorio.tipo.trim() == "") {
+      Frecordatorio.errors.Errortipo.valido = false;
+      Frecordatorio.errors.Errortipo.mensaje =
+        "(El campo tipo no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errortipo.valido = true;
+    }
+    if (Frecordatorio.mascota.trim() == "") {
+      Frecordatorio.errors.Errormascota.valido = false;
+      Frecordatorio.errors.Errormascota.mensaje =
+        "(El campo mascota no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errormascota.valido = true;
+    }
+    if (Frecordatorio.fecha_expiracion.trim() == "") {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = false;
+      Frecordatorio.errors.Errorfecha_expiracion.mensaje =
+        "(El campo fecha expiracion no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = true;
+    }
+    if (
+      !Frecordatorio.errors.Errordescripcion.valido ||
+      !Frecordatorio.nombre.valido ||
+      !Frecordatorio.errors.Errortipo.valido ||
+      !Frecordatorio.errors.Errormascota.valido ||
+      !Frecordatorio.errors.Errorfecha_expiracion.valido
+    ) {
+      isError = true;
+      console.log("error :D");
+    } else {
+      isError = false;
+    }
+    return isError;
+  };
   const onSubmit = (e) => {
     e.preventDefault();
     e.target.className += " was-validated";
-    let userid = usuario._id;
+    const err = validate();
 
-    if (nombre === "" || tipo === "") {
-      seterrores(true);
-      console.log("esta vacio");
-    } else {
+    if (!err) {
+      let userid = usuario._id;
+
       addRecordatorios({
         descripcion: descripcion,
         autor: userid,
@@ -92,6 +142,7 @@ function ListRecordatorios(props) {
         mascota: "",
         fecha_expiracion: "",
       });
+      setModal1(false);
     }
   };
 
@@ -114,51 +165,93 @@ function ListRecordatorios(props) {
     weekdaysMin: "Do_Lu_Ma_Mi_Ju_Vi_Sa".split("_"),
   });
   moment.locale("es");
+  const [modalMascotas, setModal1] = React.useState(false);
 
   return (
     <>
       <Card className="shadow p-3 mb-5 bg-white rounded">
-        <CardTitle mt-2>
-          <h2 className="text-center">Recordatorios</h2>
-          <FormRecordatorio
-            onChange={onChange}
-            Frecordatorio={Frecordatorio}
-            onSubmit={onSubmit}
-            mascotas={mascotas}
-            guardarrecordatorio={guardarrecordatorio}
-          ></FormRecordatorio>
+        <FormRecordatorio
+          modalMascotas={modalMascotas}
+          setModal1={setModal1}
+          onChange={onChange}
+          Frecordatorio={Frecordatorio}
+          onSubmit={onSubmit}
+          mascotas={mascotas}
+          guardarrecordatorio={guardarrecordatorio}
+        ></FormRecordatorio>
+        <br></br>
+        <CardTitle className="title-up">
+          <center>
+            <h3 className="text-center">Recordatorios</h3>
+          </center>
         </CardTitle>
+        <ListGroup>
+          {!loading ? (
+            recordatorios ? (
+              recordatorios.map((recordatorio) => (
+                <ListGroupItem>
+                  <ListGroupItemHeading>
+                    <h4> {recordatorio.nombre}</h4>
+                  </ListGroupItemHeading>
+                  <div>
+                    {" "}
+                    <b>Categoria:</b>{" "}
+                    <Badge color="info"> {recordatorio.tipo}</Badge>
+                  </div>
+                  <div>
+                    <b>Mascota:</b>
+                    <Badge color="success">
+                      {" "}
+                      {recordatorio.mascota.nombre}
+                    </Badge>
+                  </div>
+                  <div>
+                    <b>Vence:</b>
+                    <em>
+                      {moment(
+                        new Date(recordatorio.fecha_expiracion)
+                      ).fromNow()}
+                    </em>
+                  </div>
+                  <Button
+                    className="btn-danger"
+                    size="sm"
+                    onClick={() => {
+                      deleteRecordatorios(recordatorio._id);
+                    }}
+                  >
+                    <i className="fas fa-trash-alt"></i>
+                  </Button>
+                </ListGroupItem>
+              ))
+            ) : (
+              <center>
+                <Skeleton
+                  circle={true}
+                  height={100}
+                  width={100}
+                  animation="wave"
+                  variant="rect"
+                />
 
-        {recordatorios ? (
-          recordatorios.map((recordatorio) => (
-            <div className="shadow p-3 mb-5 bg-white rounded">
-              <h3>
-                <b>Titulo:</b>
-                {recordatorio.nombre}
-              </h3>
-              <b>Categoria:</b> <Badge color="info">{recordatorio.tipo}</Badge>
-              <br></br>
-              <b>Mascota:</b>
-              <Badge color="success">{recordatorio.mascota.nombre}</Badge>
-              <div>
-                <b>Fecha:</b>
-                <em>
-                  {moment(new Date(recordatorio.fecha_expiracion)).fromNow()}
-                </em>
-              </div>
-              <Button
-                sm
-                onClick={() => {
-                  deleteRecordatorios(recordatorio._id);
-                }}
-              >
-                <i className="fas fa-trash-alt"></i>
-              </Button>
-            </div>
-          ))
-        ) : (
-          <p>No hay recordatorios, agrega uno</p>
-        )}
+                <Skeleton
+                  height={30}
+                  width={100}
+                  animation="wave"
+                  variant="rect"
+                />
+                <Skeleton
+                  height={30}
+                  width={100}
+                  animation="wave"
+                  variant="rect"
+                />
+              </center>
+            )
+          ) : (
+            <p>No hay recordatorios</p>
+          )}
+        </ListGroup>
       </Card>
     </>
   );

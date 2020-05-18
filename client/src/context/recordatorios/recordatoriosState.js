@@ -21,6 +21,7 @@ const RecordatoriosState = (props) => {
     mensaje: null,
     recordatorios: [],
     recordatorio: null,
+    loading:true
   };
 
   const [state, dispatch] = useReducer(RecordatoriosReducer, initialState);
@@ -132,6 +133,7 @@ const RecordatoriosState = (props) => {
         mensaje: state.mensaje,
         recordatorios: state.recordatorios,
         recordatorio: state.recordatorio,
+        loading:state.loading
       }}
     >
       {props.children}

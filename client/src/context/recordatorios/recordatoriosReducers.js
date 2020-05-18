@@ -14,6 +14,7 @@ export default (state, action) => {
     case  EDIT_RECORDATORIO_SUCCESS:
       return {
         ...state,
+        loading:false,
         recordatorios: action.payload,
       };
     case ADD_RECORDATORIO_SUCCESS:

@@ -14,28 +14,28 @@ import {
   InputGroupText,
   InputGroup,
 } from "reactstrap";
-
-import RecordatoriosContex from "../../../context/recordatorios/recordatoriosContex";
-import AuthContext from "../../../context/autenticacion/authContext";
+import moment from "moment";
+import "moment/locale/es";
 
 import "react-image-crop/dist/ReactCrop.css";
 function FormRecordatorio(props) {
-  const [modalMascotas, setModal1] = React.useState(false);
-
   //modal
-
   return (
     <>
-      <Button small onClick={() => setModal1(true)}>
+      <Button
+        className="pull-right "
+        size="sm"
+        onClick={() => props.setModal1(true)}
+      >
         <i className="fas fa-plus"></i>
       </Button>
 
-      <Modal isOpen={modalMascotas} toggle={() => setModal1(false)}>
+      <Modal isOpen={props.modalMascotas} toggle={() => props.setModal1(false)}>
         <div className="modal-header justify-content-center">
           <button
             className="close"
             type="button"
-            onClick={() => setModal1(false)}
+            onClick={() => props.setModal1(false)}
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
@@ -44,13 +44,18 @@ function FormRecordatorio(props) {
         <ModalBody>
           <div>
             <h4>Añade un recordatorio</h4>
-            <InputGroup className>
+            <InputGroup  className={
+                  props.Frecordatorio.errors.Errornombre.valido
+                    ? ""
+                    : "is-invalid form-control-danger form-control"
+                }>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
                   <i class="fas fa-user-clock"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
+
                 placeholder="Titulo"
                 type="text"
                 id="nombre"
@@ -60,13 +65,27 @@ function FormRecordatorio(props) {
                 required
               ></Input>
             </InputGroup>
-            <InputGroup>
+            {!props.Frecordatorio.errors.Errornombre.valido ? (
+              <span className="text-muted">
+                {props.Frecordatorio.errors.Errornombre.mensaje}
+              </span>
+            ) : (
+              ""
+            )}
+            <InputGroup
+             className={
+              props.Frecordatorio.errors.Errordescripcion.valido
+                ? ""
+                : "is-invalid form-control-danger form-control"
+            }
+            >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
                   <i class="fas fa-align-justify"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
+
                 placeholder="Descripción"
                 rows="3"
                 type="textarea"
@@ -76,27 +95,53 @@ function FormRecordatorio(props) {
                 defaultValue={props.Frecordatorio.descripcion}
               ></Input>
             </InputGroup>
-
+            {!props.Frecordatorio.errors.Errordescripcion.valido ? (
+              <span className="text-muted">
+                {props.Frecordatorio.errors.Errordescripcion.mensaje}
+              </span>
+            ) : (
+              ""
+            )}
             <Row>
               <Col md="6">
-                <InputGroup>
+                <InputGroup
+                  className={
+                    props.Frecordatorio.errors.Errorfecha_expiracion.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
+                  }
+                >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="fas fa-birthday-cake"></i>
+                      <i class="fas fa-flag"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    type="datetime-local"
+                    type="date"
                     id="fecha_expiracion"
                     name="fecha_expiracion"
                     onChange={props.onChange}
+                    min={moment().format("YYYY-MM-DD")}
                     defaultValue={props.Frecordatorio.fecha_expiracion}
                     required
                   ></Input>
                 </InputGroup>
+                {!props.Frecordatorio.errors.Errorfecha_expiracion.valido ? (
+                  <span className="text-muted">
+                    {props.Frecordatorio.errors.Errorfecha_expiracion.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
               <Col md="6">
-                <InputGroup>
+                <InputGroup
+                  className={
+                    props.Frecordatorio.errors.Errortipo.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
+                  }
+                >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
                       <i class="fas fa-feather-alt"></i>
@@ -124,11 +169,24 @@ function FormRecordatorio(props) {
                     <option>Otro</option>
                   </Input>
                 </InputGroup>
+                {!props.Frecordatorio.errors.Errortipo.valido ? (
+                  <span className="text-muted">
+                    {props.Frecordatorio.errors.Errortipo.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
             <Row>
               <Col md="6">
-                <InputGroup>
+                <InputGroup
+                  className={
+                    props.Frecordatorio.errors.Errormascota.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
+                  }
+                >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
                       <i class="fas fa-feather-alt"></i>
@@ -149,9 +207,15 @@ function FormRecordatorio(props) {
                         {mascota.nombre}
                       </option>
                     ))}
-
                   </Input>
                 </InputGroup>
+                {!props.Frecordatorio.errors.Errormascota.valido ? (
+                  <span className="text-muted">
+                    {props.Frecordatorio.errors.Errormascota.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
           </div>
@@ -160,7 +224,11 @@ function FormRecordatorio(props) {
           <Button color="sucess" type="button" onClick={props.onSubmit}>
             <i className="fas fa-paper-plane"></i> Enviar
           </Button>
-          <Button color="danger" type="button" onClick={() => setModal1(false)}>
+          <Button
+            color="danger"
+            type="button"
+            onClick={() => props.setModal1(false)}
+          >
             Cerrar
           </Button>
         </div>
