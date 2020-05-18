@@ -72,6 +72,28 @@ const MascotasState = (props) => {
       });
     }
   };
+  const mascotasbyUsuario = async (p) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.get(`/api/mascota/getmascotasporusuario/${p}`);
+
+      dispatch({
+        type: GET_MASCOTAS_SUCCESS,
+        payload: respuesta.data.mascotas,
+      });
+    } catch (error) {
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: GET_MASCOTAS_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
 
   const deleteMascotas = async (mascotaId) => {
     const token = localStorage.getItem("token");
@@ -132,7 +154,7 @@ const MascotasState = (props) => {
         mensaje: state.mensaje,
         mascotas: state.mascotas,
         mascota: state.mascota,
-        loading:state.loading
+        loading:state.loading,mascotasbyUsuario
       }}
     >
       {props.children}

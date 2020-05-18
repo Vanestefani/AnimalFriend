@@ -19,7 +19,7 @@ import {
 import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
-import ListMascotas from "../../components/Listas/ListMascotas";
+import ListMascotasbyuser from "../../components/Listas/ListMascotasbyuser";
 import SubMenu from "../../components/Navbars/SubMenu";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
@@ -27,8 +27,13 @@ import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
 import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores";
 import Editarperfil from "./Form/editar";
 import AuthContext from "../../context/autenticacion/authContext";
+import MascotasContext from "../../context/mascotas/mascotasContext";
 
 function Perfil({ match }) {
+  const mContext = useContext(MascotasContext);
+
+  const { mascotasbyUsuario } = mContext;
+
   const AContext = useContext(AuthContext);
   const {
     Showuserid,
@@ -41,6 +46,7 @@ function Perfil({ match }) {
 
   useEffect(() => {
     Showuserid(match.params.q);
+    mascotasbyUsuario(match.params.q);
   }, []);
   React.useEffect(() => {
     document.body.classList.add("profile-page");
@@ -217,7 +223,7 @@ function Perfil({ match }) {
             <Container>
               <Row>
                 <Col md="3">
-                  <ListMascotas></ListMascotas>
+                  <ListMascotasbyuser></ListMascotasbyuser>
                   <ListaSeguidores></ListaSeguidores>
                   <ListaAnuncio></ListaAnuncio>
                 </Col>
