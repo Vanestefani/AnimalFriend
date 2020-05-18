@@ -62,7 +62,7 @@ function CrearPublicacion() {
   const handleChange = (e) => {
     setstate({
       ...state,
-      [e.target.name]: [e.target.value],
+      [e.target.name]: e.target.value,
     });
   };
   const handleSubmit = async (e) => {
@@ -113,7 +113,6 @@ function CrearPublicacion() {
                   type="textarea"
                   id="descripcion"
                   name="descripcion"
-                 
                   value={descripcion}
                   onChange={handleChange}
                 ></Input>
