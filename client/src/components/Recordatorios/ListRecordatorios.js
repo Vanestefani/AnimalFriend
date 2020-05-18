@@ -101,13 +101,21 @@ function ListRecordatorios(props) {
     if (Frecordatorio.fecha_expiracion.trim() == "") {
       Frecordatorio.errors.Errorfecha_expiracion.valido = false;
       Frecordatorio.errors.Errorfecha_expiracion.mensaje =
-        "(El campo fecha expiracion no puede estar vacio)";
+        "(El campo fecha de expiración no puede estar vacio)";
+    } else if (Frecordatorio.fecha_expiracion < moment().format("YYYY MM DD")) {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = false;
+      Frecordatorio.errors.Errorfecha_expiracion.mensaje =
+        "(El campo fecha de expiración no puede ser menor que la fecha de hoy)";
+    } else if (!moment(Frecordatorio.fecha_expiracion).isValid()) {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = false;
+      Frecordatorio.errors.Errorfecha_expiracion.mensaje =
+        "(El campo fecha de expiración es invalida)";
     } else {
       Frecordatorio.errors.Errorfecha_expiracion.valido = true;
     }
     if (
       !Frecordatorio.errors.Errordescripcion.valido ||
-      !Frecordatorio.nombre.valido ||
+      !Frecordatorio.errors.Errornombre.valido ||
       !Frecordatorio.errors.Errortipo.valido ||
       !Frecordatorio.errors.Errormascota.valido ||
       !Frecordatorio.errors.Errorfecha_expiracion.valido
@@ -141,6 +149,14 @@ function ListRecordatorios(props) {
         tipo: "",
         mascota: "",
         fecha_expiracion: "",
+        completo: false,
+        errors: {
+          Errordescripcion: { valido: true, mensaje: "" },
+          Errornombre: { valido: true, mensaje: "" },
+          Errortipo: { valido: true, mensaje: "" },
+          Errormascota: { valido: true, mensaje: "" },
+          Errorfecha_expiracion: { valido: true, mensaje: "" },
+        },
       });
       setModal1(false);
     }

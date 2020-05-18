@@ -44,18 +44,19 @@ function FormRecordatorio(props) {
         <ModalBody>
           <div>
             <h4>Añade un recordatorio</h4>
-            <InputGroup  className={
-                  props.Frecordatorio.errors.Errornombre.valido
-                    ? ""
-                    : "is-invalid form-control-danger form-control"
-                }>
+            <InputGroup
+              className={
+                props.Frecordatorio.errors.Errornombre.valido
+                  ? ""
+                  : "is-invalid form-control-danger form-control"
+              }
+            >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
                   <i class="fas fa-user-clock"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
-
                 placeholder="Titulo"
                 type="text"
                 id="nombre"
@@ -73,11 +74,11 @@ function FormRecordatorio(props) {
               ""
             )}
             <InputGroup
-             className={
-              props.Frecordatorio.errors.Errordescripcion.valido
-                ? ""
-                : "is-invalid form-control-danger form-control"
-            }
+              className={
+                props.Frecordatorio.errors.Errordescripcion.valido
+                  ? ""
+                  : "is-invalid form-control-danger form-control"
+              }
             >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
@@ -85,7 +86,6 @@ function FormRecordatorio(props) {
                 </InputGroupText>
               </InputGroupAddon>
               <Input
-
                 placeholder="Descripción"
                 rows="3"
                 type="textarea"
@@ -103,7 +103,7 @@ function FormRecordatorio(props) {
               ""
             )}
             <Row>
-              <Col md="6">
+              <Col md="12">
                 <InputGroup
                   className={
                     props.Frecordatorio.errors.Errorfecha_expiracion.valido
@@ -134,7 +134,7 @@ function FormRecordatorio(props) {
                   ""
                 )}
               </Col>
-              <Col md="6">
+              <Col md="12">
                 <InputGroup
                   className={
                     props.Frecordatorio.errors.Errortipo.valido
@@ -179,7 +179,7 @@ function FormRecordatorio(props) {
               </Col>
             </Row>
             <Row>
-              <Col md="6">
+              <Col md="12">
                 <InputGroup
                   className={
                     props.Frecordatorio.errors.Errormascota.valido
