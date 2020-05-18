@@ -31,30 +31,37 @@ const mascotasSchema = new mongoose.Schema({
   },
   chip: {
     type: String,
-
+    default:"No",
     maxlength: 15,
-    match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,
   },
   estatura: {
     type: String,
+    default:"Mediana"
   },
   estelerizado: {
-    type: Boolean,
+    type: String,
+    default:"No"
   },
   peligroso: {
-    type: Boolean,
+    type: String,
+    default:"No"
   },
   alergias: {
     type: Array,
-    default: [],
+    default: ["Ninguna"],
+  },
+  civil: {
+    type: Array,
+    default: ["Soltero"],
   },
   personalidad: {
     type: Array,
-    default: [],
+    default: ["No definida"],
   },
 
   fecha_nacimiento: {
     type: Date,
+    default:"2020/01/18",
   },
   descripcion: {
     type: String,

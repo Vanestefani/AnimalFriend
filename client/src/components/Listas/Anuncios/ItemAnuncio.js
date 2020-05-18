@@ -1,25 +1,30 @@
 import React from "react";
 import { ListGroupItem, Button } from "reactstrap";
-function ItemAnuncio() {
+import { Link } from "react-router-dom";
+
+function ItemAnuncio(props) {
   return (
     <>
-      <ListGroupItem className="shadow p-3 mb-5 bg-white rounded">
-        <center>
-          <img
-            src={require("../../../assets/img/undraw_female_avatar_w3jk.png")}
-            className="rounded-circle FotoUser"
-            width="60px"
-            atl=""
-          ></img>
-
-        </center>
-        <p>
-          Nombre de anuncio
-          <Button className="btn-round " color="neutral" size="sm">
-            <i className="fas fa-plus-circle"></i>Ver más
-          </Button>
-        </p>
-      </ListGroupItem>
+      {props.data ? (
+        <ListGroupItem className="shadow p-3 mb-5 bg-white rounded">
+          <center>
+            <img
+              src={props.data.imagen}
+              className="rounded-circle FotoUser"
+              width="60px"
+              atl=""
+            ></img>
+          </center>
+          <p>
+            {props.data.titulo}
+            <Link to={"/anuncio/" + props.data._id} className="btn btn-info">
+              Ver más
+            </Link>
+          </p>
+        </ListGroupItem>
+      ) : (
+        ""
+      )}
     </>
   );
 }

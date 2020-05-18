@@ -58,7 +58,7 @@ function ScrollNavbar() {
         <Container>
           <div className="navbar-translate">
             <NavbarBrand href="#" id="navbar-brand">
-            <Link to="/home">
+              <Link to="/home">
                 <img
                   width="200px"
                   alt="..."
@@ -139,14 +139,6 @@ function ScrollNavbar() {
                   </Link>
                 </NavLink>
               </NavItem>
-
-              <NavItem>
-                <NavLink onClick={(e) => e.preventDefault()}>
-                  <Link to="/messages/chat">
-                    <i className="fas fa-comments"></i>
-                  </Link>
-                </NavLink>
-              </NavItem>
               <NavItem>
                 <UncontrolledDropdown nav>
                   <DropdownToggle
@@ -156,25 +148,6 @@ function ScrollNavbar() {
                     href="#"
                     nav
                   >
-                    <i className="fas fa-bell"></i>
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Link className="text-dark">Notificacion prueba</Link>
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </NavItem>
-              <NavItem>
-                <UncontrolledDropdown nav>
-                  <DropdownToggle
-                    aria-haspopup={true}
-                    caret
-                    color="default"
-                    href="#"
-                    nav
-                  >
-
                     <img
                       src={usuario.fotoPerfil}
                       className="rounded-circle FotoUser"
@@ -182,7 +155,7 @@ function ScrollNavbar() {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Link to={"/perfil/"+usuario._id} className="text-dark">
+                      <Link to={"/perfil/" + usuario._id} className="text-dark">
                         <i className="fas fa-user-astronaut"></i>
                         Perfil
                       </Link>

@@ -7,19 +7,25 @@ import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
 import PerfilMascotaHeader from "../../components/Headers/PerfilMascotaHeader";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import InfoPet from "./InfoPet";
-import SubMenu from "../../components/Navbars/SubMenu";
 
 import Vistaprevi from "../../components/Galeria/vistaprevi";
-import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
+import ItemAnuncio from "../../components/Listas/Anuncios/ItemAnuncio";
+
 import Galeria from "../../components/Galeria/Galeria";
 import MascotasContext from "../../context/mascotas/mascotasContext";
+import AnunciosContext from "../../context/anuncios/anunciosContext";
 
 function PerfilMascota({ match }) {
+  const aContext = useContext(AnunciosContext);
+
+  const { allanuncios, anuncios } = aContext;
+
   const mContext = useContext(MascotasContext);
 
   const { mascota, getmascota } = mContext;
   useEffect(() => {
     getmascota(match.params.m);
+    allanuncios();
   }, [mascota]);
   const [pills, setPills] = React.useState("2");
   React.useEffect(() => {
@@ -31,25 +37,45 @@ function PerfilMascota({ match }) {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+  const arrayA = () => {
+    if (mascota && anuncios) {
+      let items = anuncios
+        .filter((data) => {
+          if (data.mascota.includes(mascota._id)) {
+            return data;
+          }
+        })
+        .map((data) => {
+          return <ItemAnuncio key={data._id} anuncio={data}></ItemAnuncio>;
+        });
+    }
+  };
+
   return (
     <>
       <ScrollNavbar></ScrollNavbar>
       <div className="wrapper">
         <PerfilMascotaHeader dato={mascota}></PerfilMascotaHeader>
+
+        {mascota ? (
+          mascota.descripcion != "" ? (
+            <div>
+              <h3 className="title">Sobre mi</h3>
+              <h5 className="description">{mascota.descripcion}</h5>
+            </div>
+          ) : (
+            ""
+          )
+        ) : (
+          ""
+        )}
         <div className="section">
           <div className="wrapper">
             <Container>
               <Row>
-                <Col md="3">
-                  <InfoPet></InfoPet>
-                </Col>
-                <Col md="6">
-                  <SubMenu></SubMenu>
-                  <Galeria></Galeria>
-                </Col>
-                <Col md="3">
-                  <Vistaprevi></Vistaprevi>
-                  <ListaAnuncio></ListaAnuncio>
+
+                <Col md="12">
+                  {mascota ? <InfoPet dato={mascota}></InfoPet> : ""}
                 </Col>
               </Row>
             </Container>

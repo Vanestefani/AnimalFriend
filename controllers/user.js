@@ -17,7 +17,7 @@ const {
 // @desc Returns all users
 // @access Public
 exports.index = async function (req, res) {
-  const users = await User.find({});
+  const users = await User.find({}).sort("-fecha_creacion");
   res.status(200).json({ users });
 };
 
@@ -281,7 +281,7 @@ exports.unFollow = async (req, res) => {
         new: true,
       }
     )
-     
+
       .catch((err) => {
         console.log(err);
       }),

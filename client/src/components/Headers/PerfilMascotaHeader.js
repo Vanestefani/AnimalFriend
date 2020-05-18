@@ -2,7 +2,7 @@ import React from "react";
 
 // reactstrap components
 import { Container } from "reactstrap";
-import Loading from '../Loading'
+import Loading from '../Loading';
 // core components
 
 function PerfilMascotaHeader(props) {

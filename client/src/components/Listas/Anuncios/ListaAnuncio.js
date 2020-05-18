@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
-
   ListGroup,
   Container,
   Card,
@@ -11,24 +10,24 @@ import {
   CardHeader,
   CardFooter,
 } from "reactstrap";
-import ItemAnuncio from './ItemAnuncio';
+import Skeleton from "react-loading-skeleton";
 
-function ListaAnuncio() {
+function ListaAnuncio(props) {
+
   return (
     <>
       <Card className="card-general">
         <Container className="container">
-          <CardHeader >
+          <CardHeader>
             <CardTitle className="title-up">
-                <h3>Anuncios</h3></CardTitle>
+              <h3>Anuncios</h3>
+            </CardTitle>
           </CardHeader>
           <CardBody>
-            <ListGroup flush>
-             <ItemAnuncio></ItemAnuncio>
-            </ListGroup>
+            <ListGroup flush> {props.dato}</ListGroup>
           </CardBody>
           <CardFooter>
-          <Link className="pull-right">Ver más</Link>
+            <Link className="pull-right">Ver más</Link>
           </CardFooter>
         </Container>
       </Card>
