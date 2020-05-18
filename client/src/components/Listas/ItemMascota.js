@@ -8,12 +8,11 @@ import {
   CardSubtitle,
   Button,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 function ItemMascota(props) {
   return (
-
     <>
-
       <CardImg
         className="rounded-circle FotoUser "
         top
@@ -24,11 +23,16 @@ function ItemMascota(props) {
       <CardBody className="text-center border-bottom border-info mb-1">
         <CardTitle>{props.mascota.nombre}</CardTitle>
         <CardSubtitle>
-          <Badge color="info">{props.mascota.especie}</Badge>
+          <Badge color="info">
+            {props.mascota.especie}/{props.mascota.raza}
+          </Badge>
         </CardSubtitle>
-        <Button className="btn-info" size="sm">
+        <Link
+          to={"/perfil-mascota/" + props.mascota._id}
+          className="btn btn-info"
+        >
           <i class="far fa-eye"></i>
-        </Button>
+        </Link>
       </CardBody>
     </>
   );

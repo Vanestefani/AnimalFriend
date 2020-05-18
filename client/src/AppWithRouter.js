@@ -170,7 +170,7 @@ const AppWithRouter = () => (
                           />
                           <PrivateRoute
                             exact
-                            path="/perfil-mascota"
+                            path="/perfil-mascota/:m"
                             component={PerfilMascota}
                           />
 

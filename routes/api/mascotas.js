@@ -8,6 +8,7 @@ const upload = multer().single("foto");
 router.post("/addmascota",upload, checkAuth, validate, MascotaController.createMascota);
 router.get("/getmascotas", checkAuth, validate, MascotaController.mascotasByUser);
 router.get("/getmascotasporusuario/:p", checkAuth, validate, MascotaController.mascotasByPerfil);
+router.get("/mascota/:m", checkAuth, validate, MascotaController.mascota);
 
 router.delete(
   "/:mascotasId",

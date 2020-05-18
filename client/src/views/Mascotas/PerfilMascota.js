@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useContext, useState } from "react";
 
 // reactstrap components
 import { Container, Row, Col, Button } from "reactstrap";
@@ -8,13 +8,19 @@ import PerfilMascotaHeader from "../../components/Headers/PerfilMascotaHeader";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import InfoPet from "./InfoPet";
 import SubMenu from "../../components/Navbars/SubMenu";
-import CrearPublicacion from "../../components/Post/CrearPublicacion";
-import PostList from "../../components/Post/PostList";
+
 import Vistaprevi from "../../components/Galeria/vistaprevi";
 import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
 import Galeria from "../../components/Galeria/Galeria";
+import MascotasContext from "../../context/mascotas/mascotasContext";
 
-function PerfilMascota() {
+function PerfilMascota({ match }) {
+  const mContext = useContext(MascotasContext);
+
+  const { mascota, getmascota } = mContext;
+  useEffect(() => {
+    getmascota(match.params.m);
+  }, [mascota]);
   const [pills, setPills] = React.useState("2");
   React.useEffect(() => {
     document.body.classList.add("profile-page");
@@ -29,7 +35,7 @@ function PerfilMascota() {
     <>
       <ScrollNavbar></ScrollNavbar>
       <div className="wrapper">
-        <PerfilMascotaHeader></PerfilMascotaHeader>
+        <PerfilMascotaHeader dato={mascota}></PerfilMascotaHeader>
         <div className="section">
           <div className="wrapper">
             <Container>
@@ -40,7 +46,6 @@ function PerfilMascota() {
                 <Col md="6">
                   <SubMenu></SubMenu>
                   <Galeria></Galeria>
-
                 </Col>
                 <Col md="3">
                   <Vistaprevi></Vistaprevi>

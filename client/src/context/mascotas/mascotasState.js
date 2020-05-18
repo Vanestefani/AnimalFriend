@@ -14,6 +14,8 @@ import {
   GET_MASCOTAS_FAILURE,
   GET_MASCOTAS_SUCCESS,
   MASCOTAS_DELETE_FAILURE,
+  GET_MASCOTA_FAILURE,
+  GET_MASCOTA_SUCCESS,
 } from "../../types";
 
 const MascotasState = (props) => {
@@ -21,11 +23,36 @@ const MascotasState = (props) => {
     mensaje: null,
     mascotas: [],
     mascota: null,
-    loading:true
+    loading: true,
   };
 
   const [state, dispatch] = useReducer(MascotasReducer, initialState);
 
+  const getmascota = async (m) => {
+    const token = localStorage.getItem("token");
+    console.log(m);
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.get(`/api/mascota/mascota/${m}`);
+
+      dispatch({
+        type: GET_MASCOTA_SUCCESS,
+        payload: respuesta.data.mascota,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: GET_MASCOTA_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
   const addMascotas = async (datos) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -78,7 +105,9 @@ const MascotasState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get(`/api/mascota/getmascotasporusuario/${p}`);
+      const respuesta = await clienteAxios.get(
+        `/api/mascota/getmascotasporusuario/${p}`
+      );
 
       dispatch({
         type: GET_MASCOTAS_SUCCESS,
@@ -154,7 +183,9 @@ const MascotasState = (props) => {
         mensaje: state.mensaje,
         mascotas: state.mascotas,
         mascota: state.mascota,
-        loading:state.loading,mascotasbyUsuario
+        loading: state.loading,
+        mascotasbyUsuario,
+        getmascota,
       }}
     >
       {props.children}

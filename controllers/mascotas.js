@@ -71,6 +71,20 @@ exports.mascotasByPerfil = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+exports.mascota = async (req, res) => {
+  try {
+    Mascota.findOne({_id: req.params.m})
+      .populate("propietario", "_id nombre fotoPerfil")
+      .then((mascota) => {
+        res.json({ mascota });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 exports.deletemascotas = async (req, res) => {
   try {
     Mascota.findOne({ _id: req.params.mascotasId })
