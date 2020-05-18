@@ -20,11 +20,14 @@ import {
   Button,
   Badge,
   Collapse,
+  Media,
 } from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
 import Like from "./Likes";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import "moment/locale/es";
 function Post(props) {
   const authContext = useContext(AuthContext);
   const { usuario } = authContext;
@@ -163,7 +166,7 @@ function Post(props) {
                     {props.publicacion.autor.nombre}
                   </p>
                 </Link>
-                <p>{props.publicacion.fecha_creacion}</p>
+                {moment(new Date(props.publicacion.fecha_creacion)).fromNow()}
               </div>
             </div>
           </div>
@@ -187,21 +190,32 @@ function Post(props) {
         </CardFooter>
         <Collapse isOpen={isOpen}>
           <Container>
-            <h3 className="pull-left">Comentarios</h3>
+            <h3 className="">Comentarios</h3>
 
             {props.publicacion.comments.map((record) => {
               return (
-                <h6 key={record._id}>
-                  <Link to={"/perfil/" + props.publicacion.autor._id}>
-                    <Badge color="info">
-                      {" "}
-                      <span style={{ fontWeight: "500" }}>
-                        {record.autor.nombre}
-                      </span>
-                    </Badge>
-                  </Link>
-                  {record.text}
-                </h6>
+                <Container className="mt-2 block">
+                  <Media>
+                    <Media left href="#" onClick={(e) => e.preventDefault()}>
+                      <Link to={"/perfil/" + props.publicacion.autor._id}>
+                        <Media
+                          object
+                          width="64px"
+                          src={record.autor.fotoPerfil}
+                          alt={"foto de perfil de " + record.autor.nombre}
+                        />
+                      </Link>
+                    </Media>
+                    <Media body>
+                      <Media heading>
+                        <Link to={"/perfil/" + props.publicacion.autor._id}>
+                          {record.autor.nombre}{" "}
+                        </Link>
+                      </Media>
+                      {record.text}
+                    </Media>
+                  </Media>
+                </Container>
               );
             })}
             <div>
