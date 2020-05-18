@@ -19,6 +19,7 @@ import {
   Form,
   Button,
   Badge,
+  Collapse,
 } from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
@@ -82,7 +83,8 @@ function Post(props) {
     });
     setModaPost(false);
   };
-
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
   return (
     <>
       <Modal isOpen={modalEditar} toggle={() => setModaPost(false)}>
@@ -175,40 +177,48 @@ function Post(props) {
         </CardBody>
         <CardFooter>
           <Like publicacion={props.publicacion}></Like>
+          <Button
+            color="neutral"
+            onClick={toggle}
+            className={"ml-1 " + (isOpen ? "btn btn-info" : "btn-success")}
+          >
+            <i class="fas fa-comment-alt"></i>
+          </Button>
         </CardFooter>
-        <Container>
-          <br></br>
-          <h3 className="text-center">Comentarios</h3>
+        <Collapse isOpen={isOpen}>
+          <Container>
+            <h3 className="pull-left">Comentarios</h3>
 
-          {props.publicacion.comments.map((record) => {
-            return (
-              <h6 key={record._id}>
-                <Link to={"/perfil/" + props.publicacion.autor._id}>
-                  <Badge color="info">
-                    {" "}
-                    <span style={{ fontWeight: "500" }}>
-                      {record.autor.nombre}
-                    </span>
-                  </Badge>
-                </Link>
-                {record.text}
-              </h6>
-            );
-          })}
-          <div>
-            <Form>
-              <Input
-                placeholder="¿Que quieres compartir hoy?"
-                rows="3"
-                cols="2"
-                value={comentario}
-                onChange={handleChangeCometario}
-                type="textarea"
-              ></Input>
-              <Button onClick={onSubmitcomentario}>Comentar</Button>
-            </Form>
-          </div>
-        </Container>
+            {props.publicacion.comments.map((record) => {
+              return (
+                <h6 key={record._id}>
+                  <Link to={"/perfil/" + props.publicacion.autor._id}>
+                    <Badge color="info">
+                      {" "}
+                      <span style={{ fontWeight: "500" }}>
+                        {record.autor.nombre}
+                      </span>
+                    </Badge>
+                  </Link>
+                  {record.text}
+                </h6>
+              );
+            })}
+            <div>
+              <Form>
+                <Input
+                  placeholder="¿Que quieres compartir hoy?"
+                  rows="3"
+                  cols="2"
+                  value={comentario}
+                  onChange={handleChangeCometario}
+                  type="textarea"
+                ></Input>
+                <Button onClick={onSubmitcomentario}>Comentar</Button>
+              </Form>
+            </div>
+          </Container>
+        </Collapse>
       </Card>
     </>
   );
