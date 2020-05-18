@@ -78,6 +78,10 @@ function CrearPublicacion() {
       addPost(formData);
       setstate({
         descripcion: " ",
+        errors: {
+          Errordescripcion: { valido: true, mensaje: "" },
+          Errorfoto: { valido: true, mensaje: "" },
+        },
       });
       guardararchivophoto(null);
       imageInputRef.current.value = "";
