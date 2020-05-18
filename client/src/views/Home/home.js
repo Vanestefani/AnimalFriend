@@ -1,20 +1,15 @@
 import React, { useContext, useEffect } from "react";
-
 import { Container, Row, Col } from "reactstrap";
-
 // core components
-
 import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
-import SubMenu from "../../components/Navbars/SubMenu";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import PostContext from "../../context/post/postContext";
 import AlertaContext from "../../context/alertas/alertaContext";
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
-
 function Home() {
   const postContext = useContext(PostContext);
   const alertaContext = useContext(AlertaContext);
@@ -29,7 +24,6 @@ function Home() {
     allpost();
   }, [mensaje]);
   useEffect(() => {
-
     allpost();
   }, []);
   React.useEffect(() => {
@@ -53,11 +47,8 @@ function Home() {
               <ListMascotas></ListMascotas>
             </Col>
             <Col md="6">
-              <SubMenu></SubMenu>
               <CrearPublicacion></CrearPublicacion>
-              <PostList publicaciones={publicaciones}
-              next={allpost}
-              ></PostList>
+              <PostList publicaciones={publicaciones} next={allpost}></PostList>
             </Col>
             <Col md="3">
               <ListRecordatorios></ListRecordatorios>

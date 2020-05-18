@@ -1,20 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
-import {
-  Container,
-  Card,
-  CardTitle,
-  CardBody,
-  CardHeader,
-  CardFooter,
-} from "reactstrap";
+import { Container, Card, CardTitle, CardBody, CardHeader } from "reactstrap";
 import ItemMascota from "./ItemMascota";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import Skeleton from "react-loading-skeleton";
 function ListMascotas() {
   const mContext = useContext(MascotasContext);
-  const { loading,mascotas, mascotasUsuario } = mContext;
+  const { loading, mascotas, mascotasUsuario } = mContext;
 
   useEffect(() => {
     mascotasUsuario();
