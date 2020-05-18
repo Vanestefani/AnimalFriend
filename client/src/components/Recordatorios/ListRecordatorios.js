@@ -203,7 +203,8 @@ function ListRecordatorios(props) {
         </CardTitle>
         <ListGroup>
           {!loading ? (
-            recordatorios ? (
+            recordatorios.length != 0 ? (
+
               recordatorios.map((recordatorio) => (
                 <ListGroupItem>
                   <ListGroupItemHeading>
@@ -227,8 +228,16 @@ function ListRecordatorios(props) {
                       {moment(
                         new Date(recordatorio.fecha_expiracion)
                       ).fromNow()}
+                      /
+                      {moment(new Date(recordatorio.fecha_expiracion)).format(
+                        "YYYY MM DD"
+                      )}
                     </em>
                   </div>
+                  <b>Descripcion:</b>
+                  <br></br>
+                  {recordatorio.descripcion}
+                  <br></br>
                   <Button
                     className="btn-danger"
                     size="sm"
@@ -241,31 +250,31 @@ function ListRecordatorios(props) {
                 </ListGroupItem>
               ))
             ) : (
-              <center>
-                <Skeleton
-                  circle={true}
-                  height={100}
-                  width={100}
-                  animation="wave"
-                  variant="rect"
-                />
-
-                <Skeleton
-                  height={30}
-                  width={100}
-                  animation="wave"
-                  variant="rect"
-                />
-                <Skeleton
-                  height={30}
-                  width={100}
-                  animation="wave"
-                  variant="rect"
-                />
-              </center>
+              <p>No hay recordatorios</p>
             )
           ) : (
-            <p>No hay recordatorios</p>
+            <center>
+              <Skeleton
+                circle={true}
+                height={100}
+                width={100}
+                animation="wave"
+                variant="rect"
+              />
+
+              <Skeleton
+                height={30}
+                width={100}
+                animation="wave"
+                variant="rect"
+              />
+              <Skeleton
+                height={30}
+                width={100}
+                animation="wave"
+                variant="rect"
+              />
+            </center>
           )}
         </ListGroup>
       </Card>

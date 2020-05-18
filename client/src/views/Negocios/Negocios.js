@@ -74,7 +74,7 @@ function Negocios() {
               <ListMascotas></ListMascotas>
             </Col>
             <Col md="6">
-              <SubMenu></SubMenu>
+
               <Card>
                 <CardHeader>
                   <CardTitle>

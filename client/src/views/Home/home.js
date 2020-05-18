@@ -9,6 +9,8 @@ import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import PostContext from "../../context/post/postContext";
 import AlertaContext from "../../context/alertas/alertaContext";
+import Calendario from "../../components/Calendario/Calendario";
+
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 function Home() {
   const postContext = useContext(PostContext);
@@ -51,6 +53,7 @@ function Home() {
               <PostList publicaciones={publicaciones} next={allpost}></PostList>
             </Col>
             <Col md="3">
+
               <ListRecordatorios></ListRecordatorios>
             </Col>
           </Row>
