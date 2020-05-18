@@ -51,13 +51,32 @@ function Post(props) {
   });
   const [comentarios, setcomentarios] = useState({
     comentario: "",
+    errors: {
+      Errorcomentario: { valido: true, mensaje: "" },
+    },
   });
-  const { comentario } = comentarios;
+  const { comentario, errors } = comentarios;
   const handleChange = (e) => {
     setEditarPost({
       ...posteditor,
       texto: e.target.value,
     });
+  };
+  //validar comentarion
+  const validate = () => {
+    let isError = false;
+    if (comentario.trim() == "") {
+      errors.Errorcomentario.valido = false;
+      errors.Errorcomentario.mensaje = "(El campo  no puede estar vacio)";
+    } else {
+      errors.Errorcomentario.valido = true;
+    }
+    if (!errors.Errorcomentario.valido) {
+      isError = true;
+    } else {
+      isError = false;
+    }
+    return isError;
   };
   const handleChangeCometario = (e) => {
     setcomentarios({
@@ -66,15 +85,21 @@ function Post(props) {
     });
   };
   const onSubmitcomentario = (e) => {
-    let postId = props.publicacion._id;
-    e.preventDefault();
-    makeComment({
-      text: comentario,
-      postId: postId,
-    });
-    setcomentarios({
-      comentario: "",
-    });
+    let err = validate();
+    if (!err) {
+      let postId = props.publicacion._id;
+      e.preventDefault();
+      makeComment({
+        text: comentario,
+        postId: postId,
+      });
+      setcomentarios({
+        comentario: "",
+        errors: {
+          Errorcomentario: { valido: true, mensaje: "" },
+        },
+      });
+    }
   };
   const onSubmitPost = (e) => {
     let postId = props.publicacion._id;
@@ -221,13 +246,27 @@ function Post(props) {
             <div>
               <Form>
                 <Input
-                  placeholder="¿Que quieres compartir hoy?"
+                 className={
+                 errors.Errorcomentario.valido
+                    ? ""
+                    : "is-invalid form-control-danger form-control"
+                }
+                  placeholder="Comparte tu opinion"
+                  onFocus
                   rows="3"
                   cols="2"
                   value={comentario}
                   onChange={handleChangeCometario}
                   type="textarea"
                 ></Input>
+                <br></br>
+                 {!errors.Errorcomentario.valido ? (
+              <span className=" container text-muted">
+                {errors.Errorcomentario.mensaje}
+              </span>
+            ) : (
+              ""
+            )}
                 <Button onClick={onSubmitcomentario}>Comentar</Button>
               </Form>
             </div>
