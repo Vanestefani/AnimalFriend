@@ -45,6 +45,7 @@ exports.RecordatoriosByUser = async (req, res) => {
     Recordatorios.find({ autor: req.user._id })
       .populate("autor", "_id nombre ")
       .populate("mascota", "_id nombre foto")
+      .sort("-fecha_creacion")
       .then((recordatorios) => {
         res.json({ recordatorios });
       })
