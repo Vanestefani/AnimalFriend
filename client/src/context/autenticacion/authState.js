@@ -40,7 +40,7 @@ const AuthState = (props) => {
     usuario: null,
     mensaje: null,
     cargando: true,
-    usuarios:null,
+    usuarios: null,
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -79,11 +79,8 @@ const AuthState = (props) => {
         payload: respuesta.data,
       });
     } catch (error) {
-     
-
       dispatch({
         type: BUSCAR_USUARIO_ERROR,
-        
       });
     }
   };
@@ -227,14 +224,13 @@ const AuthState = (props) => {
 
       dispatch({
         type: FOLLOW_SUCCESS,
-        payload: respuesta.data.result,
+        payload: respuesta.data,
       });
       alluser();
     } catch (error) {
       console.log(error);
 
       const alerta = {
-
         categoria: "danger",
       };
       dispatch({
@@ -253,13 +249,12 @@ const AuthState = (props) => {
       alluser();
       dispatch({
         type: UNFOLLOW_SUCCESS,
-        payload: respuesta.data.result,
+        payload: respuesta.data,
       });
     } catch (error) {
       console.log(error);
 
       const alerta = {
-        msg: error.response.data.message,
         categoria: "danger",
       };
       dispatch({

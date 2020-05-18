@@ -34,20 +34,15 @@ export default (state, action) => {
 
         usuarios: action.payload,
       };
-    case EDIT_PERFIL_SUCCESS:
-    case BUSCAR_USUARIO:
-      return {
-        ...state,
 
-        usuarioactual: action.payload.user,
-      };
     case UNFOLLOW_SUCCESS:
     case FOLLOW_SUCCESS:
+      case BUSCAR_USUARIO:
       return {
         ...state,
-
-        mensaje: { msg: action.payload.message, categoria: "success" },
+        usuarioactual: action.payload.user,
       };
+    case EDIT_PERFIL_SUCCESS:
     case PASSWORD_RESET_EXITOSA:
     case VERIFICACIOM_ENVIADA:
     case REGISTRO_EXITOSO:

@@ -247,9 +247,7 @@ exports.addFollowing = async (req, res) => {
         new: true,
       }
     )
-      .then((result) => {
-        res.json({ result });
-      })
+
       .catch((err) => {
         console.log(err);
       }),
@@ -262,8 +260,8 @@ exports.addFollowing = async (req, res) => {
           new: true,
         }
       )
-        .then((result) => {
-          res.json({ result });
+        .then((user) => {
+          res.json({ user:user });
         })
         .catch((err) => {
           console.log(err);
@@ -283,9 +281,7 @@ exports.unFollow = async (req, res) => {
         new: true,
       }
     )
-      .then((result) => {
-        res.json({ result });
-      })
+     
       .catch((err) => {
         console.log(err);
       }),
@@ -298,8 +294,8 @@ exports.unFollow = async (req, res) => {
           new: true,
         }
       )
-        .then((result) => {
-          res.json({ result });
+        .then((user) => {
+          res.json({ user:user });
         })
         .catch((err) => {
           console.log(err);

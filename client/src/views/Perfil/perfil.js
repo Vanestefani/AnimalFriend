@@ -62,30 +62,37 @@ function Perfil({ match }) {
 
     getpost(match.params.q);
   }, [usuarioactual]);
-  const [showfollow, setShowFollow] = useState(
-    !usuario.following.includes(usuarioactual._id) ? true : false
-  );
-
+  const [showfollow, setShowFollow] = useState({
+    follow: usuario.following.includes(usuarioactual._id),
+  });
+  console.log(showfollow.follow);
   const follow = (e) => {
     e.preventDefault();
     seguir({ userId: usuarioactual._id });
-    setShowFollow(false);
+    setShowFollow({
+      ...showfollow,
+      follow: false,
+    });
+    console.log(showfollow.follow);
   };
   const unfollow = (e) => {
     e.preventDefault();
     noseguir({ userId: usuarioactual._id });
-    setShowFollow(true);
+    setShowFollow({
+      ...showfollow,
+      follow:true,
+    });
+    console.log(showfollow.follow);
   };
 
   const botonSeguir = () => {
-    console.log(showfollow);
-    if (showfollow == false)
+    if (showfollow.follow==false)
       return (
         <Button onClick={unfollow} className="btn-round" color="info" size="lg">
           <i className="fas fa-plus-circle"></i> No Seguir
         </Button>
       );
-    if (showfollow == true)
+    if (showfollow.follow==true)
       return (
         <Button
           onClick={follow}
@@ -122,7 +129,7 @@ function Perfil({ match }) {
     nombre: usuarioactual.nombre,
     bio: usuarioactual.bio,
   });
-let countpost =Object.keys(publicaciones).length;
+  let countpost = Object.keys(publicaciones).length;
 
   return (
     <>
@@ -215,7 +222,6 @@ let countpost =Object.keys(publicaciones).length;
                   <ListaAnuncio></ListaAnuncio>
                 </Col>
                 <Col md="9">
-                  <SubMenu></SubMenu>
                   {usuarioactual._id == usuario._id ? (
                     <CrearPublicacion></CrearPublicacion>
                   ) : (
