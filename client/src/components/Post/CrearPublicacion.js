@@ -6,7 +6,7 @@ import {
   Card,
   CardBody,
   Form,
-  Alert,
+
 } from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";

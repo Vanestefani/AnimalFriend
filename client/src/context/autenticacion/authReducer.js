@@ -28,17 +28,25 @@ import {
 
 export default (state, action) => {
   switch (action.type) {
-    case BUSCAR_USUARIO:
-    case UNFOLLOW_SUCCESS:
-    case FOLLOW_SUCCESS:
     case GETALLUSER_SUCCESS:
-    case EDIT_PERFIL_SUCCESS:
       return {
         ...state,
-        autenticado: true,
-        mensaje: { msg: action.payload.message, categoria: "success" },
-        cargando: false,
+
+        usuarios: action.payload,
+      };
+    case EDIT_PERFIL_SUCCESS:
+    case BUSCAR_USUARIO:
+      return {
+        ...state,
+
         usuarioactual: action.payload.user,
+      };
+    case UNFOLLOW_SUCCESS:
+    case FOLLOW_SUCCESS:
+      return {
+        ...state,
+
+        mensaje: { msg: action.payload.message, categoria: "success" },
       };
     case PASSWORD_RESET_EXITOSA:
     case VERIFICACIOM_ENVIADA:

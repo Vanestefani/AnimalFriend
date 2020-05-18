@@ -27,15 +27,24 @@ function ProfilePageHeader(props) {
           <p className="category">{props.dato.pais}</p>
           <div className="content">
             <div className="social-description">
-              <h2>26</h2>
+              <h2>{props.countpost}</h2>
               <p>Publicaciones</p>
             </div>
             <div className="social-description">
-              <h2>{props.publicaciones.lenght}</h2>
-              <p>Anuncios</p>
+              <h2>
+                {props.dato.following != undefined
+                  ? Object.keys(props.dato.following).length
+                  : ""}
+              </h2>
+
+              <p>Siguiendo</p>
             </div>
             <div className="social-description">
-              <h2>3</h2>
+              <h2>
+                {props.dato.followers != undefined
+                  ? Object.keys(props.dato.followers).length
+                  : "0"}
+              </h2>
               <p>Seguidores</p>
             </div>
           </div>

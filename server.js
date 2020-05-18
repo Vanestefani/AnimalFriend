@@ -62,11 +62,11 @@ require("./routes/api/index")(app);
 const postsRouter = require("./routes/api/post");
 app.use("/api/post/", postsRouter);
 //front end
-app.use(express.static('client/build'));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-});
+//app.use(express.static('client/build'));
+//
+//app.get('*', (req, res) => {
+//  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//});
 
 //=== 5 - START SERVER
 app.listen(PORT, () =>

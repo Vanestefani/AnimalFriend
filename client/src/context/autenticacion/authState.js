@@ -40,6 +40,7 @@ const AuthState = (props) => {
     usuario: null,
     mensaje: null,
     cargando: true,
+    usuarios:null,
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -78,14 +79,11 @@ const AuthState = (props) => {
         payload: respuesta.data,
       });
     } catch (error) {
-      const alerta = {
-        msg: error.response.data.message,
-        categoria: "danger",
-      };
+     
 
       dispatch({
         type: BUSCAR_USUARIO_ERROR,
-        payload: alerta,
+        
       });
     }
   };
@@ -236,7 +234,7 @@ const AuthState = (props) => {
       console.log(error);
 
       const alerta = {
-        msg: error.response.data.message,
+
         categoria: "danger",
       };
       dispatch({
@@ -280,11 +278,11 @@ const AuthState = (props) => {
 
       dispatch({
         type: GETALLUSER_SUCCESS,
-        payload: respuesta.data.posts,
+        payload: respuesta.data.users,
       });
     } catch (error) {
       const alerta = {
-        msg: error.response.data.message,
+        msg: error.response.data,
         categoria: "danger",
       };
       dispatch({
@@ -324,6 +322,7 @@ const AuthState = (props) => {
         token: state.token,
         autenticado: state.autenticado,
         usuario: state.usuario,
+        usuarios: state.usuarios,
         mensaje: state.mensaje,
         cargando: state.cargando,
         registrarUsuario,

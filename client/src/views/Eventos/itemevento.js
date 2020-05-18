@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, {  useContext } from "react";
 import { Link } from "react-router-dom";
 
 // reactstrap components
@@ -15,8 +15,6 @@ import {
 } from "reactstrap";
 
 import EventosContex from "../../context/eventos/eventosContex";
-
-import Editar from "./Forms/editar";
 
 function Itemevento(props) {
   const EContex = useContext(EventosContex);

@@ -4,30 +4,18 @@ import AlertaContext from "../../context/alertas/alertaContext";
 // reactstrap components
 import {
   Button,
-  NavItem,
-  NavLink,
-  Nav,
-  TabContent,
-  TabPane,
   Container,
   Modal,
   ModalBody,
   Row,
   Col,
   FormGroup,
-  Label,
   Input,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  UncontrolledTooltip,
 } from "reactstrap";
-import {
-  CountryDropdown,
-  RegionDropdown,
-  CountryRegionData,
-} from "react-country-region-selector";
-import { Link } from "react-router-dom";
+
 import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
@@ -35,9 +23,7 @@ import ListMascotas from "../../components/Listas/ListMascotas";
 import SubMenu from "../../components/Navbars/SubMenu";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
-import Vistaprevi from "../../components/Galeria/vistaprevi";
 import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
-
 import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores";
 import Editarperfil from "./Form/editar";
 import AuthContext from "../../context/autenticacion/authContext";
@@ -73,8 +59,8 @@ function Perfil({ match }) {
   // Obtener proyectos cuando carga el componente
   useEffect(() => {
     const autorId = match.params.q;
-    console.log(match.params.q);
-    getpost(autorId);
+
+    getpost(match.params.q);
   }, [usuarioactual]);
   const [showfollow, setShowFollow] = useState(
     !usuario.following.includes(usuarioactual._id) ? true : false
@@ -136,8 +122,8 @@ function Perfil({ match }) {
     nombre: usuarioactual.nombre,
     bio: usuarioactual.bio,
   });
+let countpost =Object.keys(publicaciones).length;
 
-  console.log(usuarioactual.nombre);
   return (
     <>
       <Modal isOpen={modalMascotas} toggle={() => setModal1(false)}>
@@ -197,7 +183,7 @@ function Perfil({ match }) {
       <div className="wrapper">
         <ProfilePageHeader
           dato={usuarioactual}
-          publicaciones={publicaciones}
+          countpost={countpost}
         ></ProfilePageHeader>
         <div className="section">
           <Container>

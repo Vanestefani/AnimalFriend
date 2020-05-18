@@ -1,14 +1,14 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, {  useContext, useEffect} from "react";
 
 // reactstrap components
 import {
   Container,
   CardImg,
   CardText,
-  Col,
+
   Card,
   CardTitle,
-  CardHeader,
+
   Button,
   CardBody,
   CardSubtitle,
