@@ -16,6 +16,8 @@ import {
   LIKE_ERROR,
   EDIT_POST_SUCCESS,
   EDIT_POST_FAILURE,
+  DELETE_COMMENT,
+  DELETE_COMMENT_ERROR,
 } from "../../types";
 
 export default (state, action) => {
@@ -30,6 +32,7 @@ export default (state, action) => {
     case ADD_POST_SUCCESS:
     case DISLIKE_POST:
     case INIT_COMMENT:
+    case DELETE_COMMENT:
     case POST_DELETE_SUCCESS:
       return {
         ...state,
@@ -43,6 +46,7 @@ export default (state, action) => {
     case DISLIKE_POST_ERROR:
     case INIT_COMMENT_ERROR:
     case POST_DELETE_FAILURE:
+    case DELETE_COMMENT_ERROR:
     case LIKE_ERROR:
       return {
         ...state,

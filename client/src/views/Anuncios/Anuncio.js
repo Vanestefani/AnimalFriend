@@ -9,6 +9,7 @@ import {
   Card,
   CardTitle,
   CardHeader,
+  Table,
   Button,
   CardBody,
   CardSubtitle,
@@ -32,7 +33,7 @@ function Anuncios({ match }) {
   const { getanuncio, anuncio } = AContex;
   useEffect(() => {
     const anuncioId = match.params.anunciosId;
-    console.log(anuncioId)
+    console.log(anuncioId);
     getanuncio(anuncioId);
   }, []);
   React.useEffect(() => {
@@ -60,7 +61,7 @@ function Anuncios({ match }) {
                   src={anuncio.imagen}
                   alt="Card image cap"
                 ></CardImg>
-                <CardBody>
+                <CardBody className="m-2">
                   <CardTitle>
                     <h1 className="text-center">{anuncio.titulo}</h1>
                   </CardTitle>
@@ -91,9 +92,107 @@ function Anuncios({ match }) {
                           {anuncio.autor.nombre}
                         </Link>
                       </Media>
-                      <Button>Seguir</Button>
+                      <Link
+                        to={"/perfil/" + anuncio.autor._id}
+                        className="btn btn-info"
+                      >
+                        Ver perfil
+                      </Link>
                     </Media>
                   </Media>
+                  <Card className="card-general">
+                    <Container className="m-2">
+
+                      <p>
+
+                        <b>Nombre de mascota:</b> {anuncio.mascota.nombre}
+                      </p>
+                      <p>
+
+                        <b>Especie:</b> {anuncio.mascota.especie}
+                      </p>
+                      <p>
+
+                        <b>Raza:</b> {anuncio.mascota.raza}
+                      </p>
+
+                      <Table>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>
+                              <i className="fas fa-birthday-cake"></i>
+                              <b>Fecha de Nacimiento :</b>
+                            </td>
+                            <td>{anuncio.mascota.fecha_nacimiento}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>
+                              <i className="fas fa-palette"></i>Color principal
+                              :
+                            </td>
+                            <td>{anuncio.mascota.color}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>
+                              <i className="fas fa-heart"></i>Situación
+                              sentimental :
+                            </td>
+                            <td>{anuncio.mascota.civil}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>
+                              <i className="fas fa-microchip"></i>N° Chip :
+                            </td>
+                            <td>{anuncio.mascota.chip}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>
+                              <i className="fas fa-user-md"></i> Estelerizado:
+                            </td>
+                            <td>{anuncio.mascota.estelerizado}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>
+                              <i className="fas fa-exclamation-triangle"></i>
+                              <b> Peligroso:</b>
+                            </td>
+                            <td>{anuncio.mascota.peligroso}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>
+                              <i className="fas fa-ruler"></i>
+                              <b> Tamaño:</b>
+                            </td>
+                            <td>{anuncio.mascota.estatura}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>
+                              <i className="fas fa-notes-medical"></i>
+                              <b> Alergias:</b>
+                            </td>
+                            <td>{anuncio.mascota.alergias}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>
+                              <i className="fas fa-dragon"></i>
+                              <b> Personalidad:</b>
+                            </td>
+                            <td>{anuncio.mascota.personalidad}</td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </Container>
+                  </Card>
+                  <br></br>
                 </CardFooter>
               </div>
             ) : (

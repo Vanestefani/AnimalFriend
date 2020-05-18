@@ -35,6 +35,8 @@ exports.anunciosByUser = async (req, res) => {
   try {
     Anuncios.find({ autor: req.user._id })
       .populate("autor", "_id nombre  fotoPerfil")
+      .populate("mascota", "_id nombre foto especie raza genero color alergias personalidad ")
+
       .sort("-fecha_creacion")
 
       .then((anuncios) => {
@@ -51,6 +53,8 @@ exports.anuncio = async (req, res) => {
   try {
     Anuncios.findOne({_id: req.params.anuncioId})
       .populate("autor", "_id nombre fotoPerfil")
+      .populate("mascota", "_id nombre foto especie raza genero color alergias personalidad ")
+
       .then((anuncio) => {
         res.json({ anuncio });
       })
@@ -65,6 +69,8 @@ exports.allanuncios = async (req, res) => {
   try {
     Anuncios.find()
       .populate("autor", "_id nombre fotoPerfil")
+      .populate("mascota", "_id nombre foto especie raza genero color alergias personalidad ")
+
       .sort("-fecha_creacion")
       .then((anuncios) => {
         res.json({ anuncios });

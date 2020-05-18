@@ -38,10 +38,12 @@ function Post(props) {
     actualizarPost,
     makeComment,
     deletePost,
+    deleteComment
   } = postContext;
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
   };
+
   const [like, setLike] = useState({
     count: 0,
   });
@@ -236,6 +238,7 @@ function Post(props) {
                         <Link to={"/perfil/" + props.publicacion.autor._id}>
                           {record.autor.nombre}{" "}
                         </Link>
+                        <Button onClick={onSubmitcomentario}><i class="fas fa-trash-alt"></i></Button>
                       </Media>
                       {record.text}
                     </Media>
@@ -246,11 +249,11 @@ function Post(props) {
             <div>
               <Form>
                 <Input
-                 className={
-                 errors.Errorcomentario.valido
-                    ? ""
-                    : "is-invalid form-control-danger form-control"
-                }
+                  className={
+                    errors.Errorcomentario.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
+                  }
                   placeholder="Comparte tu opinion"
                   onFocus
                   rows="3"
@@ -260,13 +263,13 @@ function Post(props) {
                   type="textarea"
                 ></Input>
                 <br></br>
-                 {!errors.Errorcomentario.valido ? (
-              <span className=" container text-muted">
-                {errors.Errorcomentario.mensaje}
-              </span>
-            ) : (
-              ""
-            )}
+                {!errors.Errorcomentario.valido ? (
+                  <span className=" container text-muted">
+                    {errors.Errorcomentario.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
                 <Button onClick={onSubmitcomentario}>Comentar</Button>
               </Form>
             </div>

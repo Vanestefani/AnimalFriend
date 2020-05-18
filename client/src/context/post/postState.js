@@ -23,6 +23,8 @@ import {
   PUBLICACION_ACTUAL,
   LIKE,
   LIKE_ERROR,
+  DELETE_COMMENT,
+  DELETE_COMMENT_ERROR
 } from "../../types";
 
 const PostState = (props) => {
@@ -178,6 +180,29 @@ console.log(postId)
       });
     }
   };
+  const deleteComment = async (id) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.put("/api/post/uncomment", id);
+
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: respuesta.data,
+      });
+      allpost();
+    } catch (error) {
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: DELETE_COMMENT_ERROR,
+        payload: alerta,
+      });
+    }
+  };
   const deletePost = async (postId) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -281,6 +306,7 @@ console.log(postId)
         likes: state.likes,
         actualizarPost,
         getpost,
+        deleteComment
       }}
     >
       {props.children}
