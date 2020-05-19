@@ -238,7 +238,7 @@ function Post(props) {
                         <Link to={"/perfil/" + props.publicacion.autor._id}>
                           {record.autor.nombre}{" "}
                         </Link>
-                        <Button onClick={onSubmitcomentario}><i class="fas fa-trash-alt"></i></Button>
+
                       </Media>
                       {record.text}
                     </Media>
