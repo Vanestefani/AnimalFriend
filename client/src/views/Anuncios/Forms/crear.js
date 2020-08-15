@@ -38,8 +38,15 @@ function CrearAnuncios(props) {
     categoria: "",
     mascota: "",
     descripcion: "",
+    errors: {
+      titulo: { valido: true, mensaje: "" },
+      categoria: { valido: true, mensaje: "" },
+      mascota: { valido: true, mensaje: "" },
+      descripcion: { valido: true, mensaje: "" },
+      Errorfoto: { valido: true, mensaje: "" },
+    },
   });
-  const { titulo, categoria, mascota, descripcion } = AAnuncios;
+  const { titulo, categoria, mascota, descripcion, errors } = AAnuncios;
   const [AarchivoImagen, AguardararchivoImagen] = useState(null);
   useEffect(() => {
     mascotasUsuario();
@@ -50,21 +57,75 @@ function CrearAnuncios(props) {
       [e.target.name]: e.target.value,
     });
   };
+
+  const validate = () => {
+    let isError = false;
+
+    if (descripcion.trim() == "") {
+      errors.descripcion.valido = false;
+      errors.descripcion.mensaje =
+        "(El campo descripcion no puede estar vacio)";
+    } else {
+      errors.descripcion.valido = true;
+    }
+
+    if (mascota.trim() == "") {
+      errors.mascota.valido = false;
+      errors.mascota.mensaje = "(El campo mascota no puede estar vacio)";
+    } else {
+      errors.mascota.valido = true;
+    }
+    if (categoria.trim() == "") {
+      errors.categoria.valido = false;
+      errors.categoria.mensaje = "(El campo categoria no puede estar vacio)";
+    } else {
+      errors.categoria.valido = true;
+    }
+    if (titulo.trim() == "") {
+      errors.titulo.valido = false;
+      errors.titulo.mensaje = "(El campo titulo no puede estar vacio)";
+    } else {
+      errors.titulo.valido = true;
+    }
+    if (AarchivoImagen == null) {
+      errors.Errorfoto.valido = false;
+      errors.Errorfoto.mensaje = "(Debe subir una imagen)";
+    } else {
+      errors.Errorfoto.valido = true;
+    }
+
+    if (
+      !errors.descripcion.valido ||
+      !errors.mascota.valido ||
+      !errors.categoria.valido ||
+      !errors.titulo.valido ||
+      !errors.Errorfoto.valido
+    ) {
+      isError = true;
+      console.log("error :D");
+    } else {
+      isError = false;
+    }
+    return isError;
+  };
   const onSubmit = (e) => {
     e.preventDefault();
-    e.target.className += " was-validated";
-    let userid = usuario._id;
+    let err = validate();
+    if (!err) {
+      e.target.className += " was-validated";
+      let userid = usuario._id;
 
-    let formData = new FormData();
-    formData.append("imagen", AarchivoImagen, AarchivoImagen.name);
-    formData.append("titulo", titulo);
-    formData.append("categoria", categoria);
-    formData.append("autor", userid);
-    formData.append("mascota", mascota);
+      let formData = new FormData();
+      formData.append("imagen", AarchivoImagen, AarchivoImagen.name);
+      formData.append("titulo", titulo);
+      formData.append("categoria", categoria);
+      formData.append("autor", userid);
+      formData.append("mascota", mascota);
 
-    formData.append("descripcion", descripcion);
-    addAnuncios(formData);
-    console.log("click");
+      formData.append("descripcion", descripcion);
+      addAnuncios(formData);
+      console.log("click");
+    }
   };
   return (
     <>
@@ -86,7 +147,13 @@ function CrearAnuncios(props) {
         <ModalBody>
           <div>
             <h4>Información de anuncio</h4>
-            <InputGroup>
+            <InputGroup
+              className={
+                errors.titulo.valido
+                  ? ""
+                  : "is-invalid form-control-danger form-control"
+              }
+            >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
                   <i class="fas fa-play"></i>
@@ -101,9 +168,20 @@ function CrearAnuncios(props) {
                 defaultValue={AAnuncios.titulo}
                 required
               ></Input>
+              {!errors.titulo.valido ? (
+                <span className="text-muted">{errors.titulo.mensaje}</span>
+              ) : (
+                ""
+              )}
             </InputGroup>
 
-            <InputGroup>
+            <InputGroup
+              className={
+                errors.categoria.valido
+                  ? ""
+                  : "is-invalid form-control-danger form-control"
+              }
+            >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
                   <i class="fab fa-microsoft"></i>
@@ -126,9 +204,20 @@ function CrearAnuncios(props) {
                 </option>
                 <option value="Emparejar">Emparejar</option>
               </Input>
+              {!errors.categoria.valido ? (
+                <span className="text-muted">{errors.categoria.mensaje}</span>
+              ) : (
+                ""
+              )}
             </InputGroup>
 
-            <InputGroup>
+            <InputGroup
+              className={
+                errors.mascota.valido
+                  ? ""
+                  : "is-invalid form-control-danger form-control"
+              }
+            >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
                   <i class="fas fa-feather-alt"></i>
@@ -150,9 +239,19 @@ function CrearAnuncios(props) {
                   </option>
                 ))}
               </Input>
+              {!errors.mascota.valido ? (
+                <span className="text-muted">{errors.mascota.mensaje}</span>
+              ) : (
+                ""
+              )}
             </InputGroup>
 
             <Input
+              className={
+                errors.descripcion.valido
+                  ? ""
+                  : "is-invalid form-control-danger form-control"
+              }
               type="textarea"
               id="descripcion"
               name="descripcion"
@@ -161,9 +260,19 @@ function CrearAnuncios(props) {
               defaultValue={AAnuncios.descripcion}
               required
             ></Input>
+            {!errors.descripcion.valido ? (
+              <span className="text-muted">{errors.descripcion.mensaje}</span>
+            ) : (
+              ""
+            )}
             <Row>
               <Col md="6">
                 <Input
+                  className={
+                    errors.Errorfoto.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
+                  }
                   accept={acceptedFileTypes}
                   id="fotoAnuncio"
                   name="fotoAnuncio"
@@ -172,6 +281,11 @@ function CrearAnuncios(props) {
                   defaultValue={AarchivoImagen}
                   ref={imageInputRef}
                 ></Input>
+                {!errors.Errorfoto.valido ? (
+                  <span className="text-muted">{errors.Errorfoto.mensaje}</span>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
           </div>

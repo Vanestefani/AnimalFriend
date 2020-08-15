@@ -102,17 +102,13 @@ function Anuncios({ match }) {
                   </Media>
                   <Card className="card-general">
                     <Container className="m-2">
-
                       <p>
-
                         <b>Nombre de mascota:</b> {anuncio.mascota.nombre}
                       </p>
                       <p>
-
                         <b>Especie:</b> {anuncio.mascota.especie}
                       </p>
                       <p>
-
                         <b>Raza:</b> {anuncio.mascota.raza}
                       </p>
 
