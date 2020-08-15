@@ -1,7 +1,7 @@
 @media screen and (max-width: 991px){
   .sidebar-collapse .navbar-collapse:before {
-    background: $info-color;
-    background: linear-gradient($info-color,$black-color 80%);
+
+    background: #000000;;
   }
   .navbar-nav .dropdown-menu {
     position: static !important;
@@ -12,5 +12,10 @@
   .nav-tabs {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .btn{
+    padding: $padding-small-vertical $padding-small-horizontal;
+    margin: 30px;
+
   }
 }

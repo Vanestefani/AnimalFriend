@@ -116,7 +116,7 @@ function OlvidadoContraseñaPage() {
                 <CardBody>
                   {alerta ? (
                     <Alert color={alerta.categoria}>
-                      <i class="fas fa-exclamation-triangle"></i>
+                      <i className="fas fa-exclamation-triangle"></i>
                       {alerta.msg}
                     </Alert>
                   ) : null}

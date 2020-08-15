@@ -20,7 +20,7 @@ const NotFound = ({ classes }) => (
       <CircularProgress className={classes.l} size={50} />
       <div color="info">
         {" "}
-        <i class="fas fa-paw"></i> Cargando ...
+        <i className="fas fa-paw"></i> Cargando ...
 
       </div>
       <LinearProgress />

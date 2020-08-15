@@ -91,7 +91,7 @@ function CrearEventos(props) {
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-play"></i>
+                  <i className="fas fa-play"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -108,7 +108,7 @@ function CrearEventos(props) {
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fab fa-microsoft"></i>
+                  <i className="fab fa-microsoft"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -130,7 +130,7 @@ function CrearEventos(props) {
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-kiwi-bird"></i>
+                  <i className="fas fa-kiwi-bird"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -147,7 +147,7 @@ function CrearEventos(props) {
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-flag"></i>
+                  <i className="fas fa-flag"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input

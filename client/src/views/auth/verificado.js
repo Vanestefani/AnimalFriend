@@ -61,11 +61,11 @@ function Verificado({ match }) {
               <CardBody>
                 {mensaje ? (
                   <Alert color={mensaje.categoria}>
-                    <i class="fas fa-exclamation-triangle"></i>
+                    <i className="fas fa-exclamation-triangle"></i>
                     {mensaje.msg}
                   </Alert>
                 ) :  <Alert color="success">
-                <i class="fas fa-exclamation-triangle"></i>
+                <i className="fas fa-exclamation-triangle"></i>
                Su cuenta a sido verificado ,inicie sesión
               </Alert>}
                 <div className="pull-right">

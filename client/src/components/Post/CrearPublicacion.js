@@ -133,8 +133,8 @@ function CrearPublicacion() {
 
           <CardBody>
             <div className="pull-left">
-              <div class="upload-btn-wrapper">
-                <button class="btn btn-info">
+              <div className="upload-btn-wrapper">
+                <button className="btn btn-info">
                   {" "}
                   <i className="fas fa-camera"></i>Subir imagen
                 </button>

@@ -85,7 +85,7 @@ function FormEditarAnuncios(props) {
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-play"></i>
+                  <i className="fas fa-play"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -102,7 +102,7 @@ function FormEditarAnuncios(props) {
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fab fa-microsoft"></i>
+                  <i className="fab fa-microsoft"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -127,7 +127,7 @@ function FormEditarAnuncios(props) {
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-feather-alt"></i>
+                  <i className="fas fa-feather-alt"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input

@@ -66,7 +66,17 @@ function LoginPage(props) {
   };
   //errores de input :O
   const validate = () => {
+   let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     let isError = false;
+
+    if (  emailRegex.test(usuario.email)) {
+      console.log( emailRegex.test(usuario.email));
+      usuario.errors.Erroremail.valido = false;
+      usuario.errors.Erroremail.mensaje =
+        "(Por favor ingrese un correo valido)";
+    } else {
+      usuario.errors.Erroremail.valido = true;
+    }
     if (usuario.email.indexOf("@") === -1) {
       usuario.errors.Erroremail.valido = false;
       usuario.errors.Erroremail.mensaje =
@@ -75,13 +85,6 @@ function LoginPage(props) {
       usuario.errors.Erroremail.valido = true;
     }
 
-    if (usuario.password.length < 1) {
-      usuario.errors.Errorpassword.valido = false;
-      usuario.errors.Errorpassword.mensaje =
-        "(El campo contraseña no puede estar vacio)";
-    } else {
-      usuario.errors.Errorpassword.valido = true;
-    }
     if (
       !usuario.errors.Erroremail.valido ||
       !usuario.errors.Errorpassword.valido
@@ -139,7 +142,7 @@ function LoginPage(props) {
                 <CardBody>
                   {alerta ? (
                     <Alert color={alerta.categoria}>
-                      <i class="fas fa-exclamation-triangle"></i>
+                      <i className="fas fa-exclamation-triangle"></i>
                       {alerta.msg}
                     </Alert>
                   ) : null}

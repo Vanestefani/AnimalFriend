@@ -84,12 +84,12 @@ function ExamplesNavbar() {
             <Nav className="ml-auto" navbar>
               <NavItem className="btn btn-info">
                 <Link to="/">
-                  <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                  <i className="fas fa-sign-in-alt"></i> Iniciar sesión
                 </Link>
               </NavItem>
               <NavItem className="btn btn-success">
                 <Link to="/register">
-                  <i class="fas fa-paw"></i>Registrate
+                  <i className="fas fa-paw"></i>Registrate
                 </Link>
               </NavItem>
             </Nav>

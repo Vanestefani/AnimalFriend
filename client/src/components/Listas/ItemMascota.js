@@ -31,7 +31,7 @@ function ItemMascota(props) {
           to={"/perfil-mascota/" + props.mascota._id}
           className="btn btn-info"
         >
-          <i class="far fa-eye"></i>
+          <i className="far fa-eye"></i>
         </Link>
       </CardBody>
     </>

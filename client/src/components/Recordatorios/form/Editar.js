@@ -77,7 +77,7 @@ function Editar(props) {
             <InputGroup className>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-user-clock"></i>
+                  <i className="fas fa-user-clock"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -93,7 +93,7 @@ function Editar(props) {
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-align-justify"></i>
+                  <i className="fas fa-align-justify"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -131,7 +131,7 @@ function Editar(props) {
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-feather-alt"></i>
+                      <i className="fas fa-feather-alt"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -163,7 +163,7 @@ function Editar(props) {
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-feather-alt"></i>
+                      <i className="fas fa-feather-alt"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input

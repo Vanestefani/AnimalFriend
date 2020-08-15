@@ -53,7 +53,7 @@ function FormRecordatorio(props) {
             >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-user-clock"></i>
+                  <i className="fas fa-user-clock"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -82,7 +82,7 @@ function FormRecordatorio(props) {
             >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i class="fas fa-align-justify"></i>
+                  <i className="fas fa-align-justify"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -113,7 +113,7 @@ function FormRecordatorio(props) {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-flag"></i>
+                      <i className="fas fa-flag"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -144,7 +144,7 @@ function FormRecordatorio(props) {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-feather-alt"></i>
+                      <i className="fas fa-feather-alt"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
@@ -189,7 +189,7 @@ function FormRecordatorio(props) {
                 >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i class="fas fa-feather-alt"></i>
+                      <i className="fas fa-feather-alt"></i>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input

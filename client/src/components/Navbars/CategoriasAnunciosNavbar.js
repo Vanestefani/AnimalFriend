@@ -49,7 +49,7 @@ function CategoriasAnunciosNavbar(props) {
           <Nav className="flex-column" tag="nav">
             <h3>Categorias</h3>
             <NavLink href="#" onClick={allClick}>
-              <i class="fas fa-globe"></i>
+              <i className="fas fa-globe"></i>
               Todas
             </NavLink>
             <NavLink href="#AnimalFriend" onClick={MascotaPerdidaaClick}>

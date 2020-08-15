@@ -48,23 +48,23 @@ function CategoriasEventosNavbar(props) {
           <Nav className="flex-column" tag="nav">
             <h3>Categorias</h3>
             <NavLink href="#" onClick={allClick}>
-            <i class="fas fa-globe"></i>
+            <i className="fas fa-globe"></i>
               Todas
             </NavLink>
             <NavLink href="#" onClick={VacunasClick}>
-              <i class="fas fa-prescription-bottle-alt"></i>
+              <i className="fas fa-prescription-bottle-alt"></i>
               Vacunas
             </NavLink>
             <NavLink href="#" onClick={EstelirizacionClick}>
-              <i class="fas fa-user-md"></i>
+              <i className="fas fa-user-md"></i>
               Estelirización
             </NavLink>
             <NavLink href="#" onClick={CaminatasClick}>
-              <i class="fas fa-hiking"></i>
+              <i className="fas fa-hiking"></i>
               Caminatas
             </NavLink>
             <NavLink href="#" onClick={ConcursosClick}>
-              <i class="fas fa-award"></i>
+              <i className="fas fa-award"></i>
               Concursos
             </NavLink>
             <Crear></Crear>
