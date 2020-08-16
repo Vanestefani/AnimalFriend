@@ -66,17 +66,9 @@ function LoginPage(props) {
   };
   //errores de input :O
   const validate = () => {
-   let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     let isError = false;
 
-    if (  emailRegex.test(usuario.email)) {
-      console.log( emailRegex.test(usuario.email));
-      usuario.errors.Erroremail.valido = false;
-      usuario.errors.Erroremail.mensaje =
-        "(Por favor ingrese un correo valido)";
-    } else {
-      usuario.errors.Erroremail.valido = true;
-    }
     if (usuario.email.indexOf("@") === -1) {
       usuario.errors.Erroremail.valido = false;
       usuario.errors.Erroremail.mensaje =

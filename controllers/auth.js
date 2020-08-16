@@ -35,7 +35,7 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email:{ $regex: email, $options:'i' } });
 
     if (!user)
       return res.status(401).json({
