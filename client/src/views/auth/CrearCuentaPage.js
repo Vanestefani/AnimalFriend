@@ -54,14 +54,17 @@ function CrearCuentaPage(props) {
   const validate = () => {
     let isError = false;
     // El pattern solo letras
-    const pattern = new RegExp("^[A-Z]+$", "i");
+    const pattern = new RegExp(
+      "^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ']+[s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ'])+[s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ'])?$"
+    );
     //El pattern contraseña 1As20092
     const pattern2 = new RegExp(
       "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
     );
     const pattern3 = new RegExp(
-      "^[a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-z0-9]@[a-z0-9][-\.]{0,1}([a-z][-\.]{0,1})*[a-z0-9]\.[a-z0-9]{1,}([\.\-]{0,1}[a-z]){0,}[a-z0-9]{0,}$");
-    console.log(pattern3.test(usuario.email));
+      "^[a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1}([a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1})*[a-z0-9]@[a-z0-9][-.]{0,1}([a-z][-.]{0,1})*[a-z0-9].[a-z0-9]{1,}([.-]{0,1}[a-z]){0,}[a-z0-9]{0,}$"
+    );
+
     if (usuario.step == 1) {
       if (pattern3.test(usuario.email) == false) {
         usuario.errors.Erroremail.valido = false;
@@ -85,10 +88,10 @@ function CrearCuentaPage(props) {
       } else {
         usuario.errors.Errorpassword2.valido = true;
       }
-      if (usuario.nombre.length < 1) {
+      if (usuario.nombre.length < 3) {
         usuario.errors.Errornombre.valido = false;
         usuario.errors.Errornombre.mensaje =
-          "(El campo nombre no puede estar vacio)";
+          "(El campo nombre no puede estar vacio y debe tener al menos tres caracteres)";
       } else {
         usuario.errors.Errornombre.valido = true;
       }
