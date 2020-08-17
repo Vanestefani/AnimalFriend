@@ -59,9 +59,11 @@ function CrearCuentaPage(props) {
     const pattern2 = new RegExp(
       "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
     );
-
+    const pattern3 = new RegExp(
+      "^[a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-z0-9]@[a-z0-9][-\.]{0,1}([a-z][-\.]{0,1})*[a-z0-9]\.[a-z0-9]{1,}([\.\-]{0,1}[a-z]){0,}[a-z0-9]{0,}$");
+    console.log(pattern3.test(usuario.email));
     if (usuario.step == 1) {
-      if (usuario.email.indexOf("@") === -1) {
+      if (pattern3.test(usuario.email) == false) {
         usuario.errors.Erroremail.valido = false;
         usuario.errors.Erroremail.mensaje =
           "(Por favor ingrese un correo valido)";
@@ -272,7 +274,6 @@ function CrearCuentaPage(props) {
         ciudad: ciudad,
         genero: genero,
       });
-
     } else {
       validate();
     }
