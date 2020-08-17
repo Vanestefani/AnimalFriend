@@ -1,11 +1,16 @@
 const Datauri = require("datauri");
 const path = require("path");
-const multer = require("multer");
 
 const cloudinary = require("../config/cloudinary");
-const sgMail = require("@sendgrid/mail");
+const nodemailer = require('nodemailer');
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASSWORD// naturally, replace both with your real credentials or an application-specific password
+  }
+});
 
 function uploader(req) {
   return new Promise((resolve, reject) => {
@@ -24,11 +29,12 @@ function uploader(req) {
 }
 
 function sendEmail(mailOptions) {
-  return new Promise((resolve, reject) => {
-    sgMail.send(mailOptions, (error, result) => {
-      if (error) return reject(error);
-      return resolve(result);
-    });
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+    console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
   });
 }
 function checkFileType(file, cb) {

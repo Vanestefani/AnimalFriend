@@ -8,7 +8,7 @@ exports.recover = async (req, res) => {
   try {
     const { email } = req.body;
 
-    const user = await User.findOne({ email });
+   const user = await User.findOne({ email:{ $regex: email, $options:'i' } });
 
     if (!user)
       return res

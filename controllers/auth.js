@@ -10,7 +10,7 @@ exports.register = async (req, res) => {
     const { email } = req.body;
 
     // Make sure this account doesn't already exist
-    const user = await User.findOne({ email });
+   const user = await User.findOne({ email:{ $regex: email, $options:'i' } });
 
     if (user)
       return res.status(401).json({
@@ -117,7 +117,7 @@ exports.verify = async (req, res) => {
 exports.resendToken = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await User.findOne({ email });
+   const user = await User.findOne({ email:{ $regex: email, $options:'i' } });
     if (!user)
       return res.status(401).json({
         message:
