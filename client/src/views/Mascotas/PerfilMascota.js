@@ -54,7 +54,7 @@ function PerfilMascota({ match }) {
   return (
     <>
       <ScrollNavbar></ScrollNavbar>
-      <div className="wrapper">
+      <div className="wrapper content_home">
         <PerfilMascotaHeader dato={mascota}></PerfilMascotaHeader>
 
         {mascota ? (
@@ -70,7 +70,7 @@ function PerfilMascota({ match }) {
           ""
         )}
         <div className="section">
-          <div className="wrapper">
+          <div className="wrapper ">
             <Container>
               <Row>
 

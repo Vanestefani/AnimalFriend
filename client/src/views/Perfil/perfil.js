@@ -193,7 +193,7 @@ function Perfil({ match }) {
       </Modal>
 
       <ScrollNavbar />
-      <div className="wrapper">
+      <div className="wrapper ">
         <ProfilePageHeader
           dato={usuarioactual}
           countpost={countpost}
@@ -219,7 +219,7 @@ function Perfil({ match }) {
               ""
             )}
           </Container>
-          <div className="wrapper">
+          <div className="wrapper content_home">
             <Container>
               <Row>
                 <Col md="3">

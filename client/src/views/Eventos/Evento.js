@@ -47,7 +47,7 @@ function Eventos({ match }) {
   return (
     <>
       <HomeNarbar></HomeNarbar>
-      <div className="wrapper">
+      <div className="wrapper content_home">
         <Container>
           <Card>
             {evento ? (

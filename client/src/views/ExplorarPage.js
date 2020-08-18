@@ -41,7 +41,7 @@ const { seguir, noseguir, alluser, usuarios } = AContext;
   return (
     <>
       <HomeNarbar></HomeNarbar>
-      <div className="wrapper">
+      <div className="wrapper content_home">
         <Container>
           <Row>
             <Col md="3">

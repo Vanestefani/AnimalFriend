@@ -40,7 +40,7 @@ function Index() {
   return (
     <>
       <IndexNavbar />
-      <div className="wrapper">
+      <div className="wrapper content_home">
         <IndexHeader />
         <div className="main">
           <Images />
