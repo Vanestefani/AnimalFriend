@@ -60,7 +60,7 @@ function HomeNarbar() {
           }}
         />
       ) : null}
-      <Navbar className="bg-degrado" expand="lg">
+      <Navbar className="fixed-top bg-degrado" expand="lg">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand href="#" id="navbar-brand">
