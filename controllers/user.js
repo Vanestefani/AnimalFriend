@@ -58,8 +58,9 @@ exports.store = async (req, res) => {
       req.headers.host +
       "/api/auth/reset/" +
       user.resetPasswordToken;
-    let html = `<p>Hola ${user.nombre}<p><br><p>Se ha creado una nueva cuenta para usted en ${domain}. Por favor haga clic en el siguiente <a href="${link}">link</a>
-        para configurar su contraseña e iniciar sesión.</p>
+    let html = `<p>Hola ${user.nombre}<p><br><p>Se ha creado una nueva cuenta para usted en ${domain}. Por favor haga clic en el siguiente link  para configurar su contraseña e iniciar sesión:
+    </br> <a href="${link}">${link}</a>
+       </p>
                   <br><p>
                   Si no solicitó esto, ignore este correo electrónico.</p>`;
 

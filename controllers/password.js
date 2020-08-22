@@ -8,17 +8,17 @@ exports.recover = async (req, res) => {
   try {
     const { email } = req.body;
 
-   const user = await User.findOne({ email:{ $regex: email, $options:'i' } });
+    const user = await User.findOne({
+      email: { $regex: email, $options: "i" },
+    });
 
     if (!user)
-      return res
-        .status(401)
-        .json({
-          message:
-            "La direccion de correo electronico " +
-            req.body.email +
-            " no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
-        });
+      return res.status(401).json({
+        message:
+          "La direccion de correo electronico " +
+          req.body.email +
+          " no está asociado con ninguna cuenta. Vuelva a verificar su dirección de correo electrónico e intente nuevamente.",
+      });
 
     //Generate and set password reset token
     user.generatePasswordReset();
@@ -33,19 +33,20 @@ exports.recover = async (req, res) => {
     let link =
       "http://" + host + "/auth/reset/password/" + user.resetPasswordToken;
     let html = `<p>Hola ${user.nombre}</p>
-                    <p>Por favor haga clic en el siguiente <a href="${link}">link</a> para restablecer tu contraseña.</p>
+                    <p>Por favor haga clic en el siguiente link para restablecer tu contraseña. :
+                    </br>
+                    <a href="${link}">${link}</a>
+
+                     </p>
+                     <p>Si no usa este enlace dentro de las 3 horas, caducará.</p>
                     <p>Si no solicitó esto, ignore este correo electrónico y su contraseña permanecerá sin cambios.</p>`;
 
     await sendEmail({ to, from, subject, html });
 
-    res
-      .status(200)
-      .json({
-        message:
-          "Se ha enviado un correo electrónico de reinicio a " +
-          user.email +
-          ".",
-      });
+    res.status(200).json({
+      message:
+        "Se ha enviado un correo electrónico de reinicio a " + user.email + ".",
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -64,12 +65,10 @@ exports.reset = async (req, res) => {
     });
 
     if (!user)
-      return res
-        .status(401)
-        .json({
-          message:
-            "El token de restablecimiento de contraseña no es válido o ha expirado.",
-        });
+      return res.status(401).json({
+        message:
+          "El token de restablecimiento de contraseña no es válido o ha expirado.",
+      });
 
     //Redirect user to form with the email address
     res.render("reset", { user });
@@ -91,12 +90,10 @@ exports.resetPassword = async (req, res) => {
     });
 
     if (!user)
-      return res
-        .status(401)
-        .json({
-          message:
-            "El token de restablecimiento de contraseña no es válido o ha expirado",
-        });
+      return res.status(401).json({
+        message:
+          "El token de restablecimiento de contraseña no es válido o ha expirado",
+      });
 
     //Set the new password
     user.password = req.body.password;
