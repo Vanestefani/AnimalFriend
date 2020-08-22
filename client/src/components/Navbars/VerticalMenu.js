@@ -27,7 +27,7 @@ function VerticalMenu() {
                   className="rounded-circle FotoUser shadow"
                 ></img>
                 <p className="text-center">
-                  {" "}
+                 <br></br>
                   <Badge color="primary" pill>
                     {usuario.nombre}
                   </Badge>
