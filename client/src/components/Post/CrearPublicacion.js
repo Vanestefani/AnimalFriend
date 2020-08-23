@@ -1,13 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  InputGroup,
-  Button,
-  Input,
-  CardHeader,
-  Card,
-  CardBody,
-  Form,
-} from "reactstrap";
+import {InputGroup, Button, Input, CardHeader, Card, CardBody, Form } from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
 function CrearPublicacion() {
@@ -30,7 +22,7 @@ function CrearPublicacion() {
     },
   });
   const [photo, guardararchivophoto] = useState(null);
-  const { descripcion, errors } = state;
+  const { descripcion,errors } = state;
   const validate = () => {
     let isError = false;
 
@@ -49,7 +41,10 @@ function CrearPublicacion() {
       errors.Errorfoto.valido = true;
     }
 
-    if (!errors.Errordescripcion.valido || !errors.Errorfoto.valido) {
+    if (
+      !errors.Errordescripcion.valido ||
+      !errors.Errorfoto.valido
+    ) {
       isError = true;
     } else {
       isError = false;
@@ -104,36 +99,36 @@ function CrearPublicacion() {
               <div className="media-body text-center text-md-left ml-md-3 ml-0">
                 <p className="font-weight-bold my-0">{usuario.nombre}</p>
                 <InputGroup
+                      className={
+                        "no-border input-lg" +
+                        (firstFocus ? " input-group-focus" : "")
+                      }
+                    >
+                <Input
                   className={
-                    "no-border input-lg" +
-                    (firstFocus ? " input-group-focus" : "")
+                    errors.Errordescripcion.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
                   }
-                >
-                  <Input
-                    className={
-                      errors.Errordescripcion.valido
-                        ? ""
-                        : "is-invalid form-control-danger form-control"
-                    }
-                    placeholder="¿Que quieres compartir hoy?"
-                    rows="3"
-                    maxlength="150"
-                    type="textarea"
-                    id="descripcion"
-                    name="descripcion"
-                    value={descripcion}
-                    onFocus={() => setFirstFocus(true)}
-                    onBlur={() => setFirstFocus(false)}
-                    onChange={handleChange}
-                  ></Input>
-                </InputGroup>
+                  placeholder="¿Que quieres compartir hoy?"
+                  rows="3"
+                  maxlength="150"
+                  type="textarea"
+                  id="descripcion"
+                  name="descripcion"
+                  value={descripcion}
+                  onFocus={() => setFirstFocus(true)}
+                  onBlur={() => setFirstFocus(false)}
+                  onChange={handleChange}
+                ></Input>
+                 </InputGroup>
                 <i className="text-info">Máximo 150 caracteres</i>
                 {errors.Errordescripcion.valido ? (
-                  ""
+                 ""
                 ) : (
                   <span className="text-muted">
-                    {errors.Errordescripcion.mensaje}
-                  </span>
+                  {errors.Errordescripcion.mensaje}
+                </span>
                 )}
               </div>
             </div>
@@ -147,28 +142,29 @@ function CrearPublicacion() {
                   <i className="fas fa-camera"></i>Subir imagen
                 </button>
                 <InputGroup
-                  className={
-                    "no-border input-lg" +
-                    (lastFocus ? " input-group-focus" : "")
-                  }
-                >
-                  <Input
-                    accept={acceptedFileTypes}
-                    onChange={(e) => guardararchivophoto(e.target.files[0])}
-                    id="photo"
-                    name="photo"
-                    type="file"
-                    className="btn-small"
-                    size="sm"
-                    onFocus={() => setLastFocus(true)}
-                    onBlur={() => setLastFocus(false)}
-                    ref={imageInputRef}
-                  ></Input>{" "}
-                </InputGroup>
+                      className={
+                        "no-border input-lg" +
+                        (lastFocus ? " input-group-focus" : "")
+                      }
+                    >
+                <Input
+                  accept={acceptedFileTypes}
+                  onChange={(e) => guardararchivophoto(e.target.files[0])}
+                  id="photo"
+                  name="photo"
+                  type="file"
+                  className="btn-small"
+                  size="sm"
+                  onFocus={() => setLastFocus(true)}
+                  onBlur={() => setLastFocus(false)}
+                  ref={imageInputRef}
+                ></Input> </InputGroup>
                 {errors.Errorfoto.valido ? (
-                  ""
+                 ""
                 ) : (
-                  <span className="text-muted">{errors.Errorfoto.mensaje}</span>
+                  <span className="text-muted">
+                  {errors.Errorfoto.mensaje}
+                </span>
                 )}
               </div>
             </div>
