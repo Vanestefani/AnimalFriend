@@ -126,7 +126,7 @@ function CrearPublicacion() {
                 {errors.Errordescripcion.valido ? (
                  ""
                 ) : (
-                  <span className="text-muted">
+                  <span className="text-muted text-danger">
                   {errors.Errordescripcion.mensaje}
                 </span>
                 )}
@@ -158,7 +158,7 @@ function CrearPublicacion() {
                 {errors.Errorfoto.valido ? (
                  ""
                 ) : (
-                  <span className="text-muted">
+                  <span className="text-muted text-danger">
                   {errors.Errorfoto.mensaje}
                 </span>
                 )}
