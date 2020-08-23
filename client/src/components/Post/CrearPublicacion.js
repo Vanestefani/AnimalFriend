@@ -1,7 +1,18 @@
 import React, { useState, useContext } from "react";
-import {InputGroup, Button, Input, CardHeader, Card, CardBody, Form } from "reactstrap";
+import { Link } from "react-router-dom";
+import {
+  InputGroup,
+  Button,
+  Input,
+  CardHeader,
+  Card,
+  CardBody,
+  Form,
+} from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 function CrearPublicacion() {
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
@@ -22,7 +33,7 @@ function CrearPublicacion() {
     },
   });
   const [photo, guardararchivophoto] = useState(null);
-  const { descripcion,errors } = state;
+  const { descripcion, errors } = state;
   const validate = () => {
     let isError = false;
 
@@ -41,10 +52,7 @@ function CrearPublicacion() {
       errors.Errorfoto.valido = true;
     }
 
-    if (
-      !errors.Errordescripcion.valido ||
-      !errors.Errorfoto.valido
-    ) {
+    if (!errors.Errordescripcion.valido || !errors.Errorfoto.valido) {
       isError = true;
     } else {
       isError = false;
@@ -59,6 +67,7 @@ function CrearPublicacion() {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const err = validate();
@@ -81,8 +90,23 @@ function CrearPublicacion() {
       guardararchivophoto(null);
       imageInputRef.current.value = "";
     }
-    //Resets the file name of the file input - See #2
   };
+  //emojis
+  const [emojiPickerState, SetEmojiPicker] = useState(false);
+  let emojiPicker;
+  if (emojiPickerState) {
+    emojiPicker = (
+      <Picker
+        title="Pick your emoji…"
+        emoji="point_up"
+        onSelect={(emoji) => setstate(state.descripcion + "" + emoji.native)}
+      />
+    );
+  }
+  function triggerPicker(event) {
+    event.preventDefault();
+    SetEmojiPicker(!emojiPickerState);
+  }
 
   return (
     <>
@@ -99,70 +123,72 @@ function CrearPublicacion() {
               <div className="media-body text-center text-md-left ml-md-3 ml-0">
                 <p className="font-weight-bold my-0">{usuario.nombre}</p>
                 <InputGroup
-                      className={
-                        "no-border input-lg" +
-                        (firstFocus ? " input-group-focus" : "")
-                      }
-                    >
-                <Input
                   className={
-                    errors.Errordescripcion.valido
-                      ? ""
-                      : "is-invalid form-control-danger form-control"
+                    "no-border input-lg" +
+                    (firstFocus ? " input-group-focus" : "")
                   }
-                  placeholder="¿Que quieres compartir hoy?"
-                  rows="3"
-                  maxlength="150"
-                  type="textarea"
-                  id="descripcion"
-                  name="descripcion"
-                  value={descripcion}
-                  onFocus={() => setFirstFocus(true)}
-                  onBlur={() => setFirstFocus(false)}
-                  onChange={handleChange}
-                ></Input>
-                 </InputGroup>
+                >
+                  <Input
+                    className={
+                      errors.Errordescripcion.valido
+                        ? ""
+                        : "is-invalid form-control-danger form-control"
+                    }
+                    placeholder="¿Que quieres compartir hoy?"
+                    rows="3"
+                    maxlength="150"
+                    type="textarea"
+                    id="descripcion"
+                    name="descripcion"
+                    value={descripcion}
+                    onFocus={() => setFirstFocus(true)}
+                    onBlur={() => setFirstFocus(false)}
+                    onChange={handleChange}
+                  ></Input>
+                </InputGroup>
                 <i className="text-info">Máximo 150 caracteres</i>
                 {errors.Errordescripcion.valido ? (
-                 ""
+                  ""
                 ) : (
                   <span className="text-muted text-danger">
-                  {errors.Errordescripcion.mensaje}
-                </span>
+                    {errors.Errordescripcion.mensaje}
+                  </span>
                 )}
               </div>
             </div>
           </CardHeader>
 
           <CardBody>
-            <div className="pull-left">
+            <div className="pull-left clearfix ">
               <div className="upload-btn-wrapper">
-                <button className="btn btn-info">
-                  {" "}
-                  <i className="fas fa-camera"></i>Subir imagen
-                </button>
+                <span className="m-2 p-2 info">
+                  <Input
+                    accept={acceptedFileTypes}
+                    onChange={(e) => guardararchivophoto(e.target.files[0])}
+                    id="photo"
+                    name="photo"
+                    type="file"
 
-                <Input
-                  accept={acceptedFileTypes}
-                  onChange={(e) => guardararchivophoto(e.target.files[0])}
-                  id="photo"
-                  name="photo"
-                  type="file"
+                    ref={imageInputRef}
+                  ></Input>
+                  <i className="fas fa-camera"></i>
+                </span>
 
-                  className="btn-small"
-                  size="sm"
-                  onFocus={() => setLastFocus(true)}
-                  onBlur={() => setLastFocus(false)}
-                  ref={imageInputRef}
-                ></Input>
                 {errors.Errorfoto.valido ? (
-                 ""
+                  ""
                 ) : (
                   <span className="text-muted text-danger">
-                  {errors.Errorfoto.mensaje}
-                </span>
+                    {errors.Errorfoto.mensaje}
+                  </span>
                 )}
               </div>
+
+                <Link class="btn info d-inline p-2" onClick={triggerPicker}>
+                  <span role="img" aria-label="">
+                    😁
+                  </span>
+                </Link>
+
             </div>
             <div className="pull-right">
               <Button
