@@ -17,7 +17,7 @@ function DarkFooter() {
                 target="_blank"
               >
                 Sobre nosotros
-              </a>
+              </Link >
             </li>
 
             <li>

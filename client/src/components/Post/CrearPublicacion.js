@@ -1,13 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  Button,
-  Input,
-  CardHeader,
-  Card,
-  CardBody,
-  Form,
-
-} from "reactstrap";
+import { Button, Input, CardHeader, Card, CardBody, Form } from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
 function CrearPublicacion() {
@@ -37,12 +29,14 @@ function CrearPublicacion() {
       state.errors.Errordescripcion.valido = false;
       state.errors.Errordescripcion.mensaje =
         "(El campo descripción no puede estar vacio)";
+        console.log("error descripcion");
     } else {
       state.errors.Errordescripcion.valido = true;
     }
-    if (photo == null) {
+    if (photo == null || photo == "") {
       state.errors.Errorfoto.valido = false;
       state.errors.Errorfoto.mensaje = "(Debe subir una imagen)";
+      console.log("error imagen");
     } else {
       state.errors.Errorfoto.valido = true;
     }
@@ -52,11 +46,13 @@ function CrearPublicacion() {
       !state.errors.Errorfoto.valido
     ) {
       isError = true;
-      console.log("error :D");
+
     } else {
       isError = false;
     }
+    console.log(isError);
     return isError;
+
   };
 
   const handleChange = (e) => {
@@ -69,6 +65,7 @@ function CrearPublicacion() {
     e.preventDefault();
     const err = validate();
     if (!err) {
+      console.log(!err);
       let userid = usuario._id;
 
       let formData = new FormData();
@@ -120,6 +117,7 @@ function CrearPublicacion() {
                   value={descripcion}
                   onChange={handleChange}
                 ></Input>
+                <i className="text-info">Máximo 150 caracteres</i>
                 {!state.errors.Errordescripcion.valido ? (
                   <span className="text-muted">
                     {state.errors.Errordescripcion.mensaje}

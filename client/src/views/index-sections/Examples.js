@@ -13,13 +13,13 @@ function Examples() {
         <Container className="text-center">
           <Row>
             <div className="col">
-              <a href="examples/landing-page.html" target="_blank">
+              <Link href="examples/landing-page.html" target="_blank">
                 <img
                   alt="..."
                   className="img-raised"
                   src={require("../../assets//img/landing.jpg")}
                 ></img>
-              </a>
+              </Link >
               <Button
                 className="btn-round"
                 color="default"
@@ -31,13 +31,13 @@ function Examples() {
               </Button>
             </div>
             <div className="col">
-              <a href="examples/profile-page.html" target="_blank">
+              <Link href="examples/profile-page.html" target="_blank">
                 <img
                   alt="..."
                   className="img-raised"
                   src={require("../../assets//img/profile.jpg")}
                 ></img>
-              </a>
+              </Link >
               <Button
                 className="btn-round"
                 color="default"

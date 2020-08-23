@@ -15,12 +15,12 @@ function DefaultFooter() {
         <nav>
           <ul>
             <li>
-            <a
+            <Link
                 href="http://animalfriendblog.gearhostpreview.com/"
                 target="_blank"
               >
                 Sobre nosotros
-              </a>
+              </Link >
             </li>
 
             <li>

@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardFooter,
 } from "reactstrap";
-import Skeleton from "react-loading-skeleton";
 
 function ListaAnuncio(props) {
 

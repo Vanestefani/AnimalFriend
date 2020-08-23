@@ -7,7 +7,7 @@ import MascotasContext from "../../context/mascotas/mascotasContext";
 import Skeleton from "react-loading-skeleton";
 function ListMascotas({match}) {
   const mContext = useContext(MascotasContext);
-  const { loading, mascotas, mascotasbyUsuario } = mContext;
+  const { loading, mascotas } = mContext;
 
   useEffect(() => {
 

@@ -9,8 +9,7 @@ import {
   Button,
   CardTitle,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import InfiniteScroll from "react-infinite-scroll-component";
+
 import RContext from "../../context/recordatorios/recordatoriosContex";
 import AlertaContext from "../../context/alertas/alertaContext";
 import FormRecordatorio from "./form/FormRecordatorio";

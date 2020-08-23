@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {  useContext } from "react";
 
 import { Link } from "react-router-dom";
 // reactstrap components
@@ -20,7 +20,7 @@ import AuthContext from "../../context/autenticacion/authContext";
 
 function ScrollNavbar() {
   const authContext = useContext(AuthContext);
-  const { mensaje, usuario, cerrarSesion } = authContext;
+  const {  usuario, cerrarSesion } = authContext;
 
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -61,7 +61,7 @@ function ScrollNavbar() {
               <Link to="/home">
                 <img
                   width="200px"
-                  alt="..."
+                  alt="Logo"
                   src={require("../../assets/img/Logotipo.png")}
                 ></img>
               </Link>
@@ -151,6 +151,7 @@ function ScrollNavbar() {
                     <img
                       src={usuario.fotoPerfil}
                       className="rounded-circle FotoUser"
+                      alt="foto perfil"
                     ></img>
                   </DropdownToggle>
                   <DropdownMenu>

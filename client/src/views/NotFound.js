@@ -11,11 +11,8 @@ import AuthContext from "../context/autenticacion/authContext";
 import { CardBody, CardHeader, CardTitle, Container, Card } from "reactstrap";
 
 function NotFound() {
-  // extraer los valores del context
-  const alertaContext = useContext(AlertaContext);
-  const { alerta, mostrarAlerta } = alertaContext;
   const authContext = useContext(AuthContext);
-  const { mensaje, autenticado } = authContext;
+  const {  autenticado } = authContext;
 
   return (
     <>

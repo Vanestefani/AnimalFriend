@@ -8,7 +8,6 @@ import tokenAuth from "../../config/token";
 import {
   REGISTRO_EXITOSO,
   REGISTRO_ERROR,
-  OBTENER_USUARIO,
   LOGIN_EXITOSO,
   LOGIN_ERROR,
   CERRAR_SESION,
@@ -96,12 +95,11 @@ const AuthState = (props) => {
         payload: respuesta.data,
       });
     } catch (error) {
-
-if (error.response.data.message==undefined){
-  var errorsito =error.response.data.error.email
-}else{
-  var errorsito =error.response.data.message;
-}
+      if (error.response.data.message == undefined) {
+        var errorsito = error.response.data.error.email;
+      } else {
+        var errorsito = error.response.data.message;
+      }
       const alerta = {
         msg: errorsito,
 

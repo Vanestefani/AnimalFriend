@@ -20,9 +20,9 @@ function TransparentFooter() {
           <ModalPoliticas></ModalPoliticas>
             </li>
                         <li>
-              <a
+              <Link
               target="_blank"
-              href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u">Danos tu opinión</a>
+              href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u">Danos tu opinión</Link >
             </li>
           </ul>
         </nav>

@@ -11,7 +11,7 @@ function ListMascotas() {
 
   useEffect(() => {
     mascotasUsuario();
-  }, []);
+  }, [mascotasUsuario]);
 
   return (
     <>

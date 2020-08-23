@@ -9,13 +9,12 @@ import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import PostContext from "../../context/post/postContext";
 import AlertaContext from "../../context/alertas/alertaContext";
-import Calendario from "../../components/Calendario/Calendario";
 
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 function Home() {
   const postContext = useContext(PostContext);
   const alertaContext = useContext(AlertaContext);
-  const { alerta, mostrarAlerta } = alertaContext;
+  const {  mostrarAlerta } = alertaContext;
 
   const { allpost, mensaje, publicaciones } = postContext;
   // Obtener proyectos cuando carga el componente
