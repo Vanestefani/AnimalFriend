@@ -141,24 +141,20 @@ function CrearPublicacion() {
                   {" "}
                   <i className="fas fa-camera"></i>Subir imagen
                 </button>
-                <InputGroup
-                      className={
-                        "no-border input-lg" +
-                        (lastFocus ? " input-group-focus" : "")
-                      }
-                    >
+
                 <Input
                   accept={acceptedFileTypes}
                   onChange={(e) => guardararchivophoto(e.target.files[0])}
                   id="photo"
                   name="photo"
                   type="file"
+
                   className="btn-small"
                   size="sm"
                   onFocus={() => setLastFocus(true)}
                   onBlur={() => setLastFocus(false)}
                   ref={imageInputRef}
-                ></Input> </InputGroup>
+                ></Input>
                 {errors.Errorfoto.valido ? (
                  ""
                 ) : (
