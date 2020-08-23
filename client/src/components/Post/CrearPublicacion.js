@@ -1,11 +1,22 @@
 import React, { useState, useContext } from "react";
-import { Button, Input, CardHeader, Card, CardBody, Form } from "reactstrap";
+import {
+  InputGroup,
+  Button,
+  Input,
+  CardHeader,
+  Card,
+  CardBody,
+  Form,
+} from "reactstrap";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
 function CrearPublicacion() {
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
+  //focus inputs
+  const [firstFocus, setFirstFocus] = React.useState(false);
+  const [lastFocus, setLastFocus] = React.useState(false);
 
   const postContext = useContext(PostContext);
   const authContext = useContext(AuthContext);
@@ -19,30 +30,26 @@ function CrearPublicacion() {
     },
   });
   const [photo, guardararchivophoto] = useState(null);
-  const { descripcion } = state;
+  const { descripcion, errors } = state;
   const validate = () => {
     let isError = false;
 
-    if (state.descripcion.trim() === "") {
-      state.errors.Errordescripcion.valido = false;
-      state.errors.Errordescripcion.mensaje =
+    if (descripcion.trim() === "") {
+      errors.Errordescripcion.valido = false;
+      errors.Errordescripcion.mensaje =
         "(El campo descripción no puede estar vacio)";
-      console.log("error descripcion");
     } else {
-      state.errors.Errordescripcion.valido = true;
+      errors.Errordescripcion.valido = true;
     }
     if (photo === null || photo === "") {
-      state.errors.Errorfoto.valido = false;
-      state.errors.Errorfoto.mensaje = "(Debe subir una imagen)";
+      errors.Errorfoto.valido = false;
+      errors.Errorfoto.mensaje = "(Debe subir una imagen)";
       console.log("error imagen");
     } else {
-      state.errors.Errorfoto.valido = true;
+      errors.Errorfoto.valido = true;
     }
 
-    if (
-      !state.errors.Errordescripcion.valido ||
-      !state.errors.Errorfoto.valido
-    ) {
+    if (!errors.Errordescripcion.valido || !errors.Errorfoto.valido) {
       isError = true;
     } else {
       isError = false;
@@ -96,29 +103,37 @@ function CrearPublicacion() {
               ></img>
               <div className="media-body text-center text-md-left ml-md-3 ml-0">
                 <p className="font-weight-bold my-0">{usuario.nombre}</p>
-
-                <Input
+                <InputGroup
                   className={
-                    state.errors.Errordescripcion.valido
-                      ? ""
-                      : "is-invalid form-control-danger form-control"
+                    "no-border input-lg" +
+                    (firstFocus ? " input-group-focus" : "")
                   }
-                  placeholder="¿Que quieres compartir hoy?"
-                  rows="3"
-                  maxlength="150"
-                  type="textarea"
-                  id="descripcion"
-                  name="descripcion"
-                  value={descripcion}
-                  onChange={handleChange}
-                ></Input>
+                >
+                  <Input
+                    className={
+                      errors.Errordescripcion.valido
+                        ? ""
+                        : "is-invalid form-control-danger form-control"
+                    }
+                    placeholder="¿Que quieres compartir hoy?"
+                    rows="3"
+                    maxlength="150"
+                    type="textarea"
+                    id="descripcion"
+                    name="descripcion"
+                    value={descripcion}
+                    onFocus={() => setFirstFocus(true)}
+                    onBlur={() => setFirstFocus(false)}
+                    onChange={handleChange}
+                  ></Input>
+                </InputGroup>
                 <i className="text-info">Máximo 150 caracteres</i>
-                {!state.errors.Errordescripcion.valido ? (
-                  <span className="text-muted">
-                    {state.errors.Errordescripcion.mensaje}
-                  </span>
-                ) : (
+                {errors.Errordescripcion.valido ? (
                   ""
+                ) : (
+                  <span className="text-muted">
+                    {errors.Errordescripcion.mensaje}
+                  </span>
                 )}
               </div>
             </div>
@@ -131,22 +146,29 @@ function CrearPublicacion() {
                   {" "}
                   <i className="fas fa-camera"></i>Subir imagen
                 </button>
-                <Input
-                  accept={acceptedFileTypes}
-                  onChange={(e) => guardararchivophoto(e.target.files[0])}
-                  id="photo"
-                  name="photo"
-                  type="file"
-                  className="btn-small"
-                  size="sm"
-                  ref={imageInputRef}
-                ></Input>
-                {!state.errors.Errorfoto.valido ? (
-                  <span className="text-muted">
-                    {state.errors.Errorfoto.mensaje}
-                  </span>
-                ) : (
+                <InputGroup
+                  className={
+                    "no-border input-lg" +
+                    (lastFocus ? " input-group-focus" : "")
+                  }
+                >
+                  <Input
+                    accept={acceptedFileTypes}
+                    onChange={(e) => guardararchivophoto(e.target.files[0])}
+                    id="photo"
+                    name="photo"
+                    type="file"
+                    className="btn-small"
+                    size="sm"
+                    onFocus={() => setLastFocus(true)}
+                    onBlur={() => setLastFocus(false)}
+                    ref={imageInputRef}
+                  ></Input>{" "}
+                </InputGroup>
+                {errors.Errorfoto.valido ? (
                   ""
+                ) : (
+                  <span className="text-muted">{errors.Errorfoto.mensaje}</span>
                 )}
               </div>
             </div>
