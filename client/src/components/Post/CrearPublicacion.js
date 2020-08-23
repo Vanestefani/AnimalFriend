@@ -81,8 +81,6 @@ function CrearPublicacion() {
     }
     //Resets the file name of the file input - See #2
   };
-  const [firstFocus, setFirstFocus] = React.useState(false);
-  const [lastFocus, setLastFocus] = React.useState(false);
 
   return (
     <>
@@ -94,6 +92,7 @@ function CrearPublicacion() {
                 className="avatar-small rounded z-depth-1 d-flex mx-auto mb-3"
                 src={usuario.fotoPerfil}
                 width="60px"
+                alt="avatar"
               ></img>
               <div className="media-body text-center text-md-left ml-md-3 ml-0">
                 <p className="font-weight-bold my-0">{usuario.nombre}</p>
@@ -138,8 +137,6 @@ function CrearPublicacion() {
                   id="photo"
                   name="photo"
                   type="file"
-                  onFocus={() => setLastFocus(true)}
-                  onBlur={() => setLastFocus(false)}
                   className="btn-small"
                   size="sm"
                   ref={imageInputRef}

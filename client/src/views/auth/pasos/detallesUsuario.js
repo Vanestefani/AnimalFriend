@@ -3,7 +3,7 @@ import ModalPoliticas from "../../../components/Modals/Politicas";
 import {
   CountryDropdown,
   RegionDropdown,
-  CountryRegionData,
+
 } from "react-country-region-selector";
 // reactstrap components
 import {

@@ -71,7 +71,7 @@ function LoginPage(props) {
     );
     let isError = false;
 
-    if (pattern3.test(usuario.email) == false) {
+    if (pattern3.test(usuario.email) === false) {
       usuario.errors.Erroremail.valido = false;
       usuario.errors.Erroremail.mensaje =
         "(Por favor ingrese un correo valido)";

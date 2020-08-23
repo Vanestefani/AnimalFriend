@@ -12,7 +12,7 @@ function ItemAnuncio(props) {
               src={props.data.imagen}
               className="rounded-circle FotoUser"
               width="60px"
-              atl=""
+              atl="iamgen"
             ></img>
           </center>
           <p>

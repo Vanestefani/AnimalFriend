@@ -95,7 +95,7 @@ const AuthState = (props) => {
         payload: respuesta.data,
       });
     } catch (error) {
-      if (error.response.data.message == undefined) {
+      if (error.response.data.message === undefined) {
         var errorsito = error.response.data.error.email;
       } else {
         var errorsito = error.response.data.message;

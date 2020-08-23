@@ -5,8 +5,6 @@ import ExamplesNavbar from "../components/Navbars/ExamplesNavbar";
 
 import TransparentFooter from "../components/Footers/TransparentFooter.js";
 import { Link } from "react-router-dom";
-
-import AlertaContext from "../context/alertas/alertaContext";
 import AuthContext from "../context/autenticacion/authContext";
 import { CardBody, CardHeader, CardTitle, Container, Card } from "reactstrap";
 
@@ -39,7 +37,7 @@ function NotFound() {
               </CardHeader>
               <CardBody>
                 <h2 className="text-dark">Página no encontrada</h2>
-                <img width="400px" src={ require("../assets/img/404 Error with a cute animal-pana.svg")}></img>
+                <img alt="erro image cat" width="400px" src={ require("../assets/img/404 Error with a cute animal-pana.svg")}></img>
                 <p className="text-dark">
                   Lo sentimos, parece que falta la página que estás buscando.
                 </p>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // reactstrap components
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 // core components
 
@@ -15,7 +15,6 @@ import Mascota from "./Mascota";
 
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 import FormMascota from "./Form/FormMascota";
-import { Link } from "react-router-dom";
 
 function Mascotas() {
   React.useEffect(() => {
