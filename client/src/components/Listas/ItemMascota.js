@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Card,
-  Badge,
-  CardImg,
-  CardTitle,
-  CardBody,
-  CardSubtitle,
-  Button,
-} from "reactstrap";
+import { Badge, CardImg, CardTitle, CardBody, CardSubtitle } from "reactstrap";
 import { Link } from "react-router-dom";
 
 function ItemMascota(props) {

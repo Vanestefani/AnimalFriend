@@ -31,7 +31,7 @@ export default (state, action) => {
         mensaje: null,
       };
     case ADD_MASCOTAS_FAILURE:
-     case GET_MASCOTA_FAILURE:
+    case GET_MASCOTA_FAILURE:
     case EDIT_MASCOTAS_FAILURE:
     case GET_MASCOTAS_FAILURE:
       return {

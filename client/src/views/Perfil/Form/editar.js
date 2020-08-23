@@ -26,9 +26,7 @@ function FormPerfil(props) {
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
-  const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {
-    return item.trim();
-  });
+
 
   //modal
   const [modalMascotas, setModal1] = React.useState(false);

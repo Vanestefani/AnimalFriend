@@ -1,7 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-
-import InfiniteScroll from "react-infinite-scroll-component";
-
+import React, { useContext, useState } from "react";
 import {
   UncontrolledDropdown,
   DropdownToggle,
@@ -18,7 +15,6 @@ import {
   ModalBody,
   Form,
   Button,
-  Badge,
   Collapse,
   Media,
 } from "reactstrap";
@@ -38,7 +34,6 @@ function Post(props) {
     actualizarPost,
     makeComment,
     deletePost,
-    deleteComment
   } = postContext;
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
@@ -238,7 +233,6 @@ function Post(props) {
                         <Link to={"/perfil/" + props.publicacion.autor._id}>
                           {record.autor.nombre}{" "}
                         </Link>
-
                       </Media>
                       {record.text}
                     </Media>

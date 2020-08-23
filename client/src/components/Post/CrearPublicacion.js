@@ -6,9 +6,7 @@ function CrearPublicacion() {
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
-  const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {
-    return item.trim();
-  });
+
   const postContext = useContext(PostContext);
   const authContext = useContext(AuthContext);
   const { usuario } = authContext;
@@ -25,15 +23,15 @@ function CrearPublicacion() {
   const validate = () => {
     let isError = false;
 
-    if (state.descripcion.trim() == "") {
+    if (state.descripcion.trim() === "") {
       state.errors.Errordescripcion.valido = false;
       state.errors.Errordescripcion.mensaje =
         "(El campo descripción no puede estar vacio)";
-        console.log("error descripcion");
+      console.log("error descripcion");
     } else {
       state.errors.Errordescripcion.valido = true;
     }
-    if (photo == null || photo == "") {
+    if (photo === null || photo === "") {
       state.errors.Errorfoto.valido = false;
       state.errors.Errorfoto.mensaje = "(Debe subir una imagen)";
       console.log("error imagen");
@@ -46,13 +44,11 @@ function CrearPublicacion() {
       !state.errors.Errorfoto.valido
     ) {
       isError = true;
-
     } else {
       isError = false;
     }
     console.log(isError);
     return isError;
-
   };
 
   const handleChange = (e) => {

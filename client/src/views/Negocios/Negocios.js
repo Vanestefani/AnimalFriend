@@ -49,19 +49,19 @@ function Negocios() {
     });
   };
 
-    let items = negocios
-      .filter((data) => {
-        if (search == "") return data;
-        else if (
-          data.titulo.toLowerCase().includes(search.toLowerCase()) ||
-          data.categoria.toLowerCase().includes(search.toLowerCase())
-        ) {
-          return data;
-        }
-      })
-      .map((data) => {
-        return <Itemnegocio key={data._id} negocio={data}></Itemnegocio>;
-      });
+  let items = negocios
+    .filter((data) => {
+      if (search == "") return data;
+      else if (
+        data.titulo.toLowerCase().includes(search.toLowerCase()) ||
+        data.categoria.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return data;
+      }
+    })
+    .map((data) => {
+      return <Itemnegocio key={data._id} negocio={data}></Itemnegocio>;
+    });
 
   return (
     <>
@@ -74,7 +74,6 @@ function Negocios() {
               <ListMascotas></ListMascotas>
             </Col>
             <Col md="6">
-
               <Card>
                 <CardHeader>
                   <CardTitle>

@@ -21,7 +21,7 @@ function Vistaprevi() {
               </CardTitle>
             </CardHeader>
             <Col md="12 " className="p-3 ">
-              <Link md="4">
+              <Link md="4" to="#" >
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
@@ -29,7 +29,7 @@ function Vistaprevi() {
                   width="50px"
                 ></img>
               </Link>
-              <Link md="4">
+              <Link md="4" to="#">
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
@@ -37,7 +37,7 @@ function Vistaprevi() {
                   width="50px"
                 ></img>
               </Link>
-              <Link md="4">
+              <Link md="4" to="#">
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
@@ -45,7 +45,7 @@ function Vistaprevi() {
                   width="50px"
                 ></img>
               </Link>
-              <Link md="4">
+              <Link md="4" to="#">
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
@@ -53,7 +53,7 @@ function Vistaprevi() {
                   width="50px"
                 ></img>
               </Link>
-              <Link md="4">
+              <Link md="4" to="#">
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
@@ -61,7 +61,7 @@ function Vistaprevi() {
                   width="50px"
                 ></img>
               </Link>
-              <Link md="4">
+              <Link md="4" to="#">
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
@@ -69,7 +69,7 @@ function Vistaprevi() {
                   width="50px"
                 ></img>
               </Link>
-              <Link md="4">
+              <Link md="4" to="#">
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"
@@ -77,7 +77,7 @@ function Vistaprevi() {
                   width="50px"
                 ></img>
               </Link>
-              <Link md="4">
+              <Link md="4" to="#">
                 <img
                   src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
                   alt="placeholder"

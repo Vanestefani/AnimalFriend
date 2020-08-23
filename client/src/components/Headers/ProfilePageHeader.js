@@ -24,7 +24,9 @@ function ProfilePageHeader(props) {
             ></img>
           </div>
           <h3 className="title">{props.dato.nombre}</h3>
-          <p className="category">{props.dato.pais}/{props.dato.ciudad}</p>
+          <p className="category">
+            {props.dato.pais}/{props.dato.ciudad}
+          </p>
           <div className="content">
             <div className="social-description">
               <h2>{props.countpost}</h2>

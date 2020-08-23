@@ -1,8 +1,8 @@
 /*eslint-disable*/
 import React from "react";
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { Button, Container, Modal, ModalBody, Row, Col } from "reactstrap";
+import { Button, Modal, ModalBody } from "reactstrap";
 
 function ModalPoliticas() {
   const [modalPoliticas, setModal1] = React.useState(false);

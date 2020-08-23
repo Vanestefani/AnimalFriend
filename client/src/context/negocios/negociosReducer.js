@@ -6,7 +6,7 @@ import {
     EDIT_NEGOCIOS_SUCCESS,
     GET_NEGOCIOS_FAILURE,
     GET_NEGOCIOS_SUCCESS,
-    NEGOCIO_FAILURE,
+
     NEGOCIO_SUCCESS,
   } from "../../types";
 

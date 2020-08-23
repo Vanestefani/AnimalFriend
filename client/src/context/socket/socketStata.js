@@ -50,17 +50,18 @@ const RecordatoriosState = (props) => {
     }
   };
 
- const recordatoriosUsuario = async () => {
-
+  const recordatoriosUsuario = async () => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get("/api/recordatorio/recordtorios");
+      const respuesta = await clienteAxios.get(
+        "/api/recordatorio/recordtorios"
+      );
 
       dispatch({
-        type:GET_RECORDATORIO_SUCCESS,
+        type: GET_RECORDATORIO_SUCCESS,
         payload: respuesta.data.recordatorios,
       });
     } catch (error) {
@@ -68,7 +69,7 @@ const RecordatoriosState = (props) => {
         categoria: "danger",
       };
       dispatch({
-        type:GET_RECORDATORIO_FAILURE,
+        type: GET_RECORDATORIO_FAILURE,
         payload: alerta,
       });
     }
@@ -79,7 +80,9 @@ const RecordatoriosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.delete(`/api/recordatorio/${recordatorioId}`);
+      const respuesta = await clienteAxios.delete(
+        `/api/recordatorio/${recordatorioId}`
+      );
       recordatoriosUsuario();
       dispatch({
         type: RECORDATORIO_DELETE_SUCCESS,
@@ -103,7 +106,10 @@ const RecordatoriosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(`/api/recordatorio/${datos.recordatorioId}`,datos);
+      const respuesta = await clienteAxios.put(
+        `/api/recordatorio/${datos.recordatorioId}`,
+        datos
+      );
       recordatoriosUsuario();
       dispatch({
         type: EDIT_RECORDATORIO_SUCCESS,

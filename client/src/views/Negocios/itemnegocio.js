@@ -1,27 +1,18 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
-  Container,
   CardText,
   CardSubtitle,
   Card,
   CardTitle,
   CardImg,
-  Button,
   CardBody,
   Col,
 } from "reactstrap";
 
-import NegociosContex from "../../context/negocios/negociosContex";
-
-import Editar from "./Forms/editar";
-
 function Itemnegocio(props) {
-  const EContex = useContext(NegociosContex);
-  const { negociosUsuario, negocios } = EContex;
-
   return (
     <>
       <div>
@@ -38,7 +29,10 @@ function Itemnegocio(props) {
               <CardTitle>{props.negocio.titulo}</CardTitle>
               <CardSubtitle>{props.negocio.categoria}</CardSubtitle>
               <CardText>{props.negocio.descripcion}</CardText>
-              <Link to={"/negocio/"+props.negocio._id} className="btn btn-info">
+              <Link
+                to={"/negocio/" + props.negocio._id}
+                className="btn btn-info"
+              >
                 Ver más
               </Link>
             </CardBody>

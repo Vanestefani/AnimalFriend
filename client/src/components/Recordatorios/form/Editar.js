@@ -1,14 +1,11 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 
 import {
   Button,
-  Container,
   Modal,
   ModalBody,
   Row,
   Col,
-  FormGroup,
-  Label,
   Input,
   InputGroupAddon,
   InputGroupText,

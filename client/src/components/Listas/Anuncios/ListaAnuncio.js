@@ -12,7 +12,6 @@ import {
 } from "reactstrap";
 
 function ListaAnuncio(props) {
-
   return (
     <>
       <Card className="card-general">

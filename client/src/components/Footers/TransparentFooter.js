@@ -1,28 +1,28 @@
 /*eslint-disable*/
 import React from "react";
-import { Button, Modal } from "reactstrap";
-import { Link, withRouter } from 'react-router-dom';
 
-import ModalPoliticas from '../Modals/Politicas';
+import { Link } from "react-router-dom";
+
+import ModalPoliticas from "../Modals/Politicas";
 // reactstrap components
 import { Container } from "reactstrap";
 
 function TransparentFooter() {
-
   return (
     <footer className="footer">
       <Container>
         <nav>
           <ul>
-
             <li>
-
-          <ModalPoliticas></ModalPoliticas>
+              <ModalPoliticas></ModalPoliticas>
             </li>
-                        <li>
+            <li>
               <Link
-              target="_blank"
-              href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u">Danos tu opinión</Link >
+                target="_blank"
+                to="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u"
+              >
+                Danos tu opinión
+              </Link>
             </li>
           </ul>
         </nav>
@@ -31,9 +31,7 @@ function TransparentFooter() {
         </div>
       </Container>
     </footer>
-
   );
-
 }
 
 export default TransparentFooter;

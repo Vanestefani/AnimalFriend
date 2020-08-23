@@ -1,14 +1,11 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import {
   Button,
-  Container,
   Modal,
   ModalBody,
   Row,
   Col,
-  FormGroup,
-  Label,
   Input,
   InputGroupAddon,
   InputGroupText,
@@ -29,9 +26,7 @@ function CrearAnuncios(props) {
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
-  const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {
-    return item.trim();
-  });
+
   //FORM AÑADIR
   const [AAnuncios, agregarAnuncios] = useState({
     titulo: "",

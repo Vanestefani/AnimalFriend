@@ -1,27 +1,18 @@
-import React, {useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
-  Container,
   CardText,
   CardSubtitle,
   Card,
   CardTitle,
   CardImg,
-  Button,
   CardBody,
   Col,
 } from "reactstrap";
 
-import AnunciosContext from "../../context/anuncios/anunciosContext";
-
-import Editar from "./Forms/editar";
-
 function Itemanuncio(props) {
-  const EContex = useContext(AnunciosContext);
-  const { anunciosUsuario, anuncios } = EContex;
-
   return (
     <>
       <div>
@@ -38,7 +29,10 @@ function Itemanuncio(props) {
               <CardTitle>{props.anuncio.titulo}</CardTitle>
               <CardSubtitle>{props.anuncio.categoria}</CardSubtitle>
               <CardText>{props.anuncio.descripcion}</CardText>
-              <Link to={"/anuncio/"+props.anuncio._id} className="btn btn-info">
+              <Link
+                to={"/anuncio/" + props.anuncio._id}
+                className="btn btn-info"
+              >
                 Ver más
               </Link>
             </CardBody>

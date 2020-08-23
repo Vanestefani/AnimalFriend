@@ -21,7 +21,7 @@ function Mascota(props) {
           <Button
             className="btn-info "
             color="info"
-            href="#AnimalFriend"
+            to="#AnimalFriend"
             onClick={(e) => e.preventDefault()}
           >
             <i className="far fa-eye"></i>

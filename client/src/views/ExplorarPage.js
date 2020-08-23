@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import HomeNarbar from "../components/Navbars/homeNarbar";
 import DefaultFooter from "../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../components/Navbars/VerticalMenu";
 import ListMascotas from "../components/Listas/ListMascotas";
 import SubMenu from "../components/Navbars/SubMenu";
-import CrearPublicacion from "../components/Post/CrearPublicacion";
-import PostList from "../components/Post/PostList";
+
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -18,13 +17,12 @@ import {
   CardImg,
   CardBody,
   CardSubtitle,
-  CardText
 } from "reactstrap";
 import AuthContext from "../context/autenticacion/authContext";
 
 function ExplorarPage() {
   const AContext = useContext(AuthContext);
-const { seguir, noseguir, alluser, usuarios } = AContext;
+  const { alluser, usuarios } = AContext;
 
   React.useEffect(() => {
     document.body.classList.add("landing-page");
@@ -57,34 +55,34 @@ const { seguir, noseguir, alluser, usuarios } = AContext;
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
-                  {
-                  usuarios ?
-                  usuarios.map((u) => (
-                    <div>
-                      <Col md="4">
-                        <Card>
-                          <CardImg
-                            top
-                            width="80px"
-                            height="100px"
-                            src={u.fotoPerfil}
-                            alt="Card image cap"
-                          />
-                          <CardBody>
-                            <CardTitle>{u.nombre}</CardTitle>
-                            <CardSubtitle>{u.pais}</CardSubtitle>
+                  {usuarios
+                    ? usuarios.map((u) => (
+                        <div>
+                          <Col md="4">
+                            <Card>
+                              <CardImg
+                                top
+                                width="80px"
+                                height="100px"
+                                src={u.fotoPerfil}
+                                alt="Card image cap"
+                              />
+                              <CardBody>
+                                <CardTitle>{u.nombre}</CardTitle>
+                                <CardSubtitle>{u.pais}</CardSubtitle>
 
-                            <Link
-                              to={"/perfil/" + u._id}
-                              className="btn btn-info"
-                            >
-                              Ver más
-                            </Link>
-                          </CardBody>
-                        </Card>
-                      </Col>
-                    </div>
-                  )):""}
+                                <Link
+                                  to={"/perfil/" + u._id}
+                                  className="btn btn-info"
+                                >
+                                  Ver más
+                                </Link>
+                              </CardBody>
+                            </Card>
+                          </Col>
+                        </div>
+                      ))
+                    : ""}
                 </CardBody>
               </Card>
             </Col>

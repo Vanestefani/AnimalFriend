@@ -4,7 +4,6 @@ import React from "react";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
-
 function IndexHeader() {
   let pageHeader = React.createRef();
 
@@ -28,7 +27,8 @@ function IndexHeader() {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("../../assets//img/header.jpg") + ")"
+            backgroundImage:
+              "url(" + require("../../assets//img/header.jpg") + ")",
           }}
           ref={pageHeader}
         ></div>
@@ -44,16 +44,19 @@ function IndexHeader() {
           </div>
           <h6 className="category category-absolute">
             Designed by{" "}
-            <Link href="http://invisionapp.com/?ref=creativetim" target="_blank">
+            <Link
+              to="http://invisionapp.com/?ref=creativetim"
+              target="_blank"
+            >
               <img
                 alt="..."
                 className="invision-logo"
                 src={require("../../assets//img/invision-white-slim.png")}
               ></img>
             </Link>
-            . Coded by{" "}
+            . Coded by
             <Link
-              href="https://www.creative-tim.com?ref=nukr-index-header"
+              to="https://www.creative-tim.com?ref=nukr-index-header"
               target="_blank"
             >
               <img

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 // reactstrap components
 import {
   Button,
@@ -184,13 +184,12 @@ class DatosUsuario extends Component {
             block
             className="btn-round  "
             color="default"
-            href="#"
+            to="#"
             onClick={this.continue}
             size="lg"
           >
             <b> Continuar </b>
           </Button>
-
         </div>
       </>
     );

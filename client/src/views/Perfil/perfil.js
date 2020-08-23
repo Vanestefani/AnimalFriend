@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import PostContext from "../../context/post/postContext";
 import AlertaContext from "../../context/alertas/alertaContext";
 // reactstrap components
@@ -20,12 +20,11 @@ import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import ListMascotasbyuser from "../../components/Listas/ListMascotasbyuser";
-import SubMenu from "../../components/Navbars/SubMenu";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
 import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores";
-import Editarperfil from "./Form/editar";
+
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 
@@ -86,19 +85,19 @@ function Perfil({ match }) {
     noseguir({ userId: usuarioactual._id });
     setShowFollow({
       ...showfollow,
-      follow:true,
+      follow: true,
     });
     console.log(showfollow.follow);
   };
 
   const botonSeguir = () => {
-    if (showfollow.follow==false)
+    if (showfollow.follow == false)
       return (
         <Button onClick={unfollow} className="btn-round" color="info" size="lg">
           <i className="fas fa-plus-circle"></i> No Seguir
         </Button>
       );
-    if (showfollow.follow==true)
+    if (showfollow.follow == true)
       return (
         <Button
           onClick={follow}

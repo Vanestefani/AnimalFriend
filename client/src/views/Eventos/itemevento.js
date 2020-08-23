@@ -1,25 +1,18 @@
-import React, {  useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
-  Container,
   CardText,
   CardSubtitle,
   Card,
   CardTitle,
   CardImg,
-  Button,
   CardBody,
   Col,
 } from "reactstrap";
 
-import EventosContex from "../../context/eventos/eventosContex";
-
 function Itemevento(props) {
-  const EContex = useContext(EventosContex);
-  const { eventosUsuario, eventos } = EContex;
-
   return (
     <>
       <div>
@@ -36,7 +29,7 @@ function Itemevento(props) {
               <CardTitle>{props.evento.titulo}</CardTitle>
               <CardSubtitle>{props.evento.categoria}</CardSubtitle>
               <CardText>{props.evento.descripcion}</CardText>
-              <Link to={"/evento/"+props.evento._id} className="btn btn-info">
+              <Link to={"/evento/" + props.evento._id} className="btn btn-info">
                 Ver más
               </Link>
             </CardBody>

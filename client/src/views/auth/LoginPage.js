@@ -67,7 +67,8 @@ function LoginPage(props) {
   //errores de input :O
   const validate = () => {
     const pattern3 = new RegExp(
-      "^[a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-z0-9]@[a-z0-9][-\.]{0,1}([a-z][-\.]{0,1})*[a-z0-9]\.[a-z0-9]{1,}([\.\-]{0,1}[a-z]){0,}[a-z0-9]{0,}$");
+      "^[a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1}([a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1})*[a-z0-9]@[a-z0-9][-.]{0,1}([a-z][-.]{0,1})*[a-z0-9].[a-z0-9]{1,}([.-]{0,1}[a-z]){0,}[a-z0-9]{0,}$"
+    );
     let isError = false;
 
     if (pattern3.test(usuario.email) == false) {
@@ -161,7 +162,6 @@ function LoginPage(props) {
                         onChange={onChange}
                         defaultValue={email}
                         required
-                        autoComp
                         lete="email"
                         className={
                           errors.Erroremail.valido

@@ -35,18 +35,18 @@ function VerticalMenu() {
               </Link>
             </NavLink>
             <ListGroup>
-              <ListGroupItem tag="a" href="#"  onClick={(e) => e.preventDefault()}>
+              <ListGroupItem tag="a" to="#"  onClick={(e) => e.preventDefault()}>
                 <Link to="/eventos">
                   <i className="fas fa-calendar-alt"></i>
                   Eventos
                 </Link>
               </ListGroupItem>
-              <ListGroupItem tag="a" href="#"  onClick={(e) => e.preventDefault()}>
+              <ListGroupItem tag="a" to="#"  onClick={(e) => e.preventDefault()}>
               <Link to="/negocios">
                 <i className="fas fa-store-alt"></i>
                 Negocios </Link>
               </ListGroupItem>
-              <ListGroupItem tag="a" href="#AnimalFriend" onClick={(e) => e.preventDefault()}>
+              <ListGroupItem tag="a" to="#AnimalFriend" onClick={(e) => e.preventDefault()}>
                 <Link to="/anuncios">
                   <i className="fas fa-map-marker-alt"></i>
                   Anuncios

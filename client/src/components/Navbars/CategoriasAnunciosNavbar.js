@@ -48,24 +48,24 @@ function CategoriasAnunciosNavbar(props) {
         <Container>
           <Nav className="flex-column" tag="nav">
             <h3>Categorias</h3>
-            <NavLink href="#" onClick={allClick}>
+            <NavLink to="#" onClick={allClick}>
               <i className="fas fa-globe"></i>
               Todas
             </NavLink>
-            <NavLink href="#AnimalFriend" onClick={MascotaPerdidaaClick}>
+            <NavLink to="#AnimalFriend" onClick={MascotaPerdidaaClick}>
               <i className="fas fa-binoculars"></i>
               Mascotas perdidas
             </NavLink>
-            <NavLink href="#AnimalFriend" onClick={AdopcionesClick}>
+            <NavLink to="#AnimalFriend" onClick={AdopcionesClick}>
               <i className="fas fa-hand-holding-heart"></i>
               Adopciones
             </NavLink>
-            <NavLink href="#AnimalFriend" onClick={AnimalesencontradosClick}>
+            <NavLink to="#AnimalFriend" onClick={AnimalesencontradosClick}>
               <i className="fas fa-map-pin"></i>
               Animales encontrados
             </NavLink>
 
-            <NavLink href="#AnimalFriend" onClick={EmparejarClick}>
+            <NavLink to="#AnimalFriend" onClick={EmparejarClick}>
               <i className="far fa-grin-hearts"></i>
               Emparejar
             </NavLink>

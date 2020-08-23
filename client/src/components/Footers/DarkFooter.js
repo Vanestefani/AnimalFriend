@@ -3,7 +3,7 @@ import React from "react";
 import ModalPoliticas from "../Modals/Politicas";
 // reactstrap components
 import { Container } from "reactstrap";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function DarkFooter() {
   return (
@@ -12,12 +12,12 @@ function DarkFooter() {
         <nav>
           <ul>
             <li>
-              <a
-                href="http://animalfriendblog.gearhostpreview.com/"
+              <Link
+                to="http://animalfriendblog.gearhostpreview.com/"
                 target="_blank"
               >
                 Sobre nosotros
-              </Link >
+              </Link>
             </li>
 
             <li>
@@ -26,7 +26,7 @@ function DarkFooter() {
             <li>
               <Link
                 target="_blank"
-                href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u"
+                to="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u"
               >
                 Danos tu opinión
               </Link>

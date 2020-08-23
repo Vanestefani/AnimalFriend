@@ -1,8 +1,6 @@
 import {
   REGISTRO_EXITOSO,
   REGISTRO_ERROR,
-  ADD_POST_SUCCESS,
-  ADD_POST_FAILURE,
   LOGIN_EXITOSO,
   LOGIN_ERROR,
   VERIFICACIOM_ENVIADA,
@@ -37,7 +35,7 @@ export default (state, action) => {
 
     case UNFOLLOW_SUCCESS:
     case FOLLOW_SUCCESS:
-      case BUSCAR_USUARIO:
+    case BUSCAR_USUARIO:
       return {
         ...state,
         usuarioactual: action.payload.user,

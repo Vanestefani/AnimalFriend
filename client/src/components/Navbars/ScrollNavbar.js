@@ -57,7 +57,7 @@ function ScrollNavbar() {
       <Navbar className={"fixed-top " + navbarColor} color="info" expand="lg">
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand href="#" id="navbar-brand">
+            <NavbarBrand to="#" id="navbar-brand">
               <Link to="/home">
                 <img
                   width="200px"
@@ -92,7 +92,7 @@ function ScrollNavbar() {
           >
             <Nav className="ml-auto mt-2" navbar>
               <NavItem>
-                <NavLink href="/home" onClick={(e) => e.preventDefault()}>
+                <NavLink to="/home" onClick={(e) => e.preventDefault()}>
                   <Link to="/home">
                     <i className="fas fa-home"></i>
                   </Link>
@@ -104,7 +104,7 @@ function ScrollNavbar() {
                     aria-haspopup={true}
                     caret
                     color="default"
-                    href="#"
+                    to="#"
                     nav
                   >
                     <p>Crear</p>
@@ -145,7 +145,7 @@ function ScrollNavbar() {
                     aria-haspopup={true}
                     caret
                     color="default"
-                    href="#"
+                    to="#"
                     nav
                   >
                     <img
@@ -168,7 +168,7 @@ function ScrollNavbar() {
                       </Link>
                     </DropdownItem>
                     <DropdownItem
-                      href="#AnimalFriend"
+                      to="#AnimalFriend"
                       onClick={(e) => e.preventDefault()}
                     >
                       <i className="fas fa-cogs"></i>

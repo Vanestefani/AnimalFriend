@@ -1,16 +1,13 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect } from "react";
 
 // reactstrap components
 import {
   Container,
   CardImg,
   CardText,
-  Col,
   Card,
   CardTitle,
-  CardHeader,
   Table,
-  Button,
   CardBody,
   CardSubtitle,
   CardFooter,
@@ -25,8 +22,6 @@ import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 
 import { Link } from "react-router-dom";
 import AnunciosContext from "../../context/anuncios/anunciosContext";
-
-import Editar from "./Forms/editar";
 
 function Anuncios({ match }) {
   const AContex = useContext(AnunciosContext);
@@ -50,7 +45,6 @@ function Anuncios({ match }) {
     <>
       <HomeNarbar></HomeNarbar>
       <div className="wrapper content_home">
-
         <Container>
           <Card>
             {anuncio ? (
@@ -76,7 +70,7 @@ function Anuncios({ match }) {
                 <CardFooter>
                   <Media>
                     <Link to={"/perfil/" + anuncio.autor._id}>
-                      <Media left top href="#">
+                      <Media left top to="#">
                         <Media
                           object
                           width="64px"

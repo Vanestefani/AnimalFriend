@@ -1,14 +1,11 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext } from "react";
 
 import {
   Button,
-  Container,
   Modal,
   ModalBody,
   Row,
   Col,
-  FormGroup,
-  Label,
   Input,
   InputGroupAddon,
   InputGroupText,
@@ -16,7 +13,7 @@ import {
 } from "reactstrap";
 
 import NegociosContex from "../../../context/negocios/negociosContex";
-import AuthContext from "../../../context/autenticacion/authContext";
+
 function FormEditarNegocios(props) {
   const EContex = useContext(NegociosContex);
   const { actualizarNegocios } = EContex;
@@ -67,12 +64,12 @@ function FormEditarNegocios(props) {
         <i className="fas fa-plus"></i>
       </Button>
 
-      <Modal isOpen={modalNegocios} toggle={() =>setModal1(false)}>
+      <Modal isOpen={modalNegocios} toggle={() => setModal1(false)}>
         <div className="modal-header justify-content-center">
           <button
             className="close"
             type="button"
-            onClick={()=>setModal1(false)}
+            onClick={() => setModal1(false)}
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
@@ -118,7 +115,6 @@ function FormEditarNegocios(props) {
                 <option value="Juguetes">Juguetes</option>
                 <option value="Veterinaria">Veterinaria</option>
                 <option value="PeluqueriaVeterinaria">Peluqueria</option>
-
               </Input>
             </InputGroup>
 
@@ -138,7 +134,7 @@ function FormEditarNegocios(props) {
                   id="fotoNegocio"
                   name="fotoNegocio"
                   type="file"
-                  onChange={(e) =>guardararchivoImagen(e.target.files[0])}
+                  onChange={(e) => guardararchivoImagen(e.target.files[0])}
                   defaultValue={archivoImagen}
                   ref={imageInputRef}
                 ></Input>

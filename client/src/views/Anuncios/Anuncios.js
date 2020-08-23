@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 // reactstrap components
 import {
   Container,
@@ -7,7 +7,6 @@ import {
   Card,
   CardTitle,
   CardHeader,
-  Button,
   CardBody,
   Input,
 } from "reactstrap";
@@ -17,7 +16,7 @@ import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
-import SubMenu from "../../components/Navbars/SubMenu";
+
 import CategoriasAnunciosNavbar from "../../components/Navbars/CategoriasAnunciosNavbar";
 import AnunciosContext from "../../context/anuncios/anunciosContext";
 import Itemanuncio from "./itemanuncio";
@@ -71,7 +70,6 @@ function Anuncios() {
               <ListMascotas></ListMascotas>
             </Col>
             <Col md="6">
-
               <Card>
                 <CardHeader>
                   <CardTitle>
@@ -79,7 +77,7 @@ function Anuncios() {
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
-                <Input
+                  <Input
                     name="search"
                     type="search"
                     id="search"
@@ -87,19 +85,15 @@ function Anuncios() {
                     value={search}
                     onChange={onChangeSearch}
                   ></Input>
-                  {items.length === 0 ? (
-                    <p>No hay anuncios </p>
-                  ) : (
-                    items
-                  )}
+                  {items.length === 0 ? <p>No hay anuncios </p> : items}
                 </CardBody>
               </Card>
             </Col>
             <Col md="3">
               <CategoriasAnunciosNavbar
-                  search={search}
-                  busqueda={busqueda}
-                  setbusqueda={setbusqueda}
+                search={search}
+                busqueda={busqueda}
+                setbusqueda={setbusqueda}
               ></CategoriasAnunciosNavbar>
             </Col>
           </Row>

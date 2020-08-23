@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {CircularProgress ,LinearProgress} from "@material-ui/core";
+import { CircularProgress, LinearProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
@@ -21,7 +21,6 @@ const NotFound = ({ classes }) => (
       <div color="info">
         {" "}
         <i className="fas fa-paw"></i> Cargando ...
-
       </div>
       <LinearProgress />
     </center>

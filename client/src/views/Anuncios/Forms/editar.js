@@ -1,14 +1,11 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext } from "react";
 
 import {
   Button,
-  Container,
   Modal,
   ModalBody,
   Row,
   Col,
-  FormGroup,
-  Label,
   Input,
   InputGroupAddon,
   InputGroupText,
@@ -16,23 +13,21 @@ import {
 } from "reactstrap";
 import MascotasContext from "../../../context/mascotas/mascotasContext";
 import AnunciosContex from "../../../context/anuncios/anunciosContext";
-import AuthContext from "../../../context/autenticacion/authContext";
+
 function FormEditarAnuncios(props) {
   const mContext = useContext(MascotasContext);
-  const { mascotas, mascotasUsuario } = mContext;
+  const { mascotas } = mContext;
   const EContex = useContext(AnunciosContex);
   const { actualizarAnuncios } = EContex;
   const [modalAnuncios, setModal1] = React.useState(false);
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
-  const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {
-    return item.trim();
-  });
+
   const [BAnuncios, editarAnuncios] = useState({
     titulo: props.anuncio.titulo,
     categoria: props.anuncio.categoria,
-    mascota:props.anuncio.mascota,
+    mascota: props.anuncio.mascota,
     descripcion: props.anuncio.descripcion,
   });
   const [archivoImagen, guardararchivoImagen] = useState(null);

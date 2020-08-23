@@ -15,7 +15,7 @@ import {
   GET_EVENTOS_SUCCESS,
   EVENTOS_DELETE_FAILURE,
   EVENTO_SUCCESS,
-  EVENTO_FAILURE
+  EVENTO_FAILURE,
 } from "../../types";
 
 const EventosState = (props) => {
@@ -128,7 +128,9 @@ const EventosState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get(`/api/eventos/evento/${eventoId}`);
+      const respuesta = await clienteAxios.get(
+        `/api/eventos/evento/${eventoId}`
+      );
 
       dispatch({
         type: EVENTO_SUCCESS,
@@ -180,7 +182,8 @@ const EventosState = (props) => {
         mensaje: state.mensaje,
         eventos: state.eventos,
         evento: state.evento,
-        alleventos,getevento
+        alleventos,
+        getevento,
       }}
     >
       {props.children}

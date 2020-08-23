@@ -12,8 +12,6 @@ import {
   Row,
   Button,
 } from "reactstrap";
-//Modal
-import ModalMsnRegistroExitoso from '../../../components/Modals/MsnRegistroExitoso';
 
 class mascotaDatos extends Component {
   continue = (e) => {
@@ -24,9 +22,8 @@ class mascotaDatos extends Component {
     e.preventDefault();
     this.props.prevStep();
   };
- onSubmitRegistro = (e) => {
+  onSubmitRegistro = (e) => {
     e.preventDefault();
-
   };
 
   render() {
@@ -256,23 +253,24 @@ class mascotaDatos extends Component {
             </Col>
           </Row>
           <Row>
-              <Col md="12">
+            <Col md="12">
               <FormGroup check>
-            <Label check>
-              <Input type="checkbox"
-                onFocus={() => this.props.setleePoliticas(true)}
-                onBlur={() => this.props.setleePoliticas(false)}
-                id="leePoliticas"
-                name="leePoliticas"
-                onChange={this.props.onChange}
-                defaultValue={this.props.usuario.leePoliticas}
-                required
-              ></Input>
-              <span className="form-check-sign"></span>
-              Si he leído los terminos y condiciones de AnimalFriend
-            </Label>
-          </FormGroup>
-              </Col>
+                <Label check>
+                  <Input
+                    type="checkbox"
+                    onFocus={() => this.props.setleePoliticas(true)}
+                    onBlur={() => this.props.setleePoliticas(false)}
+                    id="leePoliticas"
+                    name="leePoliticas"
+                    onChange={this.props.onChange}
+                    defaultValue={this.props.usuario.leePoliticas}
+                    required
+                  ></Input>
+                  <span className="form-check-sign"></span>
+                  Si he leído los terminos y condiciones de AnimalFriend
+                </Label>
+              </FormGroup>
+            </Col>
           </Row>
           <Row>
             <Col md="6">
@@ -280,7 +278,7 @@ class mascotaDatos extends Component {
                 block
                 className="btn-round  "
                 color="danger"
-                href="#"
+                to="#"
                 onClick={this.back}
                 size="lg"
               >
@@ -292,7 +290,7 @@ class mascotaDatos extends Component {
                 block
                 className="btn-round  "
                 color="default"
-                href="#"
+                to="#"
                 onClick={this.handleSubmit}
                 size="lg"
               >

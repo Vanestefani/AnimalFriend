@@ -13,15 +13,13 @@ import RecordatoriosContex from "../../context/recordatorios/recordatoriosContex
 import AuthContext from "../../context/autenticacion/authContext";
 import FormRecordatorio from "../../components/Recordatorios/form/FormRecordatorio";
 
-import { Link } from "react-router-dom";
-
 function Recordatorio() {
   const RContext = useContext(RecordatoriosContex);
 
   const {
     addRecordatorios,
     recordatorios,
-    recordatorio,
+
     recordatoriosUsuario,
   } = RContext;
 

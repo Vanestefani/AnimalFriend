@@ -1,5 +1,5 @@
 import React from "react";
-import { ListGroupItem, Button } from "reactstrap";
+import { ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
 
 function ItemAnuncio(props) {

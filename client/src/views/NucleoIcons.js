@@ -14,13 +14,13 @@ function NucleoIcons() {
       <header>
         <h1>Nucleo Outline Web Font v2.9</h1>
         <p>
-          <Link href="https://nucleoapp.com/?ref=1712">nucleoapp.com</Link>
+          <Link to="https://nucleoapp.com/?ref=1712">nucleoapp.com</Link>
         </p>
       </header>
       <div id="cd-nav">
         <Link
           className={"cd-nav-trigger" + (open ? " menu-is-open" : "")}
-          href="#AnimalFriend"
+          to="#AnimalFriend"
           id="cd-nav-trigger"
           onClick={e => {
             e.preventDefault();
@@ -33,7 +33,7 @@ function NucleoIcons() {
           <ul id="cd-main-nav" className={open ? "is-visible" : ""}>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -45,7 +45,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -57,7 +57,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -69,7 +69,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -81,7 +81,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -93,7 +93,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -105,7 +105,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -117,7 +117,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -129,7 +129,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -141,7 +141,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -153,7 +153,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -165,7 +165,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -177,7 +177,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -189,7 +189,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -201,7 +201,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -213,7 +213,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -225,7 +225,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -237,7 +237,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -249,7 +249,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -261,7 +261,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);
@@ -273,7 +273,7 @@ function NucleoIcons() {
             </li>
             <li>
               <Link
-                href="#AnimalFriend"
+                to="#AnimalFriend"
                 onClick={e => {
                   e.preventDefault();
                   setOpen(!open);

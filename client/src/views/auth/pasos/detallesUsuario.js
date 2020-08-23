@@ -186,7 +186,7 @@ class detallesUsuario extends Component {
                 block
                 className="btn-round  "
                 color="danger"
-                href="#"
+                to="#"
                 onClick={this.back}
                 size="lg"
               >
@@ -198,7 +198,7 @@ class detallesUsuario extends Component {
                 block
                 className="btn-round  "
                 color="default"
-                href="#"
+                to="#"
                 onClick={this.props.handleSubmit}
                 size="lg"
               >

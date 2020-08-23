@@ -48,7 +48,7 @@ function ExamplesNavbar() {
       <Navbar className={"fixed-top " + navbarColor} color="info" expand="lg">
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand href="#" id="navbar-brand">
+            <NavbarBrand to="#" id="navbar-brand">
               <Link to="/">
                 <img
                   width="200px"

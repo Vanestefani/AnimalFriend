@@ -54,27 +54,27 @@ function CategoriasNegociosNavbar(props) {
         <Container>
           <Nav className="flex-column" tag="nav">
             <h3>Categorias</h3>
-            <NavLink href="#" onClick={allClick}>
+            <NavLink to="#" onClick={allClick}>
               <i className="fas fa-globe"></i>
               Todas
             </NavLink>
-            <NavLink href="#AnimalFriend" onClick={ComidaClick}>
+            <NavLink to="#AnimalFriend" onClick={ComidaClick}>
               <i className="fas fa-bone"></i>
               Comida
             </NavLink>
-            <NavLink href="#AnimalFriend" onClick={RopaClick}>
+            <NavLink to="#AnimalFriend" onClick={RopaClick}>
               <i className="fas fa-hat-wizard"></i>
               Ropa
             </NavLink>
-            <NavLink href="#AnimalFriend" onClick={JuguetesClick}>
+            <NavLink to="#AnimalFriend" onClick={JuguetesClick}>
               <i className="fas fa-volleyball-ball"></i>
               Juguetes
             </NavLink>
-            <NavLink href="#AnimalFriend" onClick={VeterinariaClick}>
+            <NavLink to="#AnimalFriend" onClick={VeterinariaClick}>
               <i className="fas fa-clinic-medical"></i>
               Veterinaria
             </NavLink>
-            <NavLink href="#AnimalFriend" onClick={PeluqueriaClick}>
+            <NavLink to="#AnimalFriend" onClick={PeluqueriaClick}>
               <i className="fas fa-cut"></i>
               Peluqueria
             </NavLink>

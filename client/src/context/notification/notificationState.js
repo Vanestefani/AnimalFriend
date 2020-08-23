@@ -1,14 +1,10 @@
 import React, { useReducer } from "react";
-import NotificatiosContex from "./notificatiosContex";
-import NotificationReducer from "./notificationReducer";
 
 import clienteAxios from "../../config/axios";
 import tokenAuth from "../../config/token";
 
 import {
-  TOGGLE_NOTIFICATION_POPUP,
-  CLOSE_NOTIFICATION_POPUP,
-  ADD_NOTIFICATION,
+
   READ_NOTIFICATIOS,
   FETCH_NOTIFICATIONS_REQUEST,
   FETCH_NOTIFICATIONS_SUCCESS,
@@ -19,8 +15,7 @@ const NotificacionesState = (props) => {
     mensaje: null,
     notifications: [],
     allNotificationsCount: "",
-    isOpen :false,
-
+    isOpen: false,
   };
 
   const [state, dispatch] = useReducer(NotificacionesReducer, initialState);
@@ -82,7 +77,7 @@ const NotificacionesState = (props) => {
         notificaciones: state.notificaciones,
         notificacion: state.notificacion,
         readNotifications,
-        getNotifications
+        getNotifications,
       }}
     >
       {props.children}

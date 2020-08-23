@@ -8,11 +8,11 @@ import { Container, Row, Col, Button } from "reactstrap";
 import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
-import ListMascotas from "../../components/Listas/ListMascotas";
+
 import SubMenu from "../../components/Navbars/SubMenu";
-import CrearPublicacion from "../../components/Post/CrearPublicacion";
+
 import Mascota from "./Mascota";
-import Calendario from "../../components/Calendario/Calendario";
+
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 import FormMascota from "./Form/FormMascota";
 import { Link } from "react-router-dom";
@@ -115,7 +115,6 @@ function Mascotas() {
               <Mascota></Mascota>
             </Col>
             <Col md="3">
-              
               <ListRecordatorios></ListRecordatorios>
             </Col>
           </Row>

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 // reactstrap components
 import {
   Container,
@@ -7,7 +7,6 @@ import {
   Card,
   CardTitle,
   CardHeader,
-  Button,
   CardBody,
   Input,
 } from "reactstrap";
@@ -18,7 +17,7 @@ import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
-import SubMenu from "../../components/Navbars/SubMenu";
+
 import CategoriasEventosNavbar from "../../components/Navbars/CategoriasEventosNavbar";
 import EventosContex from "../../context/eventos/eventosContex";
 import Itemevento from "./itemevento";
@@ -72,7 +71,6 @@ function Eventos() {
               <ListMascotas></ListMascotas>
             </Col>
             <Col md="6">
-
               <Card>
                 <CardHeader>
                   <CardTitle>

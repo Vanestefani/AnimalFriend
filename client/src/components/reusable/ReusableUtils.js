@@ -43,7 +43,7 @@ export function image64toCanvasRef(canvasRef, image64, pixelCrop) {
   const ctx = canvas.getContext("2d");
   const image = new Image();
   image.src = image64;
-  image.onload = function() {
+  image.onload = function () {
     ctx.drawImage(
       image,
       pixelCrop.x,

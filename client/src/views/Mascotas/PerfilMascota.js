@@ -8,10 +8,8 @@ import PerfilMascotaHeader from "../../components/Headers/PerfilMascotaHeader";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import InfoPet from "./InfoPet";
 
-import Vistaprevi from "../../components/Galeria/vistaprevi";
 import ItemAnuncio from "../../components/Listas/Anuncios/ItemAnuncio";
 
-import Galeria from "../../components/Galeria/Galeria";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import AnunciosContext from "../../context/anuncios/anunciosContext";
 
@@ -73,7 +71,6 @@ function PerfilMascota({ match }) {
           <div className="wrapper ">
             <Container>
               <Row>
-
                 <Col md="12">
                   {mascota ? <InfoPet dato={mascota}></InfoPet> : ""}
                 </Col>

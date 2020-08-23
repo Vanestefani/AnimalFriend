@@ -24,7 +24,7 @@ import {
   LIKE,
   LIKE_ERROR,
   DELETE_COMMENT,
-  DELETE_COMMENT_ERROR
+  DELETE_COMMENT_ERROR,
 } from "../../types";
 
 const PostState = (props) => {
@@ -83,9 +83,9 @@ const PostState = (props) => {
       });
     }
   };
-  const getpost = async postId => {
+  const getpost = async (postId) => {
     const token = localStorage.getItem("token");
-console.log(postId)
+    console.log(postId);
     if (token) {
       tokenAuth(token);
     }
@@ -266,7 +266,7 @@ console.log(postId)
     if (token) {
       tokenAuth(token);
     }
-    console.log(datos)
+    console.log(datos);
     try {
       const respuesta = await clienteAxios.put(
         `/api/post/${datos.postId}`,
@@ -306,7 +306,7 @@ console.log(postId)
         likes: state.likes,
         actualizarPost,
         getpost,
-        deleteComment
+        deleteComment,
       }}
     >
       {props.children}

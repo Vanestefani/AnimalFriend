@@ -19,7 +19,7 @@ function Examples() {
                   className="img-raised"
                   src={require("../../assets//img/landing.jpg")}
                 ></img>
-              </Link >
+              </Link>
               <Button
                 className="btn-round"
                 color="default"
@@ -37,7 +37,7 @@ function Examples() {
                   className="img-raised"
                   src={require("../../assets//img/profile.jpg")}
                 ></img>
-              </Link >
+              </Link>
               <Button
                 className="btn-round"
                 color="default"

@@ -10,7 +10,6 @@ function itemSeguidores() {
             className="rounded-circle FotoUser"
             width="60px"
           ></img>
-
         </center>
         <p>
           Nombre de seguidor

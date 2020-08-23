@@ -1,14 +1,12 @@
-import React, {  useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 
 // reactstrap components
 import {
   Container,
   CardImg,
   CardText,
-
   Card,
   CardTitle,
-
   Button,
   CardBody,
   CardSubtitle,
@@ -24,8 +22,6 @@ import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 
 import { Link } from "react-router-dom";
 import EventosContex from "../../context/eventos/eventosContex";
-
-import Editar from "./Forms/editar";
 
 function Eventos({ match }) {
   const EContex = useContext(EventosContex);
