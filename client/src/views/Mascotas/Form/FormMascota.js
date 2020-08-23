@@ -1,8 +1,7 @@
-import React, {  useContext } from "react";
+import React, { useContext } from "react";
 
 import {
   Button,
-  Container,
   Modal,
   ModalBody,
   Row,
@@ -30,14 +29,11 @@ function FormMascota(props) {
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
-  const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {
-    return item.trim();
-  });
+
   //context
   const mContext = useContext(MascotasContext);
   const authContext = useContext(AuthContext);
-  const { usuario } = authContext;
-  const { addMascotas } = mContext;
+
   //modal
   const [modalMascotas, setModal1] = React.useState(false);
   //previw imagen

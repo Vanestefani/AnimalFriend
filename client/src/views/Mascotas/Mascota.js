@@ -1,10 +1,7 @@
 import React from "react";
 
 // reactstrap components
-import { Container, Row, Col, Button } from "reactstrap";
-
-import { Link } from "react-router-dom";
-
+import {Col, Button } from "reactstrap";
 function Mascota(props) {
   return (
     <>

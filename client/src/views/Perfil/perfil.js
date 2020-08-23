@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import PostContext from "../../context/post/postContext";
-import AlertaContext from "../../context/alertas/alertaContext";
+
 // reactstrap components
 import {
   Button,
@@ -57,10 +57,8 @@ function Perfil({ match }) {
     };
   });
   const postContext = useContext(PostContext);
-  const alertaContext = useContext(AlertaContext);
-  const { alerta, mostrarAlerta } = alertaContext;
 
-  const { mensaje, publicaciones, getpost } = postContext;
+  const { publicaciones, getpost } = postContext;
   // Obtener proyectos cuando carga el componente
   useEffect(() => {
     const autorId = match.params.q;
@@ -91,13 +89,13 @@ function Perfil({ match }) {
   };
 
   const botonSeguir = () => {
-    if (showfollow.follow == false)
+    if (showfollow.follow === false)
       return (
         <Button onClick={unfollow} className="btn-round" color="info" size="lg">
           <i className="fas fa-plus-circle"></i> No Seguir
         </Button>
       );
-    if (showfollow.follow == true)
+    if (showfollow.follow === true)
       return (
         <Button
           onClick={follow}
@@ -200,7 +198,7 @@ function Perfil({ match }) {
         <div className="section">
           <Container>
             <div className="button-container">
-              {usuarioactual._id == usuario._id ? (
+              {usuarioactual._id === usuario._id ? (
                 <Button small onClick={() => setModal1(true)}>
                   <i className="fas fa-plus"></i>Editar
                 </Button>
@@ -209,7 +207,7 @@ function Perfil({ match }) {
               )}
             </div>
 
-            {usuarioactual.bio != "" ? (
+            {usuarioactual.bio !== "" ? (
               <div>
                 <h3 className="title">Sobre mi</h3>
                 <h5 className="description">{usuarioactual.bio}</h5>
@@ -227,7 +225,7 @@ function Perfil({ match }) {
                   <ListaAnuncio></ListaAnuncio>
                 </Col>
                 <Col md="9">
-                  {usuarioactual._id == usuario._id ? (
+                  {usuarioactual._id === usuario._id ? (
                     <CrearPublicacion></CrearPublicacion>
                   ) : (
                     ""

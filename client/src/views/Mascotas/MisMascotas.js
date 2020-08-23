@@ -58,7 +58,7 @@ function MisMascota() {
   };
 
   //error state
-  const [errores, seterrores] = useState(false);
+  const [ seterrores] = useState(false);
 
   //focus
   const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
@@ -71,7 +71,7 @@ function MisMascota() {
   const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
   useEffect(() => {
     mascotasUsuario();
-  }, []);
+  }, [mascotasUsuario]);
   const onSubmit = (e) => {
     e.preventDefault();
     e.target.className += " was-validated";

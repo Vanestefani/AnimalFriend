@@ -65,8 +65,8 @@ function CrearCuentaPage(props) {
       "^[a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1}([a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1})*[a-z0-9]@[a-z0-9][-.]{0,1}([a-z][-.]{0,1})*[a-z0-9].[a-z0-9]{1,}([.-]{0,1}[a-z]){0,}[a-z0-9]{0,}$"
     );
 
-    if (usuario.step == 1) {
-      if (pattern3.test(usuario.email) == false) {
+    if (usuario.step === 1) {
+      if (pattern3.test(usuario.email) === false) {
         usuario.errors.Erroremail.valido = false;
         usuario.errors.Erroremail.mensaje =
           "(Por favor ingrese un correo valido)";
@@ -116,7 +116,7 @@ function CrearCuentaPage(props) {
       }
     }
 
-    if (usuario.step == 2) {
+    if (usuario.step === 2) {
       if (usuario.pais.length < 1) {
         usuario.errors.Errorpais.valido = false;
         usuario.errors.Errorpais.mensaje = "(Debe elegir un campo)";

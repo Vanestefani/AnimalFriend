@@ -1,7 +1,15 @@
 import React from "react";
 
 // reactstrap components
-import { Container, Row, Col, Card, CardTitle, CardHeader, Button, CardBody } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardTitle,
+  CardHeader,
+  CardBody,
+} from "reactstrap";
 
 // core components
 
@@ -10,10 +18,6 @@ import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
 import SubMenu from "../../components/Navbars/SubMenu";
-import CrearPublicacion from "../../components/Post/CrearPublicacion";
-import PostList from "../../components/Post/PostList";
-
-import { Link } from "react-router-dom";
 
 function Chat() {
   React.useEffect(() => {
@@ -38,18 +42,14 @@ function Chat() {
             <Col md="9">
               <SubMenu></SubMenu>
               <Card>
-                  <CardHeader>
-                <CardTitle >
-                  <h3>Chat</h3>
-                </CardTitle>
-
+                <CardHeader>
+                  <CardTitle>
+                    <h3>Chat</h3>
+                  </CardTitle>
                 </CardHeader>
-                <CardBody>
-
-                </CardBody>
+                <CardBody></CardBody>
               </Card>
             </Col>
-
           </Row>
         </Container>
         <DefaultFooter></DefaultFooter>

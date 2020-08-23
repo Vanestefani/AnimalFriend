@@ -56,7 +56,7 @@ function CrearAnuncios(props) {
   const validate = () => {
     let isError = false;
 
-    if (descripcion.trim() == "") {
+    if (descripcion.trim() === "") {
       errors.descripcion.valido = false;
       errors.descripcion.mensaje =
         "(El campo descripcion no puede estar vacio)";
@@ -64,25 +64,25 @@ function CrearAnuncios(props) {
       errors.descripcion.valido = true;
     }
 
-    if (mascota.trim() == "") {
+    if (mascota.trim() === "") {
       errors.mascota.valido = false;
       errors.mascota.mensaje = "(El campo mascota no puede estar vacio)";
     } else {
       errors.mascota.valido = true;
     }
-    if (categoria.trim() == "") {
+    if (categoria.trim() === "") {
       errors.categoria.valido = false;
       errors.categoria.mensaje = "(El campo categoria no puede estar vacio)";
     } else {
       errors.categoria.valido = true;
     }
-    if (titulo.trim() == "") {
+    if (titulo.trim() === "") {
       errors.titulo.valido = false;
       errors.titulo.mensaje = "(El campo titulo no puede estar vacio)";
     } else {
       errors.titulo.valido = true;
     }
-    if (AarchivoImagen == null) {
+    if (AarchivoImagen === null) {
       errors.Errorfoto.valido = false;
       errors.Errorfoto.mensaje = "(Debe subir una imagen)";
     } else {
