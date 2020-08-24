@@ -38,26 +38,29 @@ function CrearPublicacion() {
     let isError = false;
 
     if (descripcion.trim() === "") {
+      if (errors){
       errors.Errordescripcion.valido = false;
       errors.Errordescripcion.mensaje =
         "(El campo descripción no puede estar vacio)";
+      }
     } else {
-      errors.Errordescripcion.valido = true;
+      if (errors) errors.Errordescripcion.valido = true;
     }
     if (photo === null || photo === "") {
-      errors.Errorfoto.valido = false;
+      if (errors) errors.Errorfoto.valido = false;
       errors.Errorfoto.mensaje = "(Debe subir una imagen)";
       console.log("error imagen");
     } else {
-      errors.Errorfoto.valido = true;
+      if (errors) errors.Errorfoto.valido = true;
     }
-
+if (errors){
     if (!errors.Errordescripcion.valido || !errors.Errorfoto.valido) {
       isError = true;
     } else {
       isError = false;
     }
-    console.log(isError);
+  }
+
     return isError;
   };
 
@@ -93,21 +96,19 @@ function CrearPublicacion() {
   };
   //emojis
   const [emojiPickerState, SetEmojiPicker] = useState(false);
-  let emojiPicker;
-  if (emojiPickerState) {
-    emojiPicker = (
-      <Picker
-        title="Pick your emoji…"
-        emoji="point_up"
-        onSelect={(emoji) => setstate(state.descripcion + "" + emoji.native)}
-      />
-    );
-  }
+
   function triggerPicker(event) {
     event.preventDefault();
+
     SetEmojiPicker(!emojiPickerState);
   }
-
+  const addEmoji = (e) => {
+    let emoji = e.native;
+    setstate({
+      descripcion: descripcion + emoji,
+    });
+    console.log("jajajaja" + emoji);
+  };
   return (
     <>
       <Card className="card-post">
@@ -130,9 +131,11 @@ function CrearPublicacion() {
                 >
                   <Input
                     className={
-                      errors.Errordescripcion.valido
-                        ? ""
-                        : "is-invalid form-control-danger form-control"
+                      errors != undefined
+                        ? errors.Errordescripcion.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
                     }
                     placeholder="¿Que quieres compartir hoy?"
                     rows="3"
@@ -147,12 +150,16 @@ function CrearPublicacion() {
                   ></Input>
                 </InputGroup>
                 <i className="text-info">Máximo 150 caracteres</i>
-                {errors.Errordescripcion.valido ? (
-                  ""
+                {errors != undefined ? (
+                  errors.Errordescripcion.valido ? (
+                    ""
+                  ) : (
+                    <span className="text-muted text-danger">
+                      {errors.Errordescripcion.mensaje}
+                    </span>
+                  )
                 ) : (
-                  <span className="text-muted text-danger">
-                    {errors.Errordescripcion.mensaje}
-                  </span>
+                  ""
                 )}
               </div>
             </div>
@@ -168,27 +175,37 @@ function CrearPublicacion() {
                     id="photo"
                     name="photo"
                     type="file"
-
                     ref={imageInputRef}
                   ></Input>
                   <i className="fas fa-camera"></i>
                 </span>
 
-                {errors.Errorfoto.valido ? (
-                  ""
+                {errors != undefined ? (
+                  errors.Errorfoto.valido ? (
+                    ""
+                  ) : (
+                    <span className="text-muted text-danger">
+                      {errors.Errorfoto.mensaje}
+                    </span>
+                  )
                 ) : (
-                  <span className="text-muted text-danger">
-                    {errors.Errorfoto.mensaje}
-                  </span>
+                  ""
                 )}
               </div>
-
-                <Link class="btn info d-inline p-2" onClick={triggerPicker}>
-                  <span role="img" aria-label="">
-                    😁
-                  </span>
-                </Link>
-
+              <Button class=" d-inline " onClick={triggerPicker}>
+                <span role="img" aria-label="">
+                  😁
+                </span>
+              </Button>
+              {emojiPickerState ? (
+                <Picker
+                  title="Pick your emoji…"
+                  emoji="point_up"
+                  onSelect={addEmoji}
+                />
+              ) : (
+                ""
+              )}
             </div>
             <div className="pull-right">
               <Button
