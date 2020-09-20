@@ -38,10 +38,10 @@ function CrearPublicacion() {
     let isError = false;
 
     if (descripcion.trim() === "") {
-      if (errors){
-      errors.Errordescripcion.valido = false;
-      errors.Errordescripcion.mensaje =
-        "(El campo descripción no puede estar vacio)";
+      if (errors) {
+        errors.Errordescripcion.valido = false;
+        errors.Errordescripcion.mensaje =
+          "(El campo descripción no puede estar vacio)";
       }
     } else {
       if (errors) errors.Errordescripcion.valido = true;
@@ -53,13 +53,13 @@ function CrearPublicacion() {
     } else {
       if (errors) errors.Errorfoto.valido = true;
     }
-if (errors){
-    if (!errors.Errordescripcion.valido || !errors.Errorfoto.valido) {
-      isError = true;
-    } else {
-      isError = false;
+    if (errors) {
+      if (!errors.Errordescripcion.valido || !errors.Errorfoto.valido) {
+        isError = true;
+      } else {
+        isError = false;
+      }
     }
-  }
 
     return isError;
   };
@@ -107,7 +107,6 @@ if (errors){
     setstate({
       descripcion: descripcion + emoji,
     });
-    console.log("jajajaja" + emoji);
   };
   return (
     <>

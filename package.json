@@ -46,6 +46,7 @@
     "react-autosuggest": "^10.0.2",
     "socket.io": "^2.3.0",
     "throttle-debounce": "^2.1.0"
+
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
