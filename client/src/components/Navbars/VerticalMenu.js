@@ -27,26 +27,57 @@ function VerticalMenu() {
                   className="rounded-circle FotoUser shadow"
                 ></img>
                 <p className="text-center">
-                 <br></br>
+                  <br></br>
                   <Badge color="primary" pill>
-                    {usuario.nombre.substr(0,16)}
+                    {usuario.nombre.substr(0, 16)}
                   </Badge>
                 </p>
               </Link>
             </NavLink>
+
             <ListGroup>
-              <ListGroupItem tag="a" to="#"  onClick={(e) => e.preventDefault()}>
+              <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
+                <Link to={"/perfil/" + usuario._id}>
+                  <i class="fas fa-user-edit"></i>
+                  Mi perfil
+                </Link>
+              </ListGroupItem>
+              <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
+                <Link to="/negocios">
+                  <i class="fas fa-paw"></i>
+                  Mis mascotas
+                </Link>
+              </ListGroupItem>
+              <ListGroupItem
+                tag="a"
+                to="#AnimalFriend"
+                onClick={(e) => e.preventDefault()}
+              >
+                <Link to="/recordatorios">
+                <i class="fas fa-clock"></i>
+                  Recordatorios
+                </Link>
+              </ListGroupItem>
+            </ListGroup>
+
+            <ListGroup>
+              <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
                 <Link to="/eventos">
                   <i className="fas fa-calendar-alt"></i>
                   Eventos
                 </Link>
               </ListGroupItem>
-              <ListGroupItem tag="a" to="#"  onClick={(e) => e.preventDefault()}>
-              <Link to="/negocios">
-                <i className="fas fa-store-alt"></i>
-                Negocios </Link>
+              <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
+                <Link to="/negocios">
+                  <i className="fas fa-store-alt"></i>
+                  Negocios{" "}
+                </Link>
               </ListGroupItem>
-              <ListGroupItem tag="a" to="#AnimalFriend" onClick={(e) => e.preventDefault()}>
+              <ListGroupItem
+                tag="a"
+                to="#AnimalFriend"
+                onClick={(e) => e.preventDefault()}
+              >
                 <Link to="/anuncios">
                   <i className="fas fa-map-marker-alt"></i>
                   Anuncios

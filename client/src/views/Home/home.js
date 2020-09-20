@@ -47,14 +47,11 @@ function Home() {
               <VerticalMenu></VerticalMenu>
               <ListMascotas></ListMascotas>
             </Col>
-            <Col md="6">
+            <Col md="9">
               <CrearPublicacion></CrearPublicacion>
               <PostList publicaciones={publicaciones} next={allpost}></PostList>
             </Col>
-            <Col md="3">
 
-              <ListRecordatorios></ListRecordatorios>
-            </Col>
           </Row>
         </Container>
         <DefaultFooter></DefaultFooter>

@@ -21,7 +21,7 @@ function ItemMascota(props) {
         </CardSubtitle>
         <Link
           to={"/perfil-mascota/" + props.mascota._id}
-          className="btn btn-info"
+          className="btn btn-info btn-sm"
         >
           <i className="far fa-eye"></i>
         </Link>

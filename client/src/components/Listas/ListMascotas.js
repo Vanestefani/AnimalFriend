@@ -23,7 +23,7 @@ function ListMascotas() {
           <CardHeader>
             <CardTitle className="title-up">
               <center>
-                <h3>Mis mascotas</h3>
+                <h3><b>Mis mascotas</b></h3>
               </center>
             </CardTitle>
           </CardHeader>
