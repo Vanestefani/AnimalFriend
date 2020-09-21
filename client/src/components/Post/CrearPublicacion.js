@@ -49,7 +49,6 @@ function CrearPublicacion() {
     if (photo === null || photo === "") {
       if (errors) errors.Errorfoto.valido = false;
       errors.Errorfoto.mensaje = "(Debe subir una imagen)";
-      console.log("error imagen");
     } else {
       if (errors) errors.Errorfoto.valido = true;
     }
@@ -92,6 +91,9 @@ function CrearPublicacion() {
       });
       guardararchivophoto(null);
       imageInputRef.current.value = "";
+    } else {
+      setFirstFocus(true);
+      validate();
     }
   };
   //emojis
