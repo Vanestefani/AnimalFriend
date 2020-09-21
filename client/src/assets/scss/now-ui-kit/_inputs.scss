@@ -301,7 +301,7 @@ textarea.form-control{
 }
 
 // Input files - hide actual input - requires specific markup in the sample.
-.form-group input[type=file] {
+.form-group input[type=file]:hove {
   opacity: 0;
   position: absolute;
   top: 0;
@@ -311,4 +311,8 @@ textarea.form-control{
   width: 100%;
   height: 100%;
   z-index: 100;
+}
+input[type=file], /* FF, IE7+, chrome (except button) */
+input[type=file]::-webkit-file-upload-button { /* chromes and blink button */
+    cursor: pointer;
 }
