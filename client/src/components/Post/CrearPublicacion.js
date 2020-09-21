@@ -193,7 +193,7 @@ function CrearPublicacion() {
                   ""
                 )}
               </div>
-              <button
+              <butto
                 class="d-inline "
                 onClick={triggerPicker}
                 class="btn btn-primary btn-floating"
@@ -201,7 +201,7 @@ function CrearPublicacion() {
                 <span role="img" aria-label="">
                   😁
                 </span>
-              </button>
+              </butto>
               {emojiPickerState ? (
                 <Picker
                   title="Pick your emoji…"

@@ -152,11 +152,11 @@ function Post(props) {
               value={posteditor.texto}
               onChange={handleChange}
             />
-            <Button class="d-inline " onClick={triggerPicker}>
+            <button  class="btn btn-primary btn-floating" onClick={triggerPicker}>
               <span role="img" aria-label="">
                 😁
               </span>
-            </Button>
+            </button>
             {emojiPickerState ? (
               <Picker
                 title="Pick your emoji…"
@@ -166,7 +166,7 @@ function Post(props) {
             ) : (
               ""
             )}
-            <Button onClick={onSubmitPost} variant="contained" color="primary">
+            <Button className="pull-right" onClick={onSubmitPost} variant="contained" color="primary">
               Editar
             </Button>
           </Form>
