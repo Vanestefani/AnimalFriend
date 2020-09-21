@@ -238,8 +238,9 @@ function Post(props) {
             onClick={toggle}
             className={"ml-1 " + (isOpen ? "btn btn-info" : "btn-success")}
           >
-            <i className="fas fa-comment-alt"></i>
+            <i className="fas fa-comment-alt"></i> Ver comentarios
           </Button>
+
         </CardFooter>
         <Collapse isOpen={isOpen}>
           <Container>

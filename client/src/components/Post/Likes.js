@@ -43,15 +43,15 @@ function Likes(props) {
     <>
       <div className="pull-left">
         {values.like ? (
-          <Button size="sm" color="danger" onClick={clicklike}>
+          <button size="sm" color="danger"    class="btn btn-danger btn-floating" onClick={clicklike}>
             <i className="fas fa-bone"></i>{" "}
-          </Button>
+          </button>
         ) : (
-          <Button size="sm" color="neutral" onClick={clicklike}>
+          <button size="sm" color="neutral"    class="btn btn-neutral btn-floating" onClick={clicklike}>
             <i color="" className="fas fa-bone"></i>
-          </Button>
+          </button>
         )}
-        {values.likes}
+      <span>  {values.likes}</span>
       </div>
     </>
   );

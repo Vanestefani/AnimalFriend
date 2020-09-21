@@ -319,3 +319,15 @@ input[type=file]::-webkit-file-upload-button { /* chromes and blink button */
 input[type=file]{
     background-color: $primary-color;
 }
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.btn-floating {
+    width: 2.3125rem;
+    height: 2.3125rem;
+}
+.btn-floating, [class*=btn-outline-].btn-floating {
+    border-radius: 50%;
+    padding: 0;
+    position: relative;
+}
