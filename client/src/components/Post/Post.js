@@ -112,9 +112,8 @@ function Post(props) {
   };
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  //emojis
+  //emojis publicacion
   const [emojiPickerState, SetEmojiPicker] = useState(false);
-
   function triggerPicker(event) {
     event.preventDefault();
 
@@ -125,6 +124,19 @@ function Post(props) {
     setEditarPost({
       ...posteditor,
       texto: posteditor.texto + emoji,
+    });
+  };
+  //emojis comentarios
+  const [emojiPickerComentaState, SetEmojiPickerComenta] = useState(false);
+  function triggerPickerComenta(event) {
+    event.preventDefault();
+    SetEmojiPickerComenta(!emojiPickerComentaState);
+  }
+  const addEmojiComentario = (e) => {
+    let emoji = e.native;
+    setcomentarios({
+      ...comentarios,
+      comentario: comentario + emoji,
     });
   };
   return (
@@ -152,21 +164,29 @@ function Post(props) {
               value={posteditor.texto}
               onChange={handleChange}
             />
-            <button  class="btn btn-primary btn-floating" onClick={triggerPicker}>
+            <button
+              class="btn btn-primary btn-floating"
+              onClick={triggerPicker}
+            >
               <span role="img" aria-label="">
                 😁
               </span>
             </button>
             {emojiPickerState ? (
               <Picker
-                title="Pick your emoji…"
+                title="Elige un emoticon"
                 emoji="point_up"
                 onSelect={addEmoji}
               />
             ) : (
               ""
             )}
-            <Button className="pull-right" onClick={onSubmitPost} variant="contained" color="primary">
+            <Button
+              className="pull-right"
+              onClick={onSubmitPost}
+              variant="contained"
+              color="primary"
+            >
               Editar
             </Button>
           </Form>
@@ -240,11 +260,12 @@ function Post(props) {
           >
             <i className="fas fa-comment-alt"></i> Ver comentarios
           </Button>
-
         </CardFooter>
         <Collapse isOpen={isOpen}>
           <Container>
-            <h3 className="">Comentarios</h3>
+            <h3>
+              <b>Comentarios</b>
+            </h3>
 
             {props.publicacion.comments.map((record) => {
               return (
@@ -296,7 +317,26 @@ function Post(props) {
                 ) : (
                   ""
                 )}
-                <Button onClick={onSubmitcomentario}>Comentar</Button>
+                <button
+                  class="btn btn-primary btn-floating"
+                  onClick={triggerPickerComenta}
+                >
+                  <span role="img" aria-label="">
+                    😁
+                  </span>
+                </button>
+                {emojiPickerComentaState ? (
+                  <Picker
+                    title="Elige un emoticon"
+                    emoji="point_up"
+                    onSelect={addEmojiComentario}
+                  />
+                ) : (
+                  ""
+                )}
+                <Button className="pull-right" onClick={onSubmitcomentario}>
+                  Comentar
+                </Button>
               </Form>
             </div>
           </Container>
