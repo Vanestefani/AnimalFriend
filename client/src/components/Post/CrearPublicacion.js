@@ -193,7 +193,7 @@ function CrearPublicacion() {
                   ""
                 )}
               </div>
-              <Button class=" d-inline " onClick={triggerPicker}>
+              <Button class="d-inline " onClick={triggerPicker}>
                 <span role="img" aria-label="">
                   😁
                 </span>

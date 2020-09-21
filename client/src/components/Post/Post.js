@@ -197,7 +197,7 @@ function Post(props) {
         <CardBody>
           <Container>
             <p>{props.publicacion.descripcion}</p>
-            <img width="400px" alt="..." src={props.publicacion.imagen}></img>
+            <img width="800px" alt="..." src={props.publicacion.imagen}></img>
           </Container>
         </CardBody>
         <CardFooter>
