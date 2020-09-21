@@ -12,10 +12,13 @@ import SubMenu from "../../components/Navbars/SubMenu";
 import RecordatoriosContex from "../../context/recordatorios/recordatoriosContex";
 import AuthContext from "../../context/autenticacion/authContext";
 import FormRecordatorio from "../../components/Recordatorios/form/FormRecordatorio";
-
+import MascotasContext from "../../context/mascotas/mascotasContext";
 function Recordatorio() {
+    //context
   const RContext = useContext(RecordatoriosContex);
 
+  const mContext = useContext(MascotasContext);
+  const { mascotas, mascotasUsuario } = mContext;
   const {
     addRecordatorios,
     recordatorios,
@@ -34,7 +37,8 @@ function Recordatorio() {
   });
   useEffect(() => {
     recordatoriosUsuario();
-  }, []);
+    mascotasUsuario();
+  }, [mascotasUsuario,recordatoriosUsuario]);
   const [Frecordatorio, guardarrecordatorio] = useState({
     descripcion: "",
     nombre: "",
@@ -43,6 +47,15 @@ function Recordatorio() {
     fecha_expiracion: "",
     notas: "",
     completo: false,
+    errors: {
+      Errordescripcion: { valido: true, mensaje: "" },
+      Errornombre: { valido: true, mensaje: "" },
+      Errortipo: { valido: true, mensaje: "" },
+      Errormascota: { valido: true, mensaje: "" },
+      Errorfecha_expiracion: { valido: true, mensaje: "" },
+      Errornotas: { valido: true, mensaje: "" },
+      Errorcompleto: { valido: true, mensaje: "" },
+    },
   });
   const {
     descripcion,
@@ -52,6 +65,7 @@ function Recordatorio() {
     fecha_expiracion,
     notas,
     completo,
+    errors,
   } = Frecordatorio;
   const onChange = (e) => {
     guardarrecordatorio({
@@ -63,15 +77,93 @@ function Recordatorio() {
   const [errores, seterrores] = useState(false);
   const authContext = useContext(AuthContext);
   const { usuario } = authContext;
+
+  //validar
+
+  const validate = () => {
+    let isError = false;
+    // El pattern solo letras
+    const pattern = new RegExp(
+      "^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ']+[s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ'])+[s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ'])?$"
+    );
+    //El pattern contraseña 1As20092
+    const pattern2 = new RegExp(
+      "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
+    );
+    const pattern3 = new RegExp(
+      "^[a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1}([a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1})*[a-z0-9]@[a-z0-9][-.]{0,1}([a-z][-.]{0,1})*[a-z0-9].[a-z0-9]{1,}([.-]{0,1}[a-z]){0,}[a-z0-9]{0,}$"
+    );
+    if (Frecordatorio.nombre.length < 3) {
+      Frecordatorio.errors.Errornombre.valido = false;
+      Frecordatorio.errors.Errornombre.mensaje =
+        "(El campo nombre no puede estar vacio y debe tener al menos tres caracteres)";
+    } else {
+      Frecordatorio.errors.Errornombre.valido = true;
+    }
+    if (Frecordatorio.descripcion.length < 3) {
+      Frecordatorio.errors.Errordescripcion.valido = false;
+      Frecordatorio.errors.Errordescripcion.mensaje =
+        "(El campo descripción no puede estar vacio y debe tener al menos tres caracteres)";
+    } else {
+      Frecordatorio.errors.Errordescripcion.valido = true;
+    }
+    if (Frecordatorio.tipo.length < 3) {
+      Frecordatorio.errors.Errortipo.valido = false;
+      Frecordatorio.errors.Errortipo.mensaje =
+        "(El campo tipo no puede estar vacio y debe tener al menos tres caracteres)";
+    } else {
+      Frecordatorio.errors.Errortipo.valido = true;
+    }
+    if (Frecordatorio.mascota.length < 3) {
+      Frecordatorio.errors.Errormascota.valido = false;
+      Frecordatorio.errors.Errormascota.mensaje =
+        "(El campo mascota no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errormascota.valido = true;
+    }
+    if (Frecordatorio.fecha_expiracion.length < 3) {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = false;
+      Frecordatorio.errors.Errorfecha_expiracion.mensaje =
+        "(El campo  fecha expiración no puede estar vacio )";
+    } else {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = true;
+    }
+    if (Frecordatorio.notas.length < 3) {
+      Frecordatorio.errors.Errornotas.valido = false;
+      Frecordatorio.errors.Errornotas.mensaje =
+        "(El campo  notas expiración no puede estar vacio y debe tener al menos tres caracteres)";
+    } else {
+      Frecordatorio.errors.Errornotas.valido = true;
+    }
+    if (Frecordatorio.completo.length < 0) {
+      Frecordatorio.errors.Errornotas.valido = false;
+      Frecordatorio.errors.Errornotas.mensaje =
+        "(El campo  notas expiración no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errornotas.valido = true;
+    }
+    if (
+      !Frecordatorio.errors.Errordescripcion.valido ||
+      !Frecordatorio.errors.Errornombre.valido ||
+      !Frecordatorio.errors.Errortipo.valido ||
+      !Frecordatorio.errors.Errormascota.valido ||
+      !Frecordatorio.errors.Errorfecha_expiracion.valido ||
+      !Frecordatorio.errors.Errornotas.valido ||
+      !Frecordatorio.errors.Errorcompleto.valido
+    ) {
+      isError = true;
+    } else {
+      isError = false;
+    }
+  };
+
+  //enviar
   const onSubmit = (e) => {
     e.preventDefault();
     e.target.className += " was-validated";
     let userid = usuario._id;
-
-    if (nombre === "" || tipo === "") {
-      seterrores(true);
-      console.log("esta vacio");
-    } else {
+    let err = validate();
+    if (!err) {
       let formData = new FormData();
       formData.append("descripcion", descripcion);
       formData.append("nombre", nombre);
@@ -81,9 +173,10 @@ function Recordatorio() {
       formData.append("notas", notas);
       formData.append("autor", userid);
       formData.append("completo", completo);
-
       addRecordatorios(formData);
       console.log("no esta vacio");
+    } else {
+      validate();
     }
   };
   return (
@@ -105,6 +198,7 @@ function Recordatorio() {
                   Frecordatorio={Frecordatorio}
                   onSubmit={onSubmit}
                   guardarrecordatorio={guardarrecordatorio}
+                  mascotas={mascotas}
                 ></FormRecordatorio>
                 {recordatorios.map((recordatorio) => (
                   <div>
