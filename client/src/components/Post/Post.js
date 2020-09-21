@@ -18,6 +18,8 @@ import {
   Collapse,
   Media,
 } from "reactstrap";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 import PostContext from "../../context/post/postContext";
 import AuthContext from "../../context/autenticacion/authContext";
 import Like from "./Likes";
@@ -110,6 +112,21 @@ function Post(props) {
   };
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  //emojis
+  const [emojiPickerState, SetEmojiPicker] = useState(false);
+
+  function triggerPicker(event) {
+    event.preventDefault();
+
+    SetEmojiPicker(!emojiPickerState);
+  }
+  const addEmoji = (e) => {
+    let emoji = e.native;
+    setEditarPost({
+      ...posteditor,
+      texto: posteditor.texto + emoji,
+    });
+  };
   return (
     <>
       <Modal isOpen={modalEditar} toggle={() => setModaPost(false)}>
@@ -121,7 +138,7 @@ function Post(props) {
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
-          <h2 className="title title-up">Editar Post</h2>
+          <h2 className="title title-up">Editar Publicación </h2>
         </div>
         <ModalBody>
           <Form noValidate autoComplete="off">
@@ -135,6 +152,20 @@ function Post(props) {
               value={posteditor.texto}
               onChange={handleChange}
             />
+            <Button class="d-inline " onClick={triggerPicker}>
+              <span role="img" aria-label="">
+                😁
+              </span>
+            </Button>
+            {emojiPickerState ? (
+              <Picker
+                title="Pick your emoji…"
+                emoji="point_up"
+                onSelect={addEmoji}
+              />
+            ) : (
+              ""
+            )}
             <Button onClick={onSubmitPost} variant="contained" color="primary">
               Editar
             </Button>
