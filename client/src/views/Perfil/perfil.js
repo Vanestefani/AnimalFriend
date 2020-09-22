@@ -237,7 +237,7 @@ function Perfil({ match }) {
                 </InputGroupAddon>
                 <CountryDropdown
                   className="form-control"
-                  value={fusuario.pais}
+                  value={usuarioactual.pais}
                   id="pais"
                   name="pais"
                   required
@@ -271,8 +271,8 @@ function Perfil({ match }) {
                   id="ciudad"
                   blankOptionLabel="Ningún país seleccionado"
                   defaultOptionLabel="Ahora selecciona una región"
-                  country={fusuario.pais}
-                  value={fusuario.ciudad}
+                  country={usuarioactual.pais}
+                  value={usuarioactual.ciudad}
                   onChange={onChangeCity}
                 />
               </InputGroup>
@@ -290,7 +290,7 @@ function Perfil({ match }) {
                   name="genero"
                   type="radio"
                   onChange={onChange}
-                  checked={fusuario.genero === "Femenino"}
+                  checked={usuarioactual.genero === "Femenino"}
                 ></Input>
                 <span className="form-check-sign"></span>
                 Femenino
@@ -303,7 +303,7 @@ function Perfil({ match }) {
                   id="genero"
                   name="genero"
                   type="radio"
-                  checked={fusuario.genero === "Masculino"}
+                  checked={usuarioactual.genero === "Masculino"}
                   onChange={onChange}
                 ></Input>
                 <span className="form-check-sign"></span>
