@@ -13,7 +13,7 @@ import {
   Input,
   InputGroupAddon,
   InputGroupText,
-  InputGroup,
+  InputGroup,Label
 } from "reactstrap";
 
 import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
@@ -27,7 +27,7 @@ import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores"
 
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
-
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 function Perfil({ match }) {
   const mContext = useContext(MascotasContext);
 
@@ -56,6 +56,29 @@ function Perfil({ match }) {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+  //select paises y ciudades
+  const [seleccion, setStateSelect] = useState({
+    country: "",
+    region: "",
+  });
+  const { country, region } = seleccion;
+  const selectCountry = (val) => {
+    setStateSelect({ country: val });
+  };
+
+  const selectRegion = (val) => {
+    setStateSelect({ region: val });
+  };
+
+  //errores validacion
+  const [errores, setErrores] = useState({
+    Errornombre: { valido: true, mensaje: "" },
+    Errorbio: { valido: true, mensaje: "" },
+    Errorpais: { valido: true, mensaje: "" },
+    Errorciudad: { valido: true, mensaje: "" },
+    Errorgenero: { valido: true, mensaje: "" },
+  });
+
   const postContext = useContext(PostContext);
 
   const { publicaciones, getpost } = postContext;
@@ -68,7 +91,7 @@ function Perfil({ match }) {
   const [showfollow, setShowFollow] = useState({
     follow: usuario.following.includes(usuarioactual._id),
   });
-  console.log(showfollow.follow);
+
   const follow = (e) => {
     e.preventDefault();
     seguir({ userId: usuarioactual._id });
@@ -76,7 +99,6 @@ function Perfil({ match }) {
       ...showfollow,
       follow: false,
     });
-    console.log(showfollow.follow);
   };
   const unfollow = (e) => {
     e.preventDefault();
@@ -85,7 +107,6 @@ function Perfil({ match }) {
       ...showfollow,
       follow: true,
     });
-    console.log(showfollow.follow);
   };
 
   const botonSeguir = () => {
@@ -123,6 +144,9 @@ function Perfil({ match }) {
       id: userId,
       nombre: fusuario.nombre,
       bio: fusuario.bio,
+      pais: fusuario.pais,
+      ciudad: fusuario.ciudad,
+      genero: fusuario.genero,
     });
   };
 
@@ -131,8 +155,30 @@ function Perfil({ match }) {
   const [fusuario, setfusuario] = useState({
     nombre: usuarioactual.nombre,
     bio: usuarioactual.bio,
+    pais: usuarioactual.pais,
+    ciudad: usuarioactual.ciudad,
+    genero: usuarioactual.genero,
   });
+  const onChangeCity = (e) => {
+    setfusuario({
+      ...fusuario,
+      ciudad: e,
+    });
+  };
+  const onChangeCountry = (e) => {
+    setfusuario({
+      ...fusuario,
+      pais: e,
+    });
+  };
+
   let countpost = Object.keys(publicaciones).length;
+  //focus
+  const [nombreFocus, setnombreFocus] = React.useState(false);
+  const [bioFocus, setbioFocus] = React.useState(false);
+  const [paisFocus, setpaisFocus] = React.useState(false);
+  const [ciudadFocus, setciudadFocus] = React.useState(false);
+  const [generoFocus, setgeneroFocus] = React.useState(false);
 
   return (
     <>
@@ -151,7 +197,12 @@ function Perfil({ match }) {
           <div>
             <h4>Información de usuario</h4>
             <FormGroup>
-              <InputGroup>
+              <InputGroup
+                className={
+                  "no-border input-lg" +
+                  (nombreFocus ? " input-group-focus" : "")
+                }
+              >
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
                     <i className="fas fa-user"></i>
@@ -167,6 +218,102 @@ function Perfil({ match }) {
                   required
                 ></Input>
               </InputGroup>
+            </FormGroup>
+            {!errores.Errornombre ? (
+              <span className="text-muted">{errores.Errornombre.mensaje}</span>
+            ) : (
+              ""
+            )}
+            <FormGroup>
+              <InputGroup
+                className={
+                  "no-border input-lg" + (paisFocus ? " input-group-focus" : "")
+                }
+              >
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="fab fa-font-awesome-flag"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                <CountryDropdown
+                  className="form-control"
+                  value={fusuario.pais}
+                  id="pais"
+                  name="pais"
+                  required
+                  defaultOptionLabel="Elija un país"
+                  onFocus={() => setpaisFocus(true)}
+                  onBlur={() => setpaisFocus(false)}
+                  onChange={onChangeCountry}
+                />
+              </InputGroup>
+            </FormGroup>
+            {!errores.Errorpais.valido ? (
+              <span className="text-muted">{errores.Errorpais.mensaje}</span>
+            ) : (
+              ""
+            )}
+            <FormGroup>
+              <InputGroup
+                className={
+                  "no-border input-lg" +
+                  (ciudadFocus ? " input-group-focus" : "")
+                }
+              >
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="fas fa-city"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                <RegionDropdown
+                  className="form-control"
+                  name="ciudad"
+                  id="ciudad"
+                  blankOptionLabel="Ningún país seleccionado"
+                  defaultOptionLabel="Ahora selecciona una región"
+                  country={fusuario.pais}
+                  value={fusuario.ciudad}
+                  onChange={onChangeCity}
+                />
+              </InputGroup>
+              {!errores.Errorciudad.valido ? (
+                <span className="text-muted">{errores.Errorciudad.mensaje}</span>
+              ) : (
+                ""
+              )}
+            </FormGroup>
+            <FormGroup check className="form-check-radio">
+              <Label check>
+                <Input
+                  value="Femenino"
+                  id="genero"
+                  name="genero"
+                  type="radio"
+                  onChange={onChange}
+                  checked={fusuario.genero === "Femenino"}
+                ></Input>
+                <span className="form-check-sign"></span>
+                Femenino
+              </Label>
+            </FormGroup>
+            <FormGroup check className="form-check-radio">
+              <Label check>
+                <Input
+                  value="Masculino"
+                  id="genero"
+                  name="genero"
+                  type="radio"
+                  checked={fusuario.genero === "Masculino"}
+                  onChange={onChange}
+                ></Input>
+                <span className="form-check-sign"></span>
+                Masculino
+              </Label>
+              {!errores.Errorgenero.valido ? (
+                <span className="text-muted">{errores.Errorgenero.mensaje}</span>
+              ) : (
+                ""
+              )}
             </FormGroup>
             <Input
               type="textarea"
