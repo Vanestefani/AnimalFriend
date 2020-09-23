@@ -27,7 +27,6 @@ function FormPerfil(props) {
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
 
-
   //modal
   const [modalMascotas, setModal1] = React.useState(false);
 
@@ -69,13 +68,15 @@ function FormPerfil(props) {
                   data-background-color="blue"
                 ></Input>
               </InputGroup>
-              {!props.fusuario.errors.Errornombre.valido ? (
+              {
+                 !props.errores ?
+              !props.errores.Errornombre.valido ? (
                 <span className="text-muted">
-                  {props.fusuario.errors.Errornombre.mensaje}
+                  {props.errores.Errornombre.mensaje}
                 </span>
               ) : (
                 ""
-              )}
+              ):""}
             </FormGroup>
             <FormGroup>
               <InputGroup>
@@ -94,13 +95,15 @@ function FormPerfil(props) {
                   required
                 ></Input>
               </InputGroup>
-              {!props.fusuario.errors.Erroremail.valido ? (
+              {
+                 !props.errores ?
+              !props.errores.Erroremail.valido ? (
                 <span className="text-muted">
-                  {props.fusuario.errors.Erroremail.mensaje}
+                  {props.errores.Erroremail.mensaje}
                 </span>
               ) : (
                 ""
-              )}
+              ):""}
             </FormGroup>
             <Row>
               <Col md="6">
@@ -122,13 +125,15 @@ function FormPerfil(props) {
                     ></Input>
                   </InputGroup>
                   <InputGroup>
-                    {!props.fusuario.errors.Errorpassword.valido ? (
+                    {
+                       !props.errores ?
+                    !props.errores.Errorpassword.valido ? (
                       <span className="text-muted">
-                        {props.fusuario.errors.Errorpassword.mensaje}
+                        {props.errores.Errorpassword.mensaje}
                       </span>
                     ) : (
                       ""
-                    )}
+                    ):""}
                   </InputGroup>
                 </FormGroup>
               </Col>
@@ -150,13 +155,15 @@ function FormPerfil(props) {
                       required
                     ></Input>
                   </InputGroup>
-                  {!props.fusuario.errors.Errorpassword2.valido ? (
+                  {
+                       !props.errores ?
+                  !props.errores.Errorpassword2.valido ? (
                     <span className="text-muted">
-                      {props.fusuario.errors.Errorpassword2.mensaje}
+                      {props.errores.Errorpassword2.mensaje}
                     </span>
                   ) : (
                     ""
-                  )}
+                  ):""}
                 </FormGroup>
               </Col>
             </Row>
@@ -180,13 +187,15 @@ function FormPerfil(props) {
                     />
                   </InputGroup>
                 </FormGroup>
-                {!props.fusuario.errors.Errorpais.valido ? (
+                {
+                   !props.errores ?
+                !props.errores.Errorpais.valido ? (
                   <span className="text-muted">
-                    {props.fusuario.errors.Errorpais.mensaje}
+                    {props.errores.Errorpais.mensaje}
                   </span>
                 ) : (
                   ""
-                )}
+                ):""}
               </Col>
               <Col md="6">
                 <FormGroup>
@@ -208,13 +217,15 @@ function FormPerfil(props) {
                       onChange={props.onChangeCity}
                     />
                   </InputGroup>
-                  {!props.fusuario.errors.Errorciudad.valido ? (
+                  {
+                     !props.errores ?
+                  !props.errores.Errorciudad.valido ? (
                     <span className="text-muted">
-                      {props.fusuario.errors.Errorciudad.mensaje}
+                      {props.errores.Errorciudad.mensaje}
                     </span>
                   ) : (
                     ""
-                  )}
+                  ):""}
                 </FormGroup>
               </Col>
             </Row>
@@ -247,13 +258,18 @@ function FormPerfil(props) {
                     <span className="form-check-sign"></span>
                     Masculino
                   </Label>
-                  {!props.usuario.errors.Errorgenero.valido ? (
+
+                  {
+                  !props.errores ?
+
+                  !props.errores.Errorgenero.valido ? (
                     <span className="text-muted">
-                      {props.usuario.errors.Errorgenero.mensaje}
+                      {props.errores.Errorgenero.mensaje}
                     </span>
                   ) : (
                     ""
-                  )}
+                  )
+                :""}
                 </FormGroup>
               </Col>
               <Col md="6"></Col>
