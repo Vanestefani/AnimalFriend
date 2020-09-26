@@ -23,7 +23,6 @@ function CrearEventos(props) {
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
-
   //FORM AÑADIR
   const [AEnventos, agregarEventos] = useState({
     titulo: "",
@@ -155,7 +154,6 @@ function CrearEventos(props) {
       formData.append("descripcion", descripcion);
       formData.append("autor", userid);
       addEventos(formData);
-      console.log("click");
     } else {
       settituloFocus(true);
 

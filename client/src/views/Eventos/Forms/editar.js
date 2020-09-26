@@ -2,12 +2,10 @@ import React, { useState, useContext } from "react";
 
 import {
   Button,
-
   Modal,
   ModalBody,
   Row,
   Col,
-
   Input,
   InputGroupAddon,
   InputGroupText,
@@ -179,7 +177,7 @@ function FormEditarEventos(props) {
           </div>
         </ModalBody>
         <div className="modal-footer">
-          <Button color="sucess"  onClick={onSubmit}>
+          <Button color="sucess" onClick={onSubmit}>
             <i className="fas fa-paper-plane"></i> Enviar
           </Button>
           <Button color="danger" type="button" onClick={() => setModal1(false)}>
