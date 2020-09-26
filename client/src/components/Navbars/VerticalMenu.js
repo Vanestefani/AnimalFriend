@@ -54,13 +54,57 @@ function VerticalMenu() {
                 onClick={(e) => e.preventDefault()}
               >
                 <Link to="/recordatorios">
-                <i class="fas fa-clock"></i>
-                  Recordatorios
+                  <i class="fas fa-clock"></i>
+                  Mis Recordatorios
+                </Link>
+              </ListGroupItem>
+              <ListGroupItem
+                tag="a"
+                to="#AnimalFriend"
+                onClick={(e) => e.preventDefault()}
+              >
+                <Link to="">
+                <i className="fas fa-map-marker-alt"></i>
+                  Mis Anuncios
+                </Link>
+              </ListGroupItem>
+              <ListGroupItem
+                tag="a"
+                to="#AnimalFriend"
+                onClick={(e) => e.preventDefault()}
+              >
+                <Link to="">
+                <i className="fas fa-store-alt"></i>
+                  Mis negocios
+                </Link>
+              </ListGroupItem>
+              <ListGroupItem
+                tag="a"
+                to="#AnimalFriend"
+                onClick={(e) => e.preventDefault()}
+              >
+                <Link to="">
+                <i class="fas fa-star"></i>
+                  Mis seguidores
+                </Link>
+              </ListGroupItem>
+              <ListGroupItem
+                tag="a"
+                to="#AnimalFriend"
+                onClick={(e) => e.preventDefault()}
+              >
+                <Link to="">
+                <i class="fas fa-user-friends"></i>
+                  A quienes sigo
                 </Link>
               </ListGroupItem>
             </ListGroup>
 
             <ListGroup>
+           <p></p>
+              <h3>
+                <center><b>Accesos directos</b></center>
+              </h3>
               <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
                 <Link to="/eventos">
                   <i className="fas fa-calendar-alt"></i>
@@ -70,7 +114,7 @@ function VerticalMenu() {
               <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
                 <Link to="/negocios">
                   <i className="fas fa-store-alt"></i>
-                  Negocios{" "}
+                  Negocios
                 </Link>
               </ListGroupItem>
               <ListGroupItem
@@ -82,6 +126,7 @@ function VerticalMenu() {
                   <i className="fas fa-map-marker-alt"></i>
                   Anuncios
                 </Link>
+
               </ListGroupItem>
             </ListGroup>
           </Nav>

@@ -45,7 +45,7 @@ function Home() {
           <Row>
             <Col md="3">
               <VerticalMenu></VerticalMenu>
-              <ListMascotas></ListMascotas>
+
             </Col>
             <Col md="9">
               <CrearPublicacion></CrearPublicacion>
