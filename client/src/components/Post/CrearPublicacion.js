@@ -74,7 +74,7 @@ function CrearPublicacion() {
     e.preventDefault();
     const err = validate();
     if (!err) {
-      console.log(!err);
+
       let userid = usuario._id;
 
       let formData = new FormData();
