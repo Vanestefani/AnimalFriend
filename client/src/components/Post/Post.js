@@ -40,10 +40,15 @@ function Post(props) {
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
   };
+//errores
+const [errores, setError] = useState({
+  Errordescripcion: { valido: true, mensaje: "" }
+});
 
   const [like, setLike] = useState({
-    count: 0,
+    count: 0
   });
+
   const [modalEditar, setModaPost] = useState(false);
   const [posteditor, setEditarPost] = useState({
     texto: props.publicacion.descripcion,
@@ -77,6 +82,22 @@ function Post(props) {
     }
     return isError;
   };
+  //validar editar publicacion
+  const validatePublicacion = () => {
+    let isError = false;
+    if (posteditor.texto.trim() == "") {
+      errores.Errordescripcion.valido = false;
+      errores.Errordescripcion.mensaje = "(El campo  no puede estar vacio)";
+    } else {
+      errores.Errordescripcion.valido = true;
+    }
+    if (!errores.Errordescripcion.valido) {
+      isError = true;
+    } else {
+      isError = false;
+    }
+    return isError;
+  };
   const handleChangeCometario = (e) => {
     setcomentarios({
       ...comentarios,
@@ -98,17 +119,26 @@ function Post(props) {
           Errorcomentario: { valido: true, mensaje: "" },
         },
       });
+    }  else {
+      lastFocus(true);
+      validate();
     }
   };
   const onSubmitPost = (e) => {
     let postId = props.publicacion._id;
     e.preventDefault();
-
+    let err = validatePublicacion();
+    if (!err) {
     actualizarPost({
       descripcion: posteditor.texto,
       postId: postId,
     });
     setModaPost(false);
+  }
+  else {
+    setFirstFocus(true);
+    validatePublicacion();
+  }
   };
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -139,6 +169,9 @@ function Post(props) {
       comentario: comentario + emoji,
     });
   };
+  const [firstFocus, setFirstFocus] = React.useState(false);
+  const [lastFocus, setLastFocus] = React.useState(false);
+
   return (
     <>
       <Modal isOpen={modalEditar} toggle={() => setModaPost(false)}>
@@ -155,15 +188,33 @@ function Post(props) {
         <ModalBody>
           <Form noValidate autoComplete="off">
             <Input
+              className={
+                errores != undefined
+                ?    errores.Errordescripcion.valido
+                  ? ""
+                  : "is-invalid form-control-danger form-control"
+                : ""}
               type="textarea"
               multiline
               margin="normal"
               rowsMax="5"
               name="texto"
               id="texto"
+              onFocus={() => setFirstFocus(true)}
+              onBlur={() => setFirstFocus(false)}
               value={posteditor.texto}
               onChange={handleChange}
             />
+
+                {
+                 errores != undefined ?
+                !errores.Errordescripcion.valido ? (
+                  <span className=" container text-muted">
+                    { errores.Errordescripcion.mensaje}
+                  </span>
+                ) : (
+                  ""
+                ): ""}
             <button
               class="btn btn-primary btn-floating"
               onClick={triggerPicker}
@@ -297,10 +348,11 @@ function Post(props) {
               <Form>
                 <Input
                   className={
+                    errors != undefined ?
                     errors.Errorcomentario.valido
                       ? ""
                       : "is-invalid form-control-danger form-control"
-                  }
+                  : " "}
                   placeholder="Comparte tu opinion"
                   onFocus
                   rows="3"
@@ -308,15 +360,19 @@ function Post(props) {
                   value={comentario}
                   onChange={handleChangeCometario}
                   type="textarea"
+                  onFocus={() => setLastFocus(true)}
+                  onBlur={() => setLastFocus(false)}
                 ></Input>
                 <br></br>
-                {!errors.Errorcomentario.valido ? (
+                {
+                 errors != undefined ?
+                !errors.Errorcomentario.valido ? (
                   <span className=" container text-muted">
                     {errors.Errorcomentario.mensaje}
                   </span>
                 ) : (
                   ""
-                )}
+                ):""}
                 <button
                   class="btn btn-primary btn-floating"
                   onClick={triggerPickerComenta}
