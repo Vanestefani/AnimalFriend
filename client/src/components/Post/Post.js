@@ -120,7 +120,7 @@ const [errores, setError] = useState({
         },
       });
     }  else {
-      lastFocus(true);
+      setLastFocus(true);
       validate();
     }
   };
