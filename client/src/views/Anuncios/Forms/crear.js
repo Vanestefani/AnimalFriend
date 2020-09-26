@@ -141,7 +141,12 @@ function CrearAnuncios(props) {
         </div>
         <ModalBody>
           <div>
-            <h4>Información de anuncio</h4>
+            <h4>
+              <center>
+                <b>Información de anuncio</b>
+              </center>
+            </h4>
+            <p>Titulo</p>
             <InputGroup
               className={
                 errors.titulo.valido
@@ -151,7 +156,7 @@ function CrearAnuncios(props) {
             >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i className="fas fa-play"></i>
+                  <i class="fas fa-edit"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -163,13 +168,13 @@ function CrearAnuncios(props) {
                 defaultValue={AAnuncios.titulo}
                 required
               ></Input>
-              {!errors.titulo.valido ? (
-                <span className="text-muted">{errors.titulo.mensaje}</span>
-              ) : (
-                ""
-              )}
             </InputGroup>
-
+            {!errors.titulo.valido ? (
+              <span className="text-muted">{errors.titulo.mensaje}</span>
+            ) : (
+              ""
+            )}
+            <p>Categoria</p>
             <InputGroup
               className={
                 errors.categoria.valido
@@ -179,7 +184,7 @@ function CrearAnuncios(props) {
             >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i className="fab fa-microsoft"></i>
+                  <i class="fas fa-clone"></i>
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -199,13 +204,13 @@ function CrearAnuncios(props) {
                 </option>
                 <option value="Emparejar">Emparejar</option>
               </Input>
-              {!errors.categoria.valido ? (
-                <span className="text-muted">{errors.categoria.mensaje}</span>
-              ) : (
-                ""
-              )}
             </InputGroup>
-
+            {!errors.categoria.valido ? (
+              <span className="text-muted">{errors.categoria.mensaje}</span>
+            ) : (
+              ""
+            )}
+            <p> Mascota</p>
             <InputGroup
               className={
                 errors.mascota.valido
@@ -234,13 +239,13 @@ function CrearAnuncios(props) {
                   </option>
                 ))}
               </Input>
-              {!errors.mascota.valido ? (
-                <span className="text-muted">{errors.mascota.mensaje}</span>
-              ) : (
-                ""
-              )}
             </InputGroup>
-
+            {!errors.mascota.valido ? (
+              <span className="text-muted">{errors.mascota.mensaje}</span>
+            ) : (
+              ""
+            )}
+            <p> Descripción</p>
             <Input
               className={
                 errors.descripcion.valido
@@ -262,6 +267,7 @@ function CrearAnuncios(props) {
             )}
             <Row>
               <Col md="6">
+                <p> Portada</p>
                 <Input
                   className={
                     errors.Errorfoto.valido
