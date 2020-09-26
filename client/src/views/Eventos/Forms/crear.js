@@ -110,7 +110,7 @@ function CrearEventos(props) {
       if (errores) {
         errores.ErrorAarchivoImagen.valido = false;
         errores.ErrorAarchivoImagen.mensaje =
-          "(El campo imagen no puede estar vacio)";
+          "(El campo portada no puede estar vacio)";
       }
     } else {
       if (errores) errores.ErrorAarchivoImagen.valido = true;
@@ -182,8 +182,11 @@ function CrearEventos(props) {
         <ModalBody>
           <div>
             <h4>
-              <center>Información de evento</center>
+              <center>
+                <b>Información de evento</b>
+              </center>
             </h4>
+            <p>Titulo</p>
             <InputGroup
               className={
                 "no-border input-lg" + (tituloFocus ? " input-group-focus" : "")
@@ -224,6 +227,7 @@ function CrearEventos(props) {
             ) : (
               ""
             )}
+            <p>Categoria</p>
             <InputGroup
               className={
                 "no-border input-lg" +
@@ -271,6 +275,8 @@ function CrearEventos(props) {
             ) : (
               ""
             )}
+            <p>Fecha inicio</p>
+
             <InputGroup
               className={
                 errores != undefined
@@ -315,6 +321,8 @@ function CrearEventos(props) {
             ) : (
               ""
             )}
+            <p>Fecha finalización</p>
+
             <InputGroup
               className={
                 "no-border input-lg" +
@@ -356,6 +364,8 @@ function CrearEventos(props) {
             ) : (
               ""
             )}
+            <p> Descripción</p>
+
             <Input
               className={
                 errores != undefined
@@ -387,6 +397,8 @@ function CrearEventos(props) {
             )}
             <Row>
               <Col md="6">
+                <p>Portada</p>
+
                 <Input
                   className={
                     errores != undefined
@@ -403,17 +415,17 @@ function CrearEventos(props) {
                   defaultValue={AarchivoImagen}
                   ref={imageInputRef}
                 ></Input>
-                  {errores != undefined ? (
-              errores.ErrorAarchivoImagen.valido ? (
-                ""
-              ) : (
-                <span className="text-muted text-danger">
-                  {errores.ErrorAarchivoImagen.mensaje}
-                </span>
-              )
-            ) : (
-              ""
-            )}
+                {errores != undefined ? (
+                  errores.ErrorAarchivoImagen.valido ? (
+                    ""
+                  ) : (
+                    <span className="text-muted text-danger">
+                      {errores.ErrorAarchivoImagen.mensaje}
+                    </span>
+                  )
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
           </div>
