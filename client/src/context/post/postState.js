@@ -61,13 +61,13 @@ const PostState = (props) => {
       });
     }
   };
-  const allpost = async () => {
+  const allpost = async (usuario) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get("/api/post/allpost");
+      const respuesta = await clienteAxios.get(`/api/post/getsubpost/${usuario}`);
 
       dispatch({
         type: GET_POST,
@@ -85,7 +85,7 @@ const PostState = (props) => {
   };
   const getpost = async (postId) => {
     const token = localStorage.getItem("token");
-    console.log(postId);
+
     if (token) {
       tokenAuth(token);
     }

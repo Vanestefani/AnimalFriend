@@ -8,7 +8,7 @@ const upload = multer().single("imagen");
 router.post("/addPost", checkAuth, validate, upload, postController.createPost);
 router.get("/allpost", checkAuth, validate, postController.allpost);
 
-router.get("/getsubpost", checkAuth, validate, postController.allpost);
+router.get("/getsubpost/:usuario", checkAuth, validate, postController.getsubpost);
 router.get("/mypost/:postid", checkAuth, validate, postController.postbyuser);
 
 router.put("/like", checkAuth, validate, postController.like);

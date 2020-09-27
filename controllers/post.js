@@ -29,6 +29,7 @@ exports.createPost = async (req, res) => {
 };
 exports.allpost = async (req, res) => {
   try {
+
     Post.find()
       .populate("autor", "_id nombre fotoPerfil")
       .populate("comments.autor", "_id nombre fotoPerfil")
@@ -45,8 +46,10 @@ exports.allpost = async (req, res) => {
 };
 exports.getsubpost = async (req, res) => {
   try {
+    let following =  req.user.following;
+
     // if postedBy in following
-    Post.find({ autor: { $in: req.user.following } })
+    Post.find({ autor: { $in: following } })
       .populate("autor", "_id nombre fotoPerfil")
       .populate("comments.autor", "_id nombre fotoPerfil")
       .sort("-fecha_creacion")

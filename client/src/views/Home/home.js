@@ -9,24 +9,28 @@ import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import PostContext from "../../context/post/postContext";
 import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/autenticacion/authContext";
 
 import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 function Home() {
   const postContext = useContext(PostContext);
   const alertaContext = useContext(AlertaContext);
+  const AContext = useContext(AuthContext);
   const {  mostrarAlerta } = alertaContext;
+  const {
 
+    usuario
+  } = AContext;
   const { allpost, mensaje, publicaciones } = postContext;
   // Obtener proyectos cuando carga el componente
+  console.log(usuario._id);
   useEffect(() => {
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);
     }
-    allpost();
-  }, [mensaje]);
-  useEffect(() => {
-    allpost();
-  }, []);
+    allpost(usuario._id);
+  }, [mensaje,usuario]);
+
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
