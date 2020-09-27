@@ -25,7 +25,7 @@ import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
 import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores";
-
+import Editar from "./Form/editar";
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
@@ -183,165 +183,6 @@ function Perfil({ match }) {
 
   return (
     <>
-      <Modal isOpen={modalMascotas} toggle={() => setModal1(false)}>
-        <div className="modal-header justify-content-center">
-          <button
-            className="close"
-            type="button"
-            onClick={() => setModal1(false)}
-          >
-            <i className="now-ui-icons ui-1_simple-remove"></i>
-          </button>
-          <h2 className="title title-up">Datos personales</h2>
-        </div>
-        <ModalBody>
-          <div>
-            <h4>Información de usuario</h4>
-            <FormGroup>
-              <InputGroup
-                className={
-                  "no-border input-lg" +
-                  (nombreFocus ? " input-group-focus" : "")
-                }
-              >
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="fas fa-user"></i>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  placeholder="Nombre completo"
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  defaultValue={usuarioactual.nombre}
-                  value={fusuario.nombre}
-                  onChange={onChange}
-                  required
-                ></Input>
-              </InputGroup>
-            </FormGroup>
-            {!errores.Errornombre ? (
-              <span className="text-muted">{errores.Errornombre.mensaje}</span>
-            ) : (
-              ""
-            )}
-            <FormGroup>
-              <InputGroup
-                className={
-                  "no-border input-lg" + (paisFocus ? " input-group-focus" : "")
-                }
-              >
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="fab fa-font-awesome-flag"></i>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <CountryDropdown
-                  className="form-control"
-                  value={usuarioactual.pais}
-                  id="pais"
-                  name="pais"
-                  required
-                  defaultOptionLabel="Elija un país"
-                  onFocus={() => setpaisFocus(true)}
-                  onBlur={() => setpaisFocus(false)}
-                  onChange={onChangeCountry}
-                />
-              </InputGroup>
-            </FormGroup>
-            {!errores.Errorpais.valido ? (
-              <span className="text-muted">{errores.Errorpais.mensaje}</span>
-            ) : (
-              ""
-            )}
-            <FormGroup>
-              <InputGroup
-                className={
-                  "no-border input-lg" +
-                  (ciudadFocus ? " input-group-focus" : "")
-                }
-              >
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="fas fa-city"></i>
-                  </InputGroupText>
-                </InputGroupAddon>
-                <RegionDropdown
-                  className="form-control"
-                  name="ciudad"
-                  id="ciudad"
-                  blankOptionLabel="Ningún país seleccionado"
-                  defaultOptionLabel="Ahora selecciona una región"
-                  country={usuarioactual.pais}
-                  value={usuarioactual.ciudad}
-                  onChange={onChangeCity}
-                />
-              </InputGroup>
-              {!errores.Errorciudad.valido ? (
-                <span className="text-muted">
-                  {errores.Errorciudad.mensaje}
-                </span>
-              ) : (
-                ""
-              )}
-            </FormGroup>
-            <FormGroup check className="form-check-radio">
-              <Label check>
-                <Input
-                  value="Femenino"
-                  id="genero"
-                  name="genero"
-                  type="radio"
-                  onChange={onChange}
-                  checked={usuarioactual.genero === "Femenino"}
-                ></Input>
-                <span className="form-check-sign"></span>
-                Femenino
-              </Label>
-            </FormGroup>
-            <FormGroup check className="form-check-radio">
-              <Label check>
-                <Input
-                  value="Masculino"
-                  id="genero"
-                  name="genero"
-                  type="radio"
-                  checked={usuarioactual.genero === "Masculino"}
-                  onChange={onChange}
-                ></Input>
-                <span className="form-check-sign"></span>
-                Masculino
-              </Label>
-              {!errores.Errorgenero.valido ? (
-                <span className="text-muted">
-                  {errores.Errorgenero.mensaje}
-                </span>
-              ) : (
-                ""
-              )}
-            </FormGroup>
-            <Input
-              type="textarea"
-              row="3"
-              id="bio"
-              name="bio"
-              defaultValue={usuarioactual.bio}
-              onChange={onChange}
-              placeholder="Sobre ti"
-            ></Input>
-          </div>
-        </ModalBody>
-        <div className="modal-footer">
-          <Button color="sucess" type="button" onClick={onSubmit}>
-            <i className="fas fa-paper-plane"></i> Enviar
-          </Button>
-          <Button color="danger" type="button" onClick={() => setModal1(false)}>
-            Cerrar
-          </Button>
-        </div>
-      </Modal>
-
       <ScrollNavbar />
       <div className="wrapper ">
         <ProfilePageHeader
@@ -352,9 +193,33 @@ function Perfil({ match }) {
           <Container>
             <div className="button-container">
               {usuarioactual._id === usuario._id ? (
-                <Button small onClick={() => setModal1(true)}>
-                  <i className="fas fa-plus"></i>Editar
-                </Button>
+                <Editar
+                  generoFocus={generoFocus}
+                  setgeneroFocus={setgeneroFocus}
+                  ciudadFocus={ciudadFocus}
+                  setciudadFocus={setciudadFocus}
+                  paisFocus={paisFocus}
+                  setpaisFocus={setpaisFocus}
+                  bioFocus={bioFocus}
+                  setbioFocus={setbioFocus}
+                  nombreFocus={nombreFocus}
+                  setnombreFocus={setnombreFocus}
+                  onChangeCountry={onChangeCountry}
+                  onChangeCity={onChangeCity}
+                  modalMascotas={modalMascotas}
+                  setModal1={setModal1}
+                  onSubmit={onSubmit}
+                  onChange={onChange}
+                  errores={errores}
+                  setErrores={setErrores}
+                  selectRegion={selectRegion}
+                  selectCountry={selectCountry}
+                  region={region}
+                  country={country}
+                  usuarioactual={usuarioactual}
+                  fusuario={fusuario}
+
+                ></Editar>
               ) : (
                 botonSeguir()
               )}
