@@ -9,6 +9,8 @@ import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
 import SubMenu from "../../components/Navbars/SubMenu";
+import CalendarioGrande from "../../components/Calendario/CalendarioGrande";
+
 import RecordatoriosContex from "../../context/recordatorios/recordatoriosContex";
 import AuthContext from "../../context/autenticacion/authContext";
 import FormRecordatorio from "../../components/Recordatorios/form/FormRecordatorio";
@@ -191,6 +193,7 @@ function Recordatorio() {
             </Col>
             <Col md="9">
               <SubMenu></SubMenu>
+              <CalendarioGrande></CalendarioGrande>
               <Card>
                 <h2>Recordatorios</h2>
                 <FormRecordatorio
