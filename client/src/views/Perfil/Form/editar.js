@@ -22,7 +22,6 @@ import {
 } from "react-country-region-selector";
 import "react-image-crop/dist/ReactCrop.css";
 function FormPerfil(props) {
-
   const [modalMascotas, setModal1] = React.useState(false);
 
   return (
@@ -31,7 +30,7 @@ function FormPerfil(props) {
         <i className="fas fa-plus"></i>Editar
       </Button>
 
-      <Modal isOpen={props.modalMascotas} toggle={() =>props.setModal1(false)}>
+      <Modal isOpen={props.modalMascotas} toggle={() => props.setModal1(false)}>
         <div className="modal-header justify-content-center">
           <button
             className="close"
@@ -44,6 +43,7 @@ function FormPerfil(props) {
         </div>
         <ModalBody>
           <div>
+            <span>Al modificar cualquier dato aparecera el boton editar para guardar los cambios</span>
             <h4>
               <center>
                 <b>Información de usuario</b>
@@ -67,7 +67,6 @@ function FormPerfil(props) {
                   type="text"
                   id="nombre"
                   name="nombre"
-                  defaultValue={props.usuarioactual.nombre}
                   value={props.fusuario.nombre}
                   onChange={props.onChange}
                   required
@@ -75,7 +74,9 @@ function FormPerfil(props) {
               </InputGroup>
             </FormGroup>
             {!props.errores.Errornombre ? (
-              <span className="text-muted">{props.errores.Errornombre.mensaje}</span>
+              <span className="text-muted">
+                {props.errores.Errornombre.mensaje}
+              </span>
             ) : (
               ""
             )}
@@ -83,7 +84,8 @@ function FormPerfil(props) {
               <p>Pais</p>
               <InputGroup
                 className={
-                  "no-border input-lg" + (props.paisFocus ? " input-group-focus" : "")
+                  "no-border input-lg" +
+                  (props.paisFocus ? " input-group-focus" : "")
                 }
               >
                 <InputGroupAddon addonType="prepend">
@@ -93,7 +95,7 @@ function FormPerfil(props) {
                 </InputGroupAddon>
                 <CountryDropdown
                   className="form-control"
-                  value={props.usuarioactual.pais}
+                  value={props.fusuario.pais}
                   id="pais"
                   name="pais"
                   required
@@ -105,7 +107,9 @@ function FormPerfil(props) {
               </InputGroup>
             </FormGroup>
             {!props.errores.Errorpais.valido ? (
-              <span className="text-muted">{props.errores.Errorpais.mensaje}</span>
+              <span className="text-muted">
+                {props.errores.Errorpais.mensaje}
+              </span>
             ) : (
               ""
             )}
@@ -128,8 +132,8 @@ function FormPerfil(props) {
                   id="ciudad"
                   blankOptionLabel="Ningún país seleccionado"
                   defaultOptionLabel="Ahora selecciona una región"
-                  country={props.usuarioactual.pais}
-                  value={props.usuarioactual.ciudad}
+                  country={props.fusuario.pais}
+                  value={props.fusuario.ciudad}
                   onChange={props.onChangeCity}
                 />
               </InputGroup>
@@ -150,7 +154,7 @@ function FormPerfil(props) {
                   name="genero"
                   type="radio"
                   onChange={props.onChange}
-                  checked={props.usuarioactual.genero === "Femenino"}
+                  checked={props.fusuario.genero === "Femenino"}
                 ></Input>
                 <span className="form-check-sign"></span>
                 Femenino
@@ -163,7 +167,7 @@ function FormPerfil(props) {
                   id="genero"
                   name="genero"
                   type="radio"
-                  checked={props.usuarioactual.genero === "Masculino"}
+                  checked={props.fusuario.genero === "Masculino"}
                   onChange={props.onChange}
                 ></Input>
                 <span className="form-check-sign"></span>
@@ -183,19 +187,21 @@ function FormPerfil(props) {
               row="3"
               id="bio"
               name="bio"
-              defaultValue={props.usuarioactual.bio}
+              value={props.fusuario.bio}
               onChange={props.onChange}
               placeholder="Sobre ti"
             ></Input>
           </div>
         </ModalBody>
         <div className="modal-footer">
-          <Button color="sucess" type="button" onClick={props.onSubmit}>
-            <i className="fas fa-paper-plane"></i> Enviar
-          </Button>
-          <Button color="danger" type="button" onClick={() => props.setModal1(false)}>
-            Cerrar
-          </Button>
+          {props.fusuario.isDisabled ? (
+           ""
+          ) : (
+            <Button color="primary" type="button" onClick={props.onSubmit}>
+              <i className="fas fa-paper-plane"></i> Enviar
+            </Button>
+          )}
+
         </div>
       </Modal>
     </>

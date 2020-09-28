@@ -137,7 +137,9 @@ function Perfil({ match }) {
     setfusuario({
       ...fusuario,
       [e.target.name]: e.target.value,
+      isDisabled :false
     });
+
   };
   const onSubmit = (e) => {
     let userId = usuarioactual._id;
@@ -154,11 +156,12 @@ function Perfil({ match }) {
   //modal
   const [modalMascotas, setModal1] = React.useState(false);
   const [fusuario, setfusuario] = useState({
-    nombre: usuarioactual.nombre,
-    bio: usuarioactual.bio,
-    pais: usuarioactual.pais,
-    ciudad: usuarioactual.ciudad,
-    genero: usuarioactual.genero,
+    nombre: usuario.nombre,
+    bio: usuario.bio,
+    pais: usuario.pais,
+    ciudad: usuario.ciudad,
+    genero: usuario.genero,
+    isDisabled:true
   });
   const onChangeCity = (e) => {
     setfusuario({
@@ -218,7 +221,6 @@ function Perfil({ match }) {
                   country={country}
                   usuarioactual={usuarioactual}
                   fusuario={fusuario}
-
                 ></Editar>
               ) : (
                 botonSeguir()

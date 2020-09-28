@@ -134,7 +134,7 @@
         &.focus,
         &:active,
         &.active {
-            background-color: $transparent-bg;
+            background-color: $transparent-bg !important;
         }
     }
 }
