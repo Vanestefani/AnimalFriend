@@ -1,25 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import {
-  ListGroupItem,
+  Media,
   Card,
   ListGroup,
   ListGroupItemHeading,
   Badge,
   Button,
   CardTitle,
+  ListGroupItem,
 } from "reactstrap";
 
 import RContext from "../../context/recordatorios/recordatoriosContex";
 import AlertaContext from "../../context/alertas/alertaContext";
 import FormRecordatorio from "./form/FormRecordatorio";
+import Editar from "./form/Editar";
 
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import moment from "moment";
 import "moment/locale/es";
 import Skeleton from "react-loading-skeleton";
-
+import { Iconos } from "./Iconos";
 function ListRecordatorios(props) {
   const mContext = useContext(MascotasContext);
   const { mascotas, mascotasUsuario } = mContext;
@@ -185,67 +187,67 @@ function ListRecordatorios(props) {
   return (
     <>
       <Card className="shadow p-3 mb-5 bg-white rounded">
-        <FormRecordatorio
-          modalMascotas={modalMascotas}
-          setModal1={setModal1}
-          onChange={onChange}
-          Frecordatorio={Frecordatorio}
-          onSubmit={onSubmit}
-          mascotas={mascotas}
-          guardarrecordatorio={guardarrecordatorio}
-        ></FormRecordatorio>
         <br></br>
         <CardTitle className="title-up">
-          <center>
-            <h3 className="text-center">Recordatorios</h3>
-          </center>
+          <span className="font-weight-bold text-center" font-size="30px">
+            Recordatorios
+          </span>
+          <FormRecordatorio
+            modalMascotas={modalMascotas}
+            setModal1={setModal1}
+            onChange={onChange}
+            Frecordatorio={Frecordatorio}
+            onSubmit={onSubmit}
+            mascotas={mascotas}
+            guardarrecordatorio={guardarrecordatorio}
+          ></FormRecordatorio>
         </CardTitle>
         <ListGroup>
           {!loading ? (
             recordatorios.length != 0 ? (
-
               recordatorios.map((recordatorio) => (
                 <ListGroupItem>
-                  <ListGroupItemHeading>
-                    <h4> {recordatorio.nombre}</h4>
-                  </ListGroupItemHeading>
-                  <div>
-                    {" "}
-                    <b>Categoria:</b>{" "}
-                    <Badge color="info"> {recordatorio.tipo}</Badge>
-                  </div>
-                  <div>
-                    <b>Mascota:</b>
-                    <Badge color="success">
-                      {" "}
-                      {recordatorio.mascota.nombre}
-                    </Badge>
-                  </div>
-                  <div>
-                    <b>Vence:</b>
-                    <em>
-                      {moment(
-                        new Date(recordatorio.fecha_expiracion)
-                      ).fromNow()}
-                      /
-                      {moment(new Date(recordatorio.fecha_expiracion)).format(
-                        "YYYY MM DD"
-                      )}
-                    </em>
-                  </div>
-                  <b>Descripcion:</b>
-                  <br></br>
-                  {recordatorio.descripcion}
-                  <br></br>
-                  <Button
-                    className="btn-danger"
-                    size="sm"
-                    onClick={() => {
-                      deleteRecordatorios(recordatorio._id);
-                    }}
-                  >
-                    <i className="fas fa-trash-alt"></i>
-                  </Button>
+                  <Media>
+                    <Media left href="#">
+                      <div className="text-center">
+                        <h1>{Iconos(recordatorio.tipo)}</h1>
+                        <Badge color="info"> {recordatorio.tipo}</Badge>
+                      </div>
+                    </Media>
+                    <Media body>
+                      <Media heading>
+                        <h2> {recordatorio.nombre}</h2>
+                        <em>
+                          Vence:
+                          {moment(
+                            new Date(recordatorio.fecha_expiracion)
+                          ).fromNow()}
+                          /
+                          {moment(
+                            new Date(recordatorio.fecha_expiracion)
+                          ).format("YYYY MM DD")}
+                        </em>{" "}
+                        <br></br>
+                        Mascota:
+                        <Badge color="success">
+                          {" "}
+                          {recordatorio.mascota.nombre}
+                        </Badge>
+                        <br></br>
+                        {recordatorio.descripcion}
+                      </Media>
+
+                      <Button
+                        className="btn-danger"
+                        size="sm"
+                        onClick={() => {
+                          deleteRecordatorios(recordatorio._id);
+                        }}
+                      >
+                        <i className="fas fa-trash-alt"></i>
+                      </Button>
+                    </Media>
+                  </Media>
                 </ListGroupItem>
               ))
             ) : (

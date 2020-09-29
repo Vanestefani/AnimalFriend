@@ -20,7 +20,7 @@ function FormRecordatorio(props) {
   return (
     <>
       <Button
-        className="pull-right "
+        className="p-2 "
         size="sm"
         onClick={() => props.setModal1(true)}
       >

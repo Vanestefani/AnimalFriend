@@ -1073,3 +1073,4 @@
 [0919/184210.144:ERROR:process_memory_win.cc(73)] ReadMemory at 0x7ffdb8d83d40 of 336 bytes failed: Solo se completó una parte de una solicitud ReadProcessMemory o WriteProcessMemory. (0x12B)
 [0919/184210.144:ERROR:process_memory_win.cc(73)] ReadMemory at 0x7ffdb8d853c0 of 64 bytes failed: Solo se completó una parte de una solicitud ReadProcessMemory o WriteProcessMemory. (0x12B)
 [0919/184210.190:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intentó obtener acceso a un proceso que está cerrándose. (0xc000010a)
+[0928/142212.950:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intentó obtener acceso a un proceso que está cerrándose. (0xc000010a)
