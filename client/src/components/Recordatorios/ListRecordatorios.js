@@ -205,7 +205,7 @@ function ListRecordatorios(props) {
       <Card className="shadow p-3 mb-5 bg-white rounded">
         <br></br>
         <CardTitle className="title-up">
-          <span className="font-weight-bold text-center" font-size="30px">
+          <span className="font-weight-bold text-center title title-up" font-size="30px">
             Recordatorios
           </span>
           <FormRecordatorio
@@ -220,7 +220,7 @@ function ListRecordatorios(props) {
         </CardTitle>
         <ListGroup>
           {!loading ? (
-            recordatorios.length != 0 ? (
+            recordatorios ? (
               recordatorios.map((recordatorio) => (
                 <ListGroupItem>
                   <Media>
@@ -252,8 +252,9 @@ function ListRecordatorios(props) {
                         <br></br>
                         {recordatorio.descripcion}
                       </Media>
-                      <Editar recordatorio={recordatorio}
-                      mascotas={mascotas}
+                      <Editar
+                        recordatorio={recordatorio}
+                        mascotas={mascotas}
                       ></Editar>
                       <Button
                         className="btn-danger"

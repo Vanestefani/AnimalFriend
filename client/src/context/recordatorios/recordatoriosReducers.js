@@ -11,13 +11,14 @@ import {
 export default (state, action) => {
   switch (action.type) {
     case GET_RECORDATORIO_SUCCESS:
-    case  EDIT_RECORDATORIO_SUCCESS:
       return {
         ...state,
-        loading:false,
+        loading: false,
         recordatorios: action.payload,
       };
     case ADD_RECORDATORIO_SUCCESS:
+    case EDIT_RECORDATORIO_SUCCESS:
+
     case RECORDATORIO_DELETE_SUCCESS:
       return {
         ...state,

@@ -66,11 +66,13 @@ function Editar(props) {
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
-          <h2 className="title title-up">Datos de recordatorios</h2>
+          <h2 className="title title-up">Editar un recordatorio</h2>
         </div>
         <ModalBody>
           <div>
-            <h4>Añade un recordatorio</h4>
+
+            <p>Titulo:</p>
+
             <InputGroup className>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
@@ -87,6 +89,8 @@ function Editar(props) {
                 required
               ></Input>
             </InputGroup>
+            <p>Descripción:</p>
+
             <InputGroup>
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
@@ -106,6 +110,8 @@ function Editar(props) {
 
             <Row>
               <Col md="6">
+                <p>Fecha expiración:</p>
+
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
@@ -125,6 +131,8 @@ function Editar(props) {
                 </InputGroup>
               </Col>
               <Col md="6">
+                <p>Tipo</p>
+
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
@@ -157,6 +165,7 @@ function Editar(props) {
             </Row>
             <Row>
               <Col md="6">
+                <p>Mascota</p>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>

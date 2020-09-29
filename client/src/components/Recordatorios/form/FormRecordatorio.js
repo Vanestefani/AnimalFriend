@@ -19,11 +19,7 @@ function FormRecordatorio(props) {
   //modal
   return (
     <>
-      <Button
-        className="p-2 "
-        size="sm"
-        onClick={() => props.setModal1(true)}
-      >
+      <Button className="p-2 " size="sm" onClick={() => props.setModal1(true)}>
         <i className="fas fa-plus"></i>
       </Button>
 
@@ -36,11 +32,12 @@ function FormRecordatorio(props) {
           >
             <i className="now-ui-icons ui-1_simple-remove"></i>
           </button>
-          <h2 className="title title-up">Datos de recordatorios</h2>
+          <h2 className="title title-up">Añade un recordatorio</h2>
         </div>
         <ModalBody>
           <div>
-            <h4>Añade un recordatorio</h4>
+
+          <p>Titulo:</p>
             <InputGroup
               className={
                 props.Frecordatorio.errors.Errornombre.valido
@@ -70,6 +67,8 @@ function FormRecordatorio(props) {
             ) : (
               ""
             )}
+            <p>Descripción:</p>
+
             <InputGroup
               className={
                 props.Frecordatorio.errors.Errordescripcion.valido
@@ -99,8 +98,11 @@ function FormRecordatorio(props) {
             ) : (
               ""
             )}
+
             <Row>
               <Col md="12">
+                <p>Fecha expiración:</p>
+
                 <InputGroup
                   className={
                     props.Frecordatorio.errors.Errorfecha_expiracion.valido
@@ -132,6 +134,7 @@ function FormRecordatorio(props) {
                 )}
               </Col>
               <Col md="12">
+                <p>Tipo</p>
                 <InputGroup
                   className={
                     props.Frecordatorio.errors.Errortipo.valido
@@ -177,6 +180,7 @@ function FormRecordatorio(props) {
             </Row>
             <Row>
               <Col md="12">
+                <p>Mascota</p>
                 <InputGroup
                   className={
                     props.Frecordatorio.errors.Errormascota.valido
