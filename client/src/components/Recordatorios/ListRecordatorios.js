@@ -54,6 +54,21 @@ function ListRecordatorios(props) {
       Errorfecha_expiracion: { valido: true, mensaje: "" },
     },
   });
+  const [Erecordatorio, Editarrecordatorio] = useState({
+    descripcion: "",
+    nombre: "",
+    tipo: "",
+    mascota: "",
+    fecha_expiracion: "",
+    completo: false,
+    errors: {
+      Errordescripcion: { valido: true, mensaje: "" },
+      Errornombre: { valido: true, mensaje: "" },
+      Errortipo: { valido: true, mensaje: "" },
+      Errormascota: { valido: true, mensaje: "" },
+      Errorfecha_expiracion: { valido: true, mensaje: "" },
+    },
+  });
   const {
     descripcion,
     nombre,
@@ -62,6 +77,7 @@ function ListRecordatorios(props) {
     fecha_expiracion,
     completo,
   } = Frecordatorio;
+
   const onChange = (e) => {
     guardarrecordatorio({
       ...Frecordatorio,
@@ -236,7 +252,9 @@ function ListRecordatorios(props) {
                         <br></br>
                         {recordatorio.descripcion}
                       </Media>
-
+                      <Editar recordatorio={recordatorio}
+                      mascotas={mascotas}
+                      ></Editar>
                       <Button
                         className="btn-danger"
                         size="sm"
