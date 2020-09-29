@@ -1,5 +1,6 @@
 import React, { useState, useContext, useRef } from "react";
-
+import moment from "moment";
+import "moment/locale/es";
 import {
   Button,
   Modal,
@@ -28,21 +29,104 @@ function Editar(props) {
     tipo: props.recordatorio.tipo,
     mascota: props.recordatorio.mascota._id,
     fecha_expiracion: props.recordatorio.fecha_expiracion,
+    errors: {
+      Errordescripcion: { valido: true, mensaje: "" },
+      Errornombre: { valido: true, mensaje: "" },
+      Errortipo: { valido: true, mensaje: "" },
+      Errormascota: { valido: true, mensaje: "" },
+      Errorfecha_expiracion: { valido: true, mensaje: "" },
+    },
   });
+  const validate = () => {
+    let isError = false;
+
+    if (Frecordatorio.descripcion.trim() == "") {
+      Frecordatorio.errors.Errordescripcion.valido = false;
+      Frecordatorio.errors.Errordescripcion.mensaje =
+        "(El campo descripción no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errordescripcion.valido = true;
+    }
+    if (Frecordatorio.nombre.trim() == "") {
+      Frecordatorio.errors.Errornombre.valido = false;
+      Frecordatorio.errors.Errornombre.mensaje =
+        "(El campo nombre no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errornombre.valido = true;
+    }
+    if (Frecordatorio.tipo.trim() == "") {
+      Frecordatorio.errors.Errortipo.valido = false;
+      Frecordatorio.errors.Errortipo.mensaje =
+        "(El campo tipo no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errortipo.valido = true;
+    }
+    if (Frecordatorio.mascota.trim() == "") {
+      Frecordatorio.errors.Errormascota.valido = false;
+      Frecordatorio.errors.Errormascota.mensaje =
+        "(El campo mascota no puede estar vacio)";
+    } else {
+      Frecordatorio.errors.Errormascota.valido = true;
+    }
+    if (Frecordatorio.fecha_expiracion.trim() == "") {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = false;
+      Frecordatorio.errors.Errorfecha_expiracion.mensaje =
+        "(El campo fecha de expiración no puede estar vacio)";
+    } else if (Frecordatorio.fecha_expiracion < moment().format("YYYY MM DD")) {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = false;
+      Frecordatorio.errors.Errorfecha_expiracion.mensaje =
+        "(El campo fecha de expiración no puede ser menor que la fecha de hoy)";
+    } else if (!moment(Frecordatorio.fecha_expiracion).isValid()) {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = false;
+      Frecordatorio.errors.Errorfecha_expiracion.mensaje =
+        "(El campo fecha de expiración es invalida)";
+    } else {
+      Frecordatorio.errors.Errorfecha_expiracion.valido = true;
+    }
+    if (
+      !Frecordatorio.errors.Errordescripcion.valido ||
+      !Frecordatorio.errors.Errornombre.valido ||
+      !Frecordatorio.errors.Errortipo.valido ||
+      !Frecordatorio.errors.Errormascota.valido ||
+      !Frecordatorio.errors.Errorfecha_expiracion.valido
+    ) {
+      isError = true;
+      console.log("error :D");
+    } else {
+      isError = false;
+    }
+    return isError;
+  };
+  moment.lang("es", {
+    months: "Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split(
+      "_"
+    ),
+    monthsShort: "Enero._Feb._Mar_Abr._May_Jun_Jul._Ago_Sept._Oct._Nov._Dec.".split(
+      "_"
+    ),
+    weekdays: "Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado".split("_"),
+    weekdaysShort: "Dom._Lun._Mar._Mier._Jue._Vier._Sab.".split("_"),
+    weekdaysMin: "Do_Lu_Ma_Mi_Ju_Vi_Sa".split("_"),
+  });
+  moment.locale("es");
   const onSubmitEditar = (e) => {
     e.preventDefault();
     e.target.className += " was-validated";
+    const err = validate();
 
-    actualizarRecordatorios({
-      descripcion: Frecordatorio.descripcion,
+    if (!err) {
+      actualizarRecordatorios({
+        descripcion: Frecordatorio.descripcion,
 
-      nombre: Frecordatorio.nombre,
-      tipo: Frecordatorio.tipo,
-      mascota: Frecordatorio.mascota,
-      fecha_expiracion: Frecordatorio.fecha_expiracion,
+        nombre: Frecordatorio.nombre,
+        tipo: Frecordatorio.tipo,
+        mascota: Frecordatorio.mascota,
+        fecha_expiracion: Frecordatorio.fecha_expiracion,
 
-      recordatorioId: props.recordatorio._id,
-    });
+        recordatorioId: props.recordatorio._id,
+      });
+      setModal1(false);
+    }
   };
   const onChange = (e) => {
     guardarrecordatorio({
@@ -70,7 +154,6 @@ function Editar(props) {
         </div>
         <ModalBody>
           <div>
-
             <p>Titulo:</p>
 
             <InputGroup className>
