@@ -18,7 +18,6 @@ import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
 import ListMascotas from "../../components/Listas/ListMascotas";
-import SubMenu from "../../components/Navbars/SubMenu";
 import CategoriasNegociosNavbar from "../../components/Navbars/CategoriasNegociosNavbar";
 import NegociosContex from "../../context/negocios/negociosContex";
 import Itemnegocio from "./itemnegocio";

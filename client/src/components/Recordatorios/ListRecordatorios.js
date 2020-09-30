@@ -8,20 +8,20 @@ import {
   Badge,
   Button,
   CardTitle,
-  ListGroupItem,
+  Col,
 } from "reactstrap";
 
 import RContext from "../../context/recordatorios/recordatoriosContex";
 import AlertaContext from "../../context/alertas/alertaContext";
 import FormRecordatorio from "./form/FormRecordatorio";
-import Editar from "./form/Editar";
+import FiltroRecordaotrios from "../../components/Navbars/FiltroRecordaotrios";
+import ItemRecordatorios from "./ItemRecordatorios";
 
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import moment from "moment";
 import "moment/locale/es";
 import Skeleton from "react-loading-skeleton";
-import { Iconos } from "./Iconos";
 function ListRecordatorios(props) {
   const mContext = useContext(MascotasContext);
   const { mascotas, mascotasUsuario } = mContext;
@@ -199,105 +199,67 @@ function ListRecordatorios(props) {
   });
   moment.locale("es");
   const [modalMascotas, setModal1] = React.useState(false);
-
+  const [busqueda, setbusqueda] = useState({
+    search: "",
+  });
+  const { search } = busqueda;
+  const onChangeSearch = (e) => {
+    setbusqueda({
+      ...busqueda,
+      search: e.target.value,
+    });
+  };
+  let items = recordatorios
+    .filter((data) => {
+      if (search === "") return data;
+      else if (data.tipo.toLowerCase().includes(search.toLowerCase())) {
+        return data;
+      }
+    })
+    .map((data) => {
+      return (
+        <ItemRecordatorios
+          key={data._id}
+          recordatorio={data}
+          mascotas={mascotas}
+          deleteRecordatorios={deleteRecordatorios}
+        ></ItemRecordatorios>
+      );
+    });
   return (
     <>
-      <Card className="shadow p-3 mb-5 bg-white rounded">
-        <br></br>
-        <CardTitle className="title-up">
-          <span className="font-weight-bold text-center title title-up" font-size="30px">
-            Recordatorios
-          </span>
-          <FormRecordatorio
-            modalMascotas={modalMascotas}
-            setModal1={setModal1}
-            onChange={onChange}
-            Frecordatorio={Frecordatorio}
-            onSubmit={onSubmit}
-            mascotas={mascotas}
-            guardarrecordatorio={guardarrecordatorio}
-          ></FormRecordatorio>
-        </CardTitle>
-        <ListGroup>
-          {!loading ? (
-            recordatorios ? (
-              recordatorios.map((recordatorio) => (
-                <ListGroupItem>
-                  <Media>
-                    <Media left href="#">
-                      <div className="text-center">
-                        <h1>{Iconos(recordatorio.tipo)}</h1>
-                        <Badge color="info"> {recordatorio.tipo}</Badge>
-                      </div>
-                    </Media>
-                    <Media body>
-                      <Media heading>
-                        <h2> {recordatorio.nombre}</h2>
-                        <em>
-                          Vence:
-                          {moment(
-                            new Date(recordatorio.fecha_expiracion)
-                          ).fromNow()}
-                          /
-                          {moment(
-                            new Date(recordatorio.fecha_expiracion)
-                          ).format("YYYY MM DD")}
-                        </em>{" "}
-                        <br></br>
-                        Mascota:
-                        <Badge color="success">
-                          {" "}
-                          {recordatorio.mascota.nombre}
-                        </Badge>
-                        <br></br>
-                        {recordatorio.descripcion}
-                      </Media>
-                      <Editar
-                        recordatorio={recordatorio}
-                        mascotas={mascotas}
-                      ></Editar>
-                      <Button
-                        className="btn-danger"
-                        size="sm"
-                        onClick={() => {
-                          deleteRecordatorios(recordatorio._id);
-                        }}
-                      >
-                        <i className="fas fa-trash-alt"></i>
-                      </Button>
-                    </Media>
-                  </Media>
-                </ListGroupItem>
-              ))
-            ) : (
-              <p>No hay recordatorios</p>
-            )
-          ) : (
-            <center>
-              <Skeleton
-                circle={true}
-                height={100}
-                width={100}
-                animation="wave"
-                variant="rect"
-              />
-
-              <Skeleton
-                height={30}
-                width={100}
-                animation="wave"
-                variant="rect"
-              />
-              <Skeleton
-                height={30}
-                width={100}
-                animation="wave"
-                variant="rect"
-              />
-            </center>
-          )}
-        </ListGroup>
-      </Card>
+      <Col md="6">
+        <Card>
+          <br></br>
+          <CardTitle className="title-up">
+            <span className=" title title-up" font-size="30px">
+              Recordatorios
+            </span>
+            <FormRecordatorio
+              modalMascotas={modalMascotas}
+              setModal1={setModal1}
+              onChange={onChange}
+              Frecordatorio={Frecordatorio}
+              onSubmit={onSubmit}
+              mascotas={mascotas}
+              guardarrecordatorio={guardarrecordatorio}
+            ></FormRecordatorio>
+          </CardTitle>
+          <ListGroup>
+            {items.length === 0 ? <p>No hay recordatorios </p> : items}
+          </ListGroup>
+        </Card>
+      </Col>
+      <Col
+        md="3
+      "
+      >
+        <FiltroRecordaotrios
+          search={search}
+          busqueda={busqueda}
+          setbusqueda={setbusqueda}
+        ></FiltroRecordaotrios>
+      </Col>
     </>
   );
 }

@@ -32,10 +32,8 @@ function Recordatorio() {
               <VerticalMenu></VerticalMenu>
               <ListMascotas></ListMascotas>
             </Col>
-            <Col md="6" className="card">
 
-              <ListRecordatorios></ListRecordatorios>
-            </Col>
+            <ListRecordatorios></ListRecordatorios>
           </Row>
         </Container>
         <DefaultFooter></DefaultFooter>
