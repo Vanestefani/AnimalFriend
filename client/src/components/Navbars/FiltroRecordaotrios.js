@@ -110,16 +110,13 @@ function FiltroRecordaotrios(props) {
               <i class="fas fa-cut" width="300px"></i>
               Peluqueria
             </NavLink>
-            <NavLink to="#" onClick={PeluqueriaClick}>
-              <i class="fas fa-cut" width="300px"></i>
-              Peluqueria
-            </NavLink>
+
             <NavLink to="#" onClick={PaseosClick}>
-              <i class="fas fa-trees" width="300px"></i>
+              <i class="fas fa-tree"></i>
               Paseos
             </NavLink>
             <NavLink to="#" onClick={MedicinasClick}>
-              <i class="fas fa-trees" width="300px"></i>
+              <i class="fas fa-tablets" width="300px"></i>
               Medicinas
             </NavLink>
 
