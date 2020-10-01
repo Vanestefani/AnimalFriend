@@ -15,6 +15,8 @@ import RContext from "../../context/recordatorios/recordatoriosContex";
 import AlertaContext from "../../context/alertas/alertaContext";
 import FormRecordatorio from "./form/FormRecordatorio";
 import FiltroRecordaotrios from "../../components/Navbars/FiltroRecordaotrios";
+import CalendarioGrande from "../../components/Calendario/CalendarioGrande";
+
 import ItemRecordatorios from "./ItemRecordatorios";
 
 import AuthContext from "../../context/autenticacion/authContext";
@@ -229,6 +231,7 @@ function ListRecordatorios(props) {
   return (
     <>
       <Col md="6">
+        <CalendarioGrande recordatorios={recordatorios}></CalendarioGrande>
         <Card>
           <br></br>
           <CardTitle className="title-up">

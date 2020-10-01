@@ -11,33 +11,19 @@ import {
   DragDropProvider,
   EditRecurrenceMenu,
 } from "@devexpress/dx-react-scheduler-material-ui";
-
+import moment from "moment";
 function CalendarioGrande(props) {
-  const appointments = [
-    {
-      title: "Website Re-Design Plan",
-      startDate: new Date(2018, 5, 25, 9, 35),
-      endDate: new Date(2018, 5, 25, 11, 30),
-      id: 0,
-      rRule: "FREQ=DAILY;COUNT=3",
-      exDate: "20180628T063500Z,20180626T063500Z",
-    },
-    {
-      title: "Book Flights to San Fran for Sales Trip",
-      startDate: new Date(2018, 5, 25, 12, 11),
-      endDate: new Date(2018, 5, 25, 13, 0),
-      id: 1,
-      rRule: "FREQ=DAILY;COUNT=4",
-      exDate: "20180627T091100Z",
-    },
-    {
-      title: "Install New Router in Dev Room",
-      startDate: new Date(2018, 5, 25, 13, 30),
-      endDate: new Date(2018, 5, 25, 14, 35),
-      id: 2,
-      rRule: "FREQ=DAILY;COUNT=5",
-    },
-  ];
+  let appointments = [];
+
+  props.recordatorios.map((data) => {
+    appointments.push({
+      title: "" + data.nombre + " : " + data.tipo,
+      startDate: moment(data.fecha_creacion, "YYYY-MM-DD HH"),
+      endDate: moment(data.fecha_expiracion, "YYYY-MM-DD HH"),
+      id: data._id,
+    });
+  });
+
   const [state, setstate] = useState({ data: appointments });
 
   const commitChanges = ({ added, changed, deleted }) => {
@@ -63,11 +49,11 @@ function CalendarioGrande(props) {
   };
 
   const { data } = state;
-
+  let fecha_actual = new Date();
   return (
     <Paper>
-      <Scheduler data={data}>
-        <ViewState defaultCurrentDate="2018-06-25" />
+      <Scheduler data={appointments}>
+        <ViewState defaultCurrentDate={fecha_actual} />
         <EditingState onCommitChanges={commitChanges} />
         <WeekView startDayHour={9} endDayHour={15} />
         <MonthView />
