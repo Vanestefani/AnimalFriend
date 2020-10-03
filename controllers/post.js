@@ -7,7 +7,11 @@ const { uploader, sendEmail } = require("../utils/index");
 const linkify = require("linkifyjs");
 require("linkifyjs/plugins/hashtag")(linkify);
 require("linkifyjs/plugins/mention")(linkify);
-
+function arrayRemove(array, value) {
+  return array.filter((item) => {
+    return item._id.toString() !== value.toString();
+  });
+}
 exports.createPost = async (req, res) => {
   try {
     const result = await uploader(req);

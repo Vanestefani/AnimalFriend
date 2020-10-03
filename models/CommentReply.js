@@ -6,7 +6,7 @@ const replySchema = new mongoose.Schema({
   autor: {
     type: mongoose.Schema.ObjectId,
     required: true,
-    ref: "User"
+    ref: "users"
   },
   fecha_creacion: {
     type: mongoose.Schema.ObjectId,

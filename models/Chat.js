@@ -60,4 +60,4 @@ Chat.statics.getRooms = function (userId) {
   ]);
 };
 
-module.exports = mongoose.model("Cha", Chat);
+module.exports = mongoose.model("Chat", Chat);

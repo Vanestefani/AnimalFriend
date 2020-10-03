@@ -20,7 +20,7 @@ const AnunciosSchema = new mongoose.Schema({
   },
   imagen: {
     type: String,
-    required: "Please select image",
+    required: "Por favor elige una imagen",
   },
   fecha_creacion: {
     type: Date,

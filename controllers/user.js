@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const fs = require("fs");
 const User = mongoose.model("users");
 const Post = require("../models/Post");
-const Notificacion = require("../models/Notificacion");
+const Notification = require("../models/Notificacion");
 const Chat = require("../models/Chat");
 const Message = require("../models/Message");
 const {
@@ -29,7 +29,9 @@ exports.store = async (req, res) => {
     const { email } = req.body;
 
     // Make sure this account doesn't already exist
-   const user = await User.findOne({ email:{ $regex: email, $options:'i' } });
+    const user = await User.findOne({
+      email: { $regex: email, $options: "i" },
+    });
 
     if (user)
       return res.status(401).json({
@@ -94,7 +96,7 @@ exports.show = async function (req, res) {
 // @route PUT api/user/{id}
 // @desc Update user details
 // @access Public
-exports.update =async (req, res) => {
+exports.update = async (req, res) => {
   try {
     const update = req.body;
     console.log(req.body);
@@ -111,7 +113,7 @@ exports.update =async (req, res) => {
     if (!req.file)
       return res
         .status(200)
-        .json({user,message: "El usuario ha sido actualizado" });
+        .json({ user, message: "El usuario ha sido actualizado" });
 
     //Attempt to upload to cloudinary
     const result = await uploader(req);
@@ -166,7 +168,7 @@ function deleteProfilePicture({ photo }) {
   });
 }
 exports.changeProfilePicture = (req, res) => {
-  User.findById(req.userData.userId)
+  User.findById(req.user.id)
     .select("fotoPerfil")
     .then((data) => {
       if (data.fotoPerfil !== "person.png") {
@@ -226,7 +228,7 @@ exports.getNewUsers = (req, res) => {
 exports.searchUsersByNombre = (req, res) => {
   if (req.body.q) {
     User.findById({
-      _id: req.body.q,
+      _id:  req.user.id,
     })
       .limit(10)
       .select("nombre fotoPerfil pais ciudad genero bio   ")
@@ -238,6 +240,32 @@ exports.searchUsersByNombre = (req, res) => {
 };
 
 exports.addFollowing = async (req, res) => {
+  ChatRoom.find({ members: { $all: [req.userData.userId, req.body.userId] } })
+    .then((room) => {
+      if (!room.length) {
+        new ChatRoom({
+          members: [req.user.id, req.userData.userId],
+        })
+          .save()
+          .then((room) => {
+            room
+              .populate("members", "nombre fotoPerfil activityStatus")
+              .execPopulate()
+              .then((room) => {
+                messageHandler.sendRoom(req, {
+                  userId: req.user.id,
+                  room: room.toObject(),
+                });
+              });
+          });
+      }
+    })
+    .catch((err) => {
+      return res.status(500).json({
+        message: err.message,
+      });
+    });
+
   try {
     User.findByIdAndUpdate(
       req.user.id,
@@ -247,11 +275,9 @@ exports.addFollowing = async (req, res) => {
       {
         new: true,
       }
-    )
-
-      .catch((err) => {
-        console.log(err);
-      }),
+    ).catch((err) => {
+      console.log(err);
+    }),
       User.findByIdAndUpdate(
         req.body.userId,
         {
@@ -262,7 +288,7 @@ exports.addFollowing = async (req, res) => {
         }
       )
         .then((user) => {
-          res.json({ user:user });
+          res.json({ user: user });
         })
         .catch((err) => {
           console.log(err);
@@ -281,11 +307,9 @@ exports.unFollow = async (req, res) => {
       {
         new: true,
       }
-    )
-
-      .catch((err) => {
-        console.log(err);
-      }),
+    ).catch((err) => {
+      console.log(err);
+    }),
       User.findByIdAndUpdate(
         req.body.userId,
         {
@@ -296,7 +320,7 @@ exports.unFollow = async (req, res) => {
         }
       )
         .then((user) => {
-          res.json({ user:user });
+          res.json({ user: user });
         })
         .catch((err) => {
           console.log(err);
@@ -304,4 +328,18 @@ exports.unFollow = async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
+};
+exports.deleteUser = (req, res) => {
+  User.remove({ _id: req.user.id }).then((result) => {
+    res
+      .status(200)
+      .json({
+        message: "Usuario eliinar",
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
+        });
+      });
+  });
 };
