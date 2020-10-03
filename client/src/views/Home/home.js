@@ -16,11 +16,8 @@ function Home() {
   const postContext = useContext(PostContext);
   const alertaContext = useContext(AlertaContext);
   const AContext = useContext(AuthContext);
-  const {  mostrarAlerta } = alertaContext;
-  const {
-
-    usuario
-  } = AContext;
+  const { mostrarAlerta } = alertaContext;
+  const { usuario } = AContext;
   const { allpost, mensaje, publicaciones } = postContext;
   // Obtener proyectos cuando carga el componente
   console.log(usuario._id);
@@ -29,7 +26,7 @@ function Home() {
       mostrarAlerta(mensaje.msg, mensaje.categoria);
     }
     allpost(usuario._id);
-  }, [mensaje,usuario]);
+  }, [mensaje, usuario]);
 
   React.useEffect(() => {
     document.body.classList.add("landing-page");
@@ -49,13 +46,12 @@ function Home() {
           <Row>
             <Col md="3">
               <VerticalMenu></VerticalMenu>
-
             </Col>
-            <Col md="9">
+            <Col md="6">
               <CrearPublicacion></CrearPublicacion>
               <PostList publicaciones={publicaciones} next={allpost}></PostList>
             </Col>
-
+            <Col md="3"></Col>
           </Row>
         </Container>
         <DefaultFooter></DefaultFooter>
