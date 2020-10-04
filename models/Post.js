@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const {ObjectId} = mongoose.Schema.Types;
+const { ObjectId } = mongoose.Schema.Types;
 const postSchema = new mongoose.Schema({
   descripcion: {
     type: String,
@@ -20,10 +20,15 @@ const postSchema = new mongoose.Schema({
     ref: "users",
     required: "Se requiere autorr",
   },
-  hashtags: {
-    type: Array,
-    default: [],
-  },
+  filter: String,
+  thumbnail: String,
+  caption: String,
+  hashtags: [
+    {
+      type: String,
+      lowercase: true,
+    },
+  ],
   localizacion: {
     type: {
       type: String,
@@ -37,11 +42,14 @@ const postSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
-  likes:[{type:ObjectId,ref:"users"}],
-  comments:[{
-      text:String,
-      autor:{type:ObjectId,ref:"users"}
-  }],
+  likes: [{ type: ObjectId, ref: "users" }],
+  comments: [
+    {
+      commenterId: String,
+      text: String,
+      autor: { type: ObjectId, ref: "users" },
+    },
+  ],
 });
 
 postSchema.index({ localizacion: "2dsphere" });
