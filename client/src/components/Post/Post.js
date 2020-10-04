@@ -40,13 +40,13 @@ function Post(props) {
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
   };
-//errores
-const [errores, setError] = useState({
-  Errordescripcion: { valido: true, mensaje: "" }
-});
+  //errores
+  const [errores, setError] = useState({
+    Errordescripcion: { valido: true, mensaje: "" },
+  });
 
   const [like, setLike] = useState({
-    count: 0
+    count: 0,
   });
 
   const [modalEditar, setModaPost] = useState(false);
@@ -119,7 +119,7 @@ const [errores, setError] = useState({
           Errorcomentario: { valido: true, mensaje: "" },
         },
       });
-    }  else {
+    } else {
       setLastFocus(true);
       validate();
     }
@@ -129,16 +129,15 @@ const [errores, setError] = useState({
     e.preventDefault();
     let err = validatePublicacion();
     if (!err) {
-    actualizarPost({
-      descripcion: posteditor.texto,
-      postId: postId,
-    });
-    setModaPost(false);
-  }
-  else {
-    setFirstFocus(true);
-    validatePublicacion();
-  }
+      actualizarPost({
+        descripcion: posteditor.texto,
+        postId: postId,
+      });
+      setModaPost(false);
+    } else {
+      setFirstFocus(true);
+      validatePublicacion();
+    }
   };
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -190,10 +189,11 @@ const [errores, setError] = useState({
             <Input
               className={
                 errores != undefined
-                ?    errores.Errordescripcion.valido
-                  ? ""
-                  : "is-invalid form-control-danger form-control"
-                : ""}
+                  ? errores.Errordescripcion.valido
+                    ? ""
+                    : "is-invalid form-control-danger form-control"
+                  : ""
+              }
               type="textarea"
               multiline
               margin="normal"
@@ -206,15 +206,17 @@ const [errores, setError] = useState({
               onChange={handleChange}
             />
 
-                {
-                 errores != undefined ?
-                !errores.Errordescripcion.valido ? (
-                  <span className=" container text-muted">
-                    { errores.Errordescripcion.mensaje}
-                  </span>
-                ) : (
-                  ""
-                ): ""}
+            {errores != undefined ? (
+              !errores.Errordescripcion.valido ? (
+                <span className=" container text-muted">
+                  {errores.Errordescripcion.mensaje}
+                </span>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
             <button
               class="btn btn-primary btn-floating"
               onClick={triggerPicker}
@@ -322,7 +324,7 @@ const [errores, setError] = useState({
               return (
                 <Container className="mt-2 block">
                   <Media>
-                    <Media left href="#" onClick={(e) => e.preventDefault()}>
+                    <Media left top href="#">
                       <Link to={"/perfil/" + props.publicacion.autor._id}>
                         <Media
                           object
@@ -333,10 +335,14 @@ const [errores, setError] = useState({
                       </Link>
                     </Media>
                     <Media body>
-                      <Media heading>
+                      <Media >
+                        {" "}
                         <Link to={"/perfil/" + props.publicacion.autor._id}>
-                          {record.autor.nombre}{" "}
+                          {record.autor.nombre}
+                          <br></br>
+                        {moment(new Date(record.fecha_creacion)).fromNow()}
                         </Link>
+
                       </Media>
                       {record.text}
                     </Media>
@@ -348,11 +354,12 @@ const [errores, setError] = useState({
               <Form>
                 <Input
                   className={
-                    errors != undefined ?
-                    errors.Errorcomentario.valido
-                      ? ""
-                      : "is-invalid form-control-danger form-control"
-                  : " "}
+                    errors != undefined
+                      ? errors.Errorcomentario.valido
+                        ? ""
+                        : "is-invalid form-control-danger form-control"
+                      : " "
+                  }
                   placeholder="Comparte tu opinion"
                   onFocus
                   rows="3"
@@ -364,15 +371,17 @@ const [errores, setError] = useState({
                   onBlur={() => setLastFocus(false)}
                 ></Input>
                 <br></br>
-                {
-                 errors != undefined ?
-                !errors.Errorcomentario.valido ? (
-                  <span className=" container text-muted">
-                    {errors.Errorcomentario.mensaje}
-                  </span>
+                {errors != undefined ? (
+                  !errors.Errorcomentario.valido ? (
+                    <span className=" container text-muted">
+                      {errors.Errorcomentario.mensaje}
+                    </span>
+                  ) : (
+                    ""
+                  )
                 ) : (
                   ""
-                ):""}
+                )}
                 <button
                   class="btn btn-primary btn-floating"
                   onClick={triggerPickerComenta}
