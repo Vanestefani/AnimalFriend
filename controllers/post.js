@@ -33,7 +33,6 @@ exports.createPost = async (req, res) => {
 };
 exports.allpost = async (req, res) => {
   try {
-
     Post.find()
       .populate("autor", "_id nombre fotoPerfil")
       .populate("comments.autor", "_id nombre fotoPerfil")
@@ -50,7 +49,7 @@ exports.allpost = async (req, res) => {
 };
 exports.getsubpost = async (req, res) => {
   try {
-    let following =  req.user.following;
+    let following = req.user.following;
 
     // if postedBy in following
     Post.find({ autor: { $in: following } })
@@ -155,6 +154,7 @@ exports.comment = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 exports.deletepost = async (req, res) => {
   try {
     Post.findOne({ _id: req.params.postId })
@@ -207,5 +207,55 @@ exports.actualizarPost = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send("Error en el servidor");
+  }
+};
+exports.deletecomment = async (req, res) => {
+  console.log(req.body.commentId);
+  try {
+    Post.findOneAndUpdate(
+      req.body.commentId,
+      {
+        $pull: {
+          comments:{
+            _id: req.body.commentId
+          },
+        },
+      },
+      { new: true },
+      (err, post) => {
+        if (err) return res.status(400).send(err);
+        return res.send(post);
+      }
+    );
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
+exports.updatecomment = async (req, res) => {
+  try {
+    Post.findByIdAndUpdate(
+      req.params.commenterId,
+      {
+        $push: {
+          comments: {
+            text: req.body.text,
+          },
+        },
+      },
+      {
+        new: true,
+      }
+    )
+      .populate("comments.autor", "_id nombre fotoPerfil ")
+      .populate("postedBy", "_id nombre fotoPerfil")
+      .exec((err, result) => {
+        if (err) {
+          return res.status(422).json({ error: err });
+        } else {
+          res.json(result);
+        }
+      });
+  } catch (err) {
+    return res.status(400).send(err);
   }
 };

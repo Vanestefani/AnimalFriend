@@ -36,6 +36,8 @@ function Post(props) {
     actualizarPost,
     makeComment,
     deletePost,
+    updatecomment,
+    deletecomment
   } = postContext;
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
@@ -50,6 +52,8 @@ function Post(props) {
   });
 
   const [modalEditar, setModaPost] = useState(false);
+  const [modalEditarComentario, setModaComentario] = useState(false);
+
   const [posteditor, setEditarPost] = useState({
     texto: props.publicacion.descripcion,
   });
@@ -59,7 +63,14 @@ function Post(props) {
       Errorcomentario: { valido: true, mensaje: "" },
     },
   });
+  const [editarComentarios, setEditarcomentarios] = useState({
+    comentario: "",
+    errors: {
+      Errorcomentario: { valido: true, mensaje: "" },
+    },
+  });
   const { comentario, errors } = comentarios;
+
   const handleChange = (e) => {
     setEditarPost({
       ...posteditor,
@@ -333,16 +344,49 @@ function Post(props) {
                           alt={"foto de perfil de " + record.autor.nombre}
                         />
                       </Link>
+                      <div className="pull-right">
+                        {record.autor._id ===
+                        usuario._id ? (
+                          <UncontrolledDropdown>
+                            <DropdownToggle
+                              aria-haspopup={true}
+                              caret
+                              color="neutral"
+                              size="sm"
+                            ></DropdownToggle>
+                            <DropdownMenu>
+                              <DropdownItem
+                                onClick={() => setModaComentario(true)}
+                              >
+                                <i className="fas fa-edit"></i>
+                                Editar
+                              </DropdownItem>
+                              <DropdownItem
+                                href="#AnimalFriend"
+                                onClick={() =>
+                                  deletecomment(
+                                {    commentId: record._id}
+                                  )
+                                }
+                              >
+                                <i className="fas fa-trash-alt"></i>
+                                Eliminar
+                              </DropdownItem>
+                            </DropdownMenu>
+                          </UncontrolledDropdown>
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </Media>
                     <Media body>
-                      <Media >
+                      <Media>
                         {" "}
                         <Link to={"/perfil/" + props.publicacion.autor._id}>
                           {record.autor.nombre}
                           <br></br>
-                        {moment(new Date(record.fecha_creacion)).fromNow()}
+                          {moment(new Date(record.fecha_creacion)).fromNow()}
                         </Link>
-
                       </Media>
                       {record.text}
                     </Media>
@@ -407,6 +451,79 @@ function Post(props) {
           </Container>
         </Collapse>
       </Card>
+      <Modal isOpen={modalEditarComentario} toggle={() => setModaComentario(false)}>
+        <div className="modal-header justify-content-center">
+          <button
+            className="close"
+            type="button"
+            onClick={() => setModaPost(false)}
+          >
+            <i className="now-ui-icons ui-1_simple-remove"></i>
+          </button>
+          <h2 className="title title-up">Editar Publicación </h2>
+        </div>
+        <ModalBody>
+          <Form noValidate autoComplete="off">
+            <Input
+              className={
+                errores != undefined
+                  ? errores.Errordescripcion.valido
+                    ? ""
+                    : "is-invalid form-control-danger form-control"
+                  : ""
+              }
+              type="textarea"
+              multiline
+              margin="normal"
+              rowsMax="5"
+              name="texto"
+              id="texto"
+              onFocus={() => setFirstFocus(true)}
+              onBlur={() => setFirstFocus(false)}
+              value={posteditor.texto}
+              onChange={handleChange}
+            />
+
+            {errores != undefined ? (
+              !errores.Errordescripcion.valido ? (
+                <span className=" container text-muted">
+                  {errores.Errordescripcion.mensaje}
+                </span>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
+            <button
+              class="btn btn-primary btn-floating"
+              onClick={triggerPicker}
+            >
+              <span role="img" aria-label="">
+                😁
+              </span>
+            </button>
+            {emojiPickerState ? (
+              <Picker
+                title="Elige un emoticon"
+                emoji="point_up"
+                onSelect={addEmoji}
+              />
+            ) : (
+              ""
+            )}
+            <Button
+              className="pull-right"
+              onClick={onSubmitPost}
+              variant="contained"
+              color="primary"
+            >
+              Editar
+            </Button>
+          </Form>
+        </ModalBody>
+      </Modal>
+
     </>
   );
 }

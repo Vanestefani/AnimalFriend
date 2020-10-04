@@ -8,12 +8,23 @@ const upload = multer().single("imagen");
 router.post("/addPost", checkAuth, validate, upload, postController.createPost);
 router.get("/allpost", checkAuth, validate, postController.allpost);
 
-router.get("/getsubpost/:usuario", checkAuth, validate, postController.getsubpost);
+router.get(
+  "/getsubpost/:usuario",
+  checkAuth,
+  validate,
+  postController.getsubpost
+);
 router.get("/mypost/:postid", checkAuth, validate, postController.postbyuser);
 
 router.put("/like", checkAuth, validate, postController.like);
 router.put("/unlike", checkAuth, validate, postController.unlike);
-router.put("/comment", checkAuth, validate, postController.comment);
+router.put(
+  "/:commentId",
+  checkAuth,
+  validate,
+
+  postController.deletecomment
+);
 router.delete(
   "/:postId",
   checkAuth,
@@ -23,5 +34,6 @@ router.delete(
 );
 
 router.put("/:postId", checkAuth, validate, postController.actualizarPost);
+router.put("/:commentId", checkAuth, validate, postController.updatecomment);
 
 module.exports = router;

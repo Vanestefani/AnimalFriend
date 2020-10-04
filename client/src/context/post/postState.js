@@ -67,7 +67,9 @@ const PostState = (props) => {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get(`/api/post/getsubpost/${usuario}`);
+      const respuesta = await clienteAxios.get(
+        `/api/post/getsubpost/${usuario}`
+      );
 
       dispatch({
         type: GET_POST,
@@ -180,13 +182,42 @@ const PostState = (props) => {
       });
     }
   };
-  const deleteComment = async (id) => {
+  const updatecomment = async (commentId) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put("/api/post/uncomment", id);
+      const respuesta = await clienteAxios.put(
+        "/api/post/updatecomment",
+        commentId
+      );
+
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: respuesta.data,
+      });
+      allpost();
+    } catch (error) {
+      const alerta = {
+        categoria: "danger",
+      };
+      dispatch({
+        type: DELETE_COMMENT_ERROR,
+        payload: alerta,
+      });
+    }
+  };
+  const deletecomment = async (commentId) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.put(
+        "/api/post/deletecomment",
+        commentId
+      );
 
       dispatch({
         type: DELETE_COMMENT,
@@ -306,7 +337,8 @@ const PostState = (props) => {
         likes: state.likes,
         actualizarPost,
         getpost,
-        deleteComment,
+        deletecomment,
+        updatecomment
       }}
     >
       {props.children}
