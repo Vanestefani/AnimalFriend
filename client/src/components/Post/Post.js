@@ -37,7 +37,7 @@ function Post(props) {
     makeComment,
     deletePost,
     updatecomment,
-    deletecomment
+    deletecomment,
   } = postContext;
   const seleccionarPublicacion = (id) => {
     publicacionActual(id);
@@ -333,7 +333,7 @@ function Post(props) {
 
             {props.publicacion.comments.map((record) => {
               return (
-                <Container className="mt-2 block">
+                <Container>
                   <Media>
                     <Media left top href="#">
                       <Link to={"/perfil/" + props.publicacion.autor._id}>
@@ -344,9 +344,11 @@ function Post(props) {
                           alt={"foto de perfil de " + record.autor.nombre}
                         />
                       </Link>
-                      <div className="pull-right">
-                        {record.autor._id ===
-                        usuario._id ? (
+                    </Media>
+
+                    <Media body>
+                      <div className="pull-right" right top>
+                        {record.autor._id === usuario._id ? (
                           <UncontrolledDropdown>
                             <DropdownToggle
                               aria-haspopup={true}
@@ -364,9 +366,7 @@ function Post(props) {
                               <DropdownItem
                                 href="#AnimalFriend"
                                 onClick={() =>
-                                  deletecomment(
-                                {    commentId: record._id}
-                                  )
+                                  deletecomment({ commentId: record._id })
                                 }
                               >
                                 <i className="fas fa-trash-alt"></i>
@@ -378,9 +378,8 @@ function Post(props) {
                           ""
                         )}
                       </div>
-                    </Media>
-                    <Media body>
-                      <Media>
+
+                      <Media letf top>
                         {" "}
                         <Link to={"/perfil/" + props.publicacion.autor._id}>
                           {record.autor.nombre}
@@ -451,7 +450,10 @@ function Post(props) {
           </Container>
         </Collapse>
       </Card>
-      <Modal isOpen={modalEditarComentario} toggle={() => setModaComentario(false)}>
+      <Modal
+        isOpen={modalEditarComentario}
+        toggle={() => setModaComentario(false)}
+      >
         <div className="modal-header justify-content-center">
           <button
             className="close"
@@ -523,7 +525,6 @@ function Post(props) {
           </Form>
         </ModalBody>
       </Modal>
-
     </>
   );
 }
