@@ -47,6 +47,10 @@ const postSchema = new mongoose.Schema({
     {
       commenterId: String,
       text: String,
+      fecha_creacion: {
+        type: Date,
+        default: Date.now,
+      },
       autor: { type: ObjectId, ref: "users" },
     },
   ],
