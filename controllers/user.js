@@ -211,31 +211,6 @@ exports.searchUsersByNombre = (req, res) => {
 };
 
 exports.addFollowing = async (req, res) => {
-  ChatRoom.find({ members: { $all: [req.userData.userId, req.body.userId] } })
-    .then((room) => {
-      if (!room.length) {
-        new ChatRoom({
-          members: [req.user.id, req.userData.userId],
-        })
-          .save()
-          .then((room) => {
-            room
-              .populate("members", "nombre fotoPerfil activityStatus")
-              .execPopulate()
-              .then((room) => {
-                messageHandler.sendRoom(req, {
-                  userId: req.user.id,
-                  room: room.toObject(),
-                });
-              });
-          });
-      }
-    })
-    .catch((err) => {
-      return res.status(500).json({
-        message: err.message,
-      });
-    });
 
   try {
     User.findByIdAndUpdate(
