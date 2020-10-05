@@ -6,7 +6,7 @@ const post = require("./post");
 const anuncios = require("./anuncios");
 const negocios = require("./negocios");
 const eventos = require("./eventos");
-const chatroom = require("./chatroom");
+const chat = require("./chat");
 
 const notification = require("./notification");
 
@@ -21,7 +21,7 @@ module.exports = (app) => {
   app.use("/api/anuncios", authenticate, anuncios);
   app.use("/api/negocios", authenticate, negocios);
   app.use("/api/eventos", authenticate, eventos);
-  app.use("/api/chatroom", authenticate, chatroom);
+  app.use("/api/chat", authenticate, chat);
 
   app.use("/api/notificacion", authenticate, notification);
 

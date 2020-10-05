@@ -6,7 +6,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const passport = require("passport");
 const path = require("path");
-
+const rateLimit = require("express-rate-limit");
+const socket_io = require("socket.io");
 // Setting up port
 mongoose.connect(process.env.MOGOURI || "mongodb://localhost/my_database", {
   useNewUrlParser: true,
@@ -17,25 +18,53 @@ let PORT = process.env.PORT || 5000;
 //=== 1 - CREATE APP
 // Creating express app and configuring middleware needed for authentication
 const app = express();
-
+const io = socket_io();
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //socket i.o
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('User Disconnected');
+app.io = io;
+app.set("socketio", io);
+
+const http = require("http").Server(app);
+io.use((socket, next) => {
+  if (socket.handshake.query && socket.handshake.query.token) {
+    const token = socket.handshake.query.token.split(" ")[1];
+    jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+      if (err) return next(new Error("Authentication error"));
+      socket.userData = decoded;
+      next();
+    });
+  } else {
+    next(new Error("Authentication error"));
+  }
+}).on("connection", (socket) => {
+  // Connection now authenticated to receive further events
+  socket.join(socket.userData.userId);
+  io.in(socket.userData.userId).clients((err, clients) => {
+    userController.changeStatus(socket.userData.userId, clients, io);
+    //console.log(clients);
   });
-  socket.on('example_message', function(msg){
-    console.log('message: ' + msg);
+  socket.on("typing", (data) => {
+    socket.to(data.userId).emit("typing", { roomId: data.roomId });
+  });
+  socket.on("stoppedTyping", (data) => {
+    socket.to(data.userId).emit("stoppedTyping", { roomId: data.roomId });
+  });
+  socket.on("disconnect", () => {
+    socket.leave(socket.userData.userId);
+    io.in(socket.userData.userId).clients((err, clients) => {
+      userController.changeStatus(socket.userData.userId, clients, io);
+      //console.log(clients);
+    });
   });
 });
-io.listen(8000);
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200, // limit each IP to 200 requests per windowMs
+});
 //form-urlencoded
 
 const connection = mongoose.connection;
@@ -62,10 +91,10 @@ require("./routes/api/index")(app);
 const postsRouter = require("./routes/api/post");
 app.use("/api/post/", postsRouter);
 
-app.use(express.static('client/build'));
+app.use(express.static("client/build"));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 
 //=== 5 - START SERVER
