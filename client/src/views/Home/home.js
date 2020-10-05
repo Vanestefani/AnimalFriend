@@ -4,7 +4,8 @@ import { Container, Row, Col } from "reactstrap";
 import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import VerticalMenu from "../../components/Navbars/VerticalMenu";
-import ListMascotas from "../../components/Listas/ListMascotas";
+import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores";
+
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import PostContext from "../../context/post/postContext";
@@ -51,7 +52,9 @@ function Home() {
               <CrearPublicacion></CrearPublicacion>
               <PostList publicaciones={publicaciones} next={allpost}></PostList>
             </Col>
-            <Col md="3"></Col>
+            <Col md="3">
+            <ListaSeguidores></ListaSeguidores>
+            </Col>
           </Row>
         </Container>
         <DefaultFooter></DefaultFooter>

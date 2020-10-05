@@ -1,24 +1,27 @@
 import React from "react";
-import { ListGroupItem, Button } from "reactstrap";
-function itemSeguidores() {
+import { Media, Button } from "reactstrap";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import "moment/locale/es";
+function itemSeguidores(props) {
   return (
     <>
-      <ListGroupItem className="shadow p-3 mb-5 bg-white rounded">
-        <center>
-          <img
-            src={require("../../../assets/img/undraw_female_avatar_w3jk.png")}
-            className="rounded-circle FotoUser"
-            width="60px"
-            alt="avatar"
-          ></img>
-        </center>
-        <p>
-          Nombre de seguidor
-          <Button className="btn-round " color="neutral" size="sm">
-            <i className="fas fa-plus-circle"></i>Añadir
-          </Button>
-        </p>
-      </ListGroupItem>
+      <Media>
+        <Media left top href="#">
+          <Link to={"/perfil/" + props.usuario._id}>
+            <Media
+              object
+              width="64px"
+              src={props.usuario.fotoPerfil}
+              alt={"foto de perfil de " + props.usuario.nombre}
+            />
+          </Link>
+        </Media>
+        <Media body>
+          <Media heading>{props.usuario.nombre}</Media>
+          {moment(new Date(props.usuario.fecha_creacion)).fromNow()}
+        </Media>
+      </Media>
     </>
   );
 }

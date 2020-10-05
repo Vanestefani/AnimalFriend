@@ -17,8 +17,9 @@ const {
 // @desc Returns all users
 // @access Public
 exports.index = async function (req, res) {
-  const users = await User.find({}).sort("-fecha_creacion");
+  const users = await User.find({}).where('_id').ne(req.user._id).sort("-fecha_creacion").limit(30);
   res.status(200).json({ users });
+
 };
 
 // @route POST api/user
@@ -193,36 +194,6 @@ exports.changeProfilePicture = (req, res) => {
       console.log(err);
       return res.status(500).json({ message: err.message });
     });
-};
-
-exports.getNewUsers = (req, res) => {
-  if (req.body.initialFetch) {
-    const usersCount = User.find({}).countDocuments();
-    const users = User.find()
-      .select("nombre fecha_creacion fotoPerfil")
-      .sort({ date: -1 })
-      .limit(30);
-
-    Promise.all([usersCount, users])
-      .then((response) => {
-        const [usersCount, users] = response;
-        res.status(200).json({ usersCount, users });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          message: err.message,
-        });
-      });
-  } else {
-    User.find({ _id: { $lt: req.body.lastId } })
-      .select("nombre fecha_creacion fotoPerfil")
-      .sort({ date: -1 })
-      .limit(30)
-      .then((users) => {
-        return res.status(200).json({ users });
-      })
-      .catch((err) => res.status(500).json({ message: err.message }));
-  }
 };
 
 exports.searchUsersByNombre = (req, res) => {

@@ -1,37 +1,40 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
   ListGroup,
   Container,
-  Card,
+  Media,
   CardTitle,
   CardBody,
   CardHeader,
   CardFooter,
 } from "reactstrap";
 import ItemSeguidores from "./itemSeguidores";
+import AuthContext from "../../../context/autenticacion/authContext";
 
 function ListaSeguidores() {
+  const AContext = useContext(AuthContext);
+  const { alluser, usuarios } = AContext;
+  useEffect(() => {
+    alluser();
+  }, [usuarios]);
   return (
     <>
-      <Card className="card-general">
-        <Container className="container">
-          <CardHeader>
-            <CardTitle className="title-up">
-              <h3>Mis seguidores</h3>
-            </CardTitle>
-          </CardHeader>
-          <CardBody>
-            <ListGroup flush>
-              <ItemSeguidores></ItemSeguidores>
-            </ListGroup>
-          </CardBody>
-          <CardFooter>
-            <Link className="pull-right">Ver más</Link>
-          </CardFooter>
-        </Container>
-      </Card>
+      <Container className="container">
+        <h3>Mis seguidores</h3>
+        <Media list>
+          {usuarios
+            ? usuarios.map((usuario) => (
+                <ListGroup flush>
+                  <Media tag="li">
+                    <ItemSeguidores usuario={usuario}></ItemSeguidores>
+                  </Media>
+                </ListGroup>
+              ))
+            : ""}
+        </Media>
+      </Container>
     </>
   );
 }
