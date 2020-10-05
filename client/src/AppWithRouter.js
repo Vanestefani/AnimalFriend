@@ -101,11 +101,7 @@ const AppWithRouter = () => (
                             path="/perfil/:q"
                             component={Perfil}
                           />
-                          <PrivateRoute
-                            exact
-                            path="/messages/chat"
-                            component={MessengerPage}
-                          />
+                      
 
                           <Route
                             exact

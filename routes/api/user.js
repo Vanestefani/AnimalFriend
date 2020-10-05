@@ -10,8 +10,7 @@ const upload = multer().single("imagen");
 const router = express.Router();
 
 //INDEX
-router.get("/all",  checkAuth,
-validate, User.index);
+router.get("/all", checkAuth, validate, User.index);
 
 //STORE
 
@@ -19,10 +18,9 @@ validate, User.index);
 router.get("/:id", checkAuth, validate, User.show);
 
 //DELETE
-router.delete("/:id",  checkAuth,
-validate, User.destroy);
+router.delete("/:id", checkAuth, validate, User.destroy);
 //Buiscar usuario por nombre y correo
-router.get(
+router.post(
   "/searchByUsername",
 
   checkAuth,
@@ -30,8 +28,8 @@ router.get(
 
   User.searchUsersByNombre
 );
-router.put("/follow", checkAuth, validate,User.addFollowing);
-router.put("/unfollow", checkAuth, validate,User.unFollow);
-router.put("/:userId", checkAuth, validate,User.update);
+router.put("/follow", checkAuth, validate, User.addFollowing);
+router.put("/unfollow", checkAuth, validate, User.unFollow);
+router.put("/:userId", checkAuth, validate, User.update);
 
 module.exports = router;

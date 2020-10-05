@@ -1,22 +1,20 @@
 const mongoose = require("mongoose");
-mongoose.Promise = global.Promise;
 
-const Message = new mongoose.Schema({
-  roomId: { type: mongoose.Schema.Types.ObjectId },
-  sender: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
-  texto: {
-    type: String,
-    trim: true,
-    minlength: 1
+const messageSchema = new mongoose.Schema({
+  chatroom: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: "Chatroom is required!",
+    ref: "Chatroom",
   },
-  tipo: {
-    type: String,
-    required: true
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: "Chatroom is required!",
+    ref: "users",
   },
-  receiver: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
-  foto: String,
-  leido: { type: Boolean, default: false },
-  fecha_creacion: { type: Date, default: Date.now }
+  message: {
+    type: String,
+    required: "Message is required!",
+  },
 });
 
-module.exports = mongoose.model("Message", Message);
+module.exports = mongoose.model("Message", messageSchema);

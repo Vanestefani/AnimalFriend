@@ -18,7 +18,7 @@ import { history } from "../../_helpers/history";
 import AuthContext from "../../context/autenticacion/authContext";
 function HomeNarbar() {
   const authContext = useContext(AuthContext);
-  const { usuario, cerrarSesion } = authContext;
+  const { usuario, cerrarSesion ,usuarios} = authContext;
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [user, setUser] = useState({
@@ -91,6 +91,7 @@ function HomeNarbar() {
               <span className="navbar-toggler-bar bar3"></span>
             </button>
           </div>
+
           <Collapse
             className="justify-content-end"
             isOpen={collapseOpen}

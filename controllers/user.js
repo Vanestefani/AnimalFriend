@@ -3,8 +3,6 @@ const fs = require("fs");
 const User = mongoose.model("users");
 const Post = require("../models/Post");
 const Notification = require("../models/Notificacion");
-const Chat = require("../models/Chat");
-const Message = require("../models/Message");
 const {
   uploader,
   sendEmail,
@@ -17,9 +15,12 @@ const {
 // @desc Returns all users
 // @access Public
 exports.index = async function (req, res) {
-  const users = await User.find({}).where('_id').ne(req.user._id).sort("-fecha_creacion").limit(30);
+  const users = await User.find({})
+    .where("_id")
+    .ne(req.user._id)
+    .sort("-fecha_creacion")
+    .limit(30);
   res.status(200).json({ users });
-
 };
 
 // @route POST api/user
@@ -198,8 +199,8 @@ exports.changeProfilePicture = (req, res) => {
 
 exports.searchUsersByNombre = (req, res) => {
   if (req.body.q) {
-    User.findById({
-      _id:  req.user.id,
+    User.find({
+      nombre: new RegExp("^" + req.body.q, "i"),
     })
       .limit(10)
       .select("nombre fotoPerfil pais ciudad genero bio   ")
@@ -211,7 +212,6 @@ exports.searchUsersByNombre = (req, res) => {
 };
 
 exports.addFollowing = async (req, res) => {
-
   try {
     User.findByIdAndUpdate(
       req.user.id,

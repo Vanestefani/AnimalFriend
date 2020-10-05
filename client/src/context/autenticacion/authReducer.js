@@ -22,6 +22,8 @@ import {
   UNFOLLOW_FAILURE,
   EDIT_PERFIL_SUCCESS,
   EDIT_PERFIL_FAILURE,
+  GETUSERSEARCH_SUCCESS,
+  GETUSERSEARCH_FAILURE,
 } from "../../types";
 
 export default (state, action) => {
@@ -32,7 +34,11 @@ export default (state, action) => {
 
         usuarios: action.payload,
       };
-
+    case GETUSERSEARCH_SUCCESS:
+      return {
+        ...state,
+        busquedausuario: action.payload.user,
+      };
     case UNFOLLOW_SUCCESS:
     case FOLLOW_SUCCESS:
     case BUSCAR_USUARIO:

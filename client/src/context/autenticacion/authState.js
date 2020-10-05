@@ -29,6 +29,8 @@ import {
   UNFOLLOW_FAILURE,
   EDIT_PERFIL_SUCCESS,
   EDIT_PERFIL_FAILURE,
+  GETUSERSEARCH_SUCCESS,
+  GETUSERSEARCH_FAILURE,
 } from "../../types";
 
 const AuthState = (props) => {
@@ -36,6 +38,7 @@ const AuthState = (props) => {
     token: localStorage.getItem("token"),
     usuarioactual: "",
     autenticado: null,
+    busquedausuario: null,
     usuario: null,
     mensaje: null,
     cargando: true,
@@ -61,6 +64,25 @@ const AuthState = (props) => {
       dispatch({
         type: REGISTRO_ERROR,
         payload: alerta,
+      });
+    }
+  };
+  const searchUsersByNombre = async (id) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.get(`api/user/searchUsersByNombre`);
+
+      dispatch({
+        type: GETUSERSEARCH_SUCCESS,
+        payload: respuesta.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GETUSERSEARCH_FAILURE,
       });
     }
   };
@@ -316,6 +338,7 @@ const AuthState = (props) => {
       });
     }
   };
+
   return (
     <AuthContext.Provider
       value={{
@@ -338,6 +361,7 @@ const AuthState = (props) => {
         seguir,
         noseguir,
         actualizarperfil,
+        searchUsersByNombre,
       }}
     >
       {props.children}
