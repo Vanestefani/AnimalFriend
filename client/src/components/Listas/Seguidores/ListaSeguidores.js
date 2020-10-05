@@ -5,6 +5,7 @@ import {
   ListGroup,
   Container,
   Media,
+  Card,
   CardTitle,
   CardBody,
   CardHeader,
@@ -21,8 +22,16 @@ function ListaSeguidores() {
   }, [usuarios]);
   return (
     <>
-      <Container className="container">
-        <h3>Mis seguidores</h3>
+      <Card >
+        <CardTitle>
+          <center>
+            {" "}
+            <h3>
+              <b>Nuevos usuarios</b>
+            </h3>
+          </center>
+        </CardTitle>
+
         <Media list>
           {usuarios
             ? usuarios.map((usuario) => (
@@ -34,7 +43,7 @@ function ListaSeguidores() {
               ))
             : ""}
         </Media>
-      </Container>
+      </Card>
     </>
   );
 }

@@ -17,13 +17,16 @@ function itemSeguidores(props) {
             />
           </Link>
         </Media>
-        <Media body>
+        <Media body top>
           <Link to={"/perfil/" + props.usuario._id}>
-            <Media heading>{props.usuario.nombre}</Media>
-            {moment(new Date(props.usuario.fecha_creacion)).fromNow()}
+            <Media>
+              <span>{props.usuario.nombre}</span>
+            </Media>
           </Link>
+          <span>
+            {moment(new Date(props.usuario.fecha_creacion)).fromNow()}
+          </span>
         </Media>
-
       </Media>
     </>
   );
