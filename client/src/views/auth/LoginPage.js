@@ -110,6 +110,7 @@ function LoginPage(props) {
       // Pasarlo al action
       iniciarSesion({ email, password });
     } else {
+      setFirstFocus(true);
       validate();
     }
   };
