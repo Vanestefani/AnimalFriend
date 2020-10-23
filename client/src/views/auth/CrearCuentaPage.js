@@ -53,10 +53,7 @@ function CrearCuentaPage(props) {
   });
   const validate = () => {
     let isError = false;
-    // El pattern solo letras
-    const pattern = new RegExp(
-      "^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ']+[s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ'])+[s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ'])?$"
-    );
+
     //El pattern contraseña 1As20092
     const pattern2 = new RegExp(
       "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
@@ -64,8 +61,11 @@ function CrearCuentaPage(props) {
     const pattern3 = new RegExp(
       "^[a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1}([a-z0-9][-_.+!#$%&'*/=?^`{|]{0,1})*[a-z0-9]@[a-z0-9][-.]{0,1}([a-z][-.]{0,1})*[a-z0-9].[a-z0-9]{1,}([.-]{0,1}[a-z]){0,}[a-z0-9]{0,}$"
     );
+const maximo=new RegExp("[a-zA-Z ]{3,19}$");
+const maximopasword=new RegExp("[a-zA-Z ]{6,19}$");
 
     if (usuario.step === 1) {
+
       if (pattern3.test(usuario.email) === false) {
         usuario.errors.Erroremail.valido = false;
         usuario.errors.Erroremail.mensaje =
@@ -73,12 +73,12 @@ function CrearCuentaPage(props) {
       } else {
         usuario.errors.Erroremail.valido = true;
       }
-      if (usuario.password.length < 6) {
-        usuario.errors.Errorpassword.valido = false;
-        usuario.errors.Errorpassword.mensaje =
-          "(La contraseña debe tener al menos 6 caracteres)";
+      if (maximo.test(usuario.nombre) === false) {
+        usuario.errors.Errornombre.valido = false;
+        usuario.errors.Errornombre.mensaje =
+          "(Por favor ingrese un nombre valido)";
       } else {
-        usuario.errors.Errorpassword.valido = true;
+        usuario.errors.Errornombre.valido = true;
       }
 
       if (usuario.password !== usuario.password2) {
@@ -88,13 +88,7 @@ function CrearCuentaPage(props) {
       } else {
         usuario.errors.Errorpassword2.valido = true;
       }
-      if (usuario.nombre.length < 3) {
-        usuario.errors.Errornombre.valido = false;
-        usuario.errors.Errornombre.mensaje =
-          "(El campo nombre no puede estar vacio y debe tener al menos tres caracteres)";
-      } else {
-        usuario.errors.Errornombre.valido = true;
-      }
+   console.log(usuario.nombre.lenght)
 
       if (!pattern2.test(usuario.password)) {
         usuario.errors.Errorpassword.valido = false;
