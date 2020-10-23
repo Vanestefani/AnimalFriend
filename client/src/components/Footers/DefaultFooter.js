@@ -14,25 +14,17 @@ function DefaultFooter() {
         <Container>
           <nav>
             <ul>
-              <li>
-                <Link
-                  to="http://animalfriendblog.gearhostpreview.com/"
-                  target="_blank"
-                >
-                  Sobre nosotros
-                </Link>
-              </li>
 
               <li>
                 <ModalPoliticas></ModalPoliticas>
               </li>
               <li>
-                <Link
+                <a
                   target="_blank"
-                  to="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u"
+                  href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABtOqqlUNjU2RjhCN0VYM1I5QkVTSFg0NUVQV09QUi4u"
                 >
                   Danos tu opinión
-                </Link>
+                </a>
               </li>
             </ul>
           </nav>

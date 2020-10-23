@@ -11,14 +11,6 @@ function DarkFooter() {
       <Container>
         <nav>
           <ul>
-            <li>
-              <Link
-                to="http://animalfriendblog.gearhostpreview.com/"
-                target="_blank"
-              >
-                Sobre nosotros
-              </Link>
-            </li>
 
             <li>
               <ModalPoliticas></ModalPoliticas>
