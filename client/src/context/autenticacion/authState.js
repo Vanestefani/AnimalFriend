@@ -118,7 +118,7 @@ const AuthState = (props) => {
       });
     } catch (error) {
       if (error) {
-        var errorsito = error.response.data.error.email;
+        var errorsito = error.response.data.message;
       } else {
         var errorsito = error.response.data.message;
       }
@@ -229,10 +229,10 @@ const AuthState = (props) => {
         payload: respuesta.data,
       });
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error.response.data);
 
       const alerta = {
-        msg: error.response.data.message,
+        msg:error.response.data,
         categoria: "danger",
       };
       dispatch({
@@ -255,7 +255,6 @@ const AuthState = (props) => {
       });
       alluser();
     } catch (error) {
-      console.log(error);
 
       const alerta = {
         categoria: "danger",
