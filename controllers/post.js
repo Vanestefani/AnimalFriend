@@ -237,10 +237,11 @@ exports.deletecomment = async (req, res) => {
 exports.updatecomment = async (req, res) => {
   try {
     Post.findByIdAndUpdate(
-      req.params.commenterId,
+      req.body.postId,
       {
         $push: {
           comments: {
+
             text: req.body.text,
           },
         },

@@ -63,6 +63,13 @@ function Post(props) {
       Errorcomentario: { valido: true, mensaje: "" },
     },
   });
+  const [editarcomentario, seteditarcomentario] = useState({
+    Id: "",
+    comentario: "",
+    errors: {
+      Errorcomentario: { valido: true, mensaje: "" },
+    },
+  });
 
   const { comentario, errors } = comentarios;
 
@@ -82,6 +89,23 @@ function Post(props) {
       errors.Errorcomentario.valido = true;
     }
     if (!errors.Errorcomentario.valido) {
+      isError = true;
+    } else {
+      isError = false;
+    }
+    return isError;
+  };
+  //validar editarcomentarion
+  const validateeditarcomentario = () => {
+    let isError = false;
+    if (editarcomentario.comentario.trim() == "") {
+      editarcomentario.errors.Errorcomentario.valido = false;
+      editarcomentario.errors.Errorcomentario.mensaje =
+        "(El campo  no puede estar vacio)";
+    } else {
+      editarcomentario.errors.Errorcomentario.valido = true;
+    }
+    if (!editarcomentario.errors.Errorcomentario.valido) {
       isError = true;
     } else {
       isError = false;
@@ -110,6 +134,28 @@ function Post(props) {
       ...comentarios,
       comentario: e.target.value,
     });
+  };
+  const handleChangeEditarCometario = (e) => {
+    seteditarcomentario({
+      ...editarcomentario,
+      comentario: e.target.value,
+    });
+  };
+  const onSubmiteditarcomentario = (e) => {
+    let err = validateeditarcomentario();
+    if (!err) {
+      let postId = props.publicacion._id;
+      e.preventDefault();
+      updatecomment({
+        commentId: editarcomentario.Id,
+        text: editarcomentario.comentario,
+        postId: postId,
+      });
+      seteditarcomentario(false);
+    } else {
+      setLastFocus(true);
+      validate();
+    }
   };
 
   const onSubmitcomentario = (e) => {
@@ -179,6 +225,7 @@ function Post(props) {
   };
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
+  const [lastFocus1, setLastFocus1] = React.useState(false);
 
   return (
     <>
@@ -332,6 +379,64 @@ function Post(props) {
             {props.publicacion.comments.map((record) => {
               return (
                 <Container>
+                  <Modal
+                    isOpen={modalEditarComentario}
+                    toggle={() => setModaComentario(false)}
+                  >
+                    <div className="modal-header justify-content-center">
+                      <button
+                        className="close"
+                        type="button"
+                        onClick={() => setModaComentario(false)}
+                      >
+                        <i className="now-ui-icons ui-1_simple-remove"></i>
+                      </button>
+                      <h2 className="title title-up">Editar Comentario </h2>
+                    </div>
+                    <ModalBody>
+                      <Form>
+                        <Input
+                          className={
+                            editarcomentario.errors != undefined
+                              ? editarcomentario.errors.Errorcomentario.valido
+                                ? ""
+                                : "is-invalid form-control-danger form-control"
+                              : " "
+                          }
+                          placeholder="Comparte tu opinion"
+                          onFocus
+                          rows="3"
+                          cols="2"
+                          value={editarcomentario.comentario}
+                          onChange={handleChangeEditarCometario}
+                          type="textarea"
+                          onFocus={() => setLastFocus1(true)}
+                          onBlur={() => setLastFocus1(false)}
+                        ></Input>
+                         <input type="hidden" name="action" value={editarcomentario.Id} defaultValue={record._id} />
+                        <br></br>
+                        {errors != undefined ? (
+                          !errors.Errorcomentario.valido ? (
+                            <span className=" container text-muted">
+                              {editarcomentario.errors.Errorcomentario.mensaje}
+                            </span>
+                          ) : (
+                            ""
+                          )
+                        ) : (
+                          ""
+                        )}
+
+                        <Button
+                          className="pull-right"
+                          onClick={onSubmiteditarcomentario}
+                        >
+                          Editar
+                        </Button>
+                      </Form>
+                    </ModalBody>
+                  </Modal>
+
                   <Media>
                     <Media left top href="#">
                       <Link to={"/perfil/" + props.publicacion.autor._id}>
@@ -359,7 +464,10 @@ function Post(props) {
                               <DropdownItem
                                 href="#AnimalFriend"
                                 onClick={() =>
-                                  deletecomment({ postId: props.publicacion._id ,commentId: record._id })
+                                  deletecomment({
+                                    postId: props.publicacion._id,
+                                    commentId: record._id,
+                                  })
                                 }
                               >
                                 <i className="fas fa-trash-alt"></i>
@@ -373,7 +481,6 @@ function Post(props) {
                       </div>
 
                       <Media letf top>
-
                         <Link to={"/perfil/" + props.publicacion.autor._id}>
                           {record.autor.nombre}
                           <br></br>

@@ -34,6 +34,6 @@ router.delete(
 );
 
 router.put("/:postId", checkAuth, validate, postController.actualizarPost);
-router.put("/:commentId", checkAuth, validate, postController.updatecomment);
+router.put("/updatecomment", checkAuth, validate, postController.updatecomment);
 
 module.exports = router;

@@ -15,50 +15,61 @@ function ListMascotas() {
 
   return (
     <>
-      <Card className="card-general">
-        <Container className="container">
-          <Link to="/mis-mascotas" className="pull-right">
-            Ver más
+ {(mascotas.length ===0) ?
+   (
+    <Card>
+          <p>No tienes añadida ninguna mascota</p>
+            <Link to="/mis-mascotas" className="pull-right">
+           Mis mascotas
           </Link>
-          <CardHeader>
-            <CardTitle className="title-up">
-              <center>
-                <h3><b>Mis mascotas</b></h3>
-              </center>
-            </CardTitle>
-          </CardHeader>
-          <CardBody>
-            {!loading ? (
-              mascotas.map((mascota) => (
-                <ItemMascota key={mascota._id} mascota={mascota}></ItemMascota>
-              ))
-            ) : (
-              <center>
-                <Skeleton
-                  circle={true}
-                  height={100}
-                  width={100}
-                  animation="wave"
-                  variant="rect"
-                />
+          </Card>
+          )   :
+              ( <Card className="card-general">
+              <Container className="container">
+                <Link to="/mis-mascotas" className="pull-right">
+                  Ver más
+                </Link>
+                <CardHeader>
+                  <CardTitle className="title-up">
+                    <center>
+                      <h3><b>Mis mascotas</b></h3>
+                    </center>
+                  </CardTitle>
+                </CardHeader>
+                <CardBody>
 
-                <Skeleton
-                  height={30}
-                  width={100}
-                  animation="wave"
-                  variant="rect"
-                />
-                <Skeleton
-                  height={30}
-                  width={100}
-                  animation="wave"
-                  variant="rect"
-                />
-              </center>
-            )}
-          </CardBody>
-        </Container>
-      </Card>
+                  {!loading ? (
+
+                    mascotas.map((mascota) => (
+                      <ItemMascota key={mascota._id} mascota={mascota}></ItemMascota>
+           ))
+                  ) : (
+                    <center>
+                      <Skeleton
+                        circle={true}
+                        height={100}
+                        width={100}
+                        animation="wave"
+                        variant="rect"
+                      />
+
+                      <Skeleton
+                        height={30}
+                        width={100}
+                        animation="wave"
+                        variant="rect"
+                      />
+                      <Skeleton
+                        height={30}
+                        width={100}
+                        animation="wave"
+                        variant="rect"
+                      />
+                    </center>
+                  )}
+                </CardBody>
+              </Container>
+            </Card>) }
     </>
   );
 }

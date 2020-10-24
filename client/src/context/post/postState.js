@@ -190,7 +190,7 @@ const PostState = (props) => {
     try {
       const respuesta = await clienteAxios.put(
         "/api/post/updatecomment",
-        commentId
+
       );
 
       dispatch({
