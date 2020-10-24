@@ -24,7 +24,7 @@ import ListMascotasbyuser from "../../components/Listas/ListMascotasbyuser";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
-import ListaSeguidores from "../../components/Listas/Seguidores/ListaSeguidores";
+import ListaUsuariosNuevos from "../../components/Listas/Seguidores/ListaUsuariosNuevos";
 import Editar from "./Form/editar";
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
@@ -241,8 +241,8 @@ function Perfil({ match }) {
               <Row>
                 <Col md="3">
                   <ListMascotasbyuser></ListMascotasbyuser>
-                  <ListaSeguidores></ListaSeguidores>
-                  <ListaAnuncio></ListaAnuncio>
+                 <ListaUsuariosNuevos></ListaUsuariosNuevos>
+                   <ListaAnuncio></ListaAnuncio>
                 </Col>
                 <Col md="9">
                   {usuarioactual._id === usuario._id ? (

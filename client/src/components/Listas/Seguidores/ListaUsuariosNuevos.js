@@ -14,7 +14,7 @@ import {
 import ItemSeguidores from "./itemSeguidores";
 import AuthContext from "../../../context/autenticacion/authContext";
 
-function ListaSeguidores() {
+function ListaUsuariosNuevos() {
   const AContext = useContext(AuthContext);
   const { alluser, usuarios } = AContext;
   useEffect(() => {
@@ -48,4 +48,4 @@ function ListaSeguidores() {
   );
 }
 
-export default ListaSeguidores;
+export default ListaUsuariosNuevos;
