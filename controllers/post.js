@@ -52,7 +52,7 @@ exports.getsubpost = async (req, res) => {
     let following = req.user.following;
 
     // if postedBy in following
-    Post.find({ $or: [{ autor: { $in: following } }, { autor: req.user._id }] })
+    Post.find({ $or: [{ autor: { $in: following } }] })
       .populate("autor", "_id nombre fotoPerfil")
       .populate("comments.autor", "_id nombre fotoPerfil")
       .sort("-fecha_creacion")

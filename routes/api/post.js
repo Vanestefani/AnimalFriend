@@ -6,7 +6,7 @@ const validate = require("../../middlewares/validate");
 const multer = require("multer");
 const upload = multer().single("imagen");
 router.post("/addPost", checkAuth, validate, upload, postController.createPost);
-router.get("/allpost", checkAuth, validate, postController.allpost);
+router.get("/allpost", checkAuth, validate, postController.getsubpost);
 router.put("/comment", checkAuth, validate, postController.comment);
 router.get(
   "/getsubpost/:usuario",

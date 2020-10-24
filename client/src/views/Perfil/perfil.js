@@ -18,17 +18,17 @@ import {
 } from "reactstrap";
 
 import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
+import SubMenu from "../../components/Navbars/SubMenu";
+
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import ListMascotasbyuser from "../../components/Listas/ListMascotasbyuser";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
-import ListaAnuncio from "../../components/Listas/Anuncios/ListaAnuncio";
-import ListaUsuariosNuevos from "../../components/Listas/Seguidores/ListaUsuariosNuevos";
+
 import Editar from "./Form/editar";
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 function Perfil({ match }) {
   const mContext = useContext(MascotasContext);
 
@@ -236,13 +236,14 @@ function Perfil({ match }) {
               ""
             )}
           </Container>
+
           <div className="wrapper content_home">
             <Container>
+            <SubMenu usuarioactual={usuarioactual} usuario={usuario}></SubMenu>
               <Row>
                 <Col md="3">
                   <ListMascotasbyuser></ListMascotasbyuser>
-                 <ListaUsuariosNuevos></ListaUsuariosNuevos>
-                   <ListaAnuncio></ListaAnuncio>
+
                 </Col>
                 <Col md="9">
                   {usuarioactual._id === usuario._id ? (

@@ -43,7 +43,7 @@ function VerticalMenu() {
                 </Link>
               </ListGroupItem>
               <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
-                <Link to="/negocios">
+                <Link to="/mis-mascotas">
                   <i class="fas fa-paw"></i>
                   Mis mascotas
                 </Link>
