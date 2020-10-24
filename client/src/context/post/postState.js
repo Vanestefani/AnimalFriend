@@ -208,14 +208,14 @@ const PostState = (props) => {
       });
     }
   };
-  const deletecomment = async (commentId) => {
+  const deletecomment = async (postId,commentId) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
       const respuesta = await clienteAxios.put(
-        "/api/post/deletecomment",
+        "/api/post/deletecomment",postId,
         commentId
       );
 

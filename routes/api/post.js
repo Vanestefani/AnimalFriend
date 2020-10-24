@@ -19,7 +19,7 @@ router.get("/mypost/:postid", checkAuth, validate, postController.postbyuser);
 router.put("/like", checkAuth, validate, postController.like);
 router.put("/unlike", checkAuth, validate, postController.unlike);
 router.put(
-  "/:commentId",
+  "/deletecomment",
   checkAuth,
   validate,
 

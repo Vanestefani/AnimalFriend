@@ -359,7 +359,7 @@ function Post(props) {
                               <DropdownItem
                                 href="#AnimalFriend"
                                 onClick={() =>
-                                  deletecomment({ commentId: record._id })
+                                  deletecomment({ postId: props.publicacion._id ,commentId: record._id })
                                 }
                               >
                                 <i className="fas fa-trash-alt"></i>

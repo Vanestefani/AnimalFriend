@@ -41,7 +41,7 @@ exports.allpost = async (req, res) => {
         res.json({ posts });
       })
       .catch((err) => {
-        console.log(err);
+
       });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -58,7 +58,7 @@ exports.getsubpost = async (req, res) => {
       .sort("-fecha_creacion")
       .then((posts) => {
         res.json({ posts });
-        console.log(posts);
+
       })
       .catch((err) => {
         console.log(err);
@@ -211,10 +211,11 @@ exports.actualizarPost = async (req, res) => {
   }
 };
 exports.deletecomment = async (req, res) => {
-  console.log(req.body.commentId);
+
   try {
-    Post.findOneAndUpdate(
-      req.body.commentId,
+    Post.findByIdAndUpdate(
+      req.body.postId,
+
       {
         $pull: {
           comments: {
@@ -226,6 +227,7 @@ exports.deletecomment = async (req, res) => {
       (err, post) => {
         if (err) return res.status(400).send(err);
         return res.send(post);
+
       }
     );
   } catch (err) {
