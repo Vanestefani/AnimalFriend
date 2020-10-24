@@ -46,9 +46,12 @@ function CrearPublicacion() {
     } else {
       if (errors) errors.Errordescripcion.valido = true;
     }
-    if (photo === null || photo === "") {
-      if (errors) errors.Errorfoto.valido = false;
-      errors.Errorfoto.mensaje = "(Debe subir una imagen)";
+
+    if (photo===undefined || photo === null || photo === "") {
+      if (errors) {
+        errors.Errorfoto.valido = false;
+        errors.Errorfoto.mensaje = "(Debe subir una imagen)";
+      }
     } else {
       if (errors) errors.Errorfoto.valido = true;
     }
@@ -74,7 +77,6 @@ function CrearPublicacion() {
     e.preventDefault();
     const err = validate();
     if (!err) {
-
       let userid = usuario._id;
 
       let formData = new FormData();

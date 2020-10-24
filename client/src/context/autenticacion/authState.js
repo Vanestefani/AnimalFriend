@@ -118,9 +118,9 @@ const AuthState = (props) => {
       });
     } catch (error) {
       if (error) {
-        var errorsito = error.response.data.message;
+        var errorsito = error.response.message;
       } else {
-        var errorsito = error.response.data.message;
+        var errorsito = error.response.message;
       }
       const alerta = {
         msg: errorsito,
