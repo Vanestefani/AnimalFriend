@@ -28,6 +28,14 @@ import {
 
 export default (state, action) => {
   switch (action.type) {
+    case EDIT_PERFIL_SUCCESS:
+      return {
+        ...state,
+
+        usuario: action.payload.user,
+        usuarioactual: action.payload.user,
+      };
+
     case GETALLUSER_SUCCESS:
       return {
         ...state,

@@ -210,7 +210,7 @@ function Perfil({ match }) {
         genero: fusuario.genero,
       });
       setModal1(false);
-      cerrarSesion();
+
     } else {
       setnombreFocus(true);
       validate();

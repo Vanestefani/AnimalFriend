@@ -65,6 +65,8 @@ function FotoPerfil(props) {
       });
       guardararchivophoto(null);
       imageInputRef.current.value = "";
+      setModalP(false);
+
     } else {
       setFirstFocus(true);
       validate();
