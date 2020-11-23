@@ -46,7 +46,7 @@ export default (state, action) => {
         ...state,
         usuarioactual: action.payload.user,
       };
-    case EDIT_PERFIL_SUCCESS:
+
     case PASSWORD_RESET_EXITOSA:
     case VERIFICACIOM_ENVIADA:
     case REGISTRO_EXITOSO:
@@ -81,7 +81,7 @@ export default (state, action) => {
     case GETALLUSER_FAILURE:
     case BUSCAR_USUARIO_ERROR:
     case FOLLOW_FAILURE:
-    case EDIT_PERFIL_FAILURE:
+
     case UNFOLLOW_FAILURE:
       localStorage.removeItem("token");
       return {

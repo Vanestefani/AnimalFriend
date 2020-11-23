@@ -101,7 +101,6 @@ exports.show = async function (req, res) {
 exports.update = async (req, res) => {
   try {
     const update = req.body;
-    console.log(req.body);
     const id = req.params.id;
     const userId = req.user._id;
 
