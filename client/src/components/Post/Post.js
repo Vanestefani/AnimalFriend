@@ -64,8 +64,8 @@ function Post(props) {
     },
   });
   const [editarcomentario, seteditarcomentario] = useState({
-    Id: "",
-    comentario: "",
+    Id: " ",
+    comentario: " ",
     errors: {
       Errorcomentario: { valido: true, mensaje: "" },
     },
@@ -98,17 +98,23 @@ function Post(props) {
   //validar editarcomentarion
   const validateeditarcomentario = () => {
     let isError = false;
-    if (editarcomentario.comentario.trim() == "") {
-      editarcomentario.errors.Errorcomentario.valido = false;
-      editarcomentario.errors.Errorcomentario.mensaje =
-        "(El campo  no puede estar vacio)";
-    } else {
-      editarcomentario.errors.Errorcomentario.valido = true;
-    }
-    if (!editarcomentario.errors.Errorcomentario.valido) {
-      isError = true;
-    } else {
-      isError = false;
+    if (editarcomentario.errors) {
+      if (editarcomentario.comentario.trim() === "") {
+        if (editarcomentario.errors) {
+          editarcomentario.errors.Errorcomentario.valido = false;
+          editarcomentario.errors.Errorcomentario.mensaje =
+            "(El campo  no puede estar vacio)";
+        }
+      } else {
+        if (errors) {
+          editarcomentario.errors.Errorcomentario.valido = true;
+        }
+      }
+      if (!editarcomentario.errors.Errorcomentario.valido) {
+        isError = true;
+      } else {
+        isError = false;
+      }
     }
     return isError;
   };
@@ -140,22 +146,6 @@ function Post(props) {
       ...editarcomentario,
       comentario: e.target.value,
     });
-  };
-  const onSubmiteditarcomentario = (e) => {
-    let err = validateeditarcomentario();
-    if (!err) {
-      let postId = props.publicacion._id;
-      e.preventDefault();
-      updatecomment({
-        commentId: editarcomentario.Id,
-        text: editarcomentario.comentario,
-        postId: postId,
-      });
-      seteditarcomentario(false);
-    } else {
-      setLastFocus(true);
-      validate();
-    }
   };
 
   const onSubmitcomentario = (e) => {
@@ -397,7 +387,7 @@ function Post(props) {
                       <Form>
                         <Input
                           className={
-                            editarcomentario.errors != undefined
+                            editarcomentario.errors
                               ? editarcomentario.errors.Errorcomentario.valido
                                 ? ""
                                 : "is-invalid form-control-danger form-control"
@@ -413,10 +403,10 @@ function Post(props) {
                           onFocus={() => setLastFocus1(true)}
                           onBlur={() => setLastFocus1(false)}
                         ></Input>
-                         <input type="hidden" name="action" value={editarcomentario.Id} defaultValue={record._id} />
+
                         <br></br>
-                        {errors != undefined ? (
-                          !errors.Errorcomentario.valido ? (
+                        {editarcomentario.errors ? (
+                          !editarcomentario.errors.valido ? (
                             <span className=" container text-muted">
                               {editarcomentario.errors.Errorcomentario.mensaje}
                             </span>
@@ -429,7 +419,32 @@ function Post(props) {
 
                         <Button
                           className="pull-right"
-                          onClick={onSubmiteditarcomentario}
+                          onClick={(e) => {
+                            let err = validateeditarcomentario();
+                            if (!err) {
+                              let postId = props.publicacion._id;
+                              let commentID = e.preventDefault();
+                              updatecomment({
+                                commentId: record._id,
+                                text: editarcomentario.comentario,
+                                postId: postId,
+                              });
+                              seteditarcomentario({
+                                Id: "",
+                                comentario: "",
+                                errors: {
+                                  Errorcomentario: {
+                                    valido: true,
+                                    mensaje: "",
+                                  },
+                                },
+                              });
+                              setModaComentario(false);
+                            } else {
+                              setLastFocus(true);
+                              validateeditarcomentario();
+                            }
+                          }}
                         >
                           Editar
                         </Button>
@@ -460,7 +475,6 @@ function Post(props) {
                               size="sm"
                             ></DropdownToggle>
                             <DropdownMenu>
-
                               <DropdownItem
                                 href="#AnimalFriend"
                                 onClick={() =>

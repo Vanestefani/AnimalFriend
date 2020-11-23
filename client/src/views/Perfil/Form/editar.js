@@ -73,6 +73,7 @@ function FormPerfil(props) {
                 ></Input>
               </InputGroup>
             </FormGroup>
+
             {!props.errores.Errornombre ? (
               <span className="text-muted">
                 {props.errores.Errornombre.mensaje}

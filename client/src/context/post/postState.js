@@ -4,7 +4,6 @@ import PostReducer from "./postReducer";
 
 import clienteAxios from "../../config/axios";
 import tokenAuth from "../../config/token";
-
 import {
   ADD_POST_SUCCESS,
   ADD_POST_FAILURE,
@@ -182,14 +181,14 @@ const PostState = (props) => {
       });
     }
   };
-  const updatecomment = async (commentId) => {
+  const updatecomment = async () => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
       const respuesta = await clienteAxios.put(
-        "/api/post/updatecomment",
+        "/api/post/updatecomment"
 
       );
 

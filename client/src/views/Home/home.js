@@ -20,8 +20,7 @@ function Home() {
   const { mostrarAlerta } = alertaContext;
   const { usuario } = AContext;
   const { allpost, mensaje, publicaciones } = postContext;
-  // Obtener proyectos cuando carga el componente
-  console.log(usuario._id);
+
   useEffect(() => {
     if (mensaje) {
       mostrarAlerta(mensaje.msg, mensaje.categoria);

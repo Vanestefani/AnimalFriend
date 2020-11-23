@@ -88,7 +88,6 @@ const maximopasword=new RegExp("[a-zA-Z ]{6,19}$");
       } else {
         usuario.errors.Errorpassword2.valido = true;
       }
-   console.log(usuario.nombre.lenght)
 
       if (!pattern2.test(usuario.password)) {
         usuario.errors.Errorpassword.valido = false;

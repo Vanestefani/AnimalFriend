@@ -1,5 +1,5 @@
 const Post = require("../models/Post");
-
+var mongoose = require('mongoose');
 const Notificacion = require("../models/Notificacion");
 
 const { uploader, sendEmail } = require("../utils/index");
@@ -40,9 +40,7 @@ exports.allpost = async (req, res) => {
       .then((posts) => {
         res.json({ posts });
       })
-      .catch((err) => {
-
-      });
+      .catch((err) => {});
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -58,7 +56,6 @@ exports.getsubpost = async (req, res) => {
       .sort("-fecha_creacion")
       .then((posts) => {
         res.json({ posts });
-
       })
       .catch((err) => {
         console.log(err);
@@ -211,7 +208,6 @@ exports.actualizarPost = async (req, res) => {
   }
 };
 exports.deletecomment = async (req, res) => {
-
   try {
     Post.findByIdAndUpdate(
       req.body.postId,
@@ -227,38 +223,20 @@ exports.deletecomment = async (req, res) => {
       (err, post) => {
         if (err) return res.status(400).send(err);
         return res.send(post);
-
       }
     );
   } catch (err) {
     return res.status(400).send(err);
   }
 };
-exports.updatecomment = async (req, res) => {
-  try {
-    Post.findByIdAndUpdate(
-      req.body.postId,
-      {
-        $push: {
-          comments: {
 
-            text: req.body.text,
-          },
-        },
-      },
-      {
-        new: true,
-      }
-    )
-      .populate("comments.autor", "_id nombre fotoPerfil ")
-      .populate("postedBy", "_id nombre fotoPerfil")
-      .exec((err, result) => {
-        if (err) {
-          return res.status(422).json({ error: err });
-        } else {
-          res.json(result);
-        }
-      });
+exports.updatecomment = async (req, res) => {
+  const comment = {
+    text: req.body.comentario,
+  };
+
+  try {
+
   } catch (err) {
     return res.status(400).send(err);
   }
