@@ -101,7 +101,7 @@ exports.changefoto = async function (req, res) {
 
     //Attempt to upload to cloudinary
     const result = await uploader(req);
-    console.log(result);
+
     const user_ = await User.findByIdAndUpdate(
       userId,
 
