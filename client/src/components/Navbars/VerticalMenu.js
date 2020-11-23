@@ -28,9 +28,7 @@ function VerticalMenu() {
                 ></img>
                 <p className="text-center">
                   <br></br>
-                  <Badge color="primary" pill>
-                    {usuario.nombre.substr(0, 16)}
-                  </Badge>
+
                 </p>
               </Link>
             </NavLink>
