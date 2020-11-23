@@ -94,7 +94,28 @@ exports.show = async function (req, res) {
     res.status(500).json({ message: error.message });
   }
 };
+exports.changefoto = async function (req, res) {
+  try {
+    const id = req.params.id;
+    const userId = req.user._id;
 
+    //Attempt to upload to cloudinary
+    const result = await uploader(req);
+    console.log(result);
+    const user_ = await User.findByIdAndUpdate(
+      userId,
+
+      { $set: { fotoPerfil: result.url } },
+      { new: true }
+    );
+
+    return res
+      .status(200)
+      .json({ user: user_, message: "El usuario ha sido actualizado" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 // @route PUT api/user/{id}
 // @desc Update user details
 // @access Public
@@ -149,51 +170,6 @@ exports.destroy = async function (req, res) {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
-
-function deleteProfilePicture({ photo }) {
-  fs.unlink("./public/images/profile-picture/" + photo, (err) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    console.log("removed");
-  });
-
-  fs.unlink("./public/images/profile-picture/100x100/" + photo, (err) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    console.log("removed");
-  });
-}
-exports.changeProfilePicture = (req, res) => {
-  User.findById(req.user.id)
-    .select("fotoPerfil")
-    .then((data) => {
-      if (data.fotoPerfil !== "person.png") {
-        deleteProfilePicture({ photo: data.fotoPerfil });
-      }
-
-      User.findOneAndUpdate(
-        { _id: req.userData.userId },
-        { fotoPerfil: req.body.photo },
-        { new: true }
-      )
-        .select("fotoPerfil")
-        .then((user) => {
-          return res.status(200).json({ user });
-        })
-        .catch((err) => {
-          console.log(err);
-          return res.status(500).json({ message: err.message });
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.status(500).json({ message: err.message });
-    });
 };
 
 exports.searchUsersByNombre = (req, res) => {

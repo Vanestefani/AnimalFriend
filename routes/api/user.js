@@ -1,11 +1,10 @@
 const express = require("express");
 const User = require("../../controllers/user");
-
+const multer = require("multer");
+const upload = multer().single("imagen");
 const checkAuth = require("../../middlewares/authenticate");
 
 const validate = require("../../middlewares/validate");
-const multer = require("multer");
-const upload = multer().single("imagen");
 
 const router = express.Router();
 
@@ -30,6 +29,7 @@ router.post(
 );
 router.put("/follow", checkAuth, validate, User.addFollowing);
 router.put("/unfollow", checkAuth, validate, User.unFollow);
+router.put("/changefoto", checkAuth, validate, upload,User.changefoto);
 router.put("/:userId", checkAuth, validate, User.update);
 
 module.exports = router;

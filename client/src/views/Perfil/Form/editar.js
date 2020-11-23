@@ -43,7 +43,10 @@ function FormPerfil(props) {
         </div>
         <ModalBody>
           <div>
-            <span>Al modificar cualquier dato aparecera el boton editar para guardar los cambios</span>
+            <span>
+              Al modificar cualquier dato aparecera el boton editar para guardar
+              los cambios
+            </span>
             <h4>
               <center>
                 <b>Información de usuario</b>
@@ -63,6 +66,13 @@ function FormPerfil(props) {
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input
+                  className={
+                    props.errores.Errornombre
+                      ? props.errores.Errornombre.valido
+                        ? ""
+                        : "is-invalid form-control-danger form-control"
+                      : ""
+                  }
                   placeholder="Nombre completo"
                   type="text"
                   id="nombre"
@@ -74,14 +84,17 @@ function FormPerfil(props) {
               </InputGroup>
             </FormGroup>
 
-            {!props.errores.Errornombre ? (
+            {!props.errores.Errornombre.valido ? (
               <span className="text-muted">
                 {props.errores.Errornombre.mensaje}
               </span>
             ) : (
               ""
             )}
-            <FormGroup>
+            <FormGroup   className={
+                  "no-border input-lg" +
+                  (props.paisFocus ? " input-group-focus" : "")
+                }>
               <p>Pais</p>
               <InputGroup
                 className={
@@ -95,7 +108,13 @@ function FormPerfil(props) {
                   </InputGroupText>
                 </InputGroupAddon>
                 <CountryDropdown
-                  className="form-control"
+                  className={
+                    props.errores.Errorpais
+                      ? props.errores.Errorpais.valido
+                        ? "form-control"
+                        : "is-invalid form-control-danger form-control"
+                      : ""
+                  }
                   value={props.fusuario.pais}
                   id="pais"
                   name="pais"
@@ -115,7 +134,10 @@ function FormPerfil(props) {
               ""
             )}
             <p>Ciudad</p>
-            <FormGroup>
+            <FormGroup   className={
+                  "no-border input-lg" +
+                  (props.ciudadFocus ? " input-group-focus" : "")
+                }>
               <InputGroup
                 className={
                   "no-border input-lg" +
@@ -128,7 +150,13 @@ function FormPerfil(props) {
                   </InputGroupText>
                 </InputGroupAddon>
                 <RegionDropdown
-                  className="form-control"
+                  className={
+                    props.errores.Errorciudad
+                      ? props.errores.Errorciudad.valido
+                        ? "form-control"
+                        : "is-invalid form-control-danger form-control"
+                      : ""
+                  }
                   name="ciudad"
                   id="ciudad"
                   blankOptionLabel="Ningún país seleccionado"
@@ -184,6 +212,13 @@ function FormPerfil(props) {
             </FormGroup>
             <p>Descripciósn</p>
             <Input
+              className={
+                props.errores.Errorbio
+                  ? props.errores.Errorbio.valido
+                    ? "form-control"
+                    : "is-invalid form-control-danger form-control"
+                  : ""
+              }
               type="textarea"
               row="3"
               id="bio"
@@ -192,17 +227,23 @@ function FormPerfil(props) {
               onChange={props.onChange}
               placeholder="Sobre ti"
             ></Input>
+            {!props.errores.Errorbio.valido ? (
+              <span className="text-muted">
+                {props.errores.Errorbio.mensaje}
+              </span>
+            ) : (
+              ""
+            )}
           </div>
         </ModalBody>
         <div className="modal-footer">
           {props.fusuario.isDisabled ? (
-           ""
+            ""
           ) : (
             <Button color="primary" type="button" onClick={props.onSubmit}>
               <i className="fas fa-paper-plane"></i> Enviar
             </Button>
           )}
-
         </div>
       </Modal>
     </>

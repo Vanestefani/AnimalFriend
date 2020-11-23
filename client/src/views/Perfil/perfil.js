@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import PostContext from "../../context/post/postContext";
 
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -27,6 +28,8 @@ import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 
 import Editar from "./Form/editar";
+import FotoPerfil from "./Form/foto.perfil";
+
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 function Perfil({ match }) {
@@ -37,12 +40,13 @@ function Perfil({ match }) {
   const AContext = useContext(AuthContext);
   const {
     Showuserid,
+    changefoto,
     usuarioactual,
     usuario,
     seguir,
     noseguir,
     actualizarperfil,
-    cerrarSesion
+    cerrarSesion,
   } = AContext;
 
   useEffect(() => {
@@ -67,11 +71,9 @@ function Perfil({ match }) {
   const selectCountry = (val) => {
     setStateSelect({ country: val });
   };
-
   const selectRegion = (val) => {
     setStateSelect({ region: val });
   };
-
   //errores validacion
   const [errores, setErrores] = useState({
     Errornombre: { valido: true, mensaje: "" },
@@ -93,13 +95,15 @@ function Perfil({ match }) {
     if (maximo.test(fusuario.nombre) === false) {
       errores.Errornombre.valido = false;
       errores.Errornombre.mensaje = "(Por favor ingrese un nombre valido)";
+    } else {
+      errores.Errornombre.valido = true;
     }
-    errores.Errornombre.valido = true;
+
     if (maximo.test(fusuario.bio) === false) {
       errores.Errorbio.valido = false;
       errores.Errorbio.mensaje = "(Por favor ingrese un descripción valido)";
     } else {
-      errores.Errornombre.valido = true;
+      errores.Errorbio.valido = true;
     }
     if (fusuario.pais.length < 1) {
       errores.Errorpais.valido = false;
@@ -107,7 +111,6 @@ function Perfil({ match }) {
     } else {
       errores.Errorpais.valido = true;
     }
-
     if (fusuario.ciudad.length < 1) {
       errores.Errorciudad.valido = false;
       errores.Errorciudad.mensaje = "(Debe elegir un campo)";
@@ -131,6 +134,7 @@ function Perfil({ match }) {
     } else {
       isError = false;
     }
+    return isError;
   };
 
   const postContext = useContext(PostContext);
@@ -139,7 +143,6 @@ function Perfil({ match }) {
   // Obtener proyectos cuando carga el componente
   useEffect(() => {
     const autorId = match.params.q;
-
     getpost(match.params.q);
   }, [usuarioactual]);
   const [showfollow, setShowFollow] = useState({
@@ -162,7 +165,6 @@ function Perfil({ match }) {
       follow: true,
     });
   };
-
   const botonSeguir = () => {
     if (showfollow.follow === false)
       return (
@@ -185,7 +187,6 @@ function Perfil({ match }) {
   const next = () => {
     getpost(match.params.q);
   };
-
   const onChange = (e) => {
     if (fusuario.ciudad != "") {
       setfusuario({
@@ -208,11 +209,12 @@ function Perfil({ match }) {
         ciudad: fusuario.ciudad,
         genero: fusuario.genero,
       });
-      cerrarSesion()
+      setModal1(false);
+      cerrarSesion();
+    } else {
+      setnombreFocus(true);
+      validate();
     }
-    setnombreFocus(true);
-    validate();
-    setModal1(false);
   };
 
   //modal
@@ -259,32 +261,40 @@ function Perfil({ match }) {
           <Container>
             <div className="button-container">
               {usuarioactual._id === usuario._id ? (
-                <Editar
-                  generoFocus={generoFocus}
-                  setgeneroFocus={setgeneroFocus}
-                  ciudadFocus={ciudadFocus}
-                  setciudadFocus={setciudadFocus}
-                  paisFocus={paisFocus}
-                  setpaisFocus={setpaisFocus}
-                  bioFocus={bioFocus}
-                  setbioFocus={setbioFocus}
-                  nombreFocus={nombreFocus}
-                  setnombreFocus={setnombreFocus}
-                  onChangeCountry={onChangeCountry}
-                  onChangeCity={onChangeCity}
-                  modalMascotas={modalMascotas}
-                  setModal1={setModal1}
-                  onSubmit={onSubmit}
-                  onChange={onChange}
-                  errores={errores}
-                  setErrores={setErrores}
-                  selectRegion={selectRegion}
-                  selectCountry={selectCountry}
-                  region={region}
-                  country={country}
-                  usuarioactual={usuarioactual}
-                  fusuario={fusuario}
-                ></Editar>
+                <div>
+                  <Editar
+                    generoFocus={generoFocus}
+                    setgeneroFocus={setgeneroFocus}
+                    ciudadFocus={ciudadFocus}
+                    setciudadFocus={setciudadFocus}
+                    paisFocus={paisFocus}
+                    setpaisFocus={setpaisFocus}
+                    bioFocus={bioFocus}
+                    setbioFocus={setbioFocus}
+                    nombreFocus={nombreFocus}
+                    setnombreFocus={setnombreFocus}
+                    onChangeCountry={onChangeCountry}
+                    onChangeCity={onChangeCity}
+                    modalMascotas={modalMascotas}
+                    setModal1={setModal1}
+                    onSubmit={onSubmit}
+                    onChange={onChange}
+                    errores={errores}
+                    setErrores={setErrores}
+                    selectRegion={selectRegion}
+                    selectCountry={selectCountry}
+                    region={region}
+                    country={country}
+                    usuarioactual={usuarioactual}
+                    fusuario={fusuario}
+                  ></Editar>
+                  <FotoPerfil
+                  changefoto={changefoto}
+                  usuario={usuario}></FotoPerfil>
+                  <Link className="btn btn-primary" to="/olvido-contrasena">
+                    Cambiar contraseña
+                  </Link>
+                </div>
               ) : (
                 botonSeguir()
               )}

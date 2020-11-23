@@ -312,6 +312,31 @@ const AuthState = (props) => {
       });
     }
   };
+  const changefoto = async (datos) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const respuesta = await clienteAxios.put("/api/user/changefoto", datos);
+
+      dispatch({
+        type: EDIT_PERFIL_SUCCESS,
+        payload: respuesta.data,
+      });
+    } catch (error) {
+      console.log(error);
+
+      const alerta = {
+        msg: error.response.data.message,
+        categoria: "danger",
+      };
+      dispatch({
+        type: EDIT_PERFIL_FAILURE,
+        payload: alerta,
+      });
+    }
+  };
   const actualizarperfil = async (datos) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -357,7 +382,7 @@ const AuthState = (props) => {
         Showuserid,
         usuarioactual: state.usuarioactual,
         alluser,
-        seguir,
+        seguir,changefoto,
         noseguir,
         actualizarperfil,
         searchUsersByNombre,
