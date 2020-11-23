@@ -150,8 +150,10 @@ function ScrollNavbar() {
                   >
                     <img
                       src={usuario.fotoPerfil}
-                      className="rounded-circle FotoUser"
+                      className="photo-container rounded-circle FotoUser"
                       alt="foto perfil"
+                      width="123px"
+                      height="123px"
                     ></img>
                   </DropdownToggle>
                   <DropdownMenu>

@@ -24,7 +24,9 @@ function VerticalMenu() {
               <Link to={"/perfil/" + usuario._id}>
                 <img
                   src={usuario.fotoPerfil}
-                  className="rounded-circle FotoUser shadow"
+                  className="photo-container rounded-circle FotoUser"
+                  width="123px"
+                  height="123px"
                 ></img>
                 <p className="text-center">
                   <br></br>
