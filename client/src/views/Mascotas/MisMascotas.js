@@ -65,6 +65,15 @@ function MisMascota() {
   const [generoMascotaFocus, setgeneroMascotaFocus] = React.useState(false);
   const [fechanacimientoFocus, setfechanacimientoFocus] = React.useState(false);
   const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
+  const [errores, setErrores] = React.useState({
+    ErrornombreMascota: { valido: true, mensaje: "" },
+    Errorespecie: { valido: true, mensaje: "" },
+    Errorraza: { valido: true, mensaje: "" },
+    Errorgenero: { valido: true, mensaje: "" },
+    Errorfechanacimiento: { valido: true, mensaje: "" },
+    ErrorcolorPrincipal: { valido: true, mensaje: "" },
+    Errorfoto: { valido: true, mensaje: "" },
+  });
 
   const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
 
@@ -97,30 +106,29 @@ function MisMascota() {
   };
   return (
     <>
-
-          <FormMascota
-            onChange={onChange}
-            Fmascota={Fmascota}
-            archivoImagen={archivoImagen}
-            guardarMascota={guardarMascota}
-            nombreMascotaFocus={nombreMascotaFocus}
-            setnombreMascotaFocus={setnombreMascotaFocus}
-            especieFocus={especieFocus}
-            setespecieFocus={setespecieFocus}
-            razaFocus={razaFocus}
-            setrazaFocus={setrazaFocus}
-            generoMascotaFocus={generoMascotaFocus}
-            setgeneroMascotaFocus={setgeneroMascotaFocus}
-            fechanacimientoFocus={fechanacimientoFocus}
-            setfechanacimientoFocus={setfechanacimientoFocus}
-            colorPrincipalFocus={colorPrincipalFocus}
-            setcolorPrincipal={setcolorPrincipal}
-            fotoMascotaFocus={fotoMascotaFocus}
-            setfotoMascota={setfotoMascota}
-            onSubmit={onSubmit}
-            guardararchivoImagen={guardararchivoImagen}
-          ></FormMascota>
-
+      <FormMascota
+        onChange={onChange}
+        Fmascota={Fmascota}
+        archivoImagen={archivoImagen}
+        guardarMascota={guardarMascota}
+        nombreMascotaFocus={nombreMascotaFocus}
+        setnombreMascotaFocus={setnombreMascotaFocus}
+        especieFocus={especieFocus}
+        setespecieFocus={setespecieFocus}
+        razaFocus={razaFocus}
+        errores={errores}
+        setrazaFocus={setrazaFocus}
+        generoMascotaFocus={generoMascotaFocus}
+        setgeneroMascotaFocus={setgeneroMascotaFocus}
+        fechanacimientoFocus={fechanacimientoFocus}
+        setfechanacimientoFocus={setfechanacimientoFocus}
+        colorPrincipalFocus={colorPrincipalFocus}
+        setcolorPrincipal={setcolorPrincipal}
+        fotoMascotaFocus={fotoMascotaFocus}
+        setfotoMascota={setfotoMascota}
+        onSubmit={onSubmit}
+        guardararchivoImagen={guardararchivoImagen}
+      ></FormMascota>
     </>
   );
 }

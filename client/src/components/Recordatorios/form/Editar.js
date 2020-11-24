@@ -117,15 +117,29 @@ function Editar(props) {
     if (!err) {
       actualizarRecordatorios({
         descripcion: Frecordatorio.descripcion,
-
         nombre: Frecordatorio.nombre,
         tipo: Frecordatorio.tipo,
         mascota: Frecordatorio.mascota,
         fecha_expiracion: Frecordatorio.fecha_expiracion,
-
         recordatorioId: props.recordatorio._id,
       });
+      guardarrecordatorio({
+        descripcion: "",
+        nombre: "",
+        tipo: "",
+        mascota: "",
+        fecha_expiracion: "",
+        completo: false,
+        errors: {
+          Errordescripcion: { valido: true, mensaje: "" },
+          Errornombre: { valido: true, mensaje: "" },
+          Errortipo: { valido: true, mensaje: "" },
+          Errormascota: { valido: true, mensaje: "" },
+          Errorfecha_expiracion: { valido: true, mensaje: "" },
+        },
+      });
       setModal1(false);
+    } else {
     }
   };
   const onChange = (e) => {
@@ -156,7 +170,13 @@ function Editar(props) {
           <div>
             <p>Titulo:</p>
 
-            <InputGroup className>
+            <InputGroup
+              className={
+                Frecordatorio.errors.Errornombre.valido
+                  ? ""
+                  : "is-invalid form-control-danger form-control"
+              }
+            >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
                   <i className="fas fa-user-clock"></i>
@@ -172,9 +192,22 @@ function Editar(props) {
                 required
               ></Input>
             </InputGroup>
+            {!Frecordatorio.errors.Errornombre.valido ? (
+              <span className="text-muted">
+                {Frecordatorio.errors.Errornombre.mensaje}
+              </span>
+            ) : (
+              ""
+            )}
             <p>Descripción:</p>
 
-            <InputGroup>
+            <InputGroup
+              className={
+                Frecordatorio.errors.Errordescripcion.valido
+                  ? ""
+                  : "is-invalid form-control-danger form-control"
+              }
+            >
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
                   <i className="fas fa-align-justify"></i>
@@ -190,12 +223,24 @@ function Editar(props) {
                 defaultValue={Frecordatorio.descripcion}
               ></Input>
             </InputGroup>
-
+            {!Frecordatorio.errors.Errordescripcion.valido ? (
+              <span className="text-muted">
+                {Frecordatorio.errors.Errordescripcion.mensaje}
+              </span>
+            ) : (
+              ""
+            )}
             <Row>
               <Col md="6">
                 <p>Fecha expiración:</p>
 
-                <InputGroup>
+                <InputGroup
+                  className={
+                    Frecordatorio.errors.Errorfecha_expiracion.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
+                  }
+                >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
                       <i className="fas fa-birthday-cake"></i>
@@ -208,15 +253,29 @@ function Editar(props) {
                     name="fecha_expiracion"
                     placeholder={Frecordatorio.fecha_expiracion}
                     onChange={onChange}
+                    min={moment().format("YYYY-MM-DD")}
                     defaultValue={Frecordatorio.fecha_expiracion}
                     required
                   ></Input>
                 </InputGroup>
+                {!Frecordatorio.errors.Errorfecha_expiracion.valido ? (
+                  <span className="text-muted">
+                    {Frecordatorio.errors.Errorfecha_expiracion.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
               <Col md="6">
                 <p>Tipo</p>
 
-                <InputGroup>
+                <InputGroup
+                  className={
+                    Frecordatorio.errors.Errortipo.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
+                  }
+                >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
                       <i className="fas fa-feather-alt"></i>
@@ -244,12 +303,25 @@ function Editar(props) {
                     <option>Otro</option>
                   </Input>
                 </InputGroup>
+                {!Frecordatorio.errors.Errortipo.valido ? (
+                  <span className="text-muted">
+                    {Frecordatorio.errors.Errortipo.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
             <Row>
               <Col md="6">
                 <p>Mascota</p>
-                <InputGroup>
+                <InputGroup
+                  className={
+                    Frecordatorio.errors.Errormascota.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
+                  }
+                >
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
                       <i className="fas fa-feather-alt"></i>
@@ -272,6 +344,13 @@ function Editar(props) {
                     ))}
                   </Input>
                 </InputGroup>
+                {!Frecordatorio.errors.Errormascota.valido ? (
+                  <span className="text-muted">
+                    {Frecordatorio.errors.Errormascota.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
           </div>
