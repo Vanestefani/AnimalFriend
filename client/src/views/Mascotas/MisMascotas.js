@@ -179,6 +179,15 @@ function MisMascota(props) {
         onChange={onChange}
         Fmascota={Fmascota}
         archivoImagen={archivoImagen}
+        usuario={usuario}
+        nombreMascota={nombreMascota}
+        especie={especie}
+        raza={raza}
+        fechanacimiento={fechanacimiento}
+        colorPrincipal={colorPrincipal}
+        addMascotas={addMascotas}
+        generoMascota={generoMascota}
+        archivoImagen={archivoImagen}
         guardarMascota={guardarMascota}
         nombreMascotaFocus={nombreMascotaFocus}
         setnombreMascotaFocus={setnombreMascotaFocus}
@@ -196,6 +205,7 @@ function MisMascota(props) {
         fotoMascotaFocus={fotoMascotaFocus}
         setfotoMascota={setfotoMascota}
         onSubmit={onSubmit}
+        validate={validate}
         guardararchivoImagen={guardararchivoImagen}
       ></FormMascota>
     </>

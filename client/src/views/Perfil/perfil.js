@@ -445,6 +445,7 @@ function Perfil({ match }) {
                                 <Mascota
                                   key={mascota._id}
                                   mascota={mascota}
+                                  usuario={usuario}
                                 ></Mascota>
                               ))
                             )}

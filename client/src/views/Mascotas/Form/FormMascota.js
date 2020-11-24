@@ -363,7 +363,6 @@ function FormMascota(props) {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-
                     className={
                       props.errores.ErrorcolorPrincipal
                         ? props.errores.ErrorcolorPrincipal.valido
@@ -413,7 +412,7 @@ function FormMascota(props) {
                   defaultValue={props.archivoImagen}
                   ref={imageInputRef}
                 ></Input>
-                    {!props.errores.Errorfoto.valido ? (
+                {!props.errores.Errorfoto.valido ? (
                   <span className="text-muted">
                     {props.errores.Errorfoto.mensaje}
                   </span>
@@ -425,7 +424,37 @@ function FormMascota(props) {
           </div>
         </ModalBody>
         <div className="modal-footer">
-          <Button color="sucess" type="button" onClick={props.onSubmit}>
+          <Button
+            color="sucess"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              const err = props.validate();
+              e.target.className += " was-validated";
+              let userid = props.usuario._id;
+
+              if (!err) {
+                let formData = new FormData();
+                formData.append(
+                  "foto",
+                  props.archivoImagen,
+                  props.archivoImagen.name
+                );
+                formData.append("nombre", props.nombreMascota);
+                formData.append("especie", props.especie);
+                formData.append("raza", props.raza);
+                formData.append("genero",  props.generoMascota);
+                formData.append("fechanacimiento", props.fechanacimiento);
+                formData.append("color", props.colorPrincipal);
+                formData.append("propietario", userid);
+                props.addMascotas(formData);
+                setModal1(false);
+              } else {
+                props.setnombreMascotaFocus(true);
+                props.validate();
+              }
+            }}
+          >
             <i className="fas fa-paper-plane"></i> Enviar
           </Button>
           <Button color="danger" type="button" onClick={() => setModal1(false)}>
