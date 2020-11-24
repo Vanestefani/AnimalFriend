@@ -42,6 +42,12 @@ function VerticalMenu() {
                 </center>
               </h3>
               <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
+                <Link to="/chatbot">
+                  <i class="fas fa-paw"></i>
+                  Dr Firulais
+                </Link>
+              </ListGroupItem>
+              <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
                 <Link to="/eventos">
                   <i className="fas fa-calendar-alt"></i>
                   Eventos

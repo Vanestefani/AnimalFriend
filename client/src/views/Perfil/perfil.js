@@ -19,12 +19,10 @@ import {
   CardTitle,
   CardText,
 } from "reactstrap";
-
 import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
-
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
-import ListMascotasbyuser from "../../components/Listas/ListMascotasbyuser";
+import Mascotas from "../../views/Mascotas/MisMascotas";
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 
@@ -47,7 +45,7 @@ function Perfil({ match }) {
     seguir,
     noseguir,
     actualizarperfil,
-    cerrarSesion,
+
   } = AContext;
 
   useEffect(() => {
@@ -417,7 +415,9 @@ function Perfil({ match }) {
                     " "
                   )}
                   <TabPane tabId="3">
-                    <ListMascotasbyuser></ListMascotasbyuser>
+                    <Mascotas
+
+                    ></Mascotas>
                   </TabPane>
                   <TabPane tabId="4">
                     <h1>Siguiendo </h1>

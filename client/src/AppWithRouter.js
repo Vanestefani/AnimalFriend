@@ -49,6 +49,7 @@ const Anuncio = lazy(() => import("./views/Anuncios/Anuncio"));
 
 const Eventos = lazy(() => import("./views/Eventos/Eventos"));
 const Evento = lazy(() => import("./views/Eventos/Evento"));
+const Chatbot = lazy(() => import("./views/chatbot/chatbot"));
 
 const Negocios = lazy(() => import("./views/Negocios/Negocios"));
 const Negocio = lazy(() => import("./views/Negocios/Negocio"));
@@ -101,7 +102,6 @@ const AppWithRouter = () => (
                             path="/perfil/:q"
                             component={Perfil}
                           />
-                      
 
                           <Route
                             exact
@@ -118,6 +118,11 @@ const AppWithRouter = () => (
                             exact
                             path="/anuncios"
                             component={Anuncios}
+                          />
+                            <PrivateRoute
+                            exact
+                            path="/chatbot"
+                            component={Chatbot}
                           />
                           <PrivateRoute
                             exact

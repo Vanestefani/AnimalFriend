@@ -163,19 +163,7 @@ function ScrollNavbar() {
                         Perfil
                       </Link>
                     </DropdownItem>
-                    <DropdownItem onClick={(e) => e.preventDefault()}>
-                      <Link to="/mis-mascotas" className="text-dark">
-                        <i className="fas fa-paw"></i>
-                        Mis Mascotas
-                      </Link>
-                    </DropdownItem>
-                    <DropdownItem
-                      to="#AnimalFriend"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fas fa-cogs"></i>
-                      Configuración
-                    </DropdownItem>
+
                     <DropdownItem onClick={() => cerrarSesion()}>
                       <i className="fas fa-sign-in-alt"></i>
                       Cerrar sesión

@@ -1,14 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
-// core components
 
-import HomeNarbar from "../../components/Navbars/homeNarbar";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
-import VerticalMenu from "../../components/Navbars/VerticalMenu";
-import SubMenu from "../../components/Navbars/SubMenu";
+
 import Mascota from "./Mascota";
-import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
+
 import FormMascota from "./Form/FormMascota";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import AuthContext from "../../context/autenticacion/authContext";
@@ -18,7 +15,8 @@ function MisMascota() {
   const mContext = useContext(MascotasContext);
   const authContext = useContext(AuthContext);
   const { usuario } = authContext;
-  const { addMascotas, mascotas, mascotasUsuario } = mContext;
+  const { addMascotas, mascotas } = mContext;
+
   //navbar effect
   React.useEffect(() => {
     document.body.classList.add("landing-page");
@@ -69,9 +67,7 @@ function MisMascota() {
   const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
 
   const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
-  useEffect(() => {
-    mascotasUsuario();
-  }, [mascotasUsuario]);
+
   const onSubmit = (e) => {
     e.preventDefault();
     e.target.className += " was-validated";
@@ -101,14 +97,10 @@ function MisMascota() {
   };
   return (
     <>
-      <HomeNarbar></HomeNarbar>
       <div className="wrapper content_home">
         <Container>
           <Row>
-            <Col md="3">
-              <VerticalMenu></VerticalMenu>
-            </Col>
-            <Col md="6">
+            <Col md="9">
 
               <FormMascota
                 onChange={onChange}
@@ -147,12 +139,9 @@ function MisMascota() {
                 </Container>
               </div>
             </Col>
-            <Col md="3">
-              <ListRecordatorios></ListRecordatorios>
-            </Col>
           </Row>
         </Container>
-        <DefaultFooter></DefaultFooter>
+
       </div>
     </>
   );
