@@ -5,16 +5,16 @@ import { Container, Card, CardTitle, CardBody, CardHeader } from "reactstrap";
 import ItemMascota from "./ItemMascota";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import Skeleton from "react-loading-skeleton";
-function ListMascotas({ match }) {
+function ListMascotas({ props }) {
   const mContext = useContext(MascotasContext);
   const { loading, mascotas } = mContext;
-
-  useEffect(() => {}, []);
 
   return (
     <>
       {mascotas.length === 0 ? (
-        <Card className="text-center">
+        <Card className="card-general text-center">
+           <Container className="container">
+
           <CardHeader>
             <CardTitle className="title-up">
               <center>
@@ -23,9 +23,9 @@ function ListMascotas({ match }) {
             </CardTitle>
           </CardHeader>
           <CardBody>
-            <h3>No tienes añadida ninguna mascota,añade una</h3>
-            <Link to="/mis-mascotas">Mis mascotas</Link>
+          <h3>No hay ninguna mascota añadida 🐾</h3>
           </CardBody>
+          </Container>
         </Card>
       ) : (
         <Card className="card-general">

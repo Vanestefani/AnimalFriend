@@ -58,7 +58,7 @@ function MisMascota() {
   };
 
   //error state
-  const [ seterrores] = useState(false);
+  const [seterrores] = useState(false);
 
   //focus
   const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
@@ -91,7 +91,6 @@ function MisMascota() {
       formData.append("color", colorPrincipal);
       formData.append("propietario", userid);
       addMascotas(formData);
-      console.log("no esta vacio");
     }
   };
 
@@ -110,7 +109,7 @@ function MisMascota() {
               <VerticalMenu></VerticalMenu>
             </Col>
             <Col md="6">
-              <SubMenu></SubMenu>
+
               <FormMascota
                 onChange={onChange}
                 Fmascota={Fmascota}

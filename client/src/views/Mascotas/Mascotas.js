@@ -84,7 +84,7 @@ function Mascotas() {
               <VerticalMenu></VerticalMenu>
             </Col>
             <Col md="6">
-              <SubMenu></SubMenu>
+
               <FormMascota
                 onChange={onChange}
                 mascota={mascota}

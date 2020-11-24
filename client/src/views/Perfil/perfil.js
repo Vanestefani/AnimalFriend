@@ -10,12 +10,14 @@ import {
   ModalBody,
   Row,
   Col,
-  FormGroup,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Label,
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Card,
+  CardTitle,
+  CardText,
 } from "reactstrap";
 
 import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
@@ -29,7 +31,7 @@ import PostList from "../../components/Post/PostList";
 
 import Editar from "./Form/editar";
 import FotoPerfil from "./Form/foto.perfil";
-
+import classnames from "classnames";
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 function Perfil({ match }) {
@@ -210,7 +212,6 @@ function Perfil({ match }) {
         genero: fusuario.genero,
       });
       setModal1(false);
-
     } else {
       setnombreFocus(true);
       validate();
@@ -248,96 +249,189 @@ function Perfil({ match }) {
   const [paisFocus, setpaisFocus] = React.useState(false);
   const [ciudadFocus, setciudadFocus] = React.useState(false);
   const [generoFocus, setgeneroFocus] = React.useState(false);
+  const [activeTab, setActiveTab] = useState("1");
 
+  const toggle = (tab) => {
+    if (activeTab !== tab) setActiveTab(tab);
+  };
   return (
     <>
-      <ScrollNavbar />
-      <div className="wrapper ">
-        <ProfilePageHeader
-          dato={usuarioactual}
-          countpost={countpost}
-        ></ProfilePageHeader>
-        <div className="section">
-          <Container>
-            <div className="button-container">
-              {usuarioactual._id === usuario._id ? (
+      <div>
+        <ScrollNavbar />
+        <div className="wrapper ">
+          <ProfilePageHeader
+            dato={usuarioactual}
+            countpost={countpost}
+          ></ProfilePageHeader>
+          <div className="section">
+            <Container>
+              <div className="button-container">
+                {usuarioactual._id === usuario._id ? (
+                  <div>
+                    <Editar
+                      generoFocus={generoFocus}
+                      setgeneroFocus={setgeneroFocus}
+                      ciudadFocus={ciudadFocus}
+                      setciudadFocus={setciudadFocus}
+                      paisFocus={paisFocus}
+                      setpaisFocus={setpaisFocus}
+                      bioFocus={bioFocus}
+                      setbioFocus={setbioFocus}
+                      nombreFocus={nombreFocus}
+                      setnombreFocus={setnombreFocus}
+                      onChangeCountry={onChangeCountry}
+                      onChangeCity={onChangeCity}
+                      modalMascotas={modalMascotas}
+                      setModal1={setModal1}
+                      onSubmit={onSubmit}
+                      onChange={onChange}
+                      errores={errores}
+                      setErrores={setErrores}
+                      selectRegion={selectRegion}
+                      selectCountry={selectCountry}
+                      region={region}
+                      country={country}
+                      usuarioactual={usuarioactual}
+                      fusuario={fusuario}
+                    ></Editar>
+                    <FotoPerfil
+                      changefoto={changefoto}
+                      usuario={usuario}
+                    ></FotoPerfil>
+                    <Link className="btn btn-primary" to="/olvido-contrasena">
+                      Cambiar contraseña
+                    </Link>
+                  </div>
+                ) : (
+                  botonSeguir()
+                )}
+              </div>
+
+              {usuarioactual.bio !== "" ? (
                 <div>
-                  <Editar
-                    generoFocus={generoFocus}
-                    setgeneroFocus={setgeneroFocus}
-                    ciudadFocus={ciudadFocus}
-                    setciudadFocus={setciudadFocus}
-                    paisFocus={paisFocus}
-                    setpaisFocus={setpaisFocus}
-                    bioFocus={bioFocus}
-                    setbioFocus={setbioFocus}
-                    nombreFocus={nombreFocus}
-                    setnombreFocus={setnombreFocus}
-                    onChangeCountry={onChangeCountry}
-                    onChangeCity={onChangeCity}
-                    modalMascotas={modalMascotas}
-                    setModal1={setModal1}
-                    onSubmit={onSubmit}
-                    onChange={onChange}
-                    errores={errores}
-                    setErrores={setErrores}
-                    selectRegion={selectRegion}
-                    selectCountry={selectCountry}
-                    region={region}
-                    country={country}
-                    usuarioactual={usuarioactual}
-                    fusuario={fusuario}
-                  ></Editar>
-                  <FotoPerfil
-                  changefoto={changefoto}
-                  usuario={usuario}></FotoPerfil>
-                  <Link className="btn btn-primary" to="/olvido-contrasena">
-                    Cambiar contraseña
-                  </Link>
+                  <h3 className="title">Sobre mi</h3>
+                  <h5 className="description">{usuarioactual.bio}</h5>
                 </div>
               ) : (
-                botonSeguir()
+                ""
               )}
-            </div>
-
-            {usuarioactual.bio !== "" ? (
-              <div>
-                <h3 className="title">Sobre mi</h3>
-                <h5 className="description">{usuarioactual.bio}</h5>
-              </div>
-            ) : (
-              ""
-            )}
-          </Container>
-
-          <div className="wrapper content_home">
-            <Container>
-              <SubMenu
-                usuarioactual={usuarioactual}
-                usuario={usuario}
-              ></SubMenu>
-              <Row>
-                <Col md="3">
-                  <ListMascotasbyuser></ListMascotasbyuser>
-                </Col>
-                <Col md="9">
-                  {usuarioactual._id === usuario._id ? (
-                    <CrearPublicacion></CrearPublicacion>
-                  ) : (
-                    ""
-                  )}
-                  {publicaciones ? (
-                    <PostList
-                      publicaciones={publicaciones}
-                      next={next}
-                    ></PostList>
-                  ) : (
-                    ""
-                  )}
-                </Col>
-              </Row>
             </Container>
-            <DefaultFooter></DefaultFooter>
+
+            <div className="wrapper content_home">
+              <Container>
+                <Nav tabs>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: activeTab === "1" })}
+                      onClick={() => {
+                        toggle("1");
+                      }}
+                    >
+                      Inicio
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: activeTab === "2" })}
+                      onClick={() => {
+                        toggle("2");
+                      }}
+                    >
+                      Recordatorios
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: activeTab === "3" })}
+                      onClick={() => {
+                        toggle("3");
+                      }}
+                    >
+                      Mascotas
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: activeTab === "4" })}
+                      onClick={() => {
+                        toggle("4");
+                      }}
+                    >
+                      Siguiendo
+                    </NavLink>
+                  </NavItem>
+
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: activeTab === "5" })}
+                      onClick={() => {
+                        toggle("5");
+                      }}
+                    >
+                      Seguidores
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: activeTab === "6" })}
+                      onClick={() => {
+                        toggle("6");
+                      }}
+                    >
+                      Anuncios
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: activeTab === "7" })}
+                      onClick={() => {
+                        toggle("7");
+                      }}
+                    >
+                      Negocios
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+                <Row>
+                  <TabContent activeTab={activeTab}>
+                    <TabPane tabId="1">
+                      {usuarioactual._id === usuario._id ? (
+                        <CrearPublicacion></CrearPublicacion>
+                      ) : (
+                        ""
+                      )}
+                      {publicaciones ? (
+                        <PostList
+                          publicaciones={publicaciones}
+                          next={next}
+                        ></PostList>
+                      ) : (
+                        ""
+                      )}
+                    </TabPane>
+                    <TabPane tabId="2">
+                      <h1>Mis Recordatorios</h1>
+                    </TabPane>
+                    <TabPane tabId="3">
+                      <h1>Mis Mascotas</h1>
+                    </TabPane>
+                    <TabPane tabId="4">
+                      <h1>Siguiendo </h1>
+                    </TabPane>
+                    <TabPane tabId="5">
+                      <h1>Seguidores </h1>
+                    </TabPane>
+                    <TabPane tabId="6">
+                      <h1>Anuncios </h1>
+                    </TabPane>
+                    <TabPane tabId="7">
+                      <h1>Negocios </h1>
+                    </TabPane>
+                  </TabContent>
+                </Row>
+              </Container>
+              <DefaultFooter></DefaultFooter>
+            </div>
           </div>
         </div>
       </div>
