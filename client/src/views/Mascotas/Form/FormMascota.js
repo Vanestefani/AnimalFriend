@@ -154,6 +154,13 @@ function FormMascota(props) {
                 </InputGroupText>
               </InputGroupAddon>
               <Input
+                className={
+                  props.errores.ErrornombreMascota
+                    ? props.errores.ErrornombreMascota.valido
+                      ? ""
+                      : "is-invalid form-control-danger form-control"
+                    : ""
+                }
                 placeholder="Nombre mascota"
                 type="text"
                 onFocus={() => props.setnombreMascotaFocus(true)}
@@ -165,6 +172,14 @@ function FormMascota(props) {
                 required
               ></Input>
             </InputGroup>
+
+            {!props.errores.ErrornombreMascota.valido ? (
+              <span className="text-muted">
+                {props.errores.ErrornombreMascota.mensaje}
+              </span>
+            ) : (
+              ""
+            )}
             <Row>
               <Col md="6">
                 <InputGroup
@@ -179,6 +194,13 @@ function FormMascota(props) {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    className={
+                      props.errores.Errorespecie
+                        ? props.errores.Errorespecie.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
                     placeholder="Especie"
                     type="select"
                     onFocus={() => props.setespecieFocus(true)}
@@ -198,6 +220,13 @@ function FormMascota(props) {
                     <option value="Caballo">Caballo</option>
                   </Input>
                 </InputGroup>
+                {!props.errores.Errorespecie.valido ? (
+                  <span className="text-muted">
+                    {props.errores.Errorespecie.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
               <Col md="6">
                 <InputGroup
@@ -212,6 +241,13 @@ function FormMascota(props) {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    className={
+                      props.errores.Errorraza
+                        ? props.errores.Errorraza.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
                     placeholder="Raza"
                     type="select"
                     onFocus={() => props.setrazaFocus(true)}
@@ -225,6 +261,13 @@ function FormMascota(props) {
                     {breed}
                   </Input>
                 </InputGroup>
+                {!props.errores.Errorraza.valido ? (
+                  <span className="text-muted">
+                    {props.errores.Errorraza.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
 
@@ -259,6 +302,13 @@ function FormMascota(props) {
                     Macho
                   </Label>
                 </FormGroup>
+                {!props.errores.Errorgenero.valido ? (
+                  <span className="text-muted">
+                    {props.errores.Errorgenero.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
               <Col md="6">
                 <InputGroup
@@ -273,6 +323,13 @@ function FormMascota(props) {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+                    className={
+                      props.errores.Errorfechanacimiento
+                        ? props.errores.Errorfechanacimiento.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
                     type="date"
                     onFocus={() => props.setfechanacimientoFocus(true)}
                     onBlur={() => props.setfechanacimientoFocus(false)}
@@ -283,6 +340,13 @@ function FormMascota(props) {
                     required
                   ></Input>
                 </InputGroup>
+                {!props.errores.Errorfechanacimiento.valido ? (
+                  <span className="text-muted">
+                    {props.errores.Errorfechanacimiento.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
             <Row>
@@ -299,6 +363,14 @@ function FormMascota(props) {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
+
+                    className={
+                      props.errores.ErrorcolorPrincipal
+                        ? props.errores.ErrorcolorPrincipal.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
                     placeholder="Color principal"
                     type="select"
                     onFocus={() => props.setrazaFocus(true)}
@@ -317,6 +389,13 @@ function FormMascota(props) {
                     <option>Naranja</option>
                   </Input>
                 </InputGroup>
+                {!props.errores.ErrorcolorPrincipal.valido ? (
+                  <span className="text-muted">
+                    {props.errores.ErrorcolorPrincipal.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
               <Col md="6">
                 <p>
@@ -334,6 +413,13 @@ function FormMascota(props) {
                   defaultValue={props.archivoImagen}
                   ref={imageInputRef}
                 ></Input>
+                    {!props.errores.Errorfoto.valido ? (
+                  <span className="text-muted">
+                    {props.errores.Errorfoto.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Col>
             </Row>
           </div>

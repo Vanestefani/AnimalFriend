@@ -3,14 +3,15 @@ import React, { useState, useContext, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
-
+import moment from "moment";
+import "moment/locale/es";
 import Mascota from "./Mascota";
 
 import FormMascota from "./Form/FormMascota";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import AuthContext from "../../context/autenticacion/authContext";
 
-function MisMascota() {
+function MisMascota(props) {
   //context
   const mContext = useContext(MascotasContext);
   const authContext = useContext(AuthContext);
@@ -79,13 +80,11 @@ function MisMascota() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const err = validate();
     e.target.className += " was-validated";
     let userid = usuario._id;
 
-    if (archivoImagen === null || nombreMascota === "") {
-      seterrores(true);
-      console.log("esta vacio");
-    } else {
+    if (!err) {
       let formData = new FormData();
       formData.append("foto", archivoImagen, archivoImagen.name);
       formData.append("nombre", nombreMascota);
@@ -96,6 +95,9 @@ function MisMascota() {
       formData.append("color", colorPrincipal);
       formData.append("propietario", userid);
       addMascotas(formData);
+    } else {
+      setnombreMascotaFocus(true);
+      validate();
     }
   };
 
@@ -103,6 +105,73 @@ function MisMascota() {
   const getBreeds = (especie) => {
     if (Fmascota.especie) {
     }
+  };
+  const validate = () => {
+    let isError = false;
+    const maximo = new RegExp("[a-zA-Z ]{3,19}$");
+    if (
+      archivoImagen === undefined ||
+      archivoImagen === null ||
+      archivoImagen === ""
+    ) {
+      if (errores) {
+        errores.Errorfoto.valido = false;
+        errores.Errorfoto.mensaje = "(Debe subir una imagen)";
+      }
+    } else {
+      if (errores) errores.Errorfoto.valido = true;
+    }
+    if (maximo.test(Fmascota.nombreMascota) === false) {
+      errores.ErrornombreMascota.valido = false;
+      errores.ErrornombreMascota.mensaje =
+        "(Por favor ingrese un nombre valido)";
+    } else {
+      errores.ErrornombreMascota.valido = true;
+    }
+    if (Fmascota.especie.length < 1) {
+      errores.Errorespecie.valido = false;
+      errores.Errorespecie.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.Errorespecie.valido = true;
+    }
+    if (Fmascota.raza.length < 1) {
+      errores.Errorraza.valido = false;
+      errores.Errorraza.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.Errorraza.valido = true;
+    }
+    if (Fmascota.generoMascota.length < 1) {
+      errores.Errorgenero.valido = false;
+      errores.Errorgenero.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.Errorgenero.valido = true;
+    }
+    if (Fmascota.fechanacimiento.length < 1) {
+      errores.Errorfechanacimiento.valido = false;
+      errores.Errorfechanacimiento.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.Errorfechanacimiento.valido = true;
+    }
+    if (Fmascota.colorPrincipal.length < 1) {
+      errores.ErrorcolorPrincipal.valido = false;
+      errores.ErrorcolorPrincipal.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.ErrorcolorPrincipal.valido = true;
+    }
+    if (
+      !errores.Errorfoto.valido ||
+      !errores.ErrornombreMascota.valido ||
+      !errores.Errorespecie.valido ||
+      !errores.Errorraza.valido ||
+      !errores.Errorgenero.valido ||
+      !errores.Errorfechanacimiento.valido ||
+      !errores.ErrorcolorPrincipal.valido
+    ) {
+      isError = true;
+    } else {
+      isError = false;
+    }
+    return isError;
   };
   return (
     <>
