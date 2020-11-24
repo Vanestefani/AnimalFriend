@@ -21,7 +21,6 @@ import {
 } from "reactstrap";
 
 import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
-import SubMenu from "../../components/Navbars/SubMenu";
 
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
@@ -315,7 +314,6 @@ function Perfil({ match }) {
                 ""
               )}
             </Container>
-
             <div className="wrapper content_home">
               <Container>
                 <Nav tabs>
@@ -329,16 +327,20 @@ function Perfil({ match }) {
                       Inicio
                     </NavLink>
                   </NavItem>
-                  <NavItem>
-                    <NavLink
-                      className={classnames({ active: activeTab === "2" })}
-                      onClick={() => {
-                        toggle("2");
-                      }}
-                    >
-                      Recordatorios
-                    </NavLink>
-                  </NavItem>
+                  {usuarioactual._id === usuario._id ? (
+                    <NavItem>
+                      <NavLink
+                        className={classnames({ active: activeTab === "2" })}
+                        onClick={() => {
+                          toggle("2");
+                        }}
+                      >
+                        Recordatorios
+                      </NavLink>
+                    </NavItem>
+                  ) : (
+                    ""
+                  )}{" "}
                   <NavItem>
                     <NavLink
                       className={classnames({ active: activeTab === "3" })}
@@ -359,7 +361,6 @@ function Perfil({ match }) {
                       Siguiendo
                     </NavLink>
                   </NavItem>
-
                   <NavItem>
                     <NavLink
                       className={classnames({ active: activeTab === "5" })}
@@ -392,47 +393,45 @@ function Perfil({ match }) {
                   </NavItem>
                 </Nav>
 
-                  <TabContent activeTab={activeTab}>
-                    <TabPane tabId="1">
-                      {usuarioactual._id === usuario._id ? (
-                        <CrearPublicacion></CrearPublicacion>
-                      ) : (
-                        ""
-                      )}
-                      {publicaciones ? (
-                        <PostList
-                          publicaciones={publicaciones}
-                          next={next}
-                        ></PostList>
-                      ) : (
-                        ""
-                      )}
-                    </TabPane>
+                <TabContent activeTab={activeTab}>
+                  <TabPane tabId="1">
                     {usuarioactual._id === usuario._id ? (
-                      <TabPane tabId="2">
-
-                        <ListRecordatorios></ListRecordatorios>
-                      </TabPane>
+                      <CrearPublicacion></CrearPublicacion>
                     ) : (
                       ""
                     )}
-                    <TabPane tabId="3">
-                      <h1>Mis Mascotas</h1>
+                    {publicaciones ? (
+                      <PostList
+                        publicaciones={publicaciones}
+                        next={next}
+                      ></PostList>
+                    ) : (
+                      ""
+                    )}
+                  </TabPane>
+                  {usuarioactual._id === usuario._id ? (
+                    <TabPane tabId="2">
+                      <ListRecordatorios></ListRecordatorios>
                     </TabPane>
-                    <TabPane tabId="4">
-                      <h1>Siguiendo </h1>
-                    </TabPane>
-                    <TabPane tabId="5">
-                      <h1>Seguidores </h1>
-                    </TabPane>
-                    <TabPane tabId="6">
-                      <h1>Anuncios </h1>
-                    </TabPane>
-                    <TabPane tabId="7">
-                      <h1>Negocios </h1>
-                    </TabPane>
-                  </TabContent>
-
+                  ) : (
+                    " "
+                  )}
+                  <TabPane tabId="3">
+                    <ListMascotasbyuser></ListMascotasbyuser>
+                  </TabPane>
+                  <TabPane tabId="4">
+                    <h1>Siguiendo </h1>
+                  </TabPane>
+                  <TabPane tabId="5">
+                    <h1>Seguidores </h1>
+                  </TabPane>
+                  <TabPane tabId="6">
+                    <h1>Anuncios </h1>
+                  </TabPane>
+                  <TabPane tabId="7">
+                    <h1>Negocios </h1>
+                  </TabPane>
+                </TabContent>
               </Container>
               <DefaultFooter></DefaultFooter>
             </div>
