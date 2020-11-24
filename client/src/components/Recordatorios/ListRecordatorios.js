@@ -9,21 +9,18 @@ import {
   Button,
   CardTitle,
   Col,
+  Row,
 } from "reactstrap";
 
 import RContext from "../../context/recordatorios/recordatoriosContex";
 import AlertaContext from "../../context/alertas/alertaContext";
 import FormRecordatorio from "./form/FormRecordatorio";
 import FiltroRecordaotrios from "../../components/Navbars/FiltroRecordaotrios";
-import CalendarioGrande from "../../components/Calendario/CalendarioGrande";
-
 import ItemRecordatorios from "./ItemRecordatorios";
-
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import moment from "moment";
 import "moment/locale/es";
-import Skeleton from "react-loading-skeleton";
 function ListRecordatorios(props) {
   const mContext = useContext(MascotasContext);
   const { mascotas, mascotasUsuario } = mContext;
@@ -230,39 +227,41 @@ function ListRecordatorios(props) {
     });
   return (
     <>
-      <Col md="6">
-        <CalendarioGrande recordatorios={recordatorios}></CalendarioGrande>
-        <Card>
-          <br></br>
-          <CardTitle className="title-up">
-            <span className=" title title-up" font-size="30px">
-              Recordatorios
-            </span>
-            <FormRecordatorio
-              modalMascotas={modalMascotas}
-              setModal1={setModal1}
-              onChange={onChange}
-              Frecordatorio={Frecordatorio}
-              onSubmit={onSubmit}
-              mascotas={mascotas}
-              guardarrecordatorio={guardarrecordatorio}
-            ></FormRecordatorio>
-          </CardTitle>
-          <ListGroup>
-            {items.length === 0 ? <p>No hay recordatorios </p> : items}
-          </ListGroup>
-        </Card>
-      </Col>
-      <Col
-        md="3
+      <Card>
+        <CardTitle className="title-up">
+          <span className=" title title-up" font-size="30px">
+            Recordatorios
+          </span>
+
+          <FormRecordatorio
+            modalMascotas={modalMascotas}
+            setModal1={setModal1}
+            onChange={onChange}
+            Frecordatorio={Frecordatorio}
+            onSubmit={onSubmit}
+            mascotas={mascotas}
+            guardarrecordatorio={guardarrecordatorio}
+          ></FormRecordatorio>
+        </CardTitle>
+        <Row>
+          <Col
+            md="6
       "
-      >
-        <FiltroRecordaotrios
-          search={search}
-          busqueda={busqueda}
-          setbusqueda={setbusqueda}
-        ></FiltroRecordaotrios>
-      </Col>
+          >
+            <ListGroup>
+              {items.length === 0 ? <p>No hay recordatorios </p> : items}
+            </ListGroup>
+          </Col>
+          <Col md="6 ">
+            {" "}
+            <FiltroRecordaotrios
+              search={search}
+              busqueda={busqueda}
+              setbusqueda={setbusqueda}
+            ></FiltroRecordaotrios>
+          </Col>
+        </Row>{" "}
+      </Card>
     </>
   );
 }

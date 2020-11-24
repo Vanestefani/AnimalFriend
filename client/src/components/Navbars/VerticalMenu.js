@@ -30,80 +30,16 @@ function VerticalMenu() {
                 ></img>
                 <p className="text-center">
                   <br></br>
-
                 </p>
               </Link>
             </NavLink>
 
             <ListGroup>
-              <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
-                <Link to={"/perfil/" + usuario._id}>
-                  <i class="fas fa-user-edit"></i>
-                  Mi perfil
-                </Link>
-              </ListGroupItem>
-              <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
-                <Link to="/mis-mascotas">
-                  <i class="fas fa-paw"></i>
-                  Mis mascotas
-                </Link>
-              </ListGroupItem>
-              <ListGroupItem
-                tag="a"
-                to="#AnimalFriend"
-                onClick={(e) => e.preventDefault()}
-              >
-                <Link to="/recordatorios">
-                  <i class="fas fa-clock"></i>
-                  Mis Recordatorios
-                </Link>
-              </ListGroupItem>
-              <ListGroupItem
-                tag="a"
-                to="#AnimalFriend"
-                onClick={(e) => e.preventDefault()}
-              >
-                <Link to="">
-                <i className="fas fa-map-marker-alt"></i>
-                  Mis Anuncios
-                </Link>
-              </ListGroupItem>
-              <ListGroupItem
-                tag="a"
-                to="#AnimalFriend"
-                onClick={(e) => e.preventDefault()}
-              >
-                <Link to="">
-                <i className="fas fa-store-alt"></i>
-                  Mis negocios
-                </Link>
-              </ListGroupItem>
-              <ListGroupItem
-                tag="a"
-                to="#AnimalFriend"
-                onClick={(e) => e.preventDefault()}
-              >
-                <Link to="">
-                <i class="fas fa-star"></i>
-                  Mis seguidores
-                </Link>
-              </ListGroupItem>
-              <ListGroupItem
-                tag="a"
-                to="#AnimalFriend"
-                onClick={(e) => e.preventDefault()}
-              >
-                <Link to="">
-                <i class="fas fa-user-friends"></i>
-                  A quienes sigo
-                </Link>
-              </ListGroupItem>
-            </ListGroup>
-
-            <ListGroup>
-           <p></p>
+              <p></p>
               <h3>
-                <center><b>Accesos directos</b></center>
+                <center>
+                  <b>Accesos directos</b>
+                </center>
               </h3>
               <ListGroupItem tag="a" to="#" onClick={(e) => e.preventDefault()}>
                 <Link to="/eventos">
@@ -126,7 +62,6 @@ function VerticalMenu() {
                   <i className="fas fa-map-marker-alt"></i>
                   Anuncios
                 </Link>
-
               </ListGroupItem>
             </ListGroup>
           </Nav>

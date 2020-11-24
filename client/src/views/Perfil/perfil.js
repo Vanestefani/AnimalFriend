@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import PostContext from "../../context/post/postContext";
-
+import ListRecordatorios from "../../components/Recordatorios/ListRecordatorios";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -217,7 +217,6 @@ function Perfil({ match }) {
       validate();
     }
   };
-
   //modal
   const [modalMascotas, setModal1] = React.useState(false);
   const [fusuario, setfusuario] = useState({
@@ -241,7 +240,6 @@ function Perfil({ match }) {
       isDisabled: false,
     });
   };
-
   let countpost = Object.keys(publicaciones).length;
   //focus
   const [nombreFocus, setnombreFocus] = React.useState(false);
@@ -254,6 +252,7 @@ function Perfil({ match }) {
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
+
   return (
     <>
       <div>
@@ -392,7 +391,7 @@ function Perfil({ match }) {
                     </NavLink>
                   </NavItem>
                 </Nav>
-                <Row>
+
                   <TabContent activeTab={activeTab}>
                     <TabPane tabId="1">
                       {usuarioactual._id === usuario._id ? (
@@ -409,9 +408,14 @@ function Perfil({ match }) {
                         ""
                       )}
                     </TabPane>
-                    <TabPane tabId="2">
-                      <h1>Mis Recordatorios</h1>
-                    </TabPane>
+                    {usuarioactual._id === usuario._id ? (
+                      <TabPane tabId="2">
+
+                        <ListRecordatorios></ListRecordatorios>
+                      </TabPane>
+                    ) : (
+                      ""
+                    )}
                     <TabPane tabId="3">
                       <h1>Mis Mascotas</h1>
                     </TabPane>
@@ -428,7 +432,7 @@ function Perfil({ match }) {
                       <h1>Negocios </h1>
                     </TabPane>
                   </TabContent>
-                </Row>
+
               </Container>
               <DefaultFooter></DefaultFooter>
             </div>
