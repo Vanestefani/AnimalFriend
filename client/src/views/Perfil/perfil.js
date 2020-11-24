@@ -23,6 +23,8 @@ import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import Mascotas from "../../views/Mascotas/MisMascotas";
+import Mascota from "../../views/Mascotas/Mascota";
+
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
 
@@ -34,7 +36,7 @@ import MascotasContext from "../../context/mascotas/mascotasContext";
 function Perfil({ match }) {
   const mContext = useContext(MascotasContext);
 
-  const { mascotasbyUsuario } = mContext;
+  const { mascotasbyUsuario, mascotas } = mContext;
 
   const AContext = useContext(AuthContext);
   const {
@@ -45,13 +47,12 @@ function Perfil({ match }) {
     seguir,
     noseguir,
     actualizarperfil,
-
   } = AContext;
 
   useEffect(() => {
     Showuserid(match.params.q);
     mascotasbyUsuario(match.params.q);
-  }, []);
+  }, [mascotas]);
   React.useEffect(() => {
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");
@@ -390,7 +391,6 @@ function Perfil({ match }) {
                     </NavLink>
                   </NavItem>
                 </Nav>
-
                 <TabContent activeTab={activeTab}>
                   <TabPane tabId="1">
                     {usuarioactual._id === usuario._id ? (
@@ -415,9 +415,38 @@ function Perfil({ match }) {
                     " "
                   )}
                   <TabPane tabId="3">
-                    <Mascotas
-
-                    ></Mascotas>
+                    {usuarioactual._id === usuario._id ? (
+                      <Mascotas></Mascotas>
+                    ) : (
+                      " "
+                    )}
+                    <h2 className="text-center">
+                      <b>Mascotas</b>
+                    </h2>
+                    <div className="section section-team text-center">
+                      <Container>
+                        <div className="team">
+                          <Row>
+                            {mascotas.length === 0 ? (
+                              <Card className="m-2">
+                                <h1 className="text-center">
+                                  No hay mascotas🐾
+                                </h1>
+                                <br></br>
+                                <center><img width="400px" src={require("../../assets/img/a.png")}></img></center>
+                              </Card>
+                            ) : (
+                              mascotas.map((mascota) => (
+                                <Mascota
+                                  key={mascota._id}
+                                  mascota={mascota}
+                                ></Mascota>
+                              ))
+                            )}
+                          </Row>
+                        </div>
+                      </Container>
+                    </div>
                   </TabPane>
                   <TabPane tabId="4">
                     <h1>Siguiendo </h1>

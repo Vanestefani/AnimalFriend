@@ -97,52 +97,30 @@ function MisMascota() {
   };
   return (
     <>
-      <div className="wrapper content_home">
-        <Container>
-          <Row>
-            <Col md="9">
 
-              <FormMascota
-                onChange={onChange}
-                Fmascota={Fmascota}
-                archivoImagen={archivoImagen}
-                guardarMascota={guardarMascota}
-                nombreMascotaFocus={nombreMascotaFocus}
-                setnombreMascotaFocus={setnombreMascotaFocus}
-                especieFocus={especieFocus}
-                setespecieFocus={setespecieFocus}
-                razaFocus={razaFocus}
-                setrazaFocus={setrazaFocus}
-                generoMascotaFocus={generoMascotaFocus}
-                setgeneroMascotaFocus={setgeneroMascotaFocus}
-                fechanacimientoFocus={fechanacimientoFocus}
-                setfechanacimientoFocus={setfechanacimientoFocus}
-                colorPrincipalFocus={colorPrincipalFocus}
-                setcolorPrincipal={setcolorPrincipal}
-                fotoMascotaFocus={fotoMascotaFocus}
-                setfotoMascota={setfotoMascota}
-                onSubmit={onSubmit}
-                guardararchivoImagen={guardararchivoImagen}
-              ></FormMascota>
-              <h2 className="pull-left p-2">
-                <b>Mascotas</b>
-              </h2>
-              <div className="section section-team text-center">
-                <Container>
-                  <div className="team">
-                    <Row>
-                      {mascotas.map((mascota) => (
-                        <Mascota key={mascota._id} mascota={mascota}></Mascota>
-                      ))}
-                    </Row>
-                  </div>
-                </Container>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+          <FormMascota
+            onChange={onChange}
+            Fmascota={Fmascota}
+            archivoImagen={archivoImagen}
+            guardarMascota={guardarMascota}
+            nombreMascotaFocus={nombreMascotaFocus}
+            setnombreMascotaFocus={setnombreMascotaFocus}
+            especieFocus={especieFocus}
+            setespecieFocus={setespecieFocus}
+            razaFocus={razaFocus}
+            setrazaFocus={setrazaFocus}
+            generoMascotaFocus={generoMascotaFocus}
+            setgeneroMascotaFocus={setgeneroMascotaFocus}
+            fechanacimientoFocus={fechanacimientoFocus}
+            setfechanacimientoFocus={setfechanacimientoFocus}
+            colorPrincipalFocus={colorPrincipalFocus}
+            setcolorPrincipal={setcolorPrincipal}
+            fotoMascotaFocus={fotoMascotaFocus}
+            setfotoMascota={setfotoMascota}
+            onSubmit={onSubmit}
+            guardararchivoImagen={guardararchivoImagen}
+          ></FormMascota>
 
-      </div>
     </>
   );
 }

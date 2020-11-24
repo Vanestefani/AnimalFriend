@@ -125,7 +125,7 @@ function FormMascota(props) {
   return (
     <>
       <Button small onClick={() => setModal1(true)}>
-        <i className="fas fa-plus"></i>
+        <i className="fas fa-plus"></i>Añadir mascota
       </Button>
 
       <Modal isOpen={modalMascotas} toggle={() => setModal1(false)}>
