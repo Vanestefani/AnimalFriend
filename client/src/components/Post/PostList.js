@@ -1,11 +1,18 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import {
+  CardHeader,
+  Card,
+  CardBody,
 
+} from "reactstrap";
 import Post from "./Post";
 
 function PostList(props) {
   if (props.publicaciones.length === 0)
-    return <p>No hay publicaciones, sigue a alguien :3</p>;
+    return <Card className="m-2"><h1 className="text-center">No hay publicaciones 😅</h1><br></br>
+    <center><img width="400px" src={require("../../assets/img/q.png")}></img></center>
+    </Card>;
 
   return (
     <>
