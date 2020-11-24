@@ -433,7 +433,12 @@ function Perfil({ match }) {
                                   No hay mascotas🐾
                                 </h1>
                                 <br></br>
-                                <center><img width="400px" src={require("../../assets/img/a.png")}></img></center>
+                                <center>
+                                  <img
+                                    width="400px"
+                                    src={require("../../assets/img/a.png")}
+                                  ></img>
+                                </center>
                               </Card>
                             ) : (
                               mascotas.map((mascota) => (

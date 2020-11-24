@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 // reactstrap components
 import {Col, Button } from "reactstrap";
 function Mascota(props) {
@@ -15,15 +15,12 @@ function Mascota(props) {
           <h4 className="title">{props.mascota.nombre}</h4>
           <span className="badge badge-primary">{props.mascota.especie}</span>
           <br></br>
-          <Button
-            className="btn-info "
-            color="info"
-            to="#AnimalFriend"
-            onClick={(e) => e.preventDefault()}
-          >
-            <i className="far fa-eye"></i>
-            Ver más
-          </Button>
+          <Link
+          to={"/perfil-mascota/" + props.mascota._id}
+          className="btn btn-info btn-sm"
+        >
+          <i className="far fa-eye"></i>
+        </Link>
         </div>
       </Col>
     </>
