@@ -52,7 +52,7 @@ function PerfilMascota({ match }) {
   return (
     <>
       <ScrollNavbar></ScrollNavbar>
-      <div className="wrapper content_home">
+      <div className="wrapper">
         <PerfilMascotaHeader dato={mascota}></PerfilMascotaHeader>
 
         {mascota ? (

@@ -10,7 +10,7 @@ function PerfilMascotaHeader(props) {
 
   return (
     <>
-    {props.dato?  <div
+    {props.dato?   <div
         className="page-header clear-filter page-header-small"
         filter-color="blue"
       >
