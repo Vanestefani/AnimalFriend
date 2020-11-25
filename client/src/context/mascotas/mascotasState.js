@@ -148,13 +148,16 @@ const MascotasState = (props) => {
       });
     }
   };
-  const actualizarMascotas = async (mascotaId) => {
+  const actualizarMascotas = async (datos) => {
     const token = localStorage.getItem("token");
+    console.log(datos.mascotaId);
+    console.log(datos);
+
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.put(`/api/mascota/${mascotaId}`);
+      const respuesta = await clienteAxios.put(`/api/mascota/${datos.mascotaId}`,datos);
       mascotasUsuario();
       dispatch({
         type: EDIT_MASCOTAS_SUCCESS,

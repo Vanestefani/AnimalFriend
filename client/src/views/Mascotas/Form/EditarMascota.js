@@ -1,32 +1,30 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-// reactstrap components
+import React, { useContext } from "react";
+
 import {
-  Col,
   Button,
+  Modal,
+  ModalBody,
+  Row,
+  Col,
   FormGroup,
   Label,
   Input,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  Modal,
-  ModalBody,
-  Row,
 } from "reactstrap";
-import Gato from "./breed/gato";
-import Perro from "./breed/perro";
-import Ave from "./breed/ave";
-import Barnyard from "./breed/barnyard";
-import Caballo from "./breed/Caballo";
-import Reptil from "./breed/Reptil";
-import Roedor from "./breed/Roedor";
-import MascotasContext from "../../context/mascotas/mascotasContext";
-import AuthContext from "../../context/autenticacion/authContext";
+import Gato from "../breed/gato";
+import Perro from "../breed/perro";
+import Ave from "../breed/ave";
+import Barnyard from "../breed/barnyard";
+import Caballo from "../breed/Caballo";
+import Reptil from "../breed/Reptil";
+import Roedor from "../breed/Roedor";
+import MascotasContext from "../../../context/mascotas/mascotasContext";
+import AuthContext from "../../../context/autenticacion/authContext";
 
 import "react-image-crop/dist/ReactCrop.css";
-
-function Mascota(props) {
+function EditarMascota(props) {
   //imgen parametros
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
@@ -35,17 +33,9 @@ function Mascota(props) {
   //context
   const mContext = useContext(MascotasContext);
   const authContext = useContext(AuthContext);
-  const { usuario } = authContext;
-  const { actualizarMascotas } = mContext;
-  //state mascota
-  const [Fmascota, guardarMascota] = useState({
-    nombreMascota: props.mascota.nombre,
-    especie: props.mascota.especie,
-    raza: props.mascota.raza,
-    generoMascota: props.mascota.genero,
-    fechanacimiento: props.mascota.fecha_nacimiento,
-    colorPrincipal: props.mascota.color,
-  });
+
+  //modal
+  const [modalMascotas, setModal1] = React.useState(false);
   const {
     nombreMascota,
     especie,
@@ -54,44 +44,77 @@ function Mascota(props) {
     fechanacimiento,
     colorPrincipal,
   } = Fmascota;
-  //error state
-  const [seterrores] = useState(false);
-
-  //focus
-  const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
-  const [especieFocus, setespecieFocus] = React.useState(false);
-  const [razaFocus, setrazaFocus] = React.useState(false);
-  const [generoMascotaFocus, setgeneroMascotaFocus] = React.useState(false);
-  const [fechanacimientoFocus, setfechanacimientoFocus] = React.useState(false);
-  const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
-  const [errores, setErrores] = React.useState({
-    ErrornombreMascota: { valido: true, mensaje: "" },
-    Errorespecie: { valido: true, mensaje: "" },
-    Errorraza: { valido: true, mensaje: "" },
-    Errorgenero: { valido: true, mensaje: "" },
-    Errorfechanacimiento: { valido: true, mensaje: "" },
-    ErrorcolorPrincipal: { valido: true, mensaje: "" },
-    Errorfoto: { valido: true, mensaje: "" },
-  });
-
-  //modal
-  const [modalMascotas, setModal1] = React.useState(false);
+  const [archivoImagen, guardararchivoImagen] = useState(null);
   //previw imagen
   let imgPreview = (
     <img
       width="100px"
-      src={require("../../assets/img/undraw_Cautious_dog_q83f.png")}
+      src={require("../../../assets/img/undraw_Cautious_dog_q83f.png")}
       alt=""
     />
   );
-  const onChange = (e) => {
-    guardarMascota({
-      ...Fmascota,
-      [e.target.name]: e.target.value,
-    });
-    getBreeds(especie);
-  };
-
+  if (props.archivoImagen) {
+    let preview = URL.createObjectURL(props.archivoImagen);
+    imgPreview = <img width="100px" src={preview} alt="" />;
+  } else {
+    if (Fmascota.especie === "Gato") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/undraw_Playful_cat_rchv.png")}
+          alt=""
+        />
+      );
+    } else if (Fmascota.especie === "Perro") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/undraw_Cautious_dog_q83f.png")}
+          alt=""
+        />
+      );
+    } else if (Fmascota.especie === "Ave") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/undraw_happy_music_g6wc.png")}
+          alt=""
+        />
+      );
+    } else if (Fmascota.especie === "Animal de corral") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/easter_egg.svg")}
+          alt=""
+        />
+      );
+    } else if (Fmascota.especie === "Reptil") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/yegor-denisov-ZCt2ayQCre8-unsplash.jpg")}
+          alt=""
+        />
+      );
+    } else if (Fmascota.especie === "Roedor") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/easter_bunny (1).svg")}
+          alt=""
+        />
+      );
+    } else if (Fmascota.especie === "Caballo") {
+      imgPreview = (
+        <img
+          width="100px"
+          src={require("../../../assets/img/undraw_Ride_till_I_can_no_more_44wq.svg")}
+          alt=""
+        />
+      );
+    }
+  }
   let breed;
   if (Fmascota.especie === "Gato") {
     breed = <Gato></Gato>;
@@ -108,121 +131,12 @@ function Mascota(props) {
   } else if (Fmascota.especie === "Caballo") {
     breed = <Caballo></Caballo>;
   }
-
-  const [fotoMascotaFocus, setfotoMascota] = React.useState(false);
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const err = validate();
-    e.target.className += " was-validated";
-    let userid = usuario._id;
-
-    if (!err) {
-      actualizarMascotas({
-        nombre: nombreMascota,
-        especie: especie,
-        raza: raza,
-        genero: generoMascota,
-        fecha_nacimiento: fechanacimiento,
-        color: colorPrincipal,
-        propietario: userid,
-        mascotaId: props.mascota._id,
-      });
-      setModal1(false);
-    } else {
-      setnombreMascotaFocus(true);
-      validate();
-    }
-  };
-
-  //cargar razaas
-  const getBreeds = (especie) => {
-    if (Fmascota.especie) {
-    }
-  };
-  const validate = () => {
-    let isError = false;
-    const maximo = new RegExp("[a-zA-Z ]{3,19}$");
-
-    if (maximo.test(Fmascota.nombreMascota) === false) {
-      errores.ErrornombreMascota.valido = false;
-      errores.ErrornombreMascota.mensaje =
-        "(Por favor ingrese un nombre valido)";
-    } else {
-      errores.ErrornombreMascota.valido = true;
-    }
-    if (Fmascota.especie.length < 1) {
-      errores.Errorespecie.valido = false;
-      errores.Errorespecie.mensaje = "(Debe elegir un campo)";
-    } else {
-      errores.Errorespecie.valido = true;
-    }
-    if (Fmascota.raza.length < 1) {
-      errores.Errorraza.valido = false;
-      errores.Errorraza.mensaje = "(Debe elegir un campo)";
-    } else {
-      errores.Errorraza.valido = true;
-    }
-    if (Fmascota.generoMascota.length < 1) {
-      errores.Errorgenero.valido = false;
-      errores.Errorgenero.mensaje = "(Debe elegir un campo)";
-    } else {
-      errores.Errorgenero.valido = true;
-    }
-    if (Fmascota.fechanacimiento.length < 1) {
-      errores.Errorfechanacimiento.valido = false;
-      errores.Errorfechanacimiento.mensaje = "(Debe elegir un campo)";
-    } else {
-      errores.Errorfechanacimiento.valido = true;
-    }
-    if (Fmascota.colorPrincipal.length < 1) {
-      errores.ErrorcolorPrincipal.valido = false;
-      errores.ErrorcolorPrincipal.mensaje = "(Debe elegir un campo)";
-    } else {
-      errores.ErrorcolorPrincipal.valido = true;
-    }
-    if (
-      !errores.Errorfoto.valido ||
-      !errores.ErrornombreMascota.valido ||
-      !errores.Errorespecie.valido ||
-      !errores.Errorraza.valido ||
-      !errores.Errorgenero.valido ||
-      !errores.Errorfechanacimiento.valido ||
-      !errores.ErrorcolorPrincipal.valido
-    ) {
-      isError = true;
-    } else {
-      isError = false;
-    }
-    return isError;
-  };
   return (
     <>
-      <Col md="6">
-        <div className="team-player">
-          <img
-            alt="..."
-            className="rounded-circle img-fluid img-raised"
-            src={props.mascota.foto}
-          ></img>
-          <h4 className="title">{props.mascota.nombre}</h4>
-          <span className="badge badge-primary">{props.mascota.especie}</span>
-          <br></br>
-          <Link
-            to={"/perfil-mascota/" + props.mascota._id}
-            className="btn btn-info btn-sm"
-          >
-            <i className="far fa-eye"></i>
-          </Link>
-          {props.mascota.propietario._id == props.usuario._id ? (
-            <Button small onClick={() => setModal1(true)}>
-              Editar
-            </Button>
-          ) : (
-            " "
-          )}
-        </div>
-      </Col>
+      <Button small onClick={() => setModal1(true)}>
+        <i className="fas fa-plus"></i>Añadir mascota
+      </Button>
+
       <Modal isOpen={modalMascotas} toggle={() => setModal1(false)}>
         <div className="modal-header justify-content-center">
           <button
@@ -240,7 +154,7 @@ function Mascota(props) {
             <InputGroup
               className={
                 "no-border input-lg" +
-                (nombreMascotaFocus ? " input-group-focus" : "")
+                (props.nombreMascotaFocus ? " input-group-focus" : "")
               }
             >
               <InputGroupAddon addonType="prepend">
@@ -250,27 +164,27 @@ function Mascota(props) {
               </InputGroupAddon>
               <Input
                 className={
-                  errores.ErrornombreMascota
-                    ? errores.ErrornombreMascota.valido
+                  props.errores.ErrornombreMascota
+                    ? props.errores.ErrornombreMascota.valido
                       ? ""
                       : "is-invalid form-control-danger form-control"
                     : ""
                 }
                 placeholder="Nombre mascota"
                 type="text"
-                onFocus={() => setnombreMascotaFocus(true)}
-                onBlur={() => setnombreMascotaFocus(false)}
+                onFocus={() => props.setnombreMascotaFocus(true)}
+                onBlur={() => props.setnombreMascotaFocus(false)}
                 id="nombreMascota"
                 name="nombreMascota"
-                onChange={onChange}
+                onChange={props.onChange}
                 defaultValue={Fmascota.nombreMascota}
                 required
               ></Input>
             </InputGroup>
 
-            {!errores.ErrornombreMascota.valido ? (
+            {!props.errores.ErrornombreMascota.valido ? (
               <span className="text-muted">
-                {errores.ErrornombreMascota.mensaje}
+                {props.errores.ErrornombreMascota.mensaje}
               </span>
             ) : (
               ""
@@ -280,7 +194,7 @@ function Mascota(props) {
                 <InputGroup
                   className={
                     "no-border input-lg" +
-                    (especieFocus ? " input-group-focus" : "")
+                    (props.especieFocus ? " input-group-focus" : "")
                   }
                 >
                   <InputGroupAddon addonType="prepend">
@@ -290,19 +204,19 @@ function Mascota(props) {
                   </InputGroupAddon>
                   <Input
                     className={
-                      errores.Errorespecie
-                        ? errores.Errorespecie.valido
+                      props.errores.Errorespecie
+                        ? props.errores.Errorespecie.valido
                           ? ""
                           : "is-invalid form-control-danger form-control"
                         : ""
                     }
                     placeholder="Especie"
                     type="select"
-                    onFocus={() => setespecieFocus(true)}
-                    onBlur={() => setespecieFocus(false)}
+                    onFocus={() => props.setespecieFocus(true)}
+                    onBlur={() => props.setespecieFocus(false)}
                     id="especie"
                     name="especie"
-                    onChange={onChange}
+                    onChange={props.onChange}
                     defaultValue={Fmascota.especie}
                     required
                   >
@@ -315,9 +229,9 @@ function Mascota(props) {
                     <option value="Caballo">Caballo</option>
                   </Input>
                 </InputGroup>
-                {!errores.Errorespecie.valido ? (
+                {!props.errores.Errorespecie.valido ? (
                   <span className="text-muted">
-                    {errores.Errorespecie.mensaje}
+                    {props.errores.Errorespecie.mensaje}
                   </span>
                 ) : (
                   ""
@@ -327,7 +241,7 @@ function Mascota(props) {
                 <InputGroup
                   className={
                     "no-border input-lg" +
-                    (razaFocus ? " input-group-focus" : "")
+                    (props.razaFocus ? " input-group-focus" : "")
                   }
                 >
                   <InputGroupAddon addonType="prepend">
@@ -337,28 +251,28 @@ function Mascota(props) {
                   </InputGroupAddon>
                   <Input
                     className={
-                      errores.Errorraza
-                        ? errores.Errorraza.valido
+                      props.errores.Errorraza
+                        ? props.errores.Errorraza.valido
                           ? ""
                           : "is-invalid form-control-danger form-control"
                         : ""
                     }
                     placeholder="Raza"
                     type="select"
-                    onFocus={() => setrazaFocus(true)}
-                    onBlur={() => setrazaFocus(false)}
+                    onFocus={() => props.setrazaFocus(true)}
+                    onBlur={() => props.setrazaFocus(false)}
                     id="raza"
                     name="raza"
-                    onChange={onChange}
+                    onChange={props.onChange}
                     defaultValue={Fmascota.raza}
                     required
                   >
                     {breed}
                   </Input>
                 </InputGroup>
-                {!errores.Errorraza.valido ? (
+                {!props.errores.Errorraza.valido ? (
                   <span className="text-muted">
-                    {errores.Errorraza.mensaje}
+                    {props.errores.Errorraza.mensaje}
                   </span>
                 ) : (
                   ""
@@ -375,8 +289,7 @@ function Mascota(props) {
                       id="generoMascota"
                       name="generoMascota"
                       type="radio"
-                      onChange={onChange}
-                      checked={Fmascota.generoMascota === "Hembra"}
+                      onChange={props.onChange}
                       defaultValue={Fmascota.generoMascota}
                     ></Input>
                     <span className="form-check-sign"></span>
@@ -391,17 +304,16 @@ function Mascota(props) {
                       id="generoMascota"
                       name="generoMascota"
                       type="radio"
-                      onChange={onChange}
-                      checked={Fmascota.generoMascota === "Macho"}
+                      onChange={props.onChange}
                       defaultValue={Fmascota.generoMascota}
                     ></Input>
                     <span className="form-check-sign"></span>
                     Macho
                   </Label>
                 </FormGroup>
-                {!errores.Errorgenero.valido ? (
+                {!props.errores.Errorgenero.valido ? (
                   <span className="text-muted">
-                    {errores.Errorgenero.mensaje}
+                    {props.errores.Errorgenero.mensaje}
                   </span>
                 ) : (
                   ""
@@ -411,7 +323,7 @@ function Mascota(props) {
                 <InputGroup
                   className={
                     "no-border input-lg" +
-                    (fechanacimiento ? " input-group-focus" : "")
+                    (props.fechanacimiento ? " input-group-focus" : "")
                   }
                 >
                   <InputGroupAddon addonType="prepend">
@@ -421,25 +333,25 @@ function Mascota(props) {
                   </InputGroupAddon>
                   <Input
                     className={
-                      errores.Errorfechanacimiento
-                        ? errores.Errorfechanacimiento.valido
+                      props.errores.Errorfechanacimiento
+                        ? props.errores.Errorfechanacimiento.valido
                           ? ""
                           : "is-invalid form-control-danger form-control"
                         : ""
                     }
                     type="date"
-                    onFocus={() => setfechanacimientoFocus(true)}
-                    onBlur={() => setfechanacimientoFocus(false)}
+                    onFocus={() => props.setfechanacimientoFocus(true)}
+                    onBlur={() => props.setfechanacimientoFocus(false)}
                     id="fechanacimiento"
                     name="fechanacimiento"
-                    onChange={onChange}
+                    onChange={props.onChange}
                     defaultValue={Fmascota.fechanacimiento}
                     required
                   ></Input>
                 </InputGroup>
-                {!errores.Errorfechanacimiento.valido ? (
+                {!props.errores.Errorfechanacimiento.valido ? (
                   <span className="text-muted">
-                    {errores.Errorfechanacimiento.mensaje}
+                    {props.errores.Errorfechanacimiento.mensaje}
                   </span>
                 ) : (
                   ""
@@ -451,7 +363,7 @@ function Mascota(props) {
                 <InputGroup
                   className={
                     "no-border input-lg" +
-                    (colorPrincipalFocus ? " input-group-focus" : "")
+                    (props.colorPrincipalFocus ? " input-group-focus" : "")
                   }
                 >
                   <InputGroupAddon addonType="prepend">
@@ -461,19 +373,19 @@ function Mascota(props) {
                   </InputGroupAddon>
                   <Input
                     className={
-                      errores.ErrorcolorPrincipal
-                        ? errores.ErrorcolorPrincipal.valido
+                      props.errores.ErrorcolorPrincipal
+                        ? props.errores.ErrorcolorPrincipal.valido
                           ? ""
                           : "is-invalid form-control-danger form-control"
                         : ""
                     }
                     placeholder="Color principal"
                     type="select"
-                    onFocus={() => setrazaFocus(true)}
-                    onBlur={() => setrazaFocus(false)}
+                    onFocus={() => props.setrazaFocus(true)}
+                    onBlur={() => props.setrazaFocus(false)}
                     id="colorPrincipal"
                     name="colorPrincipal"
-                    onChange={onChange}
+                    onChange={props.onChange}
                     defaultValue={Fmascota.colorPrincipal}
                     required
                   >
@@ -485,9 +397,33 @@ function Mascota(props) {
                     <option>Naranja</option>
                   </Input>
                 </InputGroup>
-                {!errores.ErrorcolorPrincipal.valido ? (
+                {!props.errores.ErrorcolorPrincipal.valido ? (
                   <span className="text-muted">
-                    {errores.ErrorcolorPrincipal.mensaje}
+                    {props.errores.ErrorcolorPrincipal.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </Col>
+              <Col md="6">
+                <p>
+                  <b>Foto de mascota</b>
+                </p>
+                {imgPreview}
+                <Input
+                  accept={acceptedFileTypes}
+                  id="fotoMascota"
+                  name="fotoMascota"
+                  type="file"
+                  onChange={(e) =>
+                    props.guardararchivoImagen(e.target.files[0])
+                  }
+                  defaultValue={props.archivoImagen}
+                  ref={imageInputRef}
+                ></Input>
+                {!props.errores.Errorfoto.valido ? (
+                  <span className="text-muted">
+                    {props.errores.Errorfoto.mensaje}
                   </span>
                 ) : (
                   ""
@@ -501,7 +437,31 @@ function Mascota(props) {
             color="sucess"
             type="button"
             onClick={(e) => {
-              onSubmit(e);
+              e.preventDefault();
+              const err = props.validate();
+              e.target.className += " was-validated";
+              let userid = props.usuario._id;
+
+              if (!err) {
+                let formData = new FormData();
+                formData.append(
+                  "foto",
+                  props.archivoImagen,
+                  props.archivoImagen.name
+                );
+                formData.append("nombre", props.nombreMascota);
+                formData.append("especie", props.especie);
+                formData.append("raza", props.raza);
+                formData.append("genero",  props.generoMascota);
+                formData.append("fechanacimiento", props.fechanacimiento);
+                formData.append("color", props.colorPrincipal);
+                formData.append("propietario", userid);
+                props.addMascotas(formData);
+                setModal1(false);
+              } else {
+                props.setnombreMascotaFocus(true);
+                props.validate();
+              }
             }}
           >
             <i className="fas fa-paper-plane"></i> Enviar
@@ -515,4 +475,4 @@ function Mascota(props) {
   );
 }
 
-export default Mascota;
+export default EditarMascota;

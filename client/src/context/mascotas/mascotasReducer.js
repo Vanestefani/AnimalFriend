@@ -18,13 +18,13 @@ export default (state, action) => {
         mascota: action.payload,
       };
     case GET_MASCOTAS_SUCCESS:
-    case EDIT_MASCOTAS_SUCCESS:
       return {
         ...state,
         loading: false,
         mascotas: action.payload,
       };
     case ADD_MASCOTAS_SUCCESS:
+    case EDIT_MASCOTAS_SUCCESS:
     case MASCOTAS_DELETE_SUCCESS:
       return {
         ...state,

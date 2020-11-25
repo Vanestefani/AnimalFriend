@@ -9,15 +9,6 @@ router.post("/addmascota",upload, checkAuth, validate, MascotaController.createM
 router.get("/getmascotas", checkAuth, validate, MascotaController.mascotasByUser);
 router.get("/getmascotasporusuario/:p", checkAuth, validate, MascotaController.mascotasByPerfil);
 router.get("/mascota/:m", checkAuth, validate, MascotaController.mascota);
-
-router.delete(
-  "/:mascotasId",
-  checkAuth,
-  validate,
-
-  MascotaController.deletemascotas
-);
-
-router.put("/:mascotasId",upload, checkAuth, validate, MascotaController.actualizarRecordatorio);
+router.put("/:mascotasId",upload, checkAuth, validate, MascotaController.actualizarMscotas);
 
 module.exports = router;
