@@ -23,15 +23,12 @@ import Reptil from "./breed/Reptil";
 import Roedor from "./breed/Roedor";
 import MascotasContext from "../../context/mascotas/mascotasContext";
 import AuthContext from "../../context/autenticacion/authContext";
-
 import "react-image-crop/dist/ReactCrop.css";
-
 function Mascota(props) {
   //imgen parametros
   const imageInputRef = React.useRef();
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
-
   //context
   const mContext = useContext(MascotasContext);
   const authContext = useContext(AuthContext);
@@ -45,6 +42,12 @@ function Mascota(props) {
     generoMascota: props.mascota.genero,
     fechanacimiento: props.mascota.fecha_nacimiento,
     colorPrincipal: props.mascota.color,
+    civil: props.mascota.civil,
+    personalidad: props.mascota.personalidad,
+    chip: props.mascota.chip,
+    estelerizado: props.mascota.estelerizado,
+    peligroso: props.mascota.peligroso,
+    estatura: props.mascota.estatura,
   });
   const {
     nombreMascota,
@@ -53,17 +56,25 @@ function Mascota(props) {
     generoMascota,
     fechanacimiento,
     colorPrincipal,
+    civil,
+    personalidad,
+    chip,
+    estelerizado,
+    peligroso,
+    estatura,
   } = Fmascota;
-  //error state
-  const [seterrores] = useState(false);
-
   //focus
+  const [civilFocus, setcivilFocus] = React.useState(false);
   const [nombreMascotaFocus, setnombreMascotaFocus] = React.useState(false);
   const [especieFocus, setespecieFocus] = React.useState(false);
   const [razaFocus, setrazaFocus] = React.useState(false);
-  const [generoMascotaFocus, setgeneroMascotaFocus] = React.useState(false);
   const [fechanacimientoFocus, setfechanacimientoFocus] = React.useState(false);
+  const [chipFocus, setchipFocus] = React.useState(false);
   const [colorPrincipalFocus, setcolorPrincipal] = React.useState(false);
+  const [personalidadFocus, setpersonalidadFocus] = React.useState(false);
+  const [estelerizadoFocus, setestelerizadoFocus] = React.useState(false);
+  const [peligrosoFocus, setpeligrosoFocus] = React.useState(false);
+  const [estaturaFocus, setestaturaFocus] = React.useState(false);
   const [errores, setErrores] = React.useState({
     ErrornombreMascota: { valido: true, mensaje: "" },
     Errorespecie: { valido: true, mensaje: "" },
@@ -72,6 +83,12 @@ function Mascota(props) {
     Errorfechanacimiento: { valido: true, mensaje: "" },
     ErrorcolorPrincipal: { valido: true, mensaje: "" },
     Errorfoto: { valido: true, mensaje: "" },
+    Errorcivil: { valido: true, mensaje: "" },
+    Errorpersonalidad: { valido: true, mensaje: "" },
+    Errorchip: { valido: true, mensaje: "" },
+    Errorestelerizado: { valido: true, mensaje: "" },
+    Errorpeligroso: { valido: true, mensaje: "" },
+    Errorestatura: { valido: true, mensaje: "" },
   });
 
   //modal
@@ -127,6 +144,12 @@ function Mascota(props) {
         color: colorPrincipal,
         propietario: userid,
         mascotaId: props.mascota._id,
+        civil: civil,
+        personalidad: personalidad,
+        chip: chip,
+        estelerizado: estelerizado,
+        peligroso: peligroso,
+        estatura:estatura,
       });
       setModal1(false);
     } else {
@@ -144,6 +167,36 @@ function Mascota(props) {
     let isError = false;
     const maximo = new RegExp("[a-zA-Z ]{3,19}$");
 
+    if (Fmascota.estatura.length < 1) {
+      errores.Errorestatura.valido = false;
+      errores.Errorestatura.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.Errorestatura.valido = true;
+    }
+    if (Fmascota.peligroso.length < 1) {
+      errores.Errorpeligroso.valido = false;
+      errores.Errorpeligroso.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.Errorpeligroso.valido = true;
+    }
+    if (Fmascota.estelerizado.length < 1) {
+      errores.Errorestelerizado.valido = false;
+      errores.Errorestelerizado.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.Errorestelerizado.valido = true;
+    }
+    if (Fmascota.personalidad.length < 1) {
+      errores.Errorpersonalidad.valido = false;
+      errores.Errorpersonalidad.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.Errorpersonalidad.valido = true;
+    }
+    if (Fmascota.civil.length < 1) {
+      errores.Errorcivil.valido = false;
+      errores.Errorcivil.mensaje = "(Debe elegir un campo)";
+    } else {
+      errores.Errorcivil.valido = true;
+    }
     if (maximo.test(Fmascota.nombreMascota) === false) {
       errores.ErrornombreMascota.valido = false;
       errores.ErrornombreMascota.mensaje =
@@ -181,13 +234,25 @@ function Mascota(props) {
     } else {
       errores.ErrorcolorPrincipal.valido = true;
     }
+    if (Fmascota.chip.length < 1 && Fmascota.chip.length > 15) {
+      errores.Errorchip.valido = false;
+      errores.Errorchip.mensaje = "Ingrese valor valido";
+    } else {
+      errores.Errorchip.valido = true;
+    }
     if (
       !errores.Errorfoto.valido ||
       !errores.ErrornombreMascota.valido ||
       !errores.Errorespecie.valido ||
       !errores.Errorraza.valido ||
+      !errores.Errorcivil.valido ||
+      !errores.Errorpersonalidad.valido ||
       !errores.Errorgenero.valido ||
       !errores.Errorfechanacimiento.valido ||
+      !errores.Errorchip.valido ||
+      !errores.Errorestelerizado.valido ||
+      !errores.Errorpeligroso.valido ||
+      !errores.Errorestatura.valido ||
       !errores.ErrorcolorPrincipal.valido
     ) {
       isError = true;
@@ -237,6 +302,7 @@ function Mascota(props) {
         <ModalBody>
           <div>
             <h4>Información de mascota</h4>
+            Nombre de mascota
             <InputGroup
               className={
                 "no-border input-lg" +
@@ -267,7 +333,6 @@ function Mascota(props) {
                 required
               ></Input>
             </InputGroup>
-
             {!errores.ErrornombreMascota.valido ? (
               <span className="text-muted">
                 {errores.ErrornombreMascota.mensaje}
@@ -277,6 +342,7 @@ function Mascota(props) {
             )}
             <Row>
               <Col md="6">
+                Especie
                 <InputGroup
                   className={
                     "no-border input-lg" +
@@ -324,6 +390,7 @@ function Mascota(props) {
                 )}
               </Col>
               <Col md="6">
+                Raza
                 <InputGroup
                   className={
                     "no-border input-lg" +
@@ -365,9 +432,9 @@ function Mascota(props) {
                 )}
               </Col>
             </Row>
-
             <Row>
               <Col md="6">
+                Genero
                 <FormGroup check className="form-check-radio">
                   <Label check>
                     <Input
@@ -408,6 +475,7 @@ function Mascota(props) {
                 )}
               </Col>
               <Col md="6">
+                Fecha de nacimiento
                 <InputGroup
                   className={
                     "no-border input-lg" +
@@ -448,6 +516,7 @@ function Mascota(props) {
             </Row>
             <Row>
               <Col md="6">
+                Color
                 <InputGroup
                   className={
                     "no-border input-lg" +
@@ -493,6 +562,265 @@ function Mascota(props) {
                   ""
                 )}
               </Col>
+              <Col md="6">
+                Estado civil
+                <InputGroup
+                  className={
+                    "no-border input-lg" +
+                    (civilFocus ? " input-group-focus" : "")
+                  }
+                >
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i class="fas fa-heart"></i>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    className={
+                      errores.Errorcivil
+                        ? errores.Errorcivil.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
+                    placeholder="Civil"
+                    type="select"
+                    onFocus={() => setcivilFocus(true)}
+                    onBlur={() => setcivilFocus(false)}
+                    id="civil"
+                    name="civil"
+                    onChange={onChange}
+                    defaultValue={Fmascota.civil}
+                    required
+                  >
+                    <option value="Soltero">Soltero</option>
+                    <option value="Comprometido">Comprometido</option>
+                  </Input>
+                </InputGroup>
+                {!errores.Errorcivil.valido ? (
+                  <span className="text-muted">
+                    {errores.Errorcivil.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </Col>
+            </Row>
+            <Row>
+              <Col md="12">
+                Personalidad
+                <InputGroup
+                  className={
+                    "no-border input-lg" +
+                    (personalidadFocus ? " input-group-focus" : "")
+                  }
+                >
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i class="fas fa-smile-wink"></i>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    className={
+                      errores.Errorpersonalidad
+                        ? errores.Errorpersonalidad.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
+                    placeholder="Civil"
+                    type="text"
+                    onFocus={() => setpersonalidadFocus(true)}
+                    onBlur={() => setpersonalidadFocus(false)}
+                    id="personalidad"
+                    name="personalidad"
+                    onChange={onChange}
+                    max="500px"
+                    defaultValue={Fmascota.personalidad}
+                    required
+                  ></Input>
+                </InputGroup>
+                {!errores.Errorpersonalidad.valido ? (
+                  <span className="text-muted">
+                    {errores.Errorpersonalidad.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </Col>
+            </Row>
+            <Row>
+              <Col md="6">
+                Chip
+                <InputGroup
+                  className={
+                    "no-border input-lg" +
+                    (chipFocus ? " input-group-focus" : "")
+                  }
+                >
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i class="fas fa-microchip"></i>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    className={
+                      errores.Errorchip
+                        ? errores.Errorchip.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
+                    placeholder="Chip"
+                    type="text"
+                    onFocus={() => setchipFocus(true)}
+                    onBlur={() => setchipFocus(false)}
+                    id="chip"
+                    name="chip"
+                    onChange={onChange}
+                    defaultValue={Fmascota.chip}
+                    required
+                  ></Input>
+                </InputGroup>
+                {!errores.Errorchip.valido ? (
+                  <span className="text-muted">
+                    {errores.Errorchip.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </Col>
+              <Col md="6">
+              Estelerizado
+                <InputGroup
+                  className={
+                    "no-border input-lg" +
+                    (estelerizadoFocus ? " input-group-focus" : "")
+                  }
+                >
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="fas fa-crow"></i>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    className={
+                      errores.Errorestelerizado
+                        ? errores.Errorestelerizado.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
+                    placeholder="estelerizado"
+                    type="select"
+                    onFocus={() => setestelerizadoFocus(true)}
+                    onBlur={() => setestelerizadoFocus(false)}
+                    id="estelerizado"
+                    name="estelerizado"
+                    onChange={onChange}
+                    defaultValue={Fmascota.estelerizado}
+                    required
+                  >
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                  </Input>
+                </InputGroup>
+                {!errores.Errorestelerizado.valido ? (
+                  <span className="text-muted">
+                    {errores.Errorestelerizado.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </Col>
+            </Row>
+            <Row>
+              <Col md="6">
+              Peligroso
+              <InputGroup
+                  className={
+                    "no-border input-lg" +
+                    (peligrosoFocus ? " input-group-focus" : "")
+                  }
+                >
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="fas fa-crow"></i>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    className={
+                      errores.Errorpeligroso
+                        ? errores.Errorpeligroso.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
+                    placeholder="peligroso"
+                    type="select"
+                    onFocus={() => setpeligrosoFocus(true)}
+                    onBlur={() => setpeligrosoFocus(false)}
+                    id="peligroso"
+                    name="peligroso"
+                    onChange={onChange}
+                    defaultValue={Fmascota.peligroso}
+                    required
+                  >
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                  </Input>
+                </InputGroup>
+                {!errores.Errorpeligroso.valido ? (
+                  <span className="text-muted">
+                    {errores.Errorpeligroso.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
+                </Col> <Col md="6">
+                Estatura
+              <InputGroup
+                  className={
+                    "no-border input-lg" +
+                    (estaturaFocus ? " input-group-focus" : "")
+                  }
+                >
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="fas fa-crow"></i>
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    className={
+                      errores.Errorestatura
+                        ? errores.Errorestatura.valido
+                          ? ""
+                          : "is-invalid form-control-danger form-control"
+                        : ""
+                    }
+                    placeholder="estatura"
+                    type="select"
+                    onFocus={() => setestaturaFocus(true)}
+                    onBlur={() => setestaturaFocus(false)}
+                    id="estatura"
+                    name="estatura"
+                    onChange={onChange}
+                    defaultValue={Fmascota.estatura}
+                    required
+                  >
+                      <option value="Grande">Grande</option>
+                    <option value="Mediana">Mediana</option>
+                    <option value="Pequeño">Pequeño</option>
+                  </Input>
+                </InputGroup>
+                {!errores.Errorestatura.valido ? (
+                  <span className="text-muted">
+                    {errores.Errorestatura.mensaje}
+                  </span>
+                ) : (
+                  ""
+                )}
+                </Col>
             </Row>
           </div>
         </ModalBody>

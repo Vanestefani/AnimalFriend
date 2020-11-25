@@ -137,7 +137,6 @@ function ListRecordatorios(props) {
       !Frecordatorio.errors.Errorfecha_expiracion.valido
     ) {
       isError = true;
-
     } else {
       isError = false;
     }

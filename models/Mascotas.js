@@ -12,13 +12,11 @@ const mascotasSchema = new mongoose.Schema({
   especie: {
     type: String,
     required: true,
-
   },
   raza: {
     type: String,
     required: true,
     minlength: 3,
-
   },
   genero: {
     type: String,
@@ -29,37 +27,37 @@ const mascotasSchema = new mongoose.Schema({
   },
   chip: {
     type: String,
-    default:"No",
+    default: "No",
     maxlength: 15,
   },
   estatura: {
     type: String,
-    default:"Mediana"
+    default: "Mediana",
   },
   estelerizado: {
     type: String,
-    default:"No"
+    default: "No",
   },
   peligroso: {
     type: String,
-    default:"No"
+    default: "No",
   },
   alergias: {
-    type: Array,
-    default: ["Ninguna"],
+    type: String,
+    default: "Ninguna",
   },
   civil: {
-    type: Array,
-    default: ["Soltero"],
+    type: String,
+    default: "Soltero",
   },
   personalidad: {
-    type: Array,
-    default: ["No definida"],
+    type: String,
+    default: "No definida",
   },
 
   fecha_nacimiento: {
     type: Date,
-    default:"2020/01/18",
+    default: "2020/01/18",
   },
   descripcion: {
     type: String,
@@ -68,7 +66,6 @@ const mascotasSchema = new mongoose.Schema({
   },
   color: {
     type: String,
-
     minlength: 3,
     maxlength: 30,
     match: /^([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)$/,

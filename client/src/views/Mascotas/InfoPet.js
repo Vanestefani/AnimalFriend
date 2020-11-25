@@ -1,5 +1,6 @@
 import React from "react";
-
+import moment from "moment";
+import "moment/locale/es";
 // reactstrap components
 import { Container, Card, Table } from "reactstrap";
 import Loading from "../../components/Loading";
@@ -7,7 +8,6 @@ import Loading from "../../components/Loading";
 function InfoPet(props) {
   return (
     <>
-
       {props.dato ? (
         <Card className="card-general">
           <Container>
@@ -19,7 +19,9 @@ function InfoPet(props) {
                     <i className="fas fa-birthday-cake"></i>
                     <b>Fecha de Nacimiento :</b>
                   </td>
-                  <td>{props.dato.fecha_nacimiento}</td>
+                  <td>
+                    {props.dato.fecha_nacimiento}
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">1</th>

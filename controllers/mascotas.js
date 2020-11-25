@@ -120,6 +120,12 @@ exports.actualizarMscotas = async (req, res) => {
     nuevamascotas.fecha_nacimiento = req.body.fecha_nacimiento;
     nuevamascotas.descripcion = req.body.descripcion;
     nuevamascotas.color = req.body.color;
+    nuevamascotas.civil=req.body.civil;
+    nuevamascotas.personalidad=req.body.personalidad;
+    nuevamascotas.chip=req.body.chip;
+    nuevamascotas.estelerizado=req.body.estelerizado;
+    nuevamascotas.peligroso=req.body.peligroso;
+    nuevamascotas.estatura=req.body.estatura;
     // Guardar la tarea
     mascotas = await Mascota.findOneAndUpdate(
       { _id: req.body.mascotaId },
