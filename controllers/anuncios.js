@@ -33,12 +33,10 @@ exports.createAnuncios = async (req, res) => {
 
 exports.anunciosByUser = async (req, res) => {
   try {
-    Anuncios.find({ autor: req.user._id })
+    Anuncios.find({ autor:req.params.p  })
       .populate("autor", "_id nombre  fotoPerfil")
       .populate("mascota", "_id nombre foto especie raza genero color alergias personalidad ")
-
       .sort("-fecha_creacion")
-
       .then((anuncios) => {
         res.json({ anuncios });
       })

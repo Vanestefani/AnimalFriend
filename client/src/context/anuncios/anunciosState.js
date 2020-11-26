@@ -52,13 +52,13 @@ const AnunciosState = (props) => {
       });
     }
   };
-  const anunciosUsuario = async () => {
+  const anunciosUsuario = async (p) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get("/api/anuncios/getnanuncios");
+      const respuesta = await clienteAxios.get(`/api/anuncios/getnanuncios/${p}`);
 
       dispatch({
         type: GET_ANUNCIOS_SUCCESS,

@@ -52,13 +52,13 @@ const NegociosState = (props) => {
       });
     }
   };
-  const negociosUsuario = async () => {
+  const negociosUsuario = async (p) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get("/api/negocios/getnnegocios");
+      const respuesta = await clienteAxios.get(`/api/negocios/getnnegocios/${p}`);
 
       dispatch({
         type: GET_NEGOCIOS_SUCCESS,

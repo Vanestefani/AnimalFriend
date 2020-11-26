@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import {
   Button,
   Container,
-  Modal,
-  ModalBody,
   Row,
   Col,
   TabContent,
@@ -18,26 +16,31 @@ import {
   Card,
   CardTitle,
   CardText,
+  CardHeader,
+  CardBody,
+  Input,
 } from "reactstrap";
 import ScrollNavbar from "../../components/Navbars/ScrollNavbar";
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import DefaultFooter from "../../components/Footers/DefaultFooter.js";
 import Mascotas from "../../views/Mascotas/MisMascotas";
 import Mascota from "../../views/Mascotas/Mascota";
-
 import CrearPublicacion from "../../components/Post/CrearPublicacion";
 import PostList from "../../components/Post/PostList";
-
 import Editar from "./Form/editar";
 import FotoPerfil from "./Form/foto.perfil";
 import classnames from "classnames";
 import AuthContext from "../../context/autenticacion/authContext";
 import MascotasContext from "../../context/mascotas/mascotasContext";
+import CategoriasNegociosNavbar from "../../components/Navbars/CategoriasNegociosNavbar";
+import NegociosContex from "../../context/negocios/negociosContex";
+import Itemnegocio from "../Negocios/itemnegocio";
+import CategoriasAnunciosNavbar from "../../components/Navbars/CategoriasAnunciosNavbar";
+import AnunciosContext from "../../context/anuncios/anunciosContext";
+import Itemanuncio from "../Anuncios/itemanuncio";
+
 function Perfil({ match }) {
-  const mContext = useContext(MascotasContext);
-
-  const { mascotasbyUsuario, mascotas } = mContext;
-
+  /*usuarios*/
   const AContext = useContext(AuthContext);
   const {
     Showuserid,
@@ -48,6 +51,64 @@ function Perfil({ match }) {
     noseguir,
     actualizarperfil,
   } = AContext;
+  const AnContex = useContext(AnunciosContext);
+  const { anunciosUsuario, anuncios } = AnContex;
+  const NContex = useContext(NegociosContex);
+  const { negociosUsuario, negocios } = NContex;
+  useEffect(() => {
+    negociosUsuario(match.params.q);
+    anunciosUsuario(match.params.q);
+  }, []);
+
+  const [busqueda1, setbusqueda1] = useState({
+    search1: "",
+  });
+  const { search1 } = busqueda1;
+  const onChangeSearch1 = (e) => {
+    setbusqueda1({
+      ...busqueda,
+      search: e.target.value,
+    });
+  };
+  const items1 = anuncios
+    .filter((data) => {
+      if (search1 == "") return data;
+      else if (
+        data.titulo.toLowerCase().includes(search1.toLowerCase()) ||
+        data.categoria.toLowerCase().includes(search1.toLowerCase())
+      ) {
+        return data;
+      }
+    })
+    .map((data) => {
+      return <Itemanuncio key={data._id} anuncio={data}></Itemanuncio>;
+    });
+  const [busqueda, setbusqueda] = useState({
+    search: "",
+  });
+  const { search } = busqueda;
+  const onChangeSearch = (e) => {
+    setbusqueda({
+      ...busqueda,
+      search: e.target.value,
+    });
+  };
+  let items = negocios
+    .filter((data) => {
+      if (search == "") return data;
+      else if (
+        data.titulo.toLowerCase().includes(search.toLowerCase()) ||
+        data.categoria.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return data;
+      }
+    })
+    .map((data) => {
+      return <Itemnegocio key={data._id} negocio={data}></Itemnegocio>;
+    });
+  /*Mascotas*/
+  const mContext = useContext(MascotasContext);
+  const { mascotasbyUsuario, mascotas } = mContext;
 
   useEffect(() => {
     Showuserid(match.params.q);
@@ -352,26 +413,6 @@ function Perfil({ match }) {
                   </NavItem>
                   <NavItem>
                     <NavLink
-                      className={classnames({ active: activeTab === "4" })}
-                      onClick={() => {
-                        toggle("4");
-                      }}
-                    >
-                      Siguiendo
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      className={classnames({ active: activeTab === "5" })}
-                      onClick={() => {
-                        toggle("5");
-                      }}
-                    >
-                      Seguidores
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
                       className={classnames({ active: activeTab === "6" })}
                       onClick={() => {
                         toggle("6");
@@ -454,17 +495,80 @@ function Perfil({ match }) {
                       </Container>
                     </div>
                   </TabPane>
-                  <TabPane tabId="4">
-                    <h1>Siguiendo </h1>
-                  </TabPane>
-                  <TabPane tabId="5">
-                    <h1>Seguidores </h1>
-                  </TabPane>
                   <TabPane tabId="6">
-                    <h1>Anuncios </h1>
+                    <Row>
+                      <Col md="9">
+                        <Card>
+                          <CardHeader>
+                            <CardTitle>
+                              <h3>Anuncios</h3>
+                            </CardTitle>
+                          </CardHeader>
+                          <CardBody>
+                            {" "}
+                            <Input
+                              name="search1"
+                              type="search1"
+                              id="search1"
+                              placeholder="Buscar anuncios"
+                              value={search1}
+                              onChange={onChangeSearch1}
+                            ></Input>
+                            {items1.length === 0 ? (
+                              <p>No hay anuncios </p>
+                            ) : (
+                              items1
+                            )}{" "}
+                          </CardBody>
+                        </Card>
+                      </Col>
+                      <Col md="3">
+                        <CategoriasAnunciosNavbar
+                          search={search1}
+                          busqueda={busqueda1}
+                          setbusqueda={setbusqueda1}
+                        ></CategoriasAnunciosNavbar>
+                      </Col>
+                    </Row>
                   </TabPane>
                   <TabPane tabId="7">
-                    <h1>Negocios </h1>
+                    <Row>
+                      <Col md="9">
+                        <Card>
+                          <CardHeader>
+                            <CardTitle>
+                              <h3>Negocios</h3>
+                            </CardTitle>
+                          </CardHeader>
+                          <CardBody>
+                            {" "}
+                            <Input
+                              name="search"
+                              type="search"
+                              id="search"
+                              placeholder="Buscar negocios"
+                              value={search}
+                              onChange={onChangeSearch}
+                            ></Input>
+                            {items.length === 0 ? (
+                              <p>No hay negocios </p>
+                            ) : (
+                              items
+                            )}
+                          </CardBody>
+                        </Card>
+                      </Col>
+
+                      <Col md="3">
+                        <CategoriasNegociosNavbar
+                          search={search}
+                          busqueda={busqueda}
+                          setbusqueda={setbusqueda}
+                          usuario={usuario}
+                          usuarioactual={usuarioactual}
+                        ></CategoriasNegociosNavbar>
+                      </Col>
+                    </Row>
                   </TabPane>
                 </TabContent>
               </Container>

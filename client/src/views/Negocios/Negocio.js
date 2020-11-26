@@ -84,7 +84,6 @@ function Negocios({ match }) {
                           {negocio.autor.nombre}
                         </Link>
                       </Media>
-                      <Button>Seguir</Button>
                     </Media>
                   </Media>
                 </CardFooter>

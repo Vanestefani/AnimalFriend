@@ -37,7 +37,7 @@ exports.createeventos = async (req, res) => {
 
 exports.eventoByUser = async (req, res) => {
   try {
-    Eventos.find({ autor: req.user._id })
+    Eventos.find({ autor:req.params.p  })
       .populate("autor", "_id nombre fotoPerfil")
       .sort("-fecha_creacion")
       .then((eventos) => {

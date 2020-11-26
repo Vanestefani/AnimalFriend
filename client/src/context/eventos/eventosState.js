@@ -52,13 +52,13 @@ const EventosState = (props) => {
       });
     }
   };
-  const eventosUsuario = async () => {
+  const eventosUsuario = async (p) => {
     const token = localStorage.getItem("token");
     if (token) {
       tokenAuth(token);
     }
     try {
-      const respuesta = await clienteAxios.get("/api/eventos/getneventos");
+      const respuesta = await clienteAxios.get(`/api/eventos/getneventos/${p}`);
 
       dispatch({
         type: GET_EVENTOS_SUCCESS,

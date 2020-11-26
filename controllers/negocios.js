@@ -32,12 +32,12 @@ exports.createnegocios = async (req, res) => {
 
 exports.negocioByUser = async (req, res) => {
   try {
-    Negocio.find({ autor: req.user._id })
+    Negocio.find({ autor: req.params.p })
       .populate("autor", "_id nombre fotoPerfil")
       .sort("-fecha_creacion")
 
-      .then((negocio) => {
-        res.json({ negocio });
+      .then((negocios) => {
+        res.json({ negocios });
       })
       .catch((err) => {
         console.log(err);
@@ -48,7 +48,7 @@ exports.negocioByUser = async (req, res) => {
 };
 exports.negocio = async (req, res) => {
   try {
-    Negocio.findOne({_id: req.params.negocioId})
+    Negocio.findOne({ _id: req.params.negocioId })
       .populate("autor", "_id nombre fotoPerfil")
       .then((negocio) => {
         res.json({ negocio });
