@@ -22,12 +22,23 @@ function Home() {
       <HomeNarbar></HomeNarbar>
       <div className="wrapper content_home">
         <Container>
-          <iframe
-            allow="microphone;"
-            width="100%"
-            height="600px"
-            src="https://console.dialogflow.com/api-client/demo/embedded/0f1f0038-051e-4ffc-9d29-7f92e0f07e12"
-          ></iframe>
+          <Row>
+            <Col md="6">
+              <iframe
+                allow="microphone;"
+                width="100%"
+                height="500px"
+                src="https://console.dialogflow.com/api-client/demo/embedded/0f1f0038-051e-4ffc-9d29-7f92e0f07e12"
+              ></iframe>
+            </Col>
+            <Col md="6">
+            <img
+                  width="400px"
+                  alt="..."
+                  src={require("../../assets/img/dog_walking.svg")}
+                ></img>
+            </Col>
+          </Row>{" "}
         </Container>
         <DefaultFooter></DefaultFooter>
       </div>
