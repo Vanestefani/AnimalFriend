@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import HomeNarbar from "../components/Navbars/homeNarbar";
 import DefaultFooter from "../components/Footers/DefaultFooter.js";
 
@@ -14,9 +14,10 @@ import {
   CardImg,
   CardBody,
   CardSubtitle,
+  Input,
 } from "reactstrap";
 import AuthContext from "../context/autenticacion/authContext";
-
+import UsuariosItem from "../components/UsuariosItem";
 function ExplorarPage() {
   const AContext = useContext(AuthContext);
   const { alluser, usuarios } = AContext;
@@ -33,12 +34,36 @@ function ExplorarPage() {
   useEffect(() => {
     alluser();
   }, [usuarios]);
+  const [busqueda, setbusqueda] = useState({
+    search: "",
+  });
+  const { search } = busqueda;
+  const onChangeSearch = (e) => {
+    setbusqueda({
+      ...busqueda,
+      search: e.target.value,
+    });
+  };
+  const items = usuarios
+    .filter((data) => {
+      if (search == "") return data;
+      else if (
+        data.nombre.toLowerCase().includes(search.toLowerCase()) ||
+        data.email.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return data;
+      }
+    })
+    .map((data) => {
+      return <UsuariosItem key={data._id} data={data}></UsuariosItem>;
+    });
+
   return (
     <>
       <HomeNarbar></HomeNarbar>
+
       <div className="wrapper content_home">
         <Container>
-
           <Card>
             <CardHeader>
               <CardTitle>
@@ -46,35 +71,15 @@ function ExplorarPage() {
               </CardTitle>
             </CardHeader>
             <CardBody>
-              <Row>
-              {usuarios
-                ? usuarios.map((u) => (
-                    <div>
-                      <Col md="4">
-                        <Card>
-                          <CardImg
-
-                            top width="100%"
-                            src={u.fotoPerfil}
-                            alt="Card image cap"
-                          />
-                          <CardBody>
-                            <CardTitle>{u.nombre}</CardTitle>
-                            <CardSubtitle>{u.pais}</CardSubtitle>
-
-                            <Link
-                              to={"/perfil/" + u._id}
-                              className="btn btn-info"
-                            >
-                              Ver más
-                            </Link>
-                          </CardBody>
-                        </Card>
-                      </Col>
-                    </div>
-                  ))
-                : ""}
-                </Row>
+              <Input
+                name="search"
+                type="search"
+                id="search"
+                placeholder="Buscar personas"
+                value={search}
+                onChange={onChangeSearch}
+              ></Input>
+              <Row>{items.length === 0 ? <p>No hay usuarios </p> : items}</Row>
             </CardBody>
           </Card>
         </Container>

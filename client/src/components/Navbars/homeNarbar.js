@@ -16,9 +16,10 @@ import {
 } from "reactstrap";
 import { history } from "../../_helpers/history";
 import AuthContext from "../../context/autenticacion/authContext";
+
 function HomeNarbar() {
   const authContext = useContext(AuthContext);
-  const { usuario, cerrarSesion ,usuarios} = authContext;
+  const { usuario, cerrarSesion } = authContext;
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [user, setUser] = useState({
@@ -98,6 +99,7 @@ function HomeNarbar() {
             navbar
           >
             <Nav className="ml-auto mt-2" navbar>
+
               <NavItem>
                 <NavLink to="/home" onClick={(e) => e.preventDefault()}>
                   <Link to="/home">

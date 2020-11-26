@@ -1,4 +1,4 @@
-import React, {  useContext } from "react";
+import React, { useContext } from "react";
 
 import { Link } from "react-router-dom";
 // reactstrap components
@@ -20,7 +20,7 @@ import AuthContext from "../../context/autenticacion/authContext";
 
 function ScrollNavbar() {
   const authContext = useContext(AuthContext);
-  const {  usuario, cerrarSesion } = authContext;
+  const { usuario, cerrarSesion } = authContext;
 
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
